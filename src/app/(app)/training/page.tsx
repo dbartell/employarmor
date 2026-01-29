@@ -73,7 +73,7 @@ export default function TrainingPage() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">2/5</div>
-                <div className="text-sm text-gray-500">Courses Completed</div>
+                <div className="text-sm text-gray-600">Courses Completed</div>
               </div>
             </CardContent>
           </Card>
@@ -81,7 +81,7 @@ export default function TrainingPage() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">40%</div>
-                <div className="text-sm text-gray-500">Overall Progress</div>
+                <div className="text-sm text-gray-600">Overall Progress</div>
               </div>
             </CardContent>
           </Card>
@@ -89,7 +89,7 @@ export default function TrainingPage() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-600">1</div>
-                <div className="text-sm text-gray-500">Certificate Earned</div>
+                <div className="text-sm text-gray-600">Certificate Earned</div>
               </div>
             </CardContent>
           </Card>
@@ -97,7 +97,7 @@ export default function TrainingPage() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-orange-600">55m</div>
-                <div className="text-sm text-gray-500">Time Remaining</div>
+                <div className="text-sm text-gray-600">Time Remaining</div>
               </div>
             </CardContent>
           </Card>
@@ -129,8 +129,8 @@ export default function TrainingPage() {
                         }`}>
                           {course.status === 'completed' && <CheckCircle className="w-6 h-6 text-green-600" />}
                           {course.status === 'in-progress' && <PlayCircle className="w-6 h-6 text-blue-600" />}
-                          {course.status === 'not-started' && <PlayCircle className="w-6 h-6 text-gray-400" />}
-                          {course.status === 'locked' && <Lock className="w-6 h-6 text-gray-400" />}
+                          {course.status === 'not-started' && <PlayCircle className="w-6 h-6 text-gray-600" />}
+                          {course.status === 'locked' && <Lock className="w-6 h-6 text-gray-600" />}
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
@@ -138,7 +138,7 @@ export default function TrainingPage() {
                             <span className={`text-xs px-2 py-1 rounded-full ${
                               course.status === 'completed' ? 'bg-green-100 text-green-700' :
                               course.status === 'in-progress' ? 'bg-blue-100 text-blue-700' :
-                              course.status === 'locked' ? 'bg-gray-100 text-gray-500' :
+                              course.status === 'locked' ? 'bg-gray-100 text-gray-600' :
                               'bg-gray-100 text-gray-700'
                             }`}>
                               {course.status === 'completed' && 'Completed'}
@@ -147,8 +147,8 @@ export default function TrainingPage() {
                               {course.status === 'locked' && 'Locked'}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-500 mt-1">{course.description}</p>
-                          <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
+                          <p className="text-sm text-gray-600 mt-1">{course.description}</p>
+                          <div className="flex items-center gap-4 mt-2 text-xs text-gray-600">
                             <span className="flex items-center gap-1">
                               <Clock className="w-3 h-3" /> {course.duration}
                             </span>
@@ -205,7 +205,7 @@ export default function TrainingPage() {
                       </div>
                       <div className="flex-1">
                         <div className="text-sm font-medium">{member.name}</div>
-                        <div className="text-xs text-gray-500">{member.role}</div>
+                        <div className="text-xs text-gray-600">{member.role}</div>
                       </div>
                       <div className="text-sm text-gray-600">
                         {member.completed}/{member.total}
@@ -227,7 +227,7 @@ export default function TrainingPage() {
                     <Award className="w-8 h-8 text-yellow-600" />
                   </div>
                   <div className="font-medium">AI Hiring Basics</div>
-                  <div className="text-xs text-gray-500 mb-3">Completed Jan 12, 2026</div>
+                  <div className="text-xs text-gray-600 mb-3">Completed Jan 12, 2026</div>
                   <Button variant="outline" size="sm">Download Certificate</Button>
                 </div>
               </CardContent>

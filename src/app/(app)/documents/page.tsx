@@ -113,7 +113,7 @@ export default function DocumentsPage() {
                   >
                     <docType.icon className="w-6 h-6 text-blue-600 mb-2" />
                     <div className="font-medium">{docType.name}</div>
-                    <div className="text-xs text-gray-500 mt-1">{docType.description}</div>
+                    <div className="text-xs text-gray-600 mt-1">{docType.description}</div>
                     <div className="flex gap-1 mt-2">
                       {docType.states.map(state => (
                         <span key={state} className="text-xs bg-gray-100 px-2 py-0.5 rounded">
@@ -152,7 +152,7 @@ export default function DocumentsPage() {
                     </div>
                     <div>
                       <div className="font-medium">{doc.name}</div>
-                      <div className="text-sm text-gray-500">Created {doc.createdAt}</div>
+                      <div className="text-sm text-gray-600">Created {doc.createdAt}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -223,21 +223,21 @@ export default function DocumentsPage() {
                   <FileText className="w-5 h-5 text-red-600" />
                   <div>
                     <div className="font-medium text-sm">PDF</div>
-                    <div className="text-xs text-gray-500">Print-ready format</div>
+                    <div className="text-xs text-gray-600">Print-ready format</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                   <FileText className="w-5 h-5 text-blue-600" />
                   <div>
                     <div className="font-medium text-sm">Word (DOCX)</div>
-                    <div className="text-xs text-gray-500">Editable format</div>
+                    <div className="text-xs text-gray-600">Editable format</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                   <FileText className="w-5 h-5 text-green-600" />
                   <div>
                     <div className="font-medium text-sm">HTML</div>
-                    <div className="text-xs text-gray-500">For website embedding</div>
+                    <div className="text-xs text-gray-600">For website embedding</div>
                   </div>
                 </div>
               </div>

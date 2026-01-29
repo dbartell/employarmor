@@ -96,7 +96,7 @@ export default function ConsentPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Total Records</p>
+                  <p className="text-sm text-gray-600">Total Records</p>
                   <p className="text-2xl font-bold">{stats.total}</p>
                 </div>
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -109,7 +109,7 @@ export default function ConsentPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Consented</p>
+                  <p className="text-sm text-gray-600">Consented</p>
                   <p className="text-2xl font-bold text-green-600">{stats.consented}</p>
                 </div>
                 <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -122,7 +122,7 @@ export default function ConsentPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Pending</p>
+                  <p className="text-sm text-gray-600">Pending</p>
                   <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
                 </div>
                 <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
@@ -135,7 +135,7 @@ export default function ConsentPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Declined</p>
+                  <p className="text-sm text-gray-600">Declined</p>
                   <p className="text-2xl font-bold text-red-600">{stats.declined}</p>
                 </div>
                 <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
@@ -163,7 +163,7 @@ export default function ConsentPage() {
             {/* Filters */}
             <div className="flex gap-4 mb-6">
               <div className="flex-1 relative">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" />
                 <input
                   type="text"
                   placeholder="Search by name or email..."
@@ -202,7 +202,7 @@ export default function ConsentPage() {
                     <tr key={record.id} className="border-b hover:bg-gray-50">
                       <td className="py-4">
                         <div className="font-medium">{record.candidateName}</div>
-                        <div className="text-sm text-gray-500">{record.candidateEmail}</div>
+                        <div className="text-sm text-gray-600">{record.candidateEmail}</div>
                       </td>
                       <td className="py-4 text-gray-600">{record.position}</td>
                       <td className="py-4 text-gray-600">{record.disclosureDate}</td>
@@ -229,7 +229,7 @@ export default function ConsentPage() {
             </div>
 
             {filteredRecords.length === 0 && (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-8 text-gray-600">
                 No records found matching your search.
               </div>
             )}

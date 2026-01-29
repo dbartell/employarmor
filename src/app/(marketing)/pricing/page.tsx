@@ -130,14 +130,14 @@ export default function PricingPage() {
                     <span className="text-5xl font-bold">${plan.price}</span>
                     <span className="text-gray-600">/month</span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <p className="text-sm text-gray-600 mt-1">
                     ${Math.round(plan.price * 10 / 12)}/mo billed annually
                   </p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className={`flex items-center gap-2 text-sm ${!feature.included ? 'text-gray-400' : ''}`}>
+                      <li key={i} className={`flex items-center gap-2 text-sm ${!feature.included ? 'text-gray-600' : ''}`}>
                         {feature.included ? (
                           <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                         ) : (

@@ -132,14 +132,14 @@ export default function DashboardPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Regulated States</p>
+                <p className="text-sm text-gray-600">Regulated States</p>
                 <p className="text-2xl font-bold">{mockData.statesActive.length}</p>
               </div>
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                 <Shield className="w-5 h-5 text-blue-600" />
               </div>
             </div>
-            <div className="mt-2 text-xs text-gray-500">
+            <div className="mt-2 text-xs text-gray-600">
               {mockData.statesActive.join(", ")}
             </div>
           </CardContent>
@@ -149,7 +149,7 @@ export default function DashboardPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">AI Tools Tracked</p>
+                <p className="text-sm text-gray-600">AI Tools Tracked</p>
                 <p className="text-2xl font-bold">{mockData.toolsCount}</p>
               </div>
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -166,14 +166,14 @@ export default function DashboardPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Documents</p>
+                <p className="text-sm text-gray-600">Documents</p>
                 <p className="text-2xl font-bold">{mockData.documentsGenerated}</p>
               </div>
               <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                 <FileText className="w-5 h-5 text-purple-600" />
               </div>
             </div>
-            <div className="mt-2 text-xs text-gray-500">
+            <div className="mt-2 text-xs text-gray-600">
               2 pending review
             </div>
           </CardContent>
@@ -183,14 +183,14 @@ export default function DashboardPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Consent Records</p>
+                <p className="text-sm text-gray-600">Consent Records</p>
                 <p className="text-2xl font-bold">{mockData.consentRecords}</p>
               </div>
               <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
                 <Users className="w-5 h-5 text-orange-600" />
               </div>
             </div>
-            <div className="mt-2 text-xs text-gray-500">
+            <div className="mt-2 text-xs text-gray-600">
               Last 30 days
             </div>
           </CardContent>
@@ -213,7 +213,7 @@ export default function DashboardPage() {
                 <div key={i} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div>
                     <div className="font-medium">{deadline.state}</div>
-                    <div className="text-sm text-gray-500">{deadline.law}</div>
+                    <div className="text-sm text-gray-600">{deadline.law}</div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-medium">{deadline.date}</div>
@@ -245,7 +245,7 @@ export default function DashboardPage() {
                   <div className="w-2 h-2 bg-blue-600 rounded-full" />
                   <div className="flex-1">
                     <div className="text-sm">{activity.action}</div>
-                    <div className="text-xs text-gray-500">{activity.time}</div>
+                    <div className="text-xs text-gray-600">{activity.time}</div>
                   </div>
                 </div>
               ))}

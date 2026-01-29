@@ -34,7 +34,7 @@ export default function HomePage() {
                 </Button>
               </Link>
             </div>
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="text-sm text-gray-600 mt-4">
               No credit card required • 5-minute assessment
             </p>
           </div>
@@ -84,7 +84,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <p className="text-center text-gray-500 mt-8">
+          <p className="text-center text-gray-600 mt-8">
             ...and many more. AI is embedded in most modern hiring tools.
           </p>
         </div>
@@ -268,11 +268,11 @@ export default function HomePage() {
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     Dashboard
                   </li>
-                  <li className="flex items-center gap-2 text-gray-400">
+                  <li className="flex items-center gap-2 text-gray-600">
                     <CheckCircle className="w-4 h-4" />
                     Training module
                   </li>
-                  <li className="flex items-center gap-2 text-gray-400">
+                  <li className="flex items-center gap-2 text-gray-600">
                     <CheckCircle className="w-4 h-4" />
                     Consent tracking
                   </li>
@@ -311,7 +311,7 @@ export default function HomePage() {
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     Priority support
                   </li>
-                  <li className="flex items-center gap-2 text-gray-400">
+                  <li className="flex items-center gap-2 text-gray-600">
                     <CheckCircle className="w-4 h-4" />
                     ATS integrations
                   </li>
@@ -356,7 +356,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
           </div>
-          <p className="text-center text-gray-500 mt-8">
+          <p className="text-center text-gray-600 mt-8">
             All plans include a 14-day free trial. Annual billing saves 17%.
           </p>
         </div>

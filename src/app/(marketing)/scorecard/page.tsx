@@ -115,7 +115,7 @@ export default function ScorecardPage() {
       <div className="max-w-3xl mx-auto px-4">
         {/* Progress */}
         <div className="mb-8">
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
+          <div className="flex justify-between text-sm text-gray-600 mb-2">
             <span>Step {['states', 'tools', 'usage', 'email', 'results'].indexOf(step) + 1} of 5</span>
             <span>{Math.round((['states', 'tools', 'usage', 'email', 'results'].indexOf(step) + 1) / 5 * 100)}%</span>
           </div>
@@ -196,7 +196,7 @@ export default function ScorecardPage() {
                     }`}
                   >
                     <div className="font-medium">{tool.name}</div>
-                    <div className="text-xs text-gray-500">{tool.category}</div>
+                    <div className="text-xs text-gray-600">{tool.category}</div>
                   </button>
                 ))}
               </div>
@@ -238,7 +238,7 @@ export default function ScorecardPage() {
                     }`}
                   >
                     <div className="font-medium">{usage.label}</div>
-                    <div className="text-xs text-gray-500">{usage.description}</div>
+                    <div className="text-xs text-gray-600">{usage.description}</div>
                   </button>
                 ))}
               </div>
@@ -307,7 +307,7 @@ export default function ScorecardPage() {
                   Get My Score <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
-              <p className="text-xs text-gray-500 text-center mt-4">
+              <p className="text-xs text-gray-600 text-center mt-4">
                 We'll send your detailed report to this email. No spam, ever.
               </p>
             </CardContent>
@@ -337,15 +337,15 @@ export default function ScorecardPage() {
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div className="bg-gray-50 rounded-lg p-3">
                       <div className="text-2xl font-bold">{data.states.filter(s => regulatedStates.includes(s)).length}</div>
-                      <div className="text-xs text-gray-500">Regulated States</div>
+                      <div className="text-xs text-gray-600">Regulated States</div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3">
                       <div className="text-2xl font-bold">{data.tools.length}</div>
-                      <div className="text-xs text-gray-500">AI Tools</div>
+                      <div className="text-xs text-gray-600">AI Tools</div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3">
                       <div className="text-2xl font-bold">{findings.length}</div>
-                      <div className="text-xs text-gray-500">Action Items</div>
+                      <div className="text-xs text-gray-600">Action Items</div>
                     </div>
                   </div>
                 </div>
