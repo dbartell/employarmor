@@ -27,6 +27,11 @@ export default function ScorecardPage() {
     company: ''
   })
 
+  const goToStep = (newStep: Step) => {
+    setStep(newStep)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const toggleState = (code: string) => {
     setData(prev => ({
       ...prev,
@@ -164,7 +169,7 @@ export default function ScorecardPage() {
                 </div>
               )}
               <Button 
-                onClick={() => setStep('tools')} 
+                onClick={() => goToStep('tools')} 
                 className="w-full"
                 disabled={data.states.length === 0}
               >
@@ -201,11 +206,11 @@ export default function ScorecardPage() {
                 ))}
               </div>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setStep('states')}>
+                <Button variant="outline" onClick={() => goToStep('states')}>
                   <ArrowLeft className="mr-2 w-4 h-4" /> Back
                 </Button>
                 <Button 
-                  onClick={() => setStep('usage')} 
+                  onClick={() => goToStep('usage')} 
                   className="flex-1"
                   disabled={data.tools.length === 0}
                 >
@@ -243,11 +248,11 @@ export default function ScorecardPage() {
                 ))}
               </div>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setStep('tools')}>
+                <Button variant="outline" onClick={() => goToStep('tools')}>
                   <ArrowLeft className="mr-2 w-4 h-4" /> Back
                 </Button>
                 <Button 
-                  onClick={() => setStep('email')} 
+                  onClick={() => goToStep('email')} 
                   className="flex-1"
                   disabled={data.usages.length === 0}
                 >
@@ -295,11 +300,11 @@ export default function ScorecardPage() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setStep('usage')}>
+                <Button variant="outline" onClick={() => goToStep('usage')}>
                   <ArrowLeft className="mr-2 w-4 h-4" /> Back
                 </Button>
                 <Button 
-                  onClick={() => setStep('results')} 
+                  onClick={() => goToStep('results')} 
                   className="flex-1"
                   variant="cta"
                   disabled={!data.email || !data.company}

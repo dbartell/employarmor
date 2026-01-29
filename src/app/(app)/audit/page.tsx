@@ -23,6 +23,11 @@ export default function AuditPage() {
     usages: []
   })
 
+  const goToStep = (newStep: AuditStep) => {
+    setStep(newStep)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const toggleItem = (key: keyof AuditData, value: string) => {
     setData(prev => ({
       ...prev,
@@ -163,7 +168,7 @@ export default function AuditPage() {
                   </p>
                 </div>
               )}
-              <Button onClick={() => setStep('tools')} disabled={data.states.length === 0}>
+              <Button onClick={() => goToStep('tools')} disabled={data.states.length === 0}>
                 Continue <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </CardContent>
@@ -195,10 +200,10 @@ export default function AuditPage() {
                 ))}
               </div>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setStep('states')}>
+                <Button variant="outline" onClick={() => goToStep('states')}>
                   <ArrowLeft className="mr-2 w-4 h-4" /> Back
                 </Button>
-                <Button onClick={() => setStep('usage')} disabled={data.tools.length === 0}>
+                <Button onClick={() => goToStep('usage')} disabled={data.tools.length === 0}>
                   Continue <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
@@ -231,10 +236,10 @@ export default function AuditPage() {
                 ))}
               </div>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setStep('tools')}>
+                <Button variant="outline" onClick={() => goToStep('tools')}>
                   <ArrowLeft className="mr-2 w-4 h-4" /> Back
                 </Button>
-                <Button onClick={() => setStep('results')} disabled={data.usages.length === 0}>
+                <Button onClick={() => goToStep('results')} disabled={data.usages.length === 0}>
                   View Results <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
@@ -335,7 +340,7 @@ export default function AuditPage() {
                   </Button>
                 </div>
                 <div className="mt-4">
-                  <Button variant="outline" onClick={() => setStep('states')}>
+                  <Button variant="outline" onClick={() => goToStep('states')}>
                     <ArrowLeft className="mr-2 w-4 h-4" /> Run New Audit
                   </Button>
                 </div>
