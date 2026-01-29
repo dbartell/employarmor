@@ -1,5 +1,82 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import { ChevronDown } from "lucide-react"
+
+const stateLaws = [
+  { name: "Illinois", href: "/compliance/illinois", law: "HB 3773" },
+  { name: "Colorado", href: "/compliance/colorado", law: "AI Act" },
+  { name: "California", href: "/compliance/california", law: "CCPA ADMT" },
+  { name: "New York City", href: "/compliance/nyc", law: "Local Law 144" },
+]
+
+const resources = [
+  { name: "Blog", href: "/resources", description: "Latest insights on AI hiring compliance" },
+  { name: "Guides", href: "/resources/guides", description: "Step-by-step compliance guides" },
+  { name: "Templates", href: "/resources/templates", description: "Ready-to-use compliance documents" },
+  { name: "FAQ", href: "/resources/faq", description: "Common questions answered" },
+]
+
+function Dropdown({ 
+  label, 
+  items, 
+  type = "simple" 
+}: { 
+  label: string
+  items: typeof stateLaws | typeof resources
+  type?: "simple" | "detailed"
+}) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div 
+      className="relative"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      <button className="flex items-center gap-1 text-gray-600 hover:text-gray-900 py-2">
+        {label}
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
+      {isOpen && (
+        <div className="absolute top-full left-0 pt-2 z-50">
+          <div className="bg-white rounded-lg shadow-lg border py-2 min-w-[220px]">
+            {type === "simple" ? (
+              items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="flex items-center justify-between px-4 py-2 hover:bg-gray-50"
+                >
+                  <span className="text-gray-900">{item.name}</span>
+                  {'law' in item && (
+                    <span className="text-xs text-gray-500">{item.law}</span>
+                  )}
+                </Link>
+              ))
+            ) : (
+              items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block px-4 py-2 hover:bg-gray-50"
+                >
+                  <div className="text-gray-900 font-medium">{item.name}</div>
+                  {'description' in item && (
+                    <div className="text-xs text-gray-500">{item.description}</div>
+                  )}
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function MarketingLayout({
   children,
@@ -20,15 +97,11 @@ export default function MarketingLayout({
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
-              <Link href="/compliance/illinois" className="text-gray-600 hover:text-gray-900">
-                State Laws
-              </Link>
+              <Dropdown label="State Laws" items={stateLaws} type="simple" />
               <Link href="/pricing" className="text-gray-600 hover:text-gray-900">
                 Pricing
               </Link>
-              <Link href="/resources" className="text-gray-600 hover:text-gray-900">
-                Resources
-              </Link>
+              <Dropdown label="Resources" items={resources} type="detailed" />
             </div>
 
             <div className="flex items-center gap-4">
@@ -49,7 +122,7 @@ export default function MarketingLayout({
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-600">
+      <footer className="bg-gray-900 text-gray-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
@@ -61,20 +134,23 @@ export default function MarketingLayout({
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-4">Compliance</h3>
+              <h3 className="text-white font-semibold mb-4">State Laws</h3>
               <ul className="space-y-2">
-                <li><Link href="/compliance/illinois" className="hover:text-white">Illinois</Link></li>
-                <li><Link href="/compliance/colorado" className="hover:text-white">Colorado</Link></li>
-                <li><Link href="/compliance/california" className="hover:text-white">California</Link></li>
-                <li><Link href="/compliance/nyc" className="hover:text-white">NYC</Link></li>
+                {stateLaws.map((state) => (
+                  <li key={state.href}>
+                    <Link href={state.href} className="hover:text-white">{state.name}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Resources</h3>
               <ul className="space-y-2">
-                <li><Link href="/resources" className="hover:text-white">Blog</Link></li>
-                <li><Link href="/resources/guides" className="hover:text-white">Guides</Link></li>
-                <li><Link href="/resources/templates" className="hover:text-white">Templates</Link></li>
+                {resources.map((resource) => (
+                  <li key={resource.href}>
+                    <Link href={resource.href} className="hover:text-white">{resource.name}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
