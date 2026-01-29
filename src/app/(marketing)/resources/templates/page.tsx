@@ -7,58 +7,58 @@ const templates = [
   {
     title: "AI Disclosure Notice - Multi-State",
     description: "Candidate notification template that covers Illinois, Colorado, California, and NYC requirements.",
-    format: "Word & PDF",
+    format: "TXT",
     free: true,
-    href: "/resources/templates/ai-disclosure-notice",
+    downloadSlug: "ai-disclosure-notice",
   },
   {
     title: "Candidate Consent Form",
     description: "Signature-ready consent form for candidates acknowledging AI use in the hiring process.",
-    format: "Word & PDF",
+    format: "TXT",
     free: true,
-    href: "/resources/templates/candidate-consent-form",
+    downloadSlug: "candidate-consent-form",
   },
   {
     title: "Employee Handbook AI Policy Section",
     description: "Ready-to-insert policy language for your employee handbook covering AI in HR decisions.",
-    format: "Word",
+    format: "TXT",
     free: true,
-    href: "/resources/templates/handbook-ai-policy",
+    downloadSlug: "handbook-ai-policy",
   },
   {
     title: "Colorado Impact Assessment Template",
     description: "Pre-structured template for completing the impact assessment required under Colorado's AI Act.",
     format: "Word & Excel",
     free: false,
-    href: "/resources/templates/colorado-impact-assessment",
+    downloadSlug: null,
   },
   {
     title: "NYC Bias Audit Summary Template",
     description: "Template for publishing your bias audit results as required by NYC Local Law 144.",
     format: "Word & PDF",
     free: false,
-    href: "/resources/templates/nyc-bias-audit-summary",
+    downloadSlug: null,
   },
   {
     title: "AI Tool Inventory Spreadsheet",
     description: "Track all AI-powered tools in your hiring process with this comprehensive inventory template.",
-    format: "Excel",
+    format: "CSV",
     free: true,
-    href: "/resources/templates/ai-tool-inventory",
+    downloadSlug: "ai-tool-inventory",
   },
   {
     title: "Vendor Due Diligence Questionnaire",
     description: "Questions to ask your hiring technology vendors about AI use and compliance support.",
     format: "Word",
     free: false,
-    href: "/resources/templates/vendor-questionnaire",
+    downloadSlug: null,
   },
   {
     title: "Annual Compliance Review Checklist",
     description: "Yearly checklist to ensure ongoing compliance with all AI hiring regulations.",
     format: "PDF",
     free: false,
-    href: "/resources/templates/annual-compliance-checklist",
+    downloadSlug: null,
   },
 ]
 
@@ -95,7 +95,7 @@ export default function TemplatesPage() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {templates.filter(t => t.free).map((template) => (
-              <Card key={template.href} className="hover:shadow-lg transition-shadow">
+              <Card key={template.title} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs text-gray-500">{template.format}</span>
@@ -105,10 +105,12 @@ export default function TemplatesPage() {
                   </div>
                   <CardTitle className="text-lg">{template.title}</CardTitle>
                   <CardDescription className="mb-4">{template.description}</CardDescription>
-                  <Button variant="outline" className="w-full">
-                    <Download className="w-4 h-4 mr-2" />
-                    Download Template
-                  </Button>
+                  <a href={`/api/templates/${template.downloadSlug}`} download>
+                    <Button variant="outline" className="w-full">
+                      <Download className="w-4 h-4 mr-2" />
+                      Download Template
+                    </Button>
+                  </a>
                 </CardHeader>
               </Card>
             ))}
@@ -123,7 +125,7 @@ export default function TemplatesPage() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {templates.filter(t => !t.free).map((template) => (
-              <Card key={template.href} className="hover:shadow-lg transition-shadow relative">
+              <Card key={template.title} className="hover:shadow-lg transition-shadow relative">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs text-gray-500">{template.format}</span>

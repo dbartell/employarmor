@@ -96,16 +96,16 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-gray-200 last:border-b-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-4 flex items-center justify-between text-left"
+        className="w-full px-6 py-5 flex items-center justify-between text-left"
       >
-        <span className="font-medium text-gray-900">{question}</span>
-        <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="font-medium text-gray-900 pr-4">{question}</span>
+        <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       {isOpen && (
-        <div className="pb-4 text-gray-600">
+        <div className="px-6 pb-5 text-gray-600 leading-relaxed">
           {answer}
         </div>
       )}
