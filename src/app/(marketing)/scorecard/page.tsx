@@ -3,9 +3,10 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, ArrowRight, ArrowLeft, AlertTriangle, Shield } from "lucide-react"
+import { CheckCircle, ArrowRight, ArrowLeft, AlertTriangle, Shield, Loader2 } from "lucide-react"
 import { allStates, regulatedStates, stateRequirements } from "@/data/states"
 import { aiHiringTools, usageTypes } from "@/data/tools"
+import { createClient } from "@/lib/supabase/client"
 
 type Step = 'states' | 'tools' | 'usage' | 'email' | 'results'
 
@@ -19,6 +20,7 @@ interface ScorecardData {
 
 export default function ScorecardPage() {
   const [step, setStep] = useState<Step>('states')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [data, setData] = useState<ScorecardData>({
     states: [],
     tools: [],
@@ -26,6 +28,31 @@ export default function ScorecardPage() {
     email: '',
     company: ''
   })
+
+  const submitLead = async (riskScore: number) => {
+    setIsSubmitting(true)
+    try {
+      const supabase = createClient()
+      const { error } = await supabase
+        .from('leads')
+        .insert({
+          email: data.email,
+          company_name: data.company,
+          states: data.states,
+          tools: data.tools,
+          risk_score: riskScore,
+          source: 'scorecard'
+        })
+      
+      if (error) {
+        console.error('Failed to save lead:', error)
+      }
+    } catch (err) {
+      console.error('Error submitting lead:', err)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   const goToStep = (newStep: Step) => {
     setStep(newStep)
@@ -304,12 +331,24 @@ export default function ScorecardPage() {
                   <ArrowLeft className="mr-2 w-4 h-4" /> Back
                 </Button>
                 <Button 
-                  onClick={() => goToStep('results')} 
+                  onClick={async () => {
+                    const { riskScore } = calculateScore()
+                    await submitLead(riskScore)
+                    goToStep('results')
+                  }} 
                   className="flex-1"
                   variant="cta"
-                  disabled={!data.email || !data.company}
+                  disabled={!data.email || !data.company || isSubmitting}
                 >
-                  Get My Score <ArrowRight className="ml-2 w-4 h-4" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      Get My Score <ArrowRight className="ml-2 w-4 h-4" />
+                    </>
+                  )}
                 </Button>
               </div>
               <p className="text-xs text-gray-600 text-center mt-4">
