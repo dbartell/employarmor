@@ -29,7 +29,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="/demo">
-                <Button size="xl" variant="outline">
+                <Button size="xl" variant="secondary" className="bg-gray-900 text-white hover:bg-gray-800">
                   Request Demo
                 </Button>
               </Link>
@@ -78,9 +78,9 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {["LinkedIn Recruiter", "Indeed", "HireVue", "Greenhouse", "Lever", "Workday", "ZipRecruiter", "Any ATS with AI"].map((tool) => (
-              <div key={tool} className="bg-gray-50 rounded-lg p-4 text-center">
-                <CheckCircle className="w-6 h-6 text-blue-600 mx-auto mb-2" />
-                <span className="font-medium">{tool}</span>
+              <div key={tool} className="bg-white border border-gray-200 rounded-lg p-4 text-center shadow-sm">
+                <CheckCircle className="w-6 h-6 text-blue-700 mx-auto mb-2" />
+                <span className="font-semibold text-gray-900">{tool}</span>
               </div>
             ))}
           </div>

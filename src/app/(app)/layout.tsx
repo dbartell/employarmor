@@ -12,7 +12,7 @@ export default function AppLayout({
       <aside className="w-64 bg-gray-900 text-white flex flex-col">
         <div className="p-4 border-b border-gray-800">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-blue-800 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5" />
             </div>
             <span className="font-bold text-lg">HireShield</span>
