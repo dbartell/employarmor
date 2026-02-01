@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 30
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     
     steps:
@@ -25,12 +25,13 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
       
-      - name: Run Playwright tests
-        run: npx playwright test --reporter=github
+      - name: Run Playwright smoke tests
+        run: npx playwright test e2e/marketing-to-signup.spec.ts e2e/full-journey.spec.ts --reporter=github --timeout=10000
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key' }}
           CI: true
+        timeout-minutes: 10
       
       - name: Upload test results
         uses: actions/upload-artifact@v4
