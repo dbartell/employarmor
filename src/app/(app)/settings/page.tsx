@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Building2, Mail, Users, Shield } from "lucide-react"
+import { Building2, Mail, Users, Shield, Globe, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default async function SettingsPage() {
   const supabase = await createClient()
@@ -91,6 +92,29 @@ export default async function SettingsPage() {
                   Active
                 </span>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Disclosure Page */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Globe className="w-5 h-5" />
+                Disclosure Page
+              </CardTitle>
+              <CardDescription>Public page explaining your AI hiring practices</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">
+                Create a public disclosure page that candidates can view to understand how you use AI in hiring.
+                Required for compliance with NYC LL144, Colorado AI Act, and more.
+              </p>
+              <Link href="/settings/disclosure">
+                <button className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                  Configure Disclosure Page
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
             </CardContent>
           </Card>
         </div>

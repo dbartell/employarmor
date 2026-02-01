@@ -12,6 +12,7 @@ import { UrgencyAlerts } from "@/components/urgency-alerts"
 import { generateAlerts } from "@/lib/alerts"
 import { CalendlyCTA, ContextualHelp } from "@/components/calendly-cta"
 import { ComplianceScoreHelp, StateLawsHelp } from "@/components/help-content"
+import { UpcomingRenewals } from "@/components/upcoming-renewals"
 
 export default async function DashboardPage() {
   const data = await getDashboardData()
@@ -221,7 +222,10 @@ export default async function DashboardPage() {
       </div>
 
       {/* Bottom Section */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* Upcoming Renewals */}
+        <UpcomingRenewals renewals={data.upcomingRenewals} />
+
         {/* Deadlines */}
         <Card>
           <CardHeader>

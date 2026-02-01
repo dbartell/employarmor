@@ -322,6 +322,134 @@ export function zeroConsentsEmail(params: {
   }
 }
 
+// ============================================
+// RENEWAL REMINDER EMAILS
+// ============================================
+
+export type RenewalUrgency = 'heads_up' | 'reminder' | 'warning' | 'urgent' | 'expired' | 'lapsed'
+
+const URGENCY_CONFIG: Record<RenewalUrgency, { emoji: string; headerClass: string; ctaClass: string }> = {
+  heads_up: { emoji: '📅', headerClass: '', ctaClass: '' },
+  reminder: { emoji: '⚠️', headerClass: '', ctaClass: '' },
+  warning: { emoji: '🚨', headerClass: 'urgent-header', ctaClass: 'urgent-cta' },
+  urgent: { emoji: '⏰', headerClass: 'urgent-header', ctaClass: 'urgent-cta' },
+  expired: { emoji: '❌', headerClass: 'urgent-header', ctaClass: 'urgent-cta' },
+  lapsed: { emoji: '⚠️', headerClass: 'urgent-header', ctaClass: 'urgent-cta' },
+}
+
+const DOCUMENT_TYPE_NAMES: Record<string, string> = {
+  bias_audit: 'Bias Audit',
+  impact_assessment: 'Impact Assessment',
+  disclosure: 'Candidate Disclosure',
+  training_cert: 'Training Certificate',
+  adverse_policy: 'Adverse Action Policy',
+}
+
+export function renewalReminderEmail(params: {
+  name: string
+  documentType: string
+  documentTitle: string
+  jurisdiction?: string
+  expiresAt: string
+  daysUntilExpiry: number
+  urgency: RenewalUrgency
+}): { subject: string; html: string } {
+  const config = URGENCY_CONFIG[params.urgency]
+  const docTypeName = DOCUMENT_TYPE_NAMES[params.documentType] || params.documentType
+  const jurisdictionText = params.jurisdiction ? ` (${params.jurisdiction.toUpperCase()})` : ''
+
+  // Different messaging based on urgency
+  let subjectLine: string
+  let headlineText: string
+  let bodyText: string
+  let ctaText: string
+  let discount: string | null = null
+
+  switch (params.urgency) {
+    case 'heads_up':
+      subjectLine = `Your ${docTypeName} expires in ${params.daysUntilExpiry} days`
+      headlineText = `Heads up: ${docTypeName} expires in ${params.daysUntilExpiry} days`
+      bodyText = `Your ${params.documentTitle}${jurisdictionText} will expire on <strong>${params.expiresAt}</strong>. Now is a great time to start planning your renewal.`
+      ctaText = 'Schedule renewal →'
+      break
+    case 'reminder':
+      subjectLine = `⚠️ ${params.daysUntilExpiry} days until your ${docTypeName} expires`
+      headlineText = `${params.daysUntilExpiry} days until your ${docTypeName} expires`
+      bodyText = `Your ${params.documentTitle}${jurisdictionText} expires on <strong>${params.expiresAt}</strong>. Don't wait until the last minute.`
+      ctaText = 'Book renewal now →'
+      discount = '15% early bird discount'
+      break
+    case 'warning':
+      subjectLine = `🚨 Action required: ${docTypeName} expires in ${params.daysUntilExpiry} days`
+      headlineText = `Action required: ${docTypeName} expires in ${params.daysUntilExpiry} days`
+      bodyText = `Your ${params.documentTitle}${jurisdictionText} expires on <strong>${params.expiresAt}</strong>. Schedule your renewal immediately to maintain compliance.`
+      ctaText = 'Schedule immediately →'
+      break
+    case 'urgent':
+      subjectLine = `⏰ URGENT: ${docTypeName} expires next week`
+      headlineText = `URGENT: Your ${docTypeName} expires in ${params.daysUntilExpiry} days`
+      bodyText = `Your ${params.documentTitle}${jurisdictionText} expires on <strong>${params.expiresAt}</strong>. This is your final warning before expiration.`
+      ctaText = 'Emergency renewal →'
+      break
+    case 'expired':
+      subjectLine = `❌ Your ${docTypeName} has expired - compliance at risk`
+      headlineText = `Your ${docTypeName} has expired`
+      bodyText = `Your ${params.documentTitle}${jurisdictionText} expired on <strong>${params.expiresAt}</strong>. You may be out of compliance with applicable regulations.`
+      ctaText = 'Renew now to restore compliance →'
+      break
+    case 'lapsed':
+      subjectLine = `You've been non-compliant for 30 days`
+      headlineText = `Your ${docTypeName} has been expired for 30 days`
+      bodyText = `Your ${params.documentTitle}${jurisdictionText} expired 30 days ago. Extended non-compliance increases your risk of regulatory penalties.`
+      ctaText = 'Renew and get back on track →'
+      discount = '10% off if you renew this week'
+      break
+  }
+
+  const discountSection = discount ? `
+    <div style="background: #ecfdf5; border: 1px solid #10b981; border-radius: 8px; padding: 12px; margin: 16px 0; text-align: center;">
+      <span style="color: #065f46; font-weight: 600;">🎁 ${discount}</span>
+    </div>
+  ` : ''
+
+  const content = `
+    <div class="header ${config.headerClass}">
+      <h1>${config.emoji} ${headlineText}</h1>
+    </div>
+    <div class="content">
+      <p>Hi ${params.name},</p>
+      
+      <p>${bodyText}</p>
+      
+      <div class="stat-box">
+        <strong>Document:</strong> ${params.documentTitle}<br>
+        <strong>Type:</strong> ${docTypeName}${jurisdictionText}<br>
+        <strong>Expires:</strong> ${params.expiresAt}
+      </div>
+      
+      ${discountSection}
+      
+      <h3>Why this matters:</h3>
+      <ul>
+        <li>NYC LL144 requires annual bias audits</li>
+        <li>Colorado AI Act requires annual impact assessments</li>
+        <li>Lapsed compliance = increased regulatory risk</li>
+        <li>Proactive renewal is easier than emergency remediation</li>
+      </ul>
+      
+      <a href="${APP_URL}/compliance/documents" class="cta ${config.ctaClass}">${ctaText}</a>
+      
+      <p>— The AIHireLaw Team</p>
+      
+      <p style="color: #6b7280; font-size: 14px;">P.S. Need help with your renewal? <a href="${APP_URL}/contact">Book a consultation</a> with our compliance team.</p>
+    </div>`
+
+  return {
+    subject: subjectLine,
+    html: emailWrapper(content, `<p>You're receiving this because your compliance documents need attention.</p>`),
+  }
+}
+
 // Inactivity nudge
 export function inactivityEmail(params: {
   name: string

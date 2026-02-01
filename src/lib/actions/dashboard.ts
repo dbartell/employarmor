@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from '@/lib/supabase/server'
+import { getUpcomingRenewals } from './compliance-documents'
 
 export async function getDashboardData() {
   const supabase = await createClient()
@@ -120,6 +121,9 @@ export async function getDashboardData() {
     ? hiringStates.map(s => s.state_code)
     : (leadData?.states || [])
 
+  // Get upcoming renewals for dashboard widget
+  const { renewals: upcomingRenewals } = await getUpcomingRenewals()
+
   return {
     organization: org,
     complianceScore,
@@ -136,5 +140,6 @@ export async function getDashboardData() {
     recentDocs,
     leadData: leadData || null,
     userName: user.user_metadata?.full_name || user.email?.split('@')[0] || null,
+    upcomingRenewals: upcomingRenewals || [],
   }
 }
