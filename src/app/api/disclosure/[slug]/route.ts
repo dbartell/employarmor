@@ -1,12 +1,13 @@
-import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { aiHiringTools } from '@/data/tools'
+import { createClient } from '@supabase/supabase-js'
 
-// Use service role for public API access
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+function getSupabaseClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+}
 
 export async function GET(
   request: NextRequest,
@@ -14,6 +15,7 @@ export async function GET(
 ) {
   try {
     const { slug } = await params
+    const supabase = getSupabaseClient()
 
     // Fetch disclosure page
     const { data: page, error } = await supabase

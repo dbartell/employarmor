@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Building2, Mail, Users, Shield, Globe, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Building2, Mail, Users, Shield, Globe, ArrowRight, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export default async function SettingsPage() {
@@ -13,6 +14,22 @@ export default async function SettingsPage() {
     .eq('id', user?.id)
     .single()
 
+  // Get user's membership info
+  const { data: membership } = await supabase
+    .from('organization_members')
+    .select('role')
+    .eq('user_id', user?.id)
+    .single()
+
+  // Get team member count
+  const { count: memberCount } = await supabase
+    .from('organization_members')
+    .select('*', { count: 'exact', head: true })
+    .eq('organization_id', membership?.role === 'owner' ? user?.id : null)
+
+  const canManageTeam = ['owner', 'admin'].includes(membership?.role || '')
+  const teamSize = memberCount || 1
+
   return (
     <div className="p-8">
       <div className="max-w-4xl mx-auto">
@@ -23,6 +40,31 @@ export default async function SettingsPage() {
         </div>
 
         <div className="space-y-6">
+          {/* Team Management */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="w-5 h-5" />
+                Team
+              </CardTitle>
+              <CardDescription>Manage your team members and invitations</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-2xl font-bold text-gray-900">{teamSize}</div>
+                  <div className="text-sm text-gray-500">Team member{teamSize !== 1 ? 's' : ''}</div>
+                </div>
+                <Link href="/settings/team">
+                  <Button variant={canManageTeam ? "default" : "outline"} className="gap-2">
+                    {canManageTeam ? 'Manage Team' : 'View Team'}
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Organization */}
           <Card>
             <CardHeader>

@@ -90,7 +90,7 @@ export default async function DisclosurePage({ params }: PageProps) {
         {disclosure.intro_text && (
           <section className="mb-8">
             <div className="prose prose-gray max-w-none">
-              {disclosure.intro_text.split('\n').map((paragraph, i) => (
+              {disclosure.intro_text.split('\n').map((paragraph: string, i: number) => (
                 <p key={i} className="text-gray-700 leading-relaxed">
                   {paragraph}
                 </p>
@@ -139,7 +139,7 @@ export default async function DisclosurePage({ params }: PageProps) {
             </div>
             <div className="bg-white rounded-lg border p-6">
               <div className="prose prose-gray prose-sm max-w-none">
-                {rightsText.split('\n').map((line, i) => {
+                {rightsText.split('\n').map((line: string, i: number) => {
                   if (line.trim().startsWith('•')) {
                     return (
                       <p key={i} className="text-gray-700 flex items-start gap-2 my-2">
