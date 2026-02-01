@@ -5,7 +5,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ChevronDown, ChevronUp, Plus, Loader2 } from "lucide-react"
 import { StateOutline, getStateName } from "@/components/state-outline"
-import { getHiringStatesWithProgress, type HiringStateWithProgress } from "@/lib/actions/compliance"
+import { getHiringStatesWithProgress } from "@/lib/actions/compliance"
+import type { HiringStateWithProgress } from "@/lib/types/compliance"
 
 interface SidebarStatesProps {
   onNavigate?: () => void

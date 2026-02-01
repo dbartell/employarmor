@@ -9,9 +9,9 @@ import {
 import Link from "next/link"
 import { 
   getAdverseDecisionSettings, 
-  saveAdverseDecisionSettings,
-  type AdverseDecisionSettings 
+  saveAdverseDecisionSettings
 } from "@/lib/actions/compliance"
+import type { AdverseDecisionSettings } from "@/lib/types/compliance"
 
 const defaultReasonsTemplate = `Dear [CANDIDATE_NAME],
 

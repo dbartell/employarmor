@@ -11,10 +11,9 @@ import Link from "next/link"
 import { 
   getImpactAssessments, 
   saveImpactAssessment, 
-  completeImpactAssessment,
-  type ImpactAssessment,
-  type DataInput
+  completeImpactAssessment
 } from "@/lib/actions/compliance"
+import type { ImpactAssessment, DataInput } from "@/lib/types/compliance"
 import { getHiringStatesAndTools } from "@/lib/actions/audit"
 
 type WizardStep = 1 | 2 | 3 | 4 | 5

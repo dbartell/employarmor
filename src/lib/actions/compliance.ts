@@ -13,16 +13,7 @@ import type {
   HiringStateWithProgress 
 } from '@/lib/types/compliance'
 
-// Re-export types for consumers
-export type { 
-  RemediationItem, 
-  ImpactAssessment, 
-  DataInput, 
-  AdverseDecisionSettings, 
-  ConsentSettings, 
-  ComplianceVerification,
-  HiringStateWithProgress 
-}
+// Types are available from @/lib/types/compliance
 
 // Get remediation items for an org
 export async function getRemediationItems(stateCode?: string) {
