@@ -241,43 +241,100 @@ export default function HomePage() {
               Simple, Transparent Pricing
             </h2>
             <p className="text-xl text-gray-600">
-              Plans for every company size. No hidden fees.
+              Start with training or get ongoing compliance. No hidden fees.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          
+          {/* One-time options */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12">
             <Card>
               <CardHeader>
-                <CardTitle>Starter</CardTitle>
-                <CardDescription>For small teams</CardDescription>
+                <CardTitle>Compliance Training</CardTitle>
+                <CardDescription>One-time purchase</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$199</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold">$299</span>
                 </div>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-2 text-sm">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    Compliance audit
+                    HR training course + certificate
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    "Are we compliant?" assessment
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    AI tool classification guide
+                  </li>
+                </ul>
+                <Link href="/pricing">
+                  <Button className="w-full mt-6" variant="outline">Get Training</Button>
+                </Link>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Audit + Docs Package</CardTitle>
+                <CardDescription>One-time purchase</CardDescription>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold">$999</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Everything in Training
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Full AI tool audit
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Impact assessment + all templates
+                  </li>
+                </ul>
+                <Link href="/pricing">
+                  <Button className="w-full mt-6" variant="outline">Get Audit Package</Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Monthly plans */}
+          <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle>Starter</CardTitle>
+                <CardDescription>&lt;50 employees</CardDescription>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold">$149</span>
+                  <span className="text-gray-600">/mo</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Compliance dashboard
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Training + certificates
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     Document generator
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    Dashboard
-                  </li>
-                  <li className="flex items-center gap-2 text-gray-600">
-                    <CheckCircle className="w-4 h-4" />
-                    Training module
-                  </li>
-                  <li className="flex items-center gap-2 text-gray-600">
-                    <CheckCircle className="w-4 h-4" />
-                    Consent tracking
-                  </li>
                 </ul>
-                <Button className="w-full mt-6" variant="outline">Get Started</Button>
+                <Link href="/pricing">
+                  <Button className="w-full mt-6" variant="outline">Get Started</Button>
+                </Link>
               </CardContent>
             </Card>
             
@@ -286,78 +343,96 @@ export default function HomePage() {
                 Most Popular
               </div>
               <CardHeader>
-                <CardTitle>Pro</CardTitle>
-                <CardDescription>For growing companies</CardDescription>
+                <CardTitle>Growth</CardTitle>
+                <CardDescription>50-250 employees</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$499</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold">$349</span>
+                  <span className="text-gray-600">/mo</span>
                 </div>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-2 text-sm">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     Everything in Starter
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    Training module
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    Consent tracking
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    Priority support
-                  </li>
-                  <li className="flex items-center gap-2 text-gray-600">
-                    <CheckCircle className="w-4 h-4" />
                     ATS integrations
                   </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Multi-state coverage
+                  </li>
                 </ul>
-                <Button className="w-full mt-6" variant="cta">Get Started</Button>
+                <Link href="/pricing">
+                  <Button className="w-full mt-6" variant="cta">Get Started</Button>
+                </Link>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Scale</CardTitle>
+                <CardDescription>250-1000 employees</CardDescription>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold">$749</span>
+                  <span className="text-gray-600">/mo</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Everything in Growth
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Unlimited states
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    Dedicated CSM
+                  </li>
+                </ul>
+                <Link href="/pricing">
+                  <Button className="w-full mt-6" variant="outline">Get Started</Button>
+                </Link>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader>
                 <CardTitle>Enterprise</CardTitle>
-                <CardDescription>For large organizations</CardDescription>
+                <CardDescription>1000+ employees</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$1,999</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold">$2,499</span>
+                  <span className="text-gray-600">/mo</span>
                 </div>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-2 text-sm">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    Everything in Pro
+                    Everything in Scale
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    ATS integrations
+                    SSO + custom SLA
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    Custom policies
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    Dedicated support
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    SLA guarantee
+                    Dedicated team
                   </li>
                 </ul>
-                <Button className="w-full mt-6" variant="outline">Contact Sales</Button>
+                <Link href="/pricing">
+                  <Button className="w-full mt-6" variant="outline">Contact Sales</Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
           <p className="text-center text-gray-600 mt-8">
-            All plans include a 14-day free trial. Annual billing saves 17%.
+            <Link href="/pricing" className="text-blue-600 hover:underline">View full pricing details →</Link>
           </p>
         </div>
       </section>
