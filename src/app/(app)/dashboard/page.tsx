@@ -8,7 +8,8 @@ import {
 } from "lucide-react"
 import { getDashboardData } from "@/lib/actions/dashboard"
 import { OnboardingWizard } from "@/components/onboarding-wizard"
-import { UrgencyAlerts, generateAlerts } from "@/components/urgency-alerts"
+import { UrgencyAlerts } from "@/components/urgency-alerts"
+import { generateAlerts } from "@/lib/alerts"
 import { CalendlyCTA, ContextualHelp } from "@/components/calendly-cta"
 import { ComplianceScoreHelp, StateLawsHelp } from "@/components/help-content"
 
