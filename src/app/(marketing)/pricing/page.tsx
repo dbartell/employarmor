@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Users, Building, Building2, Landmark, BookOpen, FileCheck, ArrowRight } from 'lucide-react'
+import { Check, Users, Building, Building2, Landmark, BookOpen, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
@@ -21,25 +21,6 @@ const oneTimePlans = [
       '30-day email support',
     ],
     cta: 'Get Training',
-    highlighted: false,
-  },
-  {
-    name: 'Audit + Docs Package',
-    price: '$999',
-    period: 'one-time',
-    description: 'Full compliance package for companies that need docs now.',
-    icon: FileCheck,
-    priceId: 'audit-package',
-    features: [
-      'Everything in Training',
-      'Full AI tool audit',
-      'Impact assessment document',
-      'Candidate notification templates',
-      'Employee training deck',
-      'Policy document templates',
-      '60-day email support',
-    ],
-    cta: 'Get Audit Package',
     highlighted: false,
   },
 ]
@@ -199,11 +180,11 @@ export default function PricingPage() {
               Not sure if you need ongoing compliance?
             </h2>
             <p className="text-gray-600">
-              Start with training or a one-time audit package
+              Start with training to learn what applies to you
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid gap-6 max-w-md mx-auto">
             {oneTimePlans.map((plan) => (
               <div
                 key={plan.name}
@@ -331,18 +312,14 @@ export default function PricingPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Not sure which plan is right for you?</h3>
-            <div className="grid md:grid-cols-3 gap-4 text-sm">
+            <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
                 <p className="text-gray-500 mb-1">Just need training?</p>
                 <p className="text-gray-900">→ Start with <strong>Compliance Training</strong> ($299)</p>
               </div>
               <div>
-                <p className="text-gray-500 mb-1">Need docs for an audit?</p>
-                <p className="text-gray-900">→ Get the <strong>Audit Package</strong> ($999)</p>
-              </div>
-              <div>
-                <p className="text-gray-500 mb-1">Want ongoing compliance?</p>
-                <p className="text-gray-900">→ Choose a <strong>monthly plan</strong></p>
+                <p className="text-gray-500 mb-1">Want full compliance + ongoing support?</p>
+                <p className="text-gray-900">→ Choose a <strong>monthly plan</strong> — includes audit, docs, training & more</p>
               </div>
             </div>
           </div>

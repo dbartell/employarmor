@@ -7,6 +7,7 @@ import {
   Shield, 
   LayoutDashboard, 
   ClipboardCheck, 
+  CheckSquare,
   FileText, 
   GraduationCap, 
   Users, 
@@ -19,6 +20,7 @@ import { SignOutButton } from "@/components/auth/sign-out-button"
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/audit", label: "Compliance Audit", icon: ClipboardCheck },
+  { href: "/audit/remediation", label: "Remediation", icon: CheckSquare },
   { href: "/documents", label: "Documents", icon: FileText },
   { href: "/training", label: "Training", icon: GraduationCap },
   { href: "/consent", label: "Consent Tracking", icon: Users },

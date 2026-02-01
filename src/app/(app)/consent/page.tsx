@@ -11,6 +11,8 @@ import {
   getConsentRecords, createConsentRecord, updateConsentRecord, 
   deleteConsentRecord, bulkImportConsent, getConsentStats, ConsentRecord 
 } from "@/lib/actions/consent"
+import { getConsentSettings } from "@/lib/actions/compliance"
+import { ConsentOnboarding } from "@/components/consent-onboarding"
 
 export default function ConsentPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -23,6 +25,8 @@ export default function ConsentPage() {
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState<string | null>(null)
   const [importing, setImporting] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+  const [onboardingChecked, setOnboardingChecked] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Form state
@@ -36,8 +40,25 @@ export default function ConsentPage() {
   })
 
   useEffect(() => {
-    loadData()
-  }, [statusFilter, searchQuery])
+    checkOnboarding()
+  }, [])
+
+  useEffect(() => {
+    if (onboardingChecked && !showOnboarding) {
+      loadData()
+    }
+  }, [statusFilter, searchQuery, onboardingChecked, showOnboarding])
+
+  const checkOnboarding = async () => {
+    const settings = await getConsentSettings()
+    if (!settings?.onboarding_completed) {
+      setShowOnboarding(true)
+    }
+    setOnboardingChecked(true)
+    if (settings?.onboarding_completed) {
+      loadData()
+    }
+  }
 
   const loadData = async () => {
     setLoading(true)
@@ -48,6 +69,11 @@ export default function ConsentPage() {
     setRecords(recordsData)
     setStats(statsData)
     setLoading(false)
+  }
+
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false)
+    loadData()
   }
 
   const resetForm = () => {
@@ -183,31 +209,42 @@ export default function ConsentPage() {
             <h1 className="text-3xl font-bold text-gray-900">Consent Tracking</h1>
             <p className="text-gray-600">Track candidate disclosures and consent records</p>
           </div>
-          <div className="flex gap-3">
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept=".csv"
-              onChange={handleFileUpload}
-              className="hidden"
-            />
-            <Button 
-              variant="outline" 
-              onClick={() => fileInputRef.current?.click()}
-              disabled={importing}
-            >
-              {importing ? (
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              ) : (
-                <Upload className="w-4 h-4 mr-2" />
-              )}
-              Import CSV
-            </Button>
-            <Button onClick={() => setShowForm(true)}>
-              <Plus className="w-4 h-4 mr-2" /> Add Record
-            </Button>
-          </div>
+          {!showOnboarding && (
+            <div className="flex gap-3">
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept=".csv"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+              <Button 
+                variant="outline" 
+                onClick={() => fileInputRef.current?.click()}
+                disabled={importing}
+              >
+                {importing ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Upload className="w-4 h-4 mr-2" />
+                )}
+                Import CSV
+              </Button>
+              <Button onClick={() => setShowForm(true)}>
+                <Plus className="w-4 h-4 mr-2" /> Add Record
+              </Button>
+            </div>
+          )}
         </div>
+
+        {/* Onboarding Wizard */}
+        {showOnboarding && (
+          <ConsentOnboarding onComplete={handleOnboardingComplete} />
+        )}
+
+        {/* Main Content - only show after onboarding */}
+        {!showOnboarding && (
+          <>
 
         {/* Add/Edit Form Modal */}
         {showForm && (
@@ -504,6 +541,8 @@ export default function ConsentPage() {
             </div>
           </CardContent>
         </Card>
+        </>
+        )}
       </div>
     </div>
   )

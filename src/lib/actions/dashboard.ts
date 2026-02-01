@@ -65,17 +65,29 @@ export async function getDashboardData() {
     .select('*')
     .eq('user_id', user.id)
 
-  // Get hiring states
-  const { data: hiringStates } = await supabase
-    .from('hiring_states')
-    .select('state_code')
-    .eq('org_id', orgId)
+  // Get hiring states (defensive - table may not exist yet)
+  let hiringStates: { state_code: string }[] | null = null
+  try {
+    const { data } = await supabase
+      .from('hiring_states')
+      .select('state_code')
+      .eq('org_id', orgId)
+    hiringStates = data
+  } catch {
+    hiringStates = []
+  }
 
-  // Get hiring tools
-  const { count: toolsCount } = await supabase
-    .from('hiring_tools')
-    .select('*', { count: 'exact', head: true })
-    .eq('org_id', orgId)
+  // Get hiring tools (defensive - table may not exist yet)
+  let toolsCount: number | null = 0
+  try {
+    const { count } = await supabase
+      .from('hiring_tools')
+      .select('*', { count: 'exact', head: true })
+      .eq('org_id', orgId)
+    toolsCount = count
+  } catch {
+    toolsCount = 0
+  }
 
   // Get recent documents
   const { data: recentDocs } = await supabase

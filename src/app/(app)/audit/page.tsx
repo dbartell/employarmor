@@ -521,9 +521,26 @@ export default function AuditPage() {
                     <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
                     <h3 className="font-medium text-lg mb-2">Audit Saved!</h3>
                     <p className="text-gray-600 mb-4">Your audit has been saved to your account.</p>
+                    
+                    {/* Primary CTA: Start Remediation */}
+                    {data.states.some(s => regulatedStates.includes(s)) && (
+                      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <h4 className="font-medium text-blue-900 mb-2">🎯 Start Compliance Remediation</h4>
+                        <p className="text-sm text-blue-700 mb-3">
+                          You have {data.states.filter(s => regulatedStates.includes(s)).length} regulated state(s). 
+                          Follow the step-by-step checklist to achieve full compliance.
+                        </p>
+                        <Link href="/audit/remediation">
+                          <Button>
+                            Start Remediation Checklist →
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
+
                     <div className="flex gap-3 justify-center">
                       <Link href="/documents">
-                        <Button>
+                        <Button variant="outline">
                           <FileText className="w-4 h-4 mr-2" />
                           Generate Documents
                         </Button>
