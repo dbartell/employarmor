@@ -34,35 +34,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Check if user is super admin
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('is_super_admin, org_id')
+    // Check if user is super admin (using organizations table)
+    const { data: org, error: orgError } = await supabase
+      .from('organizations')
+      .select('is_super_admin')
       .eq('id', user.id)
       .single()
 
-    if (profileError || !profile?.is_super_admin) {
+    if (orgError || !org?.is_super_admin) {
       return NextResponse.json({ error: 'Forbidden: Super admin access required' }, { status: 403 })
     }
 
     const { deleteUser = false } = await request.json()
-    const orgId = profile.org_id
-
-    if (!orgId) {
-      return NextResponse.json({ error: 'No organization found' }, { status: 400 })
-    }
+    const orgId = user.id  // org_id = user.id in this schema
 
     // Use service role client for admin operations
     const adminClient = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
-
-    // Get all user IDs in this org before deletion
-    const { data: orgUsers } = await adminClient
-      .from('profiles')
-      .select('id')
-      .eq('org_id', orgId)
 
     // Call the deletion function
     const { error: deleteError } = await adminClient.rpc('delete_organization_completely', {
@@ -74,13 +64,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to delete organization data' }, { status: 500 })
     }
 
-    // If deleteUser flag is set, delete all auth users from this org
-    if (deleteUser && orgUsers) {
-      for (const orgUser of orgUsers) {
-        const { error: userDeleteError } = await adminClient.auth.admin.deleteUser(orgUser.id)
-        if (userDeleteError) {
-          console.error('Delete user error:', userDeleteError)
-        }
+    // If deleteUser flag is set, delete the current user
+    if (deleteUser) {
+      const { error: userDeleteError } = await adminClient.auth.admin.deleteUser(user.id)
+      if (userDeleteError) {
+        console.error('Delete user error:', userDeleteError)
       }
     }
 

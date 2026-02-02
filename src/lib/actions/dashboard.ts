@@ -13,15 +13,6 @@ export async function getDashboardData() {
 
   const orgId = user.id
 
-  // Check if user is super admin
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('is_super_admin')
-    .eq('id', user.id)
-    .single()
-  
-  const isSuperAdmin = profile?.is_super_admin || false
-
   // Check for lead data from scorecard (for pre-population)
   const { data: leadData } = await supabase
     .from('leads')
@@ -34,9 +25,11 @@ export async function getDashboardData() {
   // Get organization
   const { data: org } = await supabase
     .from('organizations')
-    .select('*')
+    .select('*, is_super_admin')
     .eq('id', orgId)
     .single()
+  
+  const isSuperAdmin = org?.is_super_admin || false
 
   // Get latest audit
   const { data: latestAudit } = await supabase

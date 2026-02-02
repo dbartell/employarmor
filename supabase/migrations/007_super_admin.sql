@@ -1,8 +1,8 @@
--- Add super admin field to profiles
-ALTER TABLE profiles ADD COLUMN IF NOT EXISTS is_super_admin BOOLEAN DEFAULT false;
+-- Add super admin field to organizations (not profiles - profiles table not used)
+ALTER TABLE organizations ADD COLUMN IF NOT EXISTS is_super_admin BOOLEAN DEFAULT false;
 
 -- Create index for quick admin lookups
-CREATE INDEX IF NOT EXISTS idx_profiles_super_admin ON profiles(is_super_admin) WHERE is_super_admin = true;
+CREATE INDEX IF NOT EXISTS idx_organizations_super_admin ON organizations(is_super_admin) WHERE is_super_admin = true;
 
 -- Function to completely delete an organization and all associated data
 CREATE OR REPLACE FUNCTION delete_organization_completely(org_uuid UUID)
