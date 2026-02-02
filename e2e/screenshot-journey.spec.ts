@@ -79,67 +79,76 @@ test('capture full user journey screenshots', async ({ page }) => {
   await page.waitForLoadState('networkidle')
   await screenshot('scorecard')
 
-  // --- App pages (will redirect to login if not authed) ---
-  
-  // 13. Dashboard (may redirect)
+  // --- Log in to capture authenticated pages ---
+  await page.goto('/login')
+  await page.waitForLoadState('networkidle')
+  await page.fill('input[type="email"]', 'bartelldevyn@gmail.com')
+  await page.fill('input[type="password"]', '$SYp1k$^yKv8')
+  await page.click('button[type="submit"]')
+  await page.waitForURL(/\/(dashboard|onboarding)/, { timeout: 15000 })
+  await page.waitForLoadState('networkidle')
+
+  // --- Authenticated app pages ---
+
+  // 13. Dashboard
   await page.goto('/dashboard')
   await page.waitForLoadState('networkidle')
-  await screenshot('dashboard-or-login')
+  await screenshot('dashboard')
 
   // 14. Audit page
   await page.goto('/audit')
   await page.waitForLoadState('networkidle')
-  await screenshot('audit-or-login')
+  await screenshot('audit')
 
   // 15. Training page
   await page.goto('/training')
   await page.waitForLoadState('networkidle')
-  await screenshot('training-or-login')
+  await screenshot('training')
 
   // 16. Consent page
   await page.goto('/consent')
   await page.waitForLoadState('networkidle')
-  await screenshot('consent-or-login')
+  await screenshot('consent')
 
   // 17. Documents page
   await page.goto('/documents')
   await page.waitForLoadState('networkidle')
-  await screenshot('documents-or-login')
+  await screenshot('documents')
 
   // 18. Settings page
   await page.goto('/settings')
   await page.waitForLoadState('networkidle')
-  await screenshot('settings-or-login')
+  await screenshot('settings')
 
   // 19. Team settings
   await page.goto('/settings/team')
   await page.waitForLoadState('networkidle')
-  await screenshot('settings-team-or-login')
+  await screenshot('settings-team')
 
   // 20. Disclosure settings
   await page.goto('/settings/disclosure')
   await page.waitForLoadState('networkidle')
-  await screenshot('settings-disclosure-or-login')
+  await screenshot('settings-disclosure')
 
   // 21. Integrations
   await page.goto('/settings/integrations')
   await page.waitForLoadState('networkidle')
-  await screenshot('settings-integrations-or-login')
+  await screenshot('settings-integrations')
 
   // 22. Training settings
   await page.goto('/settings/training')
   await page.waitForLoadState('networkidle')
-  await screenshot('settings-training-or-login')
+  await screenshot('settings-training')
 
   // 23. Compliance documents
   await page.goto('/compliance/documents')
   await page.waitForLoadState('networkidle')
-  await screenshot('compliance-documents-or-login')
+  await screenshot('compliance-documents')
 
   // 24. Onboarding team setup
   await page.goto('/onboarding/team-setup')
   await page.waitForLoadState('networkidle')
-  await screenshot('onboarding-team-setup-or-login')
+  await screenshot('onboarding-team-setup')
 
   console.log(`\n✅ Captured ${step - 1} screenshots to: ${screenshotDir}`)
 })
