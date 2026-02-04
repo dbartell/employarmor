@@ -13,7 +13,8 @@ import {
   Settings, 
   Menu, 
   X,
-  Globe
+  Globe,
+  Trash2
 } from "lucide-react"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 
@@ -116,7 +117,7 @@ export function MobileSidebar({ orgName, userEmail }: MobileSidebarProps) {
             })}
           </div>
 
-          <div className="mt-6 pt-4 border-t border-gray-800">
+          <div className="mt-6 pt-4 border-t border-gray-800 space-y-1">
             <Link
               href="/settings"
               onClick={closeMenu}
@@ -131,6 +132,16 @@ export function MobileSidebar({ orgName, userEmail }: MobileSidebarProps) {
               <Settings className="w-5 h-5" />
               Settings
             </Link>
+            {userEmail === 'bartelldevyn@gmail.com' && (
+              <Link
+                href="/settings/delete-account"
+                onClick={closeMenu}
+                className="flex items-center gap-3 px-3 py-3 rounded-lg transition-colors text-red-400 hover:bg-red-900/30 hover:text-red-300"
+              >
+                <Trash2 className="w-5 h-5" />
+                Delete Account
+              </Link>
+            )}
           </div>
         </nav>
 

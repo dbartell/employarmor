@@ -7,12 +7,27 @@ const PROTECTED_ROUTES: Record<string, string[]> = {
   '/api/team/invite': ['owner', 'admin'],
 }
 
+// Marketing paths that support markdown rendering for AI agents
+const MARKDOWN_PATHS = ['/compliance', '/resources', '/glossary']
+
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
+  const acceptHeader = request.headers.get('Accept') || ''
   
-  // Handle ?format=md for markdown API access
-  if (searchParams.get('format') === 'md' && pathname.startsWith('/compliance')) {
-    const mdUrl = new URL(`/api/markdown${pathname}`, request.url)
+  // Check if this is an AI agent requesting markdown
+  const formatParam = searchParams.get('format')
+  const wantsMarkdown = 
+    acceptHeader.includes('text/markdown') ||
+    acceptHeader.includes('text/plain') ||
+    formatParam === 'md' ||
+    pathname.endsWith('.md')
+  
+  const matchesPath = MARKDOWN_PATHS.some(p => pathname.startsWith(p) || pathname.replace('.md', '').startsWith(p))
+  
+  // Handle markdown requests for marketing/content pages
+  if (wantsMarkdown && matchesPath) {
+    const cleanPath = pathname.replace(/\.md$/, '')
+    const mdUrl = new URL(`/api/markdown${cleanPath}`, request.url)
     return NextResponse.rewrite(mdUrl)
   }
   

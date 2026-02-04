@@ -1,0 +1,43 @@
+# AI Hire Law
+
+> AI hiring compliance platform helping employers navigate AEDT bias audits, impact assessments, and state AI employment laws including NYC Local Law 144, Illinois AIVI Act, Colorado SB 205, and California CCPA/ADMT.
+
+AI Hire Law provides compliance tools, training, and documentation for companies using AI in hiring decisions. Key features include automated compliance tracking, bias audit management, disclosure generation, and state-by-state regulatory guidance.
+
+## Compliance Guides
+
+- [NYC Local Law 144 Guide](https://aihirelaw.com/resources/nyc-local-law-144): AEDT requirements, bias audit timelines, candidate notification templates
+- [Illinois AIVI Act Guide](https://aihirelaw.com/resources/illinois-ai-hiring-law): Video interview AI disclosure requirements and consent rules
+- [Colorado AI Act for Employers](https://aihirelaw.com/resources/colorado-ai-act-employers): High-risk AI system requirements, impact assessments, adverse action notices
+- [California CCPA/ADMT Guide](https://aihirelaw.com/resources/california-ccpa-admt): Automated decision-making technology requirements under CPRA
+- [2026 Compliance Checklist](https://aihirelaw.com/resources/compliance-checklist-2026): Comprehensive checklist for all US AI hiring laws
+
+## Glossary
+
+- [AEDT](https://aihirelaw.com/glossary/aedt): Automated Employment Decision Tool - the legal definition and what qualifies
+- [Bias Audit](https://aihirelaw.com/glossary/bias-audit): Independent testing for disparate impact, required annually under NYC law
+- [Disparate Impact](https://aihirelaw.com/glossary/disparate-impact): Unintentional discrimination through neutral policies, measured by 4/5ths rule
+- [Impact Assessment](https://aihirelaw.com/glossary/impact-assessment): Required documentation under Colorado AI Act for high-risk systems
+- [High-Risk AI System](https://aihirelaw.com/glossary/high-risk-ai-system): Colorado's classification for AI making consequential employment decisions
+- [BIPA](https://aihirelaw.com/glossary/bipa): Illinois Biometric Information Privacy Act - relevant for video interview AI
+- [AIVI](https://aihirelaw.com/glossary/aivi): Illinois AI Video Interview Act disclosure requirements
+- [Four-Fifths Rule](https://aihirelaw.com/glossary/four-fifths-rule): 80% threshold for measuring adverse impact in selection rates
+
+## State Compliance Pages
+
+- [NYC Compliance](https://aihirelaw.com/compliance/nyc): Local Law 144 requirements and deadlines
+- [Illinois Compliance](https://aihirelaw.com/compliance/illinois): AIVI Act and BIPA requirements
+- [Colorado Compliance](https://aihirelaw.com/compliance/colorado): SB 205 requirements effective February 2026
+- [California Compliance](https://aihirelaw.com/compliance/california): CCPA/CPRA ADMT requirements
+
+## Templates & Tools
+
+- [AI Disclosure Notice Template](https://aihirelaw.com/resources/ai-disclosure-notice-template): Compliant notice language for candidates
+- [Vendor Assessment Guide](https://aihirelaw.com/resources/vendor-assessment-guide): Evaluating AI hiring vendors for compliance
+- [HR Training Guide](https://aihirelaw.com/resources/hr-training-guide): Training requirements under Colorado AI Act
+- [Compliance Scorecard](https://aihirelaw.com/scorecard): Free assessment of your AI hiring compliance status
+
+## Optional
+
+- [Pricing](https://aihirelaw.com/pricing): Subscription plans for compliance management
+- [FAQ](https://aihirelaw.com/resources/faq): Common questions about AI hiring compliance

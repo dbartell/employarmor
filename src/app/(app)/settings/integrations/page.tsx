@@ -13,6 +13,8 @@ import {
   XCircle,
   ExternalLink,
   Loader2,
+  ToggleLeft,
+  ToggleRight,
 } from 'lucide-react'
 
 interface Integration {
@@ -23,6 +25,10 @@ interface Integration {
   last_sync_at: string | null
   sync_error: string | null
   created_at: string
+  settings?: {
+    auto_consent_tracking?: boolean
+    consent_link_id?: string
+  }
   stats: {
     candidates: number
     applications: number
@@ -50,6 +56,7 @@ export default function IntegrationsPage() {
   const [connecting, setConnecting] = useState(false)
   const [syncing, setSyncing] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [togglingConsent, setTogglingConsent] = useState<string | null>(null)
 
   const fetchIntegrations = useCallback(async () => {
     try {
@@ -131,6 +138,34 @@ export default function IntegrationsPage() {
       setError('Sync failed. Please try again.')
     } finally {
       setSyncing(null)
+    }
+  }
+
+  const handleToggleAutoConsent = async (integrationId: string, currentValue: boolean) => {
+    setTogglingConsent(integrationId)
+    try {
+      const res = await fetch('/api/integrations/merge/settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          integrationId,
+          settings: { auto_consent_tracking: !currentValue },
+        }),
+      })
+
+      if (!res.ok) throw new Error('Failed to update settings')
+
+      // Update local state
+      setIntegrations(prev => prev.map(i => 
+        i.id === integrationId 
+          ? { ...i, settings: { ...i.settings, auto_consent_tracking: !currentValue } }
+          : i
+      ))
+    } catch (err) {
+      console.error(err)
+      setError('Failed to update consent tracking setting')
+    } finally {
+      setTogglingConsent(null)
     }
   }
 
@@ -340,6 +375,44 @@ export default function IntegrationsPage() {
                         {integration.sync_error}
                       </div>
                     )}
+
+                    {/* Auto-consent tracking toggle */}
+                    <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="text-sm font-medium text-gray-900">Auto-track consent</div>
+                          <div className="text-xs text-gray-500">
+                            Automatically create pending consent records for new candidates
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleToggleAutoConsent(
+                            integration.id,
+                            integration.settings?.auto_consent_tracking || false
+                          )}
+                          disabled={togglingConsent === integration.id}
+                          className={`flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                            integration.settings?.auto_consent_tracking
+                              ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                              : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                          }`}
+                        >
+                          {togglingConsent === integration.id ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : integration.settings?.auto_consent_tracking ? (
+                            <>
+                              <ToggleRight className="w-4 h-4" />
+                              Enabled
+                            </>
+                          ) : (
+                            <>
+                              <ToggleLeft className="w-4 h-4" />
+                              Disabled
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
 
                     {/* View candidates link */}
                     <div className="mt-4 pt-4 border-t flex items-center justify-between">

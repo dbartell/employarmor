@@ -9,6 +9,18 @@ export interface Organization {
   seat_limit?: number
   seats_used?: number
   created_at: string
+  // Trial and subscription
+  trial_started_at?: string | null
+  trial_ends_at?: string | null
+  subscription_status?: 'none' | 'trialing' | 'active' | 'past_due' | 'cancelled'
+  // Quiz data
+  quiz_tools?: string[]
+  quiz_risk_score?: number
+  quiz_usages?: string[]
+  // Paywall tracking
+  documents_generated?: number
+  paywall_triggered_at?: string | null
+  paywall_reason?: 'document_generated' | 'trial_day_3' | null
 }
 
 export type MemberRole = 'owner' | 'admin' | 'manager' | 'member'
@@ -104,9 +116,28 @@ export interface ConsentRecord {
   org_id: string
   candidate_email: string
   candidate_name: string
+  position?: string
   disclosure_date: string
   consent_date: string | null
-  document_id: string
+  status: 'pending' | 'consented' | 'declined'
+  document_id?: string
+  source?: 'manual' | 'link' | 'ats_sync'
+  consent_link_id?: string
+  ip_address?: string
+}
+
+export interface ConsentLink {
+  id: string
+  org_id: string
+  token: string
+  name: string
+  position?: string
+  is_active: boolean
+  expires_at?: string
+  views_count: number
+  submissions_count: number
+  created_at: string
+  updated_at: string
 }
 
 export interface TrainingCompletion {

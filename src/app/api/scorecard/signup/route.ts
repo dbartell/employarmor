@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { stripe, PRICES } from '@/lib/stripe'
+import { trackServerEvent } from '@/lib/analytics'
 
 // Use admin client to create users
 const supabaseAdmin = createClient(
@@ -23,14 +23,14 @@ export async function POST(req: NextRequest) {
     let userId: string
 
     if (existingUser) {
-      // User exists - just redirect to login
+      // User exists - return info for frontend to handle nicely
       return NextResponse.json({ 
-        error: 'Account already exists',
-        redirect: '/login?message=Account exists, please sign in'
-      }, { status: 409 })
+        existingUser: true,
+        email: email,
+      }, { status: 200 })
     }
 
-    // Create user with a temporary random password (they'll set it after checkout)
+    // Create user with a temporary random password (they'll set it after signup)
     const tempPassword = crypto.randomUUID()
     
     const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
         company_name: company,
         source: 'scorecard',
         needs_password_reset: true,
+        quiz_risk_score: riskScore,
       },
     })
 
@@ -51,14 +52,18 @@ export async function POST(req: NextRequest) {
 
     userId = authData.user.id
 
-    // Create organization
+    // Create organization with trial_started_at and quiz data
     const { error: orgError } = await supabaseAdmin
       .from('organizations')
       .insert({
         id: userId,
         name: company,
         states: states || [],
-        plan: 'free',
+        quiz_tools: tools || [], // Store selected tools from quiz
+        quiz_risk_score: riskScore,
+        plan: 'trial',
+        trial_started_at: new Date().toISOString(),
+        documents_generated: 0, // Track for paywall
       })
 
     if (orgError) {
@@ -82,44 +87,20 @@ export async function POST(req: NextRequest) {
       .update({ user_id: userId, converted_at: new Date().toISOString() })
       .eq('email', email)
 
-    // Create Stripe customer
-    const customer = await stripe.customers.create({
-      email,
-      name: company,
-      metadata: {
-        supabase_user_id: userId,
-      },
+    // Track signup analytics
+    trackServerEvent('signup_completed', { 
+      source: 'scorecard',
+      riskScore,
+      statesCount: states?.length || 0,
+      toolsCount: tools?.length || 0,
+    }, userId, userId)
+
+    // Return URL to set password (no Stripe checkout required)
+    // User goes directly to password setup, then dashboard
+    return NextResponse.json({ 
+      url: `${req.nextUrl.origin}/set-password?user_id=${userId}&trial=true`,
+      userId,
     })
-
-    // Save Stripe customer ID to org
-    await supabaseAdmin
-      .from('organizations')
-      .update({ stripe_customer_id: customer.id })
-      .eq('id', userId)
-
-    // Create checkout session for trial
-    const session = await stripe.checkout.sessions.create({
-      customer: customer.id,
-      mode: 'subscription',
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price: PRICES.PILOT,
-          quantity: 1,
-        },
-      ],
-      subscription_data: {
-        trial_period_days: 14,
-        metadata: {
-          supabase_user_id: userId,
-        },
-      },
-      success_url: `${req.nextUrl.origin}/set-password?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.nextUrl.origin}/scorecard?checkout=cancelled`,
-      allow_promotion_codes: true,
-    })
-
-    return NextResponse.json({ url: session.url })
   } catch (error) {
     console.error('Scorecard signup error:', error)
     return NextResponse.json(

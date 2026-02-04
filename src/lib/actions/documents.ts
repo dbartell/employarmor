@@ -321,10 +321,7 @@ export async function createDocument(
     .from('documents')
     .insert({
       org_id: user.id,
-      doc_type: docType.includes('disclosure') ? 'disclosure' : 
-                docType.includes('consent') ? 'consent' :
-                docType.includes('policy') || docType.includes('handbook') ? 'policy' :
-                'assessment',
+      doc_type: docType, // Store the full doc type ID
       title,
       content,
       version: 1,
@@ -385,4 +382,106 @@ export async function getOrganizationInfo() {
     .single()
 
   return org
+}
+
+export async function updateDocument(
+  id: string,
+  title: string,
+  content: string
+) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    return { error: 'Not authenticated' }
+  }
+
+  const { data, error } = await supabase
+    .from('documents')
+    .update({
+      title,
+      content,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', id)
+    .eq('org_id', user.id)
+    .select()
+    .single()
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/documents')
+  revalidatePath('/dashboard')
+
+  return { document: data }
+}
+
+export async function createDocumentVersion(
+  docType: string,
+  title: string,
+  content: string
+) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    return { error: 'Not authenticated' }
+  }
+
+  // Get the highest version number for this doc type
+  const { data: existing } = await supabase
+    .from('documents')
+    .select('version')
+    .eq('org_id', user.id)
+    .eq('doc_type', docType)
+    .order('version', { ascending: false })
+    .limit(1)
+
+  const nextVersion = (existing?.[0]?.version || 0) + 1
+
+  const { data, error } = await supabase
+    .from('documents')
+    .insert({
+      org_id: user.id,
+      doc_type: docType,
+      title,
+      content,
+      version: nextVersion,
+    })
+    .select()
+    .single()
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/documents')
+  revalidatePath('/dashboard')
+
+  return { document: data }
+}
+
+export async function getDocumentsByType(docType: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    return []
+  }
+
+  const { data: documents, error } = await supabase
+    .from('documents')
+    .select('*')
+    .eq('org_id', user.id)
+    .or(`doc_type.eq.${docType},title.ilike.%${docType.replace(/-/g, ' ')}%`)
+    .order('version', { ascending: false })
+
+  if (error) {
+    console.error('Error fetching documents by type:', error)
+    return []
+  }
+
+  return documents || []
 }

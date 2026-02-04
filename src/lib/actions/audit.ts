@@ -153,3 +153,38 @@ export async function getHiringStatesAndTools() {
     tools: toolsRes.data || [],
   }
 }
+
+export async function getOrganizationData() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    return null
+  }
+
+  // Get organization info including states stored on the org
+  const { data: org } = await supabase
+    .from('organizations')
+    .select('id, name, states')
+    .eq('id', user.id)
+    .single()
+
+  // Also get hiring_states and hiring_tools
+  const [statesRes, toolsRes] = await Promise.all([
+    supabase.from('hiring_states').select('state_code').eq('org_id', user.id),
+    supabase.from('hiring_tools').select('tool_name').eq('org_id', user.id),
+  ])
+
+  // Prefer org.states if available, otherwise use hiring_states
+  const states = org?.states?.length 
+    ? org.states 
+    : statesRes.data?.map(s => s.state_code) || []
+
+  const tools = toolsRes.data?.map(t => t.tool_name) || []
+
+  return {
+    name: org?.name || null,
+    states: states.length > 0 ? states : null,
+    tools: tools.length > 0 ? tools : null,
+  }
+}

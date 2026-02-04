@@ -87,9 +87,14 @@ export async function POST(req: NextRequest) {
         break
 
       case 'candidate.created':
+        if (data.data?.id) {
+          await handleCandidateChange(supabase, integration, data.data.id as string, true)
+        }
+        break
+
       case 'candidate.updated':
         if (data.data?.id) {
-          await handleCandidateChange(supabase, integration, data.data.id as string)
+          await handleCandidateChange(supabase, integration, data.data.id as string, false)
         }
         break
 
@@ -140,8 +145,9 @@ async function handleSyncCompleted(
 
 async function handleCandidateChange(
   supabase: ReturnType<typeof getAdminClient>,
-  integration: { id: string; org_id: string; merge_account_token: string },
-  candidateMergeId: string
+  integration: { id: string; org_id: string; merge_account_token: string; settings?: Record<string, unknown> },
+  candidateMergeId: string,
+  isNewCandidate: boolean = false
 ) {
   try {
     const mergeClient = createMergeClient(integration.merge_account_token)
@@ -180,6 +186,48 @@ async function handleCandidateChange(
           metadata: { flag_type: flag.type },
           occurred_at: new Date().toISOString(),
         })
+      }
+
+      // Auto-create consent record for new candidates (if enabled)
+      if (isNewCandidate && integration.settings?.auto_consent_tracking) {
+        const email = candidate.email_addresses?.[0]?.value
+        const firstName = candidate.first_name || ''
+        const lastName = candidate.last_name || ''
+        
+        if (email) {
+          // Check if consent record already exists
+          const { data: existingConsent } = await supabase
+            .from('consent_records')
+            .select('id')
+            .eq('org_id', integration.org_id)
+            .eq('candidate_email', email)
+            .single()
+
+          if (!existingConsent) {
+            // Create a pending consent record for tracking
+            await supabase.from('consent_records').insert({
+              org_id: integration.org_id,
+              candidate_name: `${firstName} ${lastName}`.trim() || 'Unknown',
+              candidate_email: email,
+              disclosure_date: new Date().toISOString().split('T')[0],
+              status: 'pending',
+              source: 'ats_sync',
+            })
+
+            // Log the auto-tracking event
+            await supabase.from('ats_audit_events').insert({
+              org_id: integration.org_id,
+              integration_id: integration.id,
+              candidate_id: savedCandidate.id,
+              event_type: 'consent_tracking',
+              event_source: 'merge_webhook',
+              description: `Auto-created pending consent record for ${email}`,
+              severity: 'info',
+              metadata: { candidate_email: email },
+              occurred_at: new Date().toISOString(),
+            })
+          }
+        }
       }
     }
   } catch (error) {

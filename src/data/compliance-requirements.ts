@@ -1,6 +1,8 @@
 // State-specific compliance requirements
 // Maps each regulated state to exactly what's needed
 
+export type TaskPhase = 'today' | 'this_week' | 'setup_once'
+
 export interface ComplianceRequirement {
   id: string
   title: string
@@ -8,7 +10,10 @@ export interface ComplianceRequirement {
   type: 'document' | 'action' | 'ongoing'
   docType?: string // links to document type if applicable
   href: string
-  estimatedTime?: string
+  estimatedTime?: string // Human-readable time estimate
+  estimatedMinutes?: number // Machine-readable for calculations
+  phase?: TaskPhase // Grouping for dashboard display
+  priority?: number // Lower = higher priority within phase
 }
 
 export interface StateCompliance {
@@ -35,7 +40,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'disclosure-candidate',
         href: '/documents?generate=disclosure-candidate',
-        estimatedTime: '2 min',
+        estimatedTime: '~5 min',
+        estimatedMinutes: 5,
+        phase: 'today',
+        priority: 2,
       },
       {
         id: 'il-employee-notice',
@@ -44,7 +52,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'disclosure-employee',
         href: '/documents?generate=disclosure-employee',
-        estimatedTime: '2 min',
+        estimatedTime: '~5 min',
+        estimatedMinutes: 5,
+        phase: 'this_week',
+        priority: 3,
       },
     ],
   },
@@ -62,7 +73,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'impact-assessment',
         href: '/documents/impact-assessment',
-        estimatedTime: '15 min',
+        estimatedTime: '~20 min',
+        estimatedMinutes: 20,
+        phase: 'today',
+        priority: 1,
       },
       {
         id: 'co-disclosure',
@@ -71,7 +85,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'disclosure-candidate',
         href: '/documents?generate=disclosure-candidate',
-        estimatedTime: '2 min',
+        estimatedTime: '~5 min',
+        estimatedMinutes: 5,
+        phase: 'today',
+        priority: 2,
       },
       {
         id: 'co-consent',
@@ -79,7 +96,10 @@ export const stateCompliance: StateCompliance[] = [
         description: 'Collect and track candidate consent',
         type: 'ongoing',
         href: '/consent',
-        estimatedTime: 'ongoing',
+        estimatedTime: '~10 min setup',
+        estimatedMinutes: 10,
+        phase: 'setup_once',
+        priority: 1,
       },
     ],
   },
@@ -97,6 +117,8 @@ export const stateCompliance: StateCompliance[] = [
         type: 'action',
         href: '/audit',
         estimatedTime: 'varies',
+        phase: 'setup_once',
+        priority: 2,
       },
       {
         id: 'nyc-disclosure',
@@ -105,7 +127,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'bias-audit-disclosure',
         href: '/disclosures',
-        estimatedTime: '5 min',
+        estimatedTime: '~5 min',
+        estimatedMinutes: 5,
+        phase: 'this_week',
+        priority: 2,
       },
       {
         id: 'nyc-notice',
@@ -114,7 +139,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'disclosure-candidate',
         href: '/documents?generate=disclosure-candidate',
-        estimatedTime: '2 min',
+        estimatedTime: '~5 min',
+        estimatedMinutes: 5,
+        phase: 'today',
+        priority: 2,
       },
     ],
   },
@@ -132,7 +160,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'disclosure-candidate',
         href: '/documents?generate=disclosure-candidate',
-        estimatedTime: '2 min',
+        estimatedTime: '~5 min',
+        estimatedMinutes: 5,
+        phase: 'today',
+        priority: 2,
       },
       {
         id: 'ca-consent',
@@ -140,7 +171,10 @@ export const stateCompliance: StateCompliance[] = [
         description: 'Allow candidates to opt out of AI processing',
         type: 'ongoing',
         href: '/consent',
-        estimatedTime: 'ongoing',
+        estimatedTime: '~10 min setup',
+        estimatedMinutes: 10,
+        phase: 'setup_once',
+        priority: 1,
       },
     ],
   },
@@ -158,7 +192,10 @@ export const stateCompliance: StateCompliance[] = [
         type: 'document',
         docType: 'consent-form',
         href: '/documents?generate=consent-form',
-        estimatedTime: '2 min',
+        estimatedTime: '~5 min',
+        estimatedMinutes: 5,
+        phase: 'today',
+        priority: 2,
       },
     ],
   },
@@ -172,7 +209,21 @@ export const generalRequirements: ComplianceRequirement[] = [
     description: 'Certify recruiters and hiring managers on AI compliance',
     type: 'action',
     href: '/training',
-    estimatedTime: '15-30 min',
+    estimatedTime: '~15 min each',
+    estimatedMinutes: 15,
+    phase: 'this_week',
+    priority: 1,
+  },
+  {
+    id: 'disclosure-page',
+    title: 'Public Disclosure Page',
+    description: 'Publish your AI use disclosure on your careers site',
+    type: 'action',
+    href: '/disclosures',
+    estimatedTime: '~5 min',
+    estimatedMinutes: 5,
+    phase: 'this_week',
+    priority: 2,
   },
   {
     id: 'handbook',
@@ -181,7 +232,10 @@ export const generalRequirements: ComplianceRequirement[] = [
     type: 'document',
     docType: 'handbook-policy',
     href: '/documents?generate=handbook-policy',
-    estimatedTime: '5 min',
+    estimatedTime: '~5 min',
+    estimatedMinutes: 5,
+    phase: 'setup_once',
+    priority: 3,
   },
 ]
 
@@ -202,6 +256,84 @@ export function getRequirementsForStates(stateCodes: string[]): {
     stateRequirements: stateReqs,
     generalRequirements,
   }
+}
+
+// Phase display configuration
+export const PHASE_CONFIG: Record<TaskPhase, { label: string; sublabel: string; color: string }> = {
+  today: { 
+    label: 'TODAY', 
+    sublabel: 'Complete first',
+    color: 'text-red-600 bg-red-50 border-red-200'
+  },
+  this_week: { 
+    label: 'THIS WEEK', 
+    sublabel: 'Important tasks',
+    color: 'text-amber-600 bg-amber-50 border-amber-200'
+  },
+  setup_once: { 
+    label: 'SET UP ONCE', 
+    sublabel: 'Configure and forget',
+    color: 'text-blue-600 bg-blue-50 border-blue-200'
+  },
+}
+
+// Group requirements by phase for dashboard display
+export function getRequirementsByPhase(
+  stateRequirements: { state: StateCompliance; requirements: ComplianceRequirement[] }[],
+  general: ComplianceRequirement[]
+): Record<TaskPhase, { requirement: ComplianceRequirement; state?: StateCompliance }[]> {
+  const grouped: Record<TaskPhase, { requirement: ComplianceRequirement; state?: StateCompliance }[]> = {
+    today: [],
+    this_week: [],
+    setup_once: [],
+  }
+
+  // Add state requirements
+  for (const { state, requirements } of stateRequirements) {
+    for (const req of requirements) {
+      const phase = req.phase || 'setup_once'
+      grouped[phase].push({ requirement: req, state })
+    }
+  }
+
+  // Add general requirements
+  for (const req of general) {
+    const phase = req.phase || 'setup_once'
+    grouped[phase].push({ requirement: req })
+  }
+
+  // Sort each phase by priority
+  for (const phase of Object.keys(grouped) as TaskPhase[]) {
+    grouped[phase].sort((a, b) => (a.requirement.priority || 99) - (b.requirement.priority || 99))
+  }
+
+  // Deduplicate by requirement ID (keep first occurrence)
+  for (const phase of Object.keys(grouped) as TaskPhase[]) {
+    const seen = new Set<string>()
+    grouped[phase] = grouped[phase].filter(item => {
+      if (seen.has(item.requirement.id)) return false
+      seen.add(item.requirement.id)
+      return true
+    })
+  }
+
+  return grouped
+}
+
+// Calculate total time estimate for a phase
+export function getPhaseTimeEstimate(
+  items: { requirement: ComplianceRequirement }[]
+): string {
+  const totalMinutes = items.reduce((sum, item) => {
+    return sum + (item.requirement.estimatedMinutes || 0)
+  }, 0)
+
+  if (totalMinutes === 0) return ''
+  if (totalMinutes < 60) return `~${totalMinutes} min`
+  const hours = Math.floor(totalMinutes / 60)
+  const mins = totalMinutes % 60
+  if (mins === 0) return `~${hours}h`
+  return `~${hours}h ${mins}m`
 }
 
 // Calculate total requirements count

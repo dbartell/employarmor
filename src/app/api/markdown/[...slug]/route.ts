@@ -1,5 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AI_TOOLS, STATES_WITH_LAWS, getToolBySlug, getStateBySlug } from '@/lib/seo-data'
+import { GLOSSARY_TERMS, getTermBySlug } from '@/lib/glossary-data'
+import { RESOURCE_PAGES, getResourceBySlug, type ResourceContent } from '@/lib/resources-data'
+
+// Short aliases for state slugs (marketing URLs -> seo-data slugs)
+const STATE_ALIASES: Record<string, string> = {
+  'nyc': 'new-york-city',
+  'ny': 'new-york',
+  'ca': 'california',
+  'co': 'colorado',
+  'il': 'illinois',
+  'md': 'maryland',
+}
+
+function resolveStateSlug(slug: string): string {
+  return STATE_ALIASES[slug.toLowerCase()] || slug
+}
+
+// AI agent guidance header - appears at top of all markdown responses
+const AGENT_HEADER = `> For a complete index of AI-optimized documentation, see [/llms.txt](https://aihirelaw.com/llms.txt)
+
+`
 
 // Generate markdown for tool + state compliance pages
 function generateToolStateMarkdown(toolSlug: string, stateSlug: string): string | null {
@@ -221,6 +242,144 @@ ${tools.map(t => `- [${t.name}](/compliance/${t.slug})`).join('\n')}
   return md
 }
 
+// Generate markdown for a single glossary term
+function generateGlossaryTermMarkdown(termSlug: string): string | null {
+  const term = getTermBySlug(termSlug)
+  if (!term) return null
+  
+  let md = `# ${term.term} (${term.fullName})
+
+${term.definition}
+
+## Why It Matters
+
+${term.whyItMatters}
+
+## Related Laws
+
+${term.relatedLaws.map(law => `- ${law}`).join('\n')}
+
+## Examples
+
+${term.examples.map(ex => `- ${ex}`).join('\n')}
+
+## Related Terms
+
+${term.relatedTerms.map(t => `- [${t}](/glossary/${t})`).join('\n')}
+
+---
+
+*Source: [AIHireLaw Glossary](https://aihirelaw.com/glossary/${term.slug}) - This is for informational purposes only and does not constitute legal advice.*
+`
+  
+  return md
+}
+
+// Generate markdown for a single resource page
+function generateResourceMarkdown(resource: ResourceContent): string {
+  let md = `# ${resource.title}
+
+${resource.description}
+
+`
+  
+  for (const section of resource.sections) {
+    md += `## ${section.heading}
+
+${section.content}
+
+`
+    if (section.items) {
+      for (const item of section.items) {
+        md += `${item.startsWith('☐') || item.startsWith('Q:') || /^\d\./.test(item) ? '' : '- '}${item}\n`
+      }
+      md += '\n'
+    }
+  }
+
+  if (resource.relatedLinks && resource.relatedLinks.length > 0) {
+    md += `## Related Resources
+
+${resource.relatedLinks.map(link => `- [${link.title}](${link.url})`).join('\n')}
+
+`
+  }
+
+  md += `---
+
+*Source: [AIHireLaw](https://aihirelaw.com/resources/${resource.slug}) - This is for informational purposes only and does not constitute legal advice.*
+`
+  
+  return md
+}
+
+// Generate resources index
+function generateResourcesIndex(): string {
+  let md = `# AI Hiring Compliance Resources
+
+Guides, templates, and tools for navigating AI hiring regulations.
+
+## Compliance Guides by Jurisdiction
+
+### NYC Local Law 144
+- [NYC Local Law 144: Complete Employer Compliance Guide](/resources/nyc-local-law-144)
+
+### Illinois
+- [Illinois AI Hiring Law (HB 3773) Guide](/resources/illinois-ai-hiring-law)
+
+### Colorado
+- [Colorado AI Act: Employer Requirements Explained](/resources/colorado-ai-act-employers)
+
+### California
+- [California CCPA ADMT Regulations Guide](/resources/california-ccpa-admt)
+
+## Templates & Tools
+
+- [AI Disclosure Notice Template](/resources/ai-disclosure-notice-template)
+- [AI Hiring Compliance Checklist for 2026](/resources/compliance-checklist-2026)
+- [Vendor Assessment Guide](/resources/vendor-assessment-guide)
+- [HR Training Guide](/resources/hr-training-guide)
+
+## Understanding AI Hiring
+
+- [What Counts as AI in Hiring?](/resources/what-counts-as-ai-hiring)
+- [FAQ: Common Questions Answered](/resources/faq)
+
+---
+
+*Source: [AIHireLaw Resources](https://aihirelaw.com/resources) - This is for informational purposes only and does not constitute legal advice.*
+`
+  
+  return md
+}
+
+// Generate glossary index
+function generateGlossaryIndex(): string {
+  let md = `# AI Hiring Compliance Glossary
+
+Essential terms and definitions for understanding AI hiring laws and regulations.
+
+## Terms
+
+`
+  
+  for (const term of GLOSSARY_TERMS) {
+    md += `### [${term.term}](/glossary/${term.slug})
+**${term.fullName}**
+
+${term.definition.slice(0, 200)}${term.definition.length > 200 ? '...' : ''}
+
+`
+  }
+
+  md += `---
+
+*Source: [AIHireLaw Glossary](https://aihirelaw.com/glossary) - This is for informational purposes only and does not constitute legal advice.*
+`
+  
+  return md
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string[] }> }
@@ -237,15 +396,44 @@ export async function GET(
       // /api/markdown/compliance
       markdown = generateComplianceOverview()
     } else if (slug.length === 2) {
-      // /api/markdown/compliance/[tool]
-      markdown = generateToolMarkdown(slug[1])
+      // /api/markdown/compliance/[slug] - could be tool or state
+      // Try state first (e.g., /compliance/nyc, /compliance/colorado)
+      const resolvedStateSlug = resolveStateSlug(slug[1])
+      const state = getStateBySlug(resolvedStateSlug) as typeof STATES_WITH_LAWS[number] | undefined
+      if (state && 'laws' in state) {
+        markdown = generateStateMarkdown(resolvedStateSlug)
+      } else {
+        // Try as tool (e.g., /compliance/hirevue)
+        markdown = generateToolMarkdown(slug[1])
+      }
     } else if (slug.length === 3) {
       if (slug[1] === 'state') {
         // /api/markdown/compliance/state/[state]
-        markdown = generateStateMarkdown(slug[2])
+        const resolvedStateSlug = resolveStateSlug(slug[2])
+        markdown = generateStateMarkdown(resolvedStateSlug)
       } else {
         // /api/markdown/compliance/[tool]/[state]
-        markdown = generateToolStateMarkdown(slug[1], slug[2])
+        const resolvedStateSlug = resolveStateSlug(slug[2])
+        markdown = generateToolStateMarkdown(slug[1], resolvedStateSlug)
+      }
+    }
+  } else if (slug[0] === 'glossary') {
+    if (slug.length === 1) {
+      // /api/markdown/glossary
+      markdown = generateGlossaryIndex()
+    } else if (slug.length === 2) {
+      // /api/markdown/glossary/[term]
+      markdown = generateGlossaryTermMarkdown(slug[1])
+    }
+  } else if (slug[0] === 'resources') {
+    if (slug.length === 1) {
+      // /api/markdown/resources
+      markdown = generateResourcesIndex()
+    } else if (slug.length === 2) {
+      // /api/markdown/resources/[slug]
+      const resource = getResourceBySlug(slug[1])
+      if (resource) {
+        markdown = generateResourceMarkdown(resource)
       }
     }
   } else if (slug.length === 1) {
@@ -264,7 +452,10 @@ export async function GET(
     return NextResponse.json({ error: 'Page not found' }, { status: 404 })
   }
   
-  return new NextResponse(markdown, {
+  // Prepend agent guidance header to all markdown responses
+  const fullMarkdown = AGENT_HEADER + markdown
+  
+  return new NextResponse(fullMarkdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
       'Cache-Control': 'public, max-age=3600, s-maxage=86400',

@@ -7,6 +7,10 @@ Allow: /
 # Sitemap
 Sitemap: https://aihirelaw.com/sitemap.xml
 
+# LLM-optimized content index
+# See /llms.txt for AI-friendly documentation structure
+# Full expanded version: /llms-full.txt
+
 # AI Crawlers - explicitly welcomed
 User-agent: GPTBot
 Allow: /
@@ -30,5 +34,6 @@ User-agent: Bingbot
 Allow: /
 
 # Markdown API - optimized for AI consumption
-# Access any compliance page as markdown: /compliance/[tool]/[state]?format=md
-# Or directly: /api/markdown/compliance/[tool]/[state]
+# Request headers: Accept: text/markdown or Accept: text/plain
+# URL parameter: ?format=md
+# URL suffix: .md (e.g., /compliance/nyc.md)

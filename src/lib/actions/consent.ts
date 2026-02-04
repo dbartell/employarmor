@@ -13,6 +13,9 @@ export interface ConsentRecord {
   consent_date: string | null
   status: 'pending' | 'consented' | 'declined'
   document_id?: string
+  source?: 'manual' | 'link' | 'ats_sync'
+  consent_link_id?: string
+  ip_address?: string
 }
 
 export async function getConsentRecords(filters?: {

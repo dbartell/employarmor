@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Shield } from "lucide-react"
 
 const stateLaws = [
   { name: "Illinois", href: "/compliance/illinois", law: "HB 3773" },
@@ -92,10 +92,10 @@ export default function MarketingLayout({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">H</span>
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <Shield className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-xl text-gray-900">AIHireLaw</span>
+              <span className="font-bold text-xl text-gray-900">AI Hire Law</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
@@ -110,7 +110,7 @@ export default function MarketingLayout({
               <Link href="/login">
                 <Button variant="ghost">Log in</Button>
               </Link>
-              <Link href="/scorecard">
+              <Link href="/onboard">
                 <Button variant="cta">Free Compliance Score</Button>
               </Link>
             </div>
@@ -131,7 +131,7 @@ export default function MarketingLayout({
               <h3 className="text-white font-semibold mb-4">Product</h3>
               <ul className="space-y-2">
                 <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
-                <li><Link href="/scorecard" className="hover:text-white">Free Assessment</Link></li>
+                <li><Link href="/onboard" className="hover:text-white">Free Assessment</Link></li>
                 <li><Link href="/demo" className="hover:text-white">Request Demo</Link></li>
               </ul>
             </div>
@@ -166,7 +166,7 @@ export default function MarketingLayout({
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p>© 2026 AIHireLaw. All rights reserved.</p>
+            <p>© 2026 AI Hire Law. All rights reserved.</p>
           </div>
         </div>
       </footer>

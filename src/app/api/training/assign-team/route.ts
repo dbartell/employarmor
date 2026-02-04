@@ -7,6 +7,7 @@ interface Assignment {
   name: string
   email: string
   track: TrainingTrack
+  selfAssign?: boolean
 }
 
 export async function POST(req: NextRequest) {
@@ -20,8 +21,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'No assignments provided' }, { status: 400 })
     }
 
+    // Get current user info for self-assignment
+    const { data: { user } } = await supabase.auth.getUser()
+
     // Validate assignments
     for (const a of assignments) {
+      // Self-assign doesn't require email
+      if (a.selfAssign) {
+        if (!['recruiter', 'manager', 'admin', 'executive'].includes(a.track)) {
+          return NextResponse.json({ error: `Invalid track: ${a.track}` }, { status: 400 })
+        }
+        continue
+      }
       if (!a.name || !a.email || !a.track) {
         return NextResponse.json({ error: 'Invalid assignment data' }, { status: 400 })
       }
@@ -44,50 +55,63 @@ export async function POST(req: NextRequest) {
     const errors = []
 
     for (const a of assignments) {
+      // Handle self-assignment
+      const email = a.selfAssign ? (user?.email || 'self@local') : a.email.toLowerCase()
+      const name = a.selfAssign ? (user?.user_metadata?.full_name || 'You') : a.name
+      
       // Check for existing assignment
       const { data: existing } = await supabase
         .from('training_assignments')
         .select('id, status')
         .eq('org_id', membership.organization_id)
-        .eq('user_email', a.email.toLowerCase())
+        .eq('user_email', email)
         .eq('track', a.track)
         .single()
 
       if (existing) {
         // Already assigned, skip
-        results.push({ email: a.email, status: 'already_assigned', id: existing.id })
+        results.push({ email, status: 'already_assigned', id: existing.id })
         continue
       }
 
       // Create assignment
+      const assignmentData: Record<string, unknown> = {
+        org_id: membership.organization_id,
+        user_email: email,
+        user_name: name,
+        track: a.track,
+        assigned_by: userId
+      }
+      
+      // For self-assignment, link directly to the user
+      if (a.selfAssign && user) {
+        assignmentData.user_id = user.id
+      }
+      
       const { data: assignment, error } = await supabase
         .from('training_assignments')
-        .insert({
-          org_id: membership.organization_id,
-          user_email: a.email.toLowerCase(),
-          user_name: a.name,
-          track: a.track,
-          assigned_by: userId
-        })
+        .insert(assignmentData)
         .select()
         .single()
 
       if (error) {
-        errors.push({ email: a.email, error: error.message })
+        errors.push({ email, error: error.message })
         continue
       }
 
-      results.push({ email: a.email, status: 'assigned', id: assignment.id })
+      results.push({ email, status: 'assigned', id: assignment.id })
 
-      // Send invite email
-      const trainingUrl = `${req.nextUrl.origin}/training/start/${assignment.magic_token}`
-      await sendTrainingInviteEmail({
-        to: a.email,
-        name: a.name,
-        track: a.track,
-        orgName,
-        trainingUrl
-      })
+      // Only send invite email if not self-assignment
+      if (!a.selfAssign) {
+        const trainingUrl = `${req.nextUrl.origin}/training/start/${assignment.magic_token}`
+        await sendTrainingInviteEmail({
+          to: email,
+          name,
+          track: a.track,
+          orgName,
+          trainingUrl
+        })
+      }
     }
 
     return NextResponse.json({

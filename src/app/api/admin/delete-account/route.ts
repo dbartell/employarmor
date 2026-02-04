@@ -34,15 +34,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Check if user is super admin (using organizations table)
-    const { data: org, error: orgError } = await supabase
-      .from('organizations')
-      .select('is_super_admin')
-      .eq('id', user.id)
-      .single()
+    // Check if user is super admin (using organizations table OR specific email)
+    const allowedEmails = ['bartelldevyn@gmail.com']
+    const isSuperAdminByEmail = allowedEmails.includes(user.email || '')
+    
+    if (!isSuperAdminByEmail) {
+      const { data: org, error: orgError } = await supabase
+        .from('organizations')
+        .select('is_super_admin')
+        .eq('id', user.id)
+        .single()
 
-    if (orgError || !org?.is_super_admin) {
-      return NextResponse.json({ error: 'Forbidden: Super admin access required' }, { status: 403 })
+      if (orgError || !org?.is_super_admin) {
+        return NextResponse.json({ error: 'Forbidden: Super admin access required' }, { status: 403 })
+      }
     }
 
     const { deleteUser = false } = await request.json()
@@ -64,12 +69,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to delete organization data' }, { status: 500 })
     }
 
-    // If deleteUser flag is set, delete the current user
+    // If deleteUser flag is set, delete the current user from auth
     if (deleteUser) {
+      console.log('Deleting auth user:', user.id, user.email)
       const { error: userDeleteError } = await adminClient.auth.admin.deleteUser(user.id)
       if (userDeleteError) {
         console.error('Delete user error:', userDeleteError)
+        return NextResponse.json({ error: 'Failed to delete user from auth: ' + userDeleteError.message }, { status: 500 })
       }
+      console.log('Auth user deleted successfully')
     }
 
     return NextResponse.json({ 
