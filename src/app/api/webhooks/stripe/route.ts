@@ -33,12 +33,13 @@ export async function POST(req: NextRequest) {
           (await getCustomerUserId(session.customer as string))
 
         if (userId) {
-          await supabaseAdmin.from('profiles').update({
+          await supabaseAdmin.from('organizations').update({
             subscription_status: 'active',
             subscription_id: session.subscription as string,
             subscription_started_at: new Date().toISOString(),
           }).eq('id', userId)
         }
+        // Note: For guest checkout, user may not exist yet - set-password will handle org creation
         break
       }
 
@@ -49,7 +50,7 @@ export async function POST(req: NextRequest) {
 
         if (userId) {
           const periodEnd = (subscription as unknown as { current_period_end?: number }).current_period_end
-          await supabaseAdmin.from('profiles').update({
+          await supabaseAdmin.from('organizations').update({
             subscription_status: subscription.status,
             ...(periodEnd && { subscription_current_period_end: new Date(periodEnd * 1000).toISOString() }),
           }).eq('id', userId)
@@ -63,7 +64,7 @@ export async function POST(req: NextRequest) {
           (await getCustomerUserId(subscription.customer as string))
 
         if (userId) {
-          await supabaseAdmin.from('profiles').update({
+          await supabaseAdmin.from('organizations').update({
             subscription_status: 'cancelled',
             subscription_ended_at: new Date().toISOString(),
           }).eq('id', userId)
@@ -76,7 +77,7 @@ export async function POST(req: NextRequest) {
         const userId = await getCustomerUserId(invoice.customer as string)
 
         if (userId) {
-          await supabaseAdmin.from('profiles').update({
+          await supabaseAdmin.from('organizations').update({
             subscription_status: 'past_due',
           }).eq('id', userId)
         }
@@ -93,7 +94,7 @@ export async function POST(req: NextRequest) {
 
 async function getCustomerUserId(customerId: string): Promise<string | null> {
   const { data } = await supabaseAdmin
-    .from('profiles')
+    .from('organizations')
     .select('id')
     .eq('stripe_customer_id', customerId)
     .single()

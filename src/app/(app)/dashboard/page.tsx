@@ -550,6 +550,7 @@ export default function DashboardPage() {
       {showPaywall && paywallStatus && (
         <PaywallModal
           status={paywallStatus}
+          isGuest={isGuest}
           onClose={() => {
             setShowPaywall(false)
             setPendingNavigation(null)

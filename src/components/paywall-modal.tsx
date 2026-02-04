@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { X, Sparkles, Check, Loader2, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -10,6 +10,7 @@ interface PaywallModalProps {
   status: PaywallStatus
   onClose?: () => void
   onUpgrade?: () => void
+  isGuest?: boolean
 }
 
 const FEATURES = [
@@ -21,13 +22,70 @@ const FEATURES = [
   "Priority support",
 ]
 
-export function PaywallModal({ status, onClose, onUpgrade }: PaywallModalProps) {
+const ONBOARD_STORAGE_KEY = 'hireshield_onboard_data'
+
+export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallModalProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [guestEmail, setGuestEmail] = useState('')
+  const [error, setError] = useState<string | null>(null)
   const message = getPaywallMessage(status)
+
+  // Pre-fill email from localStorage for guests
+  useEffect(() => {
+    if (isGuest) {
+      const storedData = localStorage.getItem(ONBOARD_STORAGE_KEY)
+      if (storedData) {
+        try {
+          const data = JSON.parse(storedData)
+          if (data.email) setGuestEmail(data.email)
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+  }, [isGuest])
 
   const handleUpgrade = async () => {
     setLoading(true)
+    setError(null)
+
+    // Guest checkout flow
+    if (isGuest) {
+      if (!guestEmail) {
+        setError('Please enter your email')
+        setLoading(false)
+        return
+      }
+
+      try {
+        const res = await fetch('/api/checkout/guest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: guestEmail }),
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+          if (data.existingUser) {
+            setError('Account exists. Please sign in first.')
+            setLoading(false)
+            return
+          }
+          setError(data.error || 'Failed to start checkout')
+          setLoading(false)
+          return
+        }
+
+        // Redirect to Stripe checkout
+        window.location.href = data.url
+      } catch (err) {
+        setError('Something went wrong. Please try again.')
+        setLoading(false)
+      }
+      return
+    }
     
     if (onUpgrade) {
       onUpgrade()
@@ -91,9 +149,24 @@ export function PaywallModal({ status, onClose, onUpgrade }: PaywallModalProps) 
 
         {/* CTA */}
         <div className="px-6 pb-6 space-y-3">
+          {isGuest && (
+            <div className="space-y-2">
+              <input
+                type="email"
+                value={guestEmail}
+                onChange={(e) => setGuestEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              {error && (
+                <p className="text-sm text-red-600">{error}</p>
+              )}
+            </div>
+          )}
+
           <Button
             onClick={handleUpgrade}
-            disabled={loading}
+            disabled={loading || (isGuest && !guestEmail)}
             className="w-full h-12 text-base"
             variant="cta"
           >
@@ -117,7 +190,9 @@ export function PaywallModal({ status, onClose, onUpgrade }: PaywallModalProps) 
           )}
 
           <p className="text-xs text-center text-gray-500">
-            {status.trialDaysRemaining > 0 ? (
+            {isGuest ? (
+              "Create your account after checkout"
+            ) : status.trialDaysRemaining > 0 ? (
               `${status.trialDaysRemaining} days left in your trial`
             ) : (
               "Your compliance progress will be saved"

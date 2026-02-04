@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
       userId = directUserId
     }
-    // Legacy Stripe checkout flow
+    // Stripe checkout flow (including guest checkout)
     else if (sessionId) {
       const session = await stripe.checkout.sessions.retrieve(sessionId)
 
@@ -51,7 +51,104 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Customer not found' }, { status: 400 })
       }
 
+      // Check if user already exists
       userId = customer.metadata?.supabase_user_id || null
+
+      // Guest checkout - need to create user account
+      if (!userId && 'email' in customer && customer.email) {
+        const email = customer.email
+
+        // Check if user exists by email (shouldn't, but just in case)
+        const { data: existingUsers } = await supabaseAdmin.auth.admin.listUsers()
+        const existingUser = existingUsers?.users?.find(u => u.email?.toLowerCase() === email.toLowerCase())
+
+        if (existingUser) {
+          // User exists - just update their subscription
+          userId = existingUser.id
+        } else {
+          // Get quiz data from leads table
+          const { data: lead } = await supabaseAdmin
+            .from('leads')
+            .select('*')
+            .eq('email', email.toLowerCase())
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .single()
+
+          // Create user with password
+          const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
+            email,
+            password,
+            email_confirm: true,
+            user_metadata: {
+              company_name: lead?.company_name || customer.name || undefined,
+              source: 'guest_checkout',
+            },
+          })
+
+          if (authError || !authData.user) {
+            console.error('Create user error:', authError)
+            return NextResponse.json({ error: 'Failed to create account' }, { status: 500 })
+          }
+
+          userId = authData.user.id
+
+          // Create organization with quiz data
+          const { error: orgError } = await supabaseAdmin
+            .from('organizations')
+            .insert({
+              id: userId,
+              name: lead?.company_name || customer.name || 'My Company',
+              states: lead?.states || [],
+              quiz_tools: lead?.tools || [],
+              quiz_usages: lead?.usages || [],
+              quiz_risk_score: lead?.risk_score || null,
+              employee_count: lead?.employee_count || null,
+              subscription_status: 'active',
+              documents_generated: 0,
+            })
+
+          if (orgError) {
+            console.error('Create org error:', orgError)
+            // Continue anyway - user is created
+          }
+
+          // Create user record
+          await supabaseAdmin
+            .from('users')
+            .insert({
+              id: userId,
+              org_id: userId,
+              email: email,
+              role: 'admin',
+            })
+
+          // Mark lead as converted
+          if (lead) {
+            await supabaseAdmin
+              .from('leads')
+              .update({ user_id: userId, converted_at: new Date().toISOString() })
+              .eq('email', email.toLowerCase())
+          }
+
+          // Update Stripe customer with user ID
+          await stripe.customers.update(customer.id, {
+            metadata: {
+              ...customer.metadata,
+              supabase_user_id: userId,
+            },
+          })
+
+          // Track conversion
+          trackServerEvent('guest_checkout_converted', { 
+            source: 'guest_checkout',
+            hasLeadData: !!lead,
+          }, userId, userId)
+
+          // User already has password set, return success
+          return NextResponse.json({ success: true, newUser: true })
+        }
+      }
     }
 
     if (!userId) {
