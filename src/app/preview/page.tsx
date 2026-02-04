@@ -251,13 +251,11 @@ export default function PreviewPage() {
 
   const handleTaskClick = () => {
     setPaywallStatus({
-      isSubscribed: false,
-      isTrialing: false,
-      trialExpired: false,
-      trialDaysLeft: 0,
-      limitReached: true,
+      shouldShowPaywall: true,
+      reason: null,
+      trialDaysRemaining: 0,
       documentsGenerated: 0,
-      documentLimit: 0,
+      isSubscribed: false,
     })
     setShowPaywall(true)
   }
