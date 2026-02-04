@@ -478,13 +478,23 @@ export default function DashboardPage() {
     }
   }, [data])
 
-  // Handle task click - check paywall or guest mode
+  // Handle task click - check paywall
   const handleTaskClick = (href: string) => {
     if (!data) return
     
-    // If guest, redirect to login with return URL
+    // Guests always see paywall
     if (isGuest) {
-      router.push(`/login?redirect=${encodeURIComponent(href)}`)
+      setPaywallStatus({
+        isSubscribed: false,
+        isTrialing: false,
+        trialExpired: false,
+        trialDaysLeft: 0,
+        limitReached: true,
+        documentsGenerated: 0,
+        documentLimit: 0,
+      })
+      setPendingNavigation(href)
+      setShowPaywall(true)
       return
     }
     
