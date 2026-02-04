@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Shield, ArrowRight, ArrowLeft, AlertTriangle, Loader2, CheckCircle2, Building2 } from 'lucide-react'
+import { Shield, ArrowRight, ArrowLeft, AlertTriangle, Loader2, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { createClient } from '@/lib/supabase/client'
@@ -545,29 +545,6 @@ export default function OnboardPage() {
           </div>
         )}
 
-        {/* Preview what they'll get */}
-        {step === 'email' && !existingUser && (
-          <div className="mt-8 p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Building2 className="w-5 h-5 text-blue-500" />
-              Your Compliance Summary
-            </h3>
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div className="bg-gray-50 rounded-lg p-3">
-                <div className="text-2xl font-bold text-gray-900">{data.states.filter(s => regulatedStates.includes(s)).length}</div>
-                <div className="text-xs text-gray-500">Regulated States</div>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-3">
-                <div className="text-2xl font-bold text-gray-900">{data.tools.length}</div>
-                <div className="text-xs text-gray-500">AI Tools</div>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-3">
-                <div className="text-2xl font-bold text-amber-500">{calculateRiskScore(data)}</div>
-                <div className="text-xs text-gray-500">Risk Score</div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )
