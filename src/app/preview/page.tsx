@@ -144,10 +144,10 @@ function TaskCard({
         </p>
       </div>
       
-      {requirement.timeEstimate && !isComplete && (
+      {requirement.estimatedTime && !isComplete && (
         <div className="flex items-center gap-1 text-xs text-gray-400">
           <Clock className="w-3 h-3" />
-          {requirement.timeEstimate}
+          {requirement.estimatedTime}
         </div>
       )}
       
