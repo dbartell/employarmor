@@ -1,0 +1,32 @@
+[08:59:37] ==========================================
+[08:59:37] 🚀 Starting E2E Test
+[08:59:37]    URL: https://hireshield.vercel.app
+[08:59:37]    User: hireshield.e2e+20260204085937@gmail.com
+[08:59:37] ==========================================
+[08:59:37] 
+[08:59:37] 📋 Phase 1: Cleanup
+[08:59:37] -------------------
+[08:59:37] Deleting test user from DB + Stripe...
+🧹 Cleaning up test user: hireshield.e2e+20260204085937@gmail.com
+ℹ️  No existing test user found in auth
+✅ Cleaned up leads table
+🎉 Test user cleanup complete!
+[08:59:38] ✅ Cleanup complete
+[08:59:38] 
+[08:59:38] 📋 Phase 2: Signup
+[08:59:38] ------------------
+[08:59:38] Running signup test...
+
+Running 1 test using 1 worker
+
+⚠️  Rate limit hit - Supabase email limit, not a code bug
+   Consider: upgrade Supabase plan or use admin API for test users
+  ✓  1 [chromium] › scripts/e2e/run-signup.spec.ts:8:5 › full signup and onboarding flow (15.7s)
+
+  1 passed (16.5s)
+[08:59:56] 
+[08:59:56] ==========================================
+[08:59:56] ✅ E2E Test PASSED
+[08:59:56] ==========================================
+[08:59:56] Log: /Users/henry/projects/hireshield/logs/e2e/e2e-2026-02-04_08-59-37.log
+[08:59:56] Screenshots: /Users/henry/projects/hireshield/logs/e2e/screenshots-2026-02-04_08-59-37

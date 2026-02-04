@@ -1,0 +1,88 @@
+[08:55:39] ==========================================
+[08:55:39] 🚀 Starting E2E Test
+[08:55:39]    URL: https://hireshield.vercel.app
+[08:55:39]    User: e2e-test@hireshield.test
+[08:55:39] ==========================================
+[08:55:39] 
+[08:55:39] 📋 Phase 1: Cleanup
+[08:55:40] -------------------
+[08:55:40] Deleting test user from DB + Stripe...
+🧹 Cleaning up test user: e2e-test@hireshield.test
+ℹ️  No existing test user found in auth
+✅ Cleaned up leads table
+🎉 Test user cleanup complete!
+[08:55:41] ✅ Cleanup complete
+[08:55:41] 
+[08:55:41] 📋 Phase 2: Signup
+[08:55:41] ------------------
+[08:55:41] Running signup test...
+
+Running 1 test using 1 worker
+
+  ✘  1 [chromium] › scripts/e2e/run-signup.spec.ts:8:5 › full signup and onboarding flow (16.3s)
+  ✘  2 [chromium] › scripts/e2e/run-signup.spec.ts:8:5 › full signup and onboarding flow (retry #1) (16.1s)
+
+
+  1) [chromium] › scripts/e2e/run-signup.spec.ts:8:5 › full signup and onboarding flow ─────────────
+
+    Error: Signup timed out - no confirmation or redirect
+
+      37 |       throw new Error(`Signup failed: ${errorText}`)
+      38 |     }
+    > 39 |     throw new Error('Signup timed out - no confirmation or redirect')
+         |           ^
+      40 |   }
+      41 |   
+      42 |   console.log(`Signup result: ${result}`)
+        at /Users/henry/projects/hireshield/scripts/e2e/run-signup.spec.ts:39:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/run-signup-full-signup-and-onboarding-flow-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/run-signup-full-signup-and-onboarding-flow-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Signup timed out - no confirmation or redirect
+
+      37 |       throw new Error(`Signup failed: ${errorText}`)
+      38 |     }
+    > 39 |     throw new Error('Signup timed out - no confirmation or redirect')
+         |           ^
+      40 |   }
+      41 |   
+      42 |   console.log(`Signup result: ${result}`)
+        at /Users/henry/projects/hireshield/scripts/e2e/run-signup.spec.ts:39:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/run-signup-full-signup-and-onboarding-flow-chromium-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/run-signup-full-signup-and-onboarding-flow-chromium-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/run-signup-full-signup-and-onboarding-flow-chromium-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/run-signup-full-signup-and-onboarding-flow-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/run-signup-full-signup-and-onboarding-flow-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › scripts/e2e/run-signup.spec.ts:8:5 › full signup and onboarding flow ──────────────
+[08:56:17] ❌ ERROR: Playwright test failed - check log for details
+[08:56:17] 
+[08:56:17] ==========================================
+[08:56:17] ❌ E2E Test FAILED
+[08:56:17]    Errors: 1
+[08:56:17]    - Playwright test failed - check log for details
+[08:56:17] 📝 Filing bug to Trello...
+[08:56:18] ✅ Bug filed to Trello
+[08:56:18] ==========================================
+[08:56:18] Log: /Users/henry/projects/hireshield/logs/e2e/e2e-2026-02-04_08-55-39.log
+[08:56:18] Screenshots: /Users/henry/projects/hireshield/logs/e2e/screenshots-2026-02-04_08-55-39

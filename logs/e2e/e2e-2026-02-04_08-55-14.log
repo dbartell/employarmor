@@ -1,0 +1,34 @@
+[08:55:14] ==========================================
+[08:55:14] 🚀 Starting E2E Test
+[08:55:14]    URL: https://hireshield.vercel.app
+[08:55:14]    User: e2e-test@hireshield.test
+[08:55:14] ==========================================
+[08:55:14] 
+[08:55:14] 📋 Phase 1: Cleanup
+[08:55:14] -------------------
+[08:55:14] Deleting test user from DB + Stripe...
+npm warn exec The following package was not found and will be installed: tsx@4.21.0
+🧹 Cleaning up test user: e2e-test@hireshield.test
+ℹ️  No existing test user found in auth
+✅ Cleaned up leads table
+🎉 Test user cleanup complete!
+[08:55:21] ✅ Cleanup complete
+[08:55:21] 
+[08:55:21] 📋 Phase 2: Signup
+[08:55:21] ------------------
+[08:55:21] Running signup test...
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[08:55:22] ❌ ERROR: Playwright test failed - check log for details
+[08:55:22] 
+[08:55:22] ==========================================
+[08:55:22] ❌ E2E Test FAILED
+[08:55:22]    Errors: 1
+[08:55:22]    - Playwright test failed - check log for details
+[08:55:22] 📝 Filing bug to Trello...
+[08:55:23] ✅ Bug filed to Trello
+[08:55:23] ==========================================
+[08:55:23] Log: /Users/henry/projects/hireshield/logs/e2e/e2e-2026-02-04_08-55-14.log
+[08:55:23] Screenshots: /Users/henry/projects/hireshield/logs/e2e/screenshots-2026-02-04_08-55-14
