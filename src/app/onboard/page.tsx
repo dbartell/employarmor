@@ -19,7 +19,25 @@ interface OnboardData {
   employeeCount: string
   email: string
   company: string
+  industry: string
 }
+
+const industries = [
+  { id: '', label: 'Select industry (optional)' },
+  { id: 'technology', label: 'Technology / Software' },
+  { id: 'healthcare', label: 'Healthcare / Medical' },
+  { id: 'finance', label: 'Finance / Banking' },
+  { id: 'retail', label: 'Retail / E-commerce' },
+  { id: 'manufacturing', label: 'Manufacturing' },
+  { id: 'professional-services', label: 'Professional Services' },
+  { id: 'education', label: 'Education' },
+  { id: 'hospitality', label: 'Hospitality / Travel' },
+  { id: 'logistics', label: 'Logistics / Transportation' },
+  { id: 'media', label: 'Media / Entertainment' },
+  { id: 'government', label: 'Government / Public Sector' },
+  { id: 'nonprofit', label: 'Non-profit' },
+  { id: 'other', label: 'Other' },
+]
 
 const employeeTiers = [
   { id: '1-50', label: '1-50 employees', description: 'Small team' },
@@ -69,7 +87,8 @@ export default function OnboardPage() {
     usages: [],
     employeeCount: '',
     email: '',
-    company: ''
+    company: '',
+    industry: ''
   })
 
   // Load saved progress from localStorage on mount
@@ -87,6 +106,7 @@ export default function OnboardPage() {
           employeeCount: parsed.employeeCount || '',
           email: parsed.email || '',
           company: parsed.company || '',
+          industry: parsed.industry || '',
         }))
         // Resume at the furthest incomplete step
         if (parsed.email && parsed.company) setStep('email')
@@ -189,6 +209,7 @@ export default function OnboardPage() {
           tools: allTools,
           usages: data.usages,
           employeeCount: data.employeeCount,
+          industry: data.industry || null,
           riskScore,
           customTool: data.customTool.trim() || null,
         }),
@@ -552,6 +573,22 @@ export default function OnboardPage() {
                     className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Acme Inc."
                   />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Industry <span className="text-gray-400 font-normal">(optional)</span>
+                  </label>
+                  <select
+                    value={data.industry}
+                    onChange={(e) => setData(prev => ({ ...prev, industry: e.target.value }))}
+                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    {industries.map(ind => (
+                      <option key={ind.id} value={ind.id}>
+                        {ind.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               
