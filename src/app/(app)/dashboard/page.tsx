@@ -342,7 +342,38 @@ export default function DashboardPage() {
       // Get user email for leads lookup
       const userEmail = user.email
 
-      // Parallel fetch all data
+      // First check if org exists - if not, try to bootstrap it
+      const { data: orgCheck } = await supabase.from('organizations').select('id').eq('id', orgId).single()
+      
+      if (!orgCheck) {
+        // Org doesn't exist - try to bootstrap from localStorage quiz data
+        const storedQuizData = typeof window !== 'undefined' ? localStorage.getItem('hireshield_onboard_data') : null
+        let quizData = null
+        if (storedQuizData) {
+          try {
+            quizData = JSON.parse(storedQuizData)
+          } catch (e) {
+            // ignore parse errors
+          }
+        }
+        
+        // Call bootstrap API to create org
+        try {
+          await fetch('/api/dashboard/bootstrap', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              userId: orgId,
+              email: userEmail,
+              quizData,
+            }),
+          })
+        } catch (e) {
+          console.error('Bootstrap failed:', e)
+        }
+      }
+
+      // Parallel fetch all data (re-fetch org after potential bootstrap)
       const [orgRes, docsRes, disclosureRes, trainingCompleteRes, trainingTotalRes, auditsRes, consentsRes, hiringStatesRes, leadsRes] = await Promise.all([
         supabase.from('organizations').select('name, states, subscription_status, trial_started_at, documents_generated').eq('id', orgId).single(),
         supabase.from('documents').select('doc_type').eq('org_id', orgId),
