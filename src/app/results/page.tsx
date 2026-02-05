@@ -360,7 +360,7 @@ export default function PreviewPage() {
         />
       )}
       
-      <div className="max-w-5xl mx-auto p-6 md:p-8 overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 py-6 md:p-8 overflow-hidden">
         
         {/* Hero Section */}
         <div className="relative overflow-hidden rounded-2xl mb-8 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800">
