@@ -13,3 +13,4 @@ ADD COLUMN IF NOT EXISTS quiz_usages TEXT[] DEFAULT '{}';
 
 -- Index for state-based queries
 CREATE INDEX IF NOT EXISTS idx_organizations_states ON organizations USING GIN(states);
+
