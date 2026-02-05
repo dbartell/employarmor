@@ -89,7 +89,6 @@ export async function POST(req: NextRequest) {
         quiz_risk_score: riskScore,
         plan: 'trial',
         trial_started_at: new Date().toISOString(),
-        documents_generated: 0,
       })
 
     if (orgError) {
