@@ -339,7 +339,7 @@ export default function DashboardPage() {
         supabase.from('audits').select('risk_score').eq('org_id', orgId).order('created_at', { ascending: false }).limit(1),
         supabase.from('consents').select('*', { count: 'exact', head: true }).eq('org_id', orgId),
         supabase.from('hiring_states').select('state_code').eq('org_id', orgId),
-        userEmail ? supabase.from('leads').select('risk_score').eq('email', userEmail).order('created_at', { ascending: false }).limit(1) : Promise.resolve({ data: null }),
+        userEmail ? supabase.from('leads').select('risk_score, states, tools').eq('email', userEmail).order('created_at', { ascending: false }).limit(1) : Promise.resolve({ data: null }),
       ])
 
       // Get risk score from most recent audit, or fall back to leads table (scorecard)
@@ -347,10 +347,11 @@ export default function DashboardPage() {
       const leadRiskScore = leadsRes.data?.[0]?.risk_score ?? null
       const riskScore = auditRiskScore ?? leadRiskScore
 
-      // Get states from org or fall back to hiring_states table
+      // Get states from org, fall back to hiring_states table, then leads table
       const orgStates = orgRes.data?.states || []
       const hiringStates = hiringStatesRes.data?.map(s => s.state_code) || []
-      const states = orgStates.length > 0 ? orgStates : hiringStates
+      const leadStates = leadsRes.data?.[0]?.states || []
+      const states = orgStates.length > 0 ? orgStates : (hiringStates.length > 0 ? hiringStates : leadStates)
 
       setData({
         orgName: orgRes.data?.name || 'Your Company',
