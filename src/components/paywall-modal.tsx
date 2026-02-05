@@ -59,10 +59,25 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
       }
 
       try {
+        // Get quiz data from localStorage to pass along
+        const storedQuizData = localStorage.getItem(ONBOARD_STORAGE_KEY)
+        let quizData: { states?: string[], tools?: string[], riskScore?: number, company?: string } = {}
+        if (storedQuizData) {
+          try {
+            const parsed = JSON.parse(storedQuizData)
+            quizData = {
+              states: parsed.states,
+              tools: parsed.tools,
+              riskScore: parsed.riskScore,
+              company: parsed.company,
+            }
+          } catch (e) { /* ignore */ }
+        }
+
         const res = await fetch('/api/checkout/guest', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: guestEmail }),
+          body: JSON.stringify({ email: guestEmail, ...quizData }),
         })
 
         const data = await res.json()

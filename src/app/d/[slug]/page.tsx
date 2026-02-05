@@ -140,19 +140,21 @@ export default async function DisclosurePage({ params }: PageProps) {
             <div className="bg-white rounded-lg border p-6">
               <div className="prose prose-gray prose-sm max-w-none">
                 {rightsText.split('\n').map((line: string, i: number) => {
-                  if (line.trim().startsWith('•')) {
+                  const trimmed = line.trim()
+                  // Handle both • and - as bullet markers
+                  if (trimmed.startsWith('•') || trimmed.startsWith('-')) {
                     return (
                       <p key={i} className="text-gray-700 flex items-start gap-2 my-2">
                         <span 
                           className="inline-block w-2 h-2 rounded-full mt-2 flex-shrink-0"
                           style={{ backgroundColor: brandColor }}
                         />
-                        <span>{line.trim().substring(1).trim()}</span>
+                        <span>{trimmed.substring(1).trim()}</span>
                       </p>
                     )
                   }
-                  return line.trim() ? (
-                    <p key={i} className="text-gray-700 my-2">{line}</p>
+                  return trimmed ? (
+                    <p key={i} className="text-gray-700 my-2">{trimmed}</p>
                   ) : null
                 })}
               </div>
@@ -161,7 +163,7 @@ export default async function DisclosurePage({ params }: PageProps) {
         )}
 
         {/* Bias Audit Section */}
-        {disclosure.bias_audit_section_enabled && (disclosure.bias_audit_date || disclosure.bias_audit_auditor) && (
+        {disclosure.bias_audit_section_enabled && (
           <section className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <FileText 
@@ -171,20 +173,26 @@ export default async function DisclosurePage({ params }: PageProps) {
               <h2 className="text-xl font-semibold text-gray-900">Bias Audit Summary (NYC LL144)</h2>
             </div>
             <div className="bg-white rounded-lg border p-6">
-              <p className="text-gray-700 mb-4">
-                Our most recent bias audit was conducted
-                {disclosure.bias_audit_date && (
-                  <> on <strong>{new Date(disclosure.bias_audit_date).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                  })}</strong></>
-                )}
-                {disclosure.bias_audit_auditor && (
-                  <> by <strong>{disclosure.bias_audit_auditor}</strong></>
-                )}
-                .
-              </p>
+              {(disclosure.bias_audit_date || disclosure.bias_audit_auditor) ? (
+                <p className="text-gray-700 mb-4">
+                  Our most recent bias audit was conducted
+                  {disclosure.bias_audit_date && (
+                    <> on <strong>{new Date(disclosure.bias_audit_date).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}</strong></>
+                  )}
+                  {disclosure.bias_audit_auditor && (
+                    <> by <strong>{disclosure.bias_audit_auditor}</strong></>
+                  )}
+                  .
+                </p>
+              ) : (
+                <p className="text-gray-700 mb-4">
+                  We conduct regular bias audits of our AI hiring tools to ensure fair and non-discriminatory outcomes.
+                </p>
+              )}
               {disclosure.bias_audit_url && (
                 <a
                   href={disclosure.bias_audit_url}

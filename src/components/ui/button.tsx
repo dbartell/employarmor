@@ -13,7 +13,7 @@ const buttonVariants = cva(
         secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200",
         ghost: "hover:bg-gray-100",
         link: "text-blue-600 underline-offset-4 hover:underline",
-        cta: "bg-orange-500 text-white hover:bg-orange-600 shadow-lg",
+        cta: "bg-orange-500 text-white hover:bg-orange-600 hover:scale-[1.02] shadow-lg transition-all",
       },
       size: {
         default: "h-10 px-4 py-2",

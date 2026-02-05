@@ -100,6 +100,11 @@ export async function POST(req: NextRequest) {
             .limit(1)
             .single()
 
+          // Also try to get quiz data from Stripe metadata as fallback
+          const stripeQuizStates = customerMetadata?.quiz_states ? JSON.parse(customerMetadata.quiz_states) : null
+          const stripeQuizTools = customerMetadata?.quiz_tools ? JSON.parse(customerMetadata.quiz_tools) : null
+          const stripeQuizRiskScore = customerMetadata?.quiz_risk_score ? parseInt(customerMetadata.quiz_risk_score) : null
+
           // Create user with password
           const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
             email,
@@ -118,16 +123,16 @@ export async function POST(req: NextRequest) {
 
           userId = authData.user.id
 
-          // Create organization with quiz data
+          // Create organization with quiz data (prefer leads table, fallback to Stripe metadata)
           const { error: orgError } = await supabaseAdmin
             .from('organizations')
             .insert({
               id: userId,
               name: lead?.company_name || customer.name || 'My Company',
-              states: lead?.states || [],
-              quiz_tools: lead?.tools || [],
+              states: lead?.states || stripeQuizStates || [],
+              quiz_tools: lead?.tools || stripeQuizTools || [],
               quiz_usages: lead?.usages || [],
-              quiz_risk_score: lead?.risk_score || null,
+              quiz_risk_score: lead?.risk_score ?? stripeQuizRiskScore ?? null,
               employee_count: lead?.employee_count || null,
               subscription_status: 'active',
               documents_generated: 0,

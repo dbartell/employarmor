@@ -85,8 +85,8 @@ export function getPaywallMessage(status: PaywallStatus): {
 } {
   if (status.trialDaysRemaining === 0) {
     return {
-      title: 'Your trial has ended',
-      description: 'Upgrade now to continue using AIHireLaw and keep your compliance documents.',
+      title: 'Upgrade now',
+      description: 'Continue using AI Hire Law and keep your compliance documents.',
       ctaText: 'Upgrade to Continue',
       urgency: 'high',
     }

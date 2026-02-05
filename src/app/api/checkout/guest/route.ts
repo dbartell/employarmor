@@ -9,7 +9,7 @@ const supabaseAdmin = createClient(
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, priceId = PRICES.PILOT } = await req.json()
+    const { email, priceId = PRICES.PILOT, states, tools, riskScore, company } = await req.json()
 
     if (!email) {
       return NextResponse.json({ error: 'Email required' }, { status: 400 })
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     let customerId = existingCustomers.data[0]?.id
 
     if (!customerId) {
-      // Get company name from leads table
+      // Get company name from leads table as fallback
       const { data: lead } = await supabaseAdmin
         .from('leads')
         .select('company_name')
@@ -40,14 +40,32 @@ export async function POST(req: NextRequest) {
         .limit(1)
         .single()
 
+      // Build metadata object (Stripe doesn't accept undefined values)
+      const metadata: Record<string, string> = { source: 'guest_checkout' }
+      if (states) metadata.quiz_states = JSON.stringify(states)
+      if (tools) metadata.quiz_tools = JSON.stringify(tools)
+      if (riskScore !== undefined && riskScore !== null) metadata.quiz_risk_score = String(riskScore)
+
       const customer = await stripe.customers.create({
         email,
-        name: lead?.company_name || undefined,
-        metadata: {
-          source: 'guest_checkout',
-        },
+        name: company || lead?.company_name || undefined,
+        metadata,
       })
       customerId = customer.id
+    } else {
+      // Update existing customer with quiz data if provided
+      if (states || tools || riskScore !== undefined) {
+        const updateMetadata: Record<string, string> = {}
+        if (states) updateMetadata.quiz_states = JSON.stringify(states)
+        if (tools) updateMetadata.quiz_tools = JSON.stringify(tools)
+        if (riskScore !== undefined && riskScore !== null) updateMetadata.quiz_risk_score = String(riskScore)
+        
+        if (Object.keys(updateMetadata).length > 0) {
+          await stripe.customers.update(customerId, {
+            metadata: updateMetadata,
+          })
+        }
+      }
     }
 
     // Create checkout session
