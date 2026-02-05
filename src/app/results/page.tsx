@@ -215,6 +215,9 @@ export default function PreviewPage() {
   const [paywallStatus, setPaywallStatus] = useState<PaywallStatus | null>(null)
 
   useEffect(() => {
+    // Scroll to top on page load
+    window.scrollTo(0, 0)
+    
     // Check if user is logged in - redirect to dashboard
     const checkAuth = async () => {
       const supabase = createClient()
