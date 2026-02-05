@@ -100,6 +100,7 @@ export async function POST(req: NextRequest) {
       quiz_tools: tools,
       quiz_risk_score: riskScore,
       plan: 'trial',
+      subscription_status: 'trialing', // Allows access during trial
       trial_started_at: new Date().toISOString(),
     }
     console.log('Inserting org:', orgData)
