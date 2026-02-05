@@ -18,7 +18,7 @@ export default function ColoradoAIActPage() {
 
       <h2>Key Dates</h2>
       <ul>
-        <li><strong>Effective Date:</strong> February 1, 2026</li>
+        <li><strong>Effective Date:</strong> June 30, 2026</li>
         <li><strong>Applies To:</strong> Deployers of high-risk AI systems in Colorado</li>
         <li><strong>Enforced By:</strong> Colorado Attorney General</li>
       </ul>

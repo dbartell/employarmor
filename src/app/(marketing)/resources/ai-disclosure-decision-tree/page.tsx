@@ -8,7 +8,7 @@ export default function AIDisclosureDecisionTreePage() {
       description="Use this simple flowchart to determine if your company needs to disclose AI use to candidates, and which regulations apply to your hiring process."
       category="Tool"
       readTime="3 min read"
-      publishedDate="February 1, 2026"
+      publishedDate="June 30, 2026"
     >
       <p>
         Not sure if your hiring tools require candidate disclosure? This decision tree walks you 
@@ -59,7 +59,7 @@ export default function AIDisclosureDecisionTreePage() {
             <span className="text-xl">☐</span>
             <div>
               <strong>Colorado</strong>
-              <p className="text-sm text-gray-600">→ Colorado AI Act applies (effective February 1, 2026)</p>
+              <p className="text-sm text-gray-600">→ Colorado AI Act applies (effective June 30, 2026)</p>
             </div>
           </li>
           <li className="flex items-start gap-3">
@@ -169,7 +169,7 @@ export default function AIDisclosureDecisionTreePage() {
         <li>☐ Ensure AI doesn't discriminate on protected characteristics</li>
       </ul>
 
-      <h3>Colorado (AI Act) — February 1, 2026</h3>
+      <h3>Colorado (AI Act) — June 30, 2026</h3>
       <ul>
         <li>☐ Complete impact assessment before deployment</li>
         <li>☐ Notify candidates before AI is used</li>

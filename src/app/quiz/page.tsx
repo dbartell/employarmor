@@ -288,8 +288,8 @@ export default function OnboardPage() {
                   }}
                   className={`w-full p-3 rounded-lg border-2 transition-all flex items-center justify-center gap-2 ${
                     data.states.length === allStates.length
-                      ? 'bg-blue-600 border-blue-500 text-white'
-                      : 'bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200 text-blue-700 hover:border-blue-300'
+                      ? 'bg-blue-100 border-blue-600 text-blue-700'
+                      : 'bg-gray-50 border-gray-200 text-gray-700 hover:border-gray-300'
                   }`}
                 >
                   <Globe className="w-5 h-5" />
@@ -306,9 +306,9 @@ export default function OnboardPage() {
                   <button
                     key={state.code}
                     onClick={() => toggleState(state.code)}
-                    className={`p-2 text-sm rounded-lg border transition-all ${
+                    className={`p-2 text-sm rounded-lg border-2 transition-all ${
                       data.states.includes(state.code)
-                        ? 'bg-blue-600 border-blue-500 text-white'
+                        ? 'bg-blue-100 border-blue-600 text-blue-700'
                         : 'bg-gray-50 border-gray-200 text-gray-700 hover:border-gray-300'
                     } ${regulatedStates.includes(state.code) ? 'font-medium' : ''}`}
                   >
@@ -377,14 +377,14 @@ export default function OnboardPage() {
                         <button
                           key={tool.id}
                           onClick={() => toggleTool(tool.id)}
-                          className={`p-3 text-left rounded-lg border transition-all ${
+                          className={`p-3 text-left rounded-lg border-2 transition-all ${
                             data.tools.includes(tool.id)
-                              ? 'bg-blue-600 border-blue-500 text-white'
+                              ? 'bg-blue-100 border-blue-600'
                               : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                           }`}
                         >
-                          <div className={`font-medium ${data.tools.includes(tool.id) ? 'text-white' : 'text-gray-900'}`}>{tool.name}</div>
-                          <div className={`text-xs ${data.tools.includes(tool.id) ? 'text-blue-100' : 'text-gray-500'}`}>{tool.category}</div>
+                          <div className={`font-medium ${data.tools.includes(tool.id) ? 'text-blue-700' : 'text-gray-900'}`}>{tool.name}</div>
+                          <div className={`text-xs ${data.tools.includes(tool.id) ? 'text-blue-600' : 'text-gray-500'}`}>{tool.category}</div>
                         </button>
                       ))}
                     </div>
@@ -460,14 +460,14 @@ export default function OnboardPage() {
                   <button
                     key={usage.id}
                     onClick={() => toggleUsage(usage.id)}
-                    className={`w-full p-3 text-left rounded-lg border transition-all ${
+                    className={`w-full p-3 text-left rounded-lg border-2 transition-all ${
                       data.usages.includes(usage.id)
-                        ? 'bg-blue-600 border-blue-500 text-white'
+                        ? 'bg-blue-100 border-blue-600'
                         : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className={`font-medium ${data.usages.includes(usage.id) ? 'text-white' : 'text-gray-900'}`}>{usage.label}</div>
-                    <div className={`text-xs ${data.usages.includes(usage.id) ? 'text-blue-100' : 'text-gray-500'}`}>{usage.description}</div>
+                    <div className={`font-medium ${data.usages.includes(usage.id) ? 'text-blue-700' : 'text-gray-900'}`}>{usage.label}</div>
+                    <div className={`text-xs ${data.usages.includes(usage.id) ? 'text-blue-600' : 'text-gray-500'}`}>{usage.description}</div>
                   </button>
                 ))}
               </div>
@@ -502,14 +502,14 @@ export default function OnboardPage() {
                   <button
                     key={tier.id}
                     onClick={() => setData(prev => ({ ...prev, employeeCount: tier.id }))}
-                    className={`w-full p-4 text-left rounded-lg border transition-all ${
+                    className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                       data.employeeCount === tier.id
-                        ? 'bg-blue-600 border-blue-500 text-white'
+                        ? 'bg-blue-100 border-blue-600'
                         : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className={`font-medium ${data.employeeCount === tier.id ? 'text-white' : 'text-gray-900'}`}>{tier.label}</div>
-                    <div className={`text-sm ${data.employeeCount === tier.id ? 'text-blue-100' : 'text-gray-500'}`}>{tier.description}</div>
+                    <div className={`font-medium ${data.employeeCount === tier.id ? 'text-blue-700' : 'text-gray-900'}`}>{tier.label}</div>
+                    <div className={`text-sm ${data.employeeCount === tier.id ? 'text-blue-600' : 'text-gray-500'}`}>{tier.description}</div>
                   </button>
                 ))}
               </div>

@@ -23,7 +23,7 @@ const faqCategories = [
       },
       {
         q: "When do these laws take effect?",
-        a: "NYC Local Law 144 is already in effect. Illinois HB 3773 takes effect January 1, 2026. Colorado's AI Act takes effect February 1, 2026. California's CCPA ADMT regulations take effect January 1, 2026 with some provisions in 2027."
+        a: "NYC Local Law 144 is already in effect. Illinois HB 3773 takes effect January 1, 2026. Colorado's AI Act takes effect June 30, 2026. California's CCPA ADMT regulations take effect January 1, 2026 with some provisions in 2027."
       },
     ]
   },

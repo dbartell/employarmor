@@ -11,7 +11,7 @@ export default function ColoradoCompliancePage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
             <AlertTriangle className="w-4 h-4" />
-            Effective February 1, 2026
+            Effective June 30, 2026
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Colorado AI Act (SB24-205)
@@ -34,7 +34,7 @@ export default function ColoradoCompliancePage() {
             <div className="text-center">
               <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-2" />
               <div className="font-semibold">Effective Date</div>
-              <div className="text-gray-600">February 1, 2026</div>
+              <div className="text-gray-600">June 30, 2026</div>
             </div>
             <div className="text-center">
               <Building className="w-8 h-8 text-blue-600 mx-auto mb-2" />

@@ -308,19 +308,6 @@ export default function DashboardPage() {
     trialStartedAt: Date | null
     documentsGenerated: number
   } | null>(null)
-  const [debugData, setDebugData] = useState<{
-    userId: string
-    userEmail: string | undefined
-    orgResponse: unknown
-    leadsResponse: unknown
-    hiringStatesResponse: unknown
-    orgStates: string[]
-    hiringStates: string[]
-    leadStates: string[]
-    finalStates: string[]
-    auditRiskScore: number | null
-    leadRiskScore: number | null
-  } | null>(null)
   const [loading, setLoading] = useState(true)
   const [showConfetti, setShowConfetti] = useState(false)
   const [showPaywall, setShowPaywall] = useState(false)
@@ -405,21 +392,6 @@ export default function DashboardPage() {
       const hiringStates = hiringStatesRes.data?.map(s => s.state_code) || []
       const leadStates = leadsRes.data?.[0]?.states || []
       const states = orgStates.length > 0 ? orgStates : (hiringStates.length > 0 ? hiringStates : leadStates)
-
-      // Set debug data for on-screen display
-      setDebugData({
-        userId: orgId,
-        userEmail,
-        orgResponse: orgRes.data,
-        leadsResponse: leadsRes.data,
-        hiringStatesResponse: hiringStatesRes.data,
-        orgStates,
-        hiringStates,
-        leadStates,
-        finalStates: states,
-        auditRiskScore,
-        leadRiskScore,
-      })
 
       setData({
         orgName: orgRes.data?.name || 'Your Company',
@@ -586,39 +558,6 @@ export default function DashboardPage() {
       
       <div className="max-w-5xl mx-auto p-6 md:p-8">
         
-        {/* ============================================================ */}
-        {/* DEBUG PANEL - REMOVE AFTER TROUBLESHOOTING */}
-        {/* ============================================================ */}
-        {debugData && (
-          <div className="mb-8 p-4 bg-yellow-50 border-2 border-yellow-300 rounded-xl font-mono text-xs overflow-auto">
-            <div className="font-bold text-yellow-800 mb-3 text-sm">🔧 DEBUG DATA (remove after troubleshooting)</div>
-            <div className="grid gap-2 text-yellow-900">
-              <div><strong>User ID:</strong> {debugData.userId}</div>
-              <div><strong>User Email:</strong> {debugData.userEmail || 'N/A'}</div>
-              <div><strong>Audit Risk Score:</strong> {debugData.auditRiskScore ?? 'null'}</div>
-              <div><strong>Lead Risk Score:</strong> {debugData.leadRiskScore ?? 'null'}</div>
-              <hr className="border-yellow-300" />
-              <div><strong>Org States:</strong> {JSON.stringify(debugData.orgStates)}</div>
-              <div><strong>Hiring States:</strong> {JSON.stringify(debugData.hiringStates)}</div>
-              <div><strong>Lead States:</strong> {JSON.stringify(debugData.leadStates)}</div>
-              <div className="text-green-700 font-bold"><strong>→ Final States:</strong> {JSON.stringify(debugData.finalStates)}</div>
-              <hr className="border-yellow-300" />
-              <details className="cursor-pointer">
-                <summary className="font-bold">Org Response (click to expand)</summary>
-                <pre className="mt-2 p-2 bg-yellow-100 rounded overflow-auto max-h-40">{JSON.stringify(debugData.orgResponse, null, 2)}</pre>
-              </details>
-              <details className="cursor-pointer">
-                <summary className="font-bold">Leads Response (click to expand)</summary>
-                <pre className="mt-2 p-2 bg-yellow-100 rounded overflow-auto max-h-40">{JSON.stringify(debugData.leadsResponse, null, 2)}</pre>
-              </details>
-              <details className="cursor-pointer">
-                <summary className="font-bold">Hiring States Response (click to expand)</summary>
-                <pre className="mt-2 p-2 bg-yellow-100 rounded overflow-auto max-h-40">{JSON.stringify(debugData.hiringStatesResponse, null, 2)}</pre>
-              </details>
-            </div>
-          </div>
-        )}
-
         {/* ============================================================ */}
         {/* HERO SECTION */}
         {/* ============================================================ */}

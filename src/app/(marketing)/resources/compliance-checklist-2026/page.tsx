@@ -22,7 +22,7 @@ export default function ComplianceChecklist2026Page() {
         <ul className="text-orange-700 mt-2">
           <li><strong>Already in effect:</strong> NYC Local Law 144</li>
           <li><strong>January 1, 2026:</strong> Illinois HB 3773</li>
-          <li><strong>February 1, 2026:</strong> Colorado AI Act</li>
+          <li><strong>June 30, 2026:</strong> Colorado AI Act</li>
           <li><strong>Ongoing:</strong> California CCPA ADMT (already in effect)</li>
         </ul>
       </div>
