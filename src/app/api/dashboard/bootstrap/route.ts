@@ -63,6 +63,25 @@ export async function POST(req: NextRequest) {
         }
       }
       
+      // Ensure organization_members record exists (fixes existing users missing membership)
+      const { data: existingMembership } = await supabaseAdmin
+        .from('organization_members')
+        .select('id')
+        .eq('user_id', userId)
+        .single()
+
+      if (!existingMembership) {
+        console.log('Creating missing organization_members record for existing org')
+        await supabaseAdmin
+          .from('organization_members')
+          .insert({
+            organization_id: userId,
+            user_id: userId,
+            role: 'owner',
+            joined_at: new Date().toISOString(),
+          })
+      }
+      
       return NextResponse.json({ success: true, action: 'updated' })
     }
 
@@ -132,6 +151,30 @@ export async function POST(req: NextRequest) {
           email,
           role: 'admin',
         })
+    }
+
+    // Create organization_members record for owner
+    const { data: existingMembership } = await supabaseAdmin
+      .from('organization_members')
+      .select('id')
+      .eq('user_id', userId)
+      .single()
+
+    if (!existingMembership) {
+      console.log('Creating organization_members record')
+      const { error: memberError } = await supabaseAdmin
+        .from('organization_members')
+        .insert({
+          organization_id: userId,
+          user_id: userId,
+          role: 'owner',
+          joined_at: new Date().toISOString(),
+        })
+      
+      if (memberError) {
+        console.error('Failed to create membership:', memberError)
+        // Don't fail the whole request, but log it
+      }
     }
 
     // Update lead as converted if exists

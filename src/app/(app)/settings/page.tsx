@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Building2, Mail, Users, Shield, Globe, ArrowRight, ChevronRight } from "lucide-react"
+import { Building2, Mail, Users, Shield, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export default async function SettingsPage() {
@@ -125,38 +125,37 @@ export default async function SettingsPage() {
               <CardDescription>Your current plan</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+              <div className={`flex items-center justify-between p-4 rounded-lg ${
+                org?.subscription_status === 'active' 
+                  ? 'bg-green-50' 
+                  : 'bg-gray-50'
+              }`}>
                 <div>
-                  <div className="font-semibold text-blue-900">Free Trial</div>
-                  <div className="text-sm text-blue-700">14 days remaining</div>
+                  <div className={`font-semibold ${
+                    org?.subscription_status === 'active' 
+                      ? 'text-green-900' 
+                      : 'text-gray-900'
+                  }`}>
+                    {org?.subscription_status === 'active' ? 'Subscribed' : 'No active subscription'}
+                  </div>
+                  <div className={`text-sm ${
+                    org?.subscription_status === 'active' 
+                      ? 'text-green-700' 
+                      : 'text-gray-600'
+                  }`}>
+                    {org?.subscription_status === 'active' 
+                      ? 'Full access to all features' 
+                      : 'Upgrade to unlock all features'}
+                  </div>
                 </div>
-                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-                  Active
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  org?.subscription_status === 'active'
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-gray-200 text-gray-600'
+                }`}>
+                  {org?.subscription_status === 'active' ? 'Active' : 'Inactive'}
                 </span>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Disclosure Page */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="w-5 h-5" />
-                Disclosure Page
-              </CardTitle>
-              <CardDescription>Public page explaining your AI hiring practices</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 mb-4">
-                Create a public disclosure page that candidates can view to understand how you use AI in hiring.
-                Required for compliance with NYC LL144, Colorado AI Act, and more.
-              </p>
-              <Link href="/settings/disclosure">
-                <button className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  Configure Disclosure Page
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </Link>
             </CardContent>
           </Card>
         </div>

@@ -46,9 +46,9 @@ export function getPaywallMessage(status: PaywallStatus): {
   urgency: 'low' | 'medium' | 'high'
 } {
   return {
-    title: 'Subscribe to Get Compliant',
+    title: 'Upgrade Now',
     description: 'Unlock your compliance dashboard, generate documents, and track your progress.',
-    ctaText: 'Subscribe Now',
+    ctaText: 'Upgrade Now',
     urgency: 'high',
   }
 }
