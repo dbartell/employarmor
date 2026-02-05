@@ -110,7 +110,7 @@ function TaskCard({
   return (
     <div
       onClick={() => onTaskClick(requirement.href)}
-      className={`group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border transition-all cursor-pointer ${
+      className={`group w-full flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border transition-all cursor-pointer ${
         isComplete 
           ? 'bg-green-50 border-green-200' 
           : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-md'
