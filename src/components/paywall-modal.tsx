@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { X, Sparkles, Check, Loader2, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PaywallStatus, getPaywallMessage } from "@/lib/paywall"
+import { trackEvent } from "@/components/GoogleAnalytics"
 
 interface PaywallModalProps {
   status: PaywallStatus
@@ -93,6 +94,9 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
           return
         }
 
+        // Track checkout initiation
+        trackEvent('begin_checkout', 'conversion', 'guest_checkout')
+        
         // Redirect to Stripe checkout
         window.location.href = data.url
       } catch (err) {

@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Shield, Loader2, AlertCircle, CheckCircle } from "lucide-react"
+import { trackEvent } from "@/components/GoogleAnalytics"
 
 export default function SignupPage() {
   const [email, setEmail] = useState("")
@@ -76,6 +77,9 @@ export default function SignupPage() {
       }
     }
 
+    // Track successful signup
+    trackEvent('sign_up', 'conversion', 'email')
+    
     setSuccess(true)
     setLoading(false)
   }

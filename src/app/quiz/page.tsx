@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { Shield, ArrowRight, ArrowLeft, AlertTriangle, Loader2, Search, Globe, Plus } from 'lucide-react'
+import { trackEvent } from '@/components/GoogleAnalytics'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { createClient } from '@/lib/supabase/client'
@@ -217,6 +218,9 @@ export default function OnboardPage() {
         // Ignore errors - localStorage is the source of truth
       })
 
+      // Track quiz completion
+      trackEvent('quiz_complete', 'conversion', `risk_score_${riskScore}`, riskScore)
+      
       // Show creating state briefly then redirect
       setStep('creating')
       

@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 import { Quiz } from "@/components/training/quiz"
 import { getTrackData, type TrainingTrack } from "@/lib/training-data"
+import { trackEvent } from "@/components/GoogleAnalytics"
 
 interface PageProps {
   params: Promise<{ track: string; section: string }>
@@ -75,6 +76,7 @@ export default function TrainingSectionPage({ params }: PageProps) {
           action: 'complete_video'
         })
       })
+      trackEvent('training_video_complete', 'training', `${trackParam}_section_${sectionNumber}`)
       setVideoWatched(true)
       setShowQuiz(true)
     } catch (err) {
@@ -96,11 +98,14 @@ export default function TrainingSectionPage({ params }: PageProps) {
     })
 
     if (!res.ok) throw new Error('Failed to submit quiz')
+    trackEvent('training_quiz_complete', 'training', `${trackParam}_section_${sectionNumber}`)
     return res.json()
   }
 
   const handleContinue = () => {
     if (isLastSection) {
+      // Track training completion
+      trackEvent('training_complete', 'conversion', trackParam)
       // Go back to training overview
       router.push('/training')
     } else {

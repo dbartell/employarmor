@@ -20,6 +20,7 @@ import {
   getDocumentTemplate, 
   getOrganizationInfo 
 } from "@/lib/actions/documents"
+import { trackEvent } from "@/components/GoogleAnalytics"
 
 // Document type configuration with behaviors
 type DocumentBehavior = 'singleton' | 'versioned' | 'multiple'
@@ -203,6 +204,7 @@ function DocumentModal({
       } else {
         // Create new document
         await createDocument(docType.id, title, content)
+        trackEvent('document_create', 'engagement', docType.id)
       }
       onSave()
       onClose()
