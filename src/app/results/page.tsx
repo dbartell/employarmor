@@ -21,6 +21,7 @@ import {
 } from "@/data/compliance-requirements"
 import { PaywallModal } from "@/components/paywall-modal"
 import { PaywallStatus } from "@/lib/paywall"
+import { analyzeToolStack, ToolAnalysisResult } from "@/lib/tool-analysis"
 
 const ONBOARD_STORAGE_KEY = 'hireshield_onboard_data'
 
@@ -214,6 +215,7 @@ export default function PreviewPage() {
     orgName: string
     states: string[]
     riskScore: number | null
+    analysis: ToolAnalysisResult | null
   } | null>(null)
   const [loading, setLoading] = useState(true)
   const [showPaywall, setShowPaywall] = useState(false)
@@ -237,10 +239,16 @@ export default function PreviewPage() {
       if (storedData) {
         try {
           const onboardData = JSON.parse(storedData)
+          // Rebuild analysis if not stored, or use stored
+          const analysis = onboardData.analysis || 
+            (onboardData.tools && onboardData.states 
+              ? analyzeToolStack(onboardData.tools, onboardData.states) 
+              : null)
           setData({
             orgName: onboardData.company || 'Your Company',
             states: onboardData.states || [],
             riskScore: onboardData.riskScore || null,
+            analysis,
           })
         } catch (e) {
           // Invalid data, redirect to onboard
@@ -345,7 +353,7 @@ export default function PreviewPage() {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-lg text-gray-900">AI Hire Law</span>
+            <span className="font-bold text-lg text-gray-900">EmployArmor</span>
           </Link>
           <Link 
             href="/login" 
@@ -444,6 +452,81 @@ export default function PreviewPage() {
           </div>
         )}
 
+        {/* Tool Analysis Results */}
+        {data.analysis && data.analysis.totalTools > 0 && (
+          <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-1">
+              We analyzed your {data.analysis.totalTools} tool{data.analysis.totalTools !== 1 ? 's' : ''}. Here&apos;s what we found:
+            </h2>
+            <p className="text-gray-500 text-sm mb-6">Based on your selected states and tool stack</p>
+
+            {data.analysis.high.length > 0 && (
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-lg">🔴</span>
+                  <span className="font-semibold text-red-700">
+                    {data.analysis.high.length} tool{data.analysis.high.length !== 1 ? 's' : ''} require immediate compliance action
+                  </span>
+                </div>
+                <div className="space-y-2 pl-8">
+                  {data.analysis.high.map(item => (
+                    <div key={item.toolId} className="flex items-start gap-2 text-sm">
+                      <span className="font-medium text-gray-900">{item.toolName}</span>
+                      {item.laws.length > 0 && (
+                        <span className="text-red-600">— {item.laws.join(', ')}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {data.analysis.medium.length > 0 && (
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-lg">🟡</span>
+                  <span className="font-semibold text-amber-700">
+                    {data.analysis.medium.length} tool{data.analysis.medium.length !== 1 ? 's' : ''} have AI features you should be aware of
+                  </span>
+                </div>
+                <div className="space-y-2 pl-8">
+                  {data.analysis.medium.map(item => (
+                    <div key={item.toolId} className="flex items-start gap-2 text-sm">
+                      <span className="font-medium text-gray-900">{item.toolName}</span>
+                      <span className="text-amber-600">— {item.reason}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {data.analysis.low.length > 0 && (
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-lg">🟢</span>
+                  <span className="font-semibold text-green-700">
+                    {data.analysis.low.length} tool{data.analysis.low.length !== 1 ? 's' : ''} have no current compliance requirements
+                  </span>
+                </div>
+                <div className="space-y-1 pl-8">
+                  <span className="text-sm text-gray-600">
+                    {data.analysis.low.map(item => item.toolName).join(', ')}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-6 pt-4 border-t border-gray-100">
+              <button
+                onClick={handleTaskClick}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2"
+              >
+                Set Up Your Compliance Dashboard <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Next Step CTA */}
         {nextAction && hasStates && (
           <div 
@@ -531,7 +614,7 @@ export default function PreviewPage() {
           </div>
           <p className="text-sm">
             <a 
-              href="https://calendly.com/aihirelaw/compliance-review" 
+              href="https://calendly.com/employarmor/compliance-review" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:text-blue-700 font-medium hover:underline"

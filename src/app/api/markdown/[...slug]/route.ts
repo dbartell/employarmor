@@ -18,7 +18,7 @@ function resolveStateSlug(slug: string): string {
 }
 
 // AI agent guidance header - appears at top of all markdown responses
-const AGENT_HEADER = `> For a complete index of AI-optimized documentation, see [/llms.txt](https://aihirelaw.com/llms.txt)
+const AGENT_HEADER = `> For a complete index of AI-optimized documentation, see [/llms.txt](https://employarmor.com/llms.txt)
 
 `
 
@@ -129,7 +129,7 @@ Everything you need to know about using ${tool.name} for hiring in ${state.name}
 
   md += `---
 
-*Source: [AIHireLaw](https://aihirelaw.com/compliance/${tool.slug}/${state.slug}) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor](https://employarmor.com/compliance/${tool.slug}/${state.slug}) - This is for informational purposes only and does not constitute legal advice.*
 `
 
   return md
@@ -162,7 +162,7 @@ The following states have specific laws that may apply when using ${tool.name}:
 
   md += `---
 
-*Source: [AIHireLaw](https://aihirelaw.com/compliance/${tool.slug}) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor](https://employarmor.com/compliance/${tool.slug}) - This is for informational purposes only and does not constitute legal advice.*
 `
   
   return md
@@ -196,7 +196,7 @@ These AI hiring tools may require compliance in ${state.name}:
   md += `
 ---
 
-*Source: [AIHireLaw](https://aihirelaw.com/compliance/state/${state.slug}) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor](https://employarmor.com/compliance/state/${state.slug}) - This is for informational purposes only and does not constitute legal advice.*
 `
   
   return md
@@ -206,7 +206,7 @@ These AI hiring tools may require compliance in ${state.name}:
 function generateComplianceOverview(): string {
   let md = `# AI Hiring Compliance Guide
 
-Navigate AI hiring laws with confidence. AIHireLaw helps employers stay compliant with state and local regulations.
+Navigate AI hiring laws with confidence. EmployArmor helps employers stay compliant with state and local regulations.
 
 ## States with AI Hiring Laws
 
@@ -236,7 +236,7 @@ ${tools.map(t => `- [${t.name}](/compliance/${t.slug})`).join('\n')}
 
   md += `---
 
-*Source: [AIHireLaw](https://aihirelaw.com/compliance) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor](https://employarmor.com/compliance) - This is for informational purposes only and does not constitute legal advice.*
 `
   
   return md
@@ -269,7 +269,7 @@ ${term.relatedTerms.map(t => `- [${t}](/glossary/${t})`).join('\n')}
 
 ---
 
-*Source: [AIHireLaw Glossary](https://aihirelaw.com/glossary/${term.slug}) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor Glossary](https://employarmor.com/glossary/${term.slug}) - This is for informational purposes only and does not constitute legal advice.*
 `
   
   return md
@@ -307,7 +307,7 @@ ${resource.relatedLinks.map(link => `- [${link.title}](${link.url})`).join('\n')
 
   md += `---
 
-*Source: [AIHireLaw](https://aihirelaw.com/resources/${resource.slug}) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor](https://employarmor.com/resources/${resource.slug}) - This is for informational purposes only and does not constitute legal advice.*
 `
   
   return md
@@ -347,7 +347,7 @@ Guides, templates, and tools for navigating AI hiring regulations.
 
 ---
 
-*Source: [AIHireLaw Resources](https://aihirelaw.com/resources) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor Resources](https://employarmor.com/resources) - This is for informational purposes only and does not constitute legal advice.*
 `
   
   return md
@@ -374,7 +374,7 @@ ${term.definition.slice(0, 200)}${term.definition.length > 200 ? '...' : ''}
 
   md += `---
 
-*Source: [AIHireLaw Glossary](https://aihirelaw.com/glossary) - This is for informational purposes only and does not constitute legal advice.*
+*Source: [EmployArmor Glossary](https://employarmor.com/glossary) - This is for informational purposes only and does not constitute legal advice.*
 `
   
   return md

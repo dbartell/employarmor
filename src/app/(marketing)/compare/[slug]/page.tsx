@@ -420,7 +420,7 @@ export default async function ComparisonPage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Need Help With Compliance?</h2>
           <p className="text-xl text-blue-100 mb-8">
-            AIHireLaw helps you navigate compliance for any AI hiring tool you use.
+            EmployArmor helps you navigate compliance for any AI hiring tool you use.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/scorecard">

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe, PRICES, isOneTimePrice } from '@/lib/stripe'
+import { stripe, PRICES } from '@/lib/stripe'
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseAdmin = createClient(
@@ -68,12 +68,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Create checkout session - different config for one-time vs subscription
-    const isOneTime = isOneTimePrice(priceId)
-    
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      mode: isOneTime ? 'payment' : 'subscription',
+      mode: 'subscription',
       payment_method_types: ['card'],
       line_items: [
         {

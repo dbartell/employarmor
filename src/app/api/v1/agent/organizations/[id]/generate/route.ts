@@ -242,7 +242,7 @@ export async function POST(
     })
 
     const format = body.format || 'html'
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://aihirelaw.com'
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://employarmor.com'
     
     const generatedDocuments: GeneratedDocument[] = []
     const documentUrls: string[] = []

@@ -1,7 +1,7 @@
-// Email templates for AIHireLaw notifications
+// Email templates for EmployArmor notifications
 // Used by both Edge Functions and server actions
 
-export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://app.aihirelaw.com'
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://app.employarmor.com'
 
 // Base email wrapper
 export function emailWrapper(content: string, footerText?: string): string {
@@ -93,8 +93,8 @@ export function emailWrapper(content: string, footerText?: string): string {
       ${content}
     </div>
     <div class="footer">
-      ${footerText || `<p>You're receiving this email from AIHireLaw.</p>`}
-      <p><a href="${APP_URL}/settings/notifications">Manage email preferences</a> · <a href="${APP_URL}">Open AIHireLaw</a></p>
+      ${footerText || `<p>You're receiving this email from EmployArmor.</p>`}
+      <p><a href="${APP_URL}/settings/notifications">Manage email preferences</a> · <a href="${APP_URL}">Open EmployArmor</a></p>
     </div>
   </div>
 </body>
@@ -128,7 +128,7 @@ export function auditReminderEmail(params: {
       
       <p>Takes about 10 minutes. Your previous answers are pre-loaded.</p>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
       
       <p style="color: #6b7280; font-size: 14px;">P.S. Companies that audit quarterly catch 3x more compliance gaps before regulators do.</p>
     </div>`
@@ -167,7 +167,7 @@ export function trainingExpiryEmail(params: {
       
       <p>Your certificate will be updated automatically upon completion.</p>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
     </div>`
 
   return {
@@ -224,9 +224,9 @@ export function lawAlertEmail(params: {
       
       <a href="${APP_URL}/audit?state=${params.stateCode}" class="cta urgent-cta">Update your compliance →</a>
       
-      <p>We've updated AIHireLaw's document templates and audit tools to reflect these changes.</p>
+      <p>We've updated EmployArmor's document templates and audit tools to reflect these changes.</p>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
     </div>`
 
   return {
@@ -241,7 +241,7 @@ export function welcomeEmail(params: {
 }): { subject: string; html: string } {
   const content = `
     <div class="header">
-      <h1>Welcome to AIHireLaw 🛡️</h1>
+      <h1>Welcome to EmployArmor 🛡️</h1>
     </div>
     <div class="content">
       <p>Hi ${params.name},</p>
@@ -272,11 +272,11 @@ export function welcomeEmail(params: {
       
       <a href="${APP_URL}/audit" class="cta">Get started →</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
     </div>`
 
   return {
-    subject: `Welcome to AIHireLaw — let's get you compliant`,
+    subject: `Welcome to EmployArmor — let's get you compliant`,
     html: emailWrapper(content),
   }
 }
@@ -293,7 +293,7 @@ export function zeroConsentsEmail(params: {
     <div class="content">
       <p>Hi ${params.name},</p>
       
-      <p>You've been using AIHireLaw for <strong>${params.daysActive} days</strong> but haven't tracked any candidate consents yet.</p>
+      <p>You've been using EmployArmor for <strong>${params.daysActive} days</strong> but haven't tracked any candidate consents yet.</p>
       
       <h3>Why this matters:</h3>
       <ul>
@@ -311,7 +311,7 @@ export function zeroConsentsEmail(params: {
       
       <a href="${APP_URL}/consent" class="cta">Start tracking →</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
       
       <p style="color: #6b7280; font-size: 14px;">P.S. The average audit request gives you 30 days to produce records. Start now, not then.</p>
     </div>`
@@ -439,7 +439,7 @@ export function renewalReminderEmail(params: {
       
       <a href="${APP_URL}/compliance/documents" class="cta ${config.ctaClass}">${ctaText}</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
       
       <p style="color: #6b7280; font-size: 14px;">P.S. Need help with your renewal? <a href="${APP_URL}/contact">Book a consultation</a> with our compliance team.</p>
     </div>`
@@ -476,7 +476,7 @@ export function inactivityEmail(params: {
 
   const content = `
     <div class="header">
-      <h1>Quick check-in from AIHireLaw</h1>
+      <h1>Quick check-in from EmployArmor</h1>
     </div>
     <div class="content">
       <p>Hi ${params.name},</p>
@@ -490,11 +490,11 @@ export function inactivityEmail(params: {
       
       <a href="${APP_URL}/dashboard" class="cta">Check your dashboard →</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
     </div>`
 
   return {
-    subject: `Quick check-in from AIHireLaw`,
+    subject: `Quick check-in from EmployArmor`,
     html: emailWrapper(content),
   }
 }

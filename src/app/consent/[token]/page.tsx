@@ -372,7 +372,7 @@ export default function PublicConsentPage({
         {/* Powered By Footer */}
         <footer className="mt-8 pt-6 border-t text-center">
           <a 
-            href="https://aihirelaw.com"
+            href="https://employarmor.com"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-600 transition-colors"

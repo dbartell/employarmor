@@ -150,12 +150,12 @@ export default async function GlossaryTermPage({ params }: Props) {
         </section>
       )}
 
-      {/* How AIHireLaw Helps */}
+      {/* How EmployArmor Helps */}
       <section className="py-16 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-4">How AIHireLaw Helps</h2>
+          <h2 className="text-3xl font-bold mb-4">How EmployArmor Helps</h2>
           <p className="text-xl text-blue-100 mb-8">
-            Understanding {term.term} is just the first step. AIHireLaw helps you implement compliance for all AI hiring regulations.
+            Understanding {term.term} is just the first step. EmployArmor helps you implement compliance for all AI hiring regulations.
           </p>
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="bg-blue-700 rounded-lg p-6">

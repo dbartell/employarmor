@@ -497,6 +497,57 @@ export default function TrainingPage() {
         })}
       </div>
 
+      {/* Tool-Specific Training */}
+      <div className="mt-10">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              🛠️ Tool-Specific Training
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Compliance training customized for each tool in your stack
+            </p>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          {[
+            { slug: 'greenhouse', name: 'Greenhouse', category: 'ATS', time: '8 min', host: 'Sarah' },
+            { slug: 'linkedin-recruiter', name: 'LinkedIn Recruiter', category: 'Sourcing', time: '7 min', host: 'Marcus' },
+            { slug: 'hirevue', name: 'HireVue', category: 'Video Interviewing', time: '10 min', host: 'Marcus' },
+            { slug: 'slack', name: 'Slack', category: 'Communication', time: '5 min', host: 'David' },
+            { slug: 'indeed', name: 'Indeed', category: 'Job Board', time: '6 min', host: 'Marcus' },
+            { slug: 'checkr', name: 'Checkr', category: 'Background Checks', time: '8 min', host: 'Elena' },
+            { slug: 'chatgpt', name: 'ChatGPT / AI Assistants', category: 'General AI', time: '6 min', host: 'David' },
+            { slug: 'workday', name: 'Workday', category: 'Enterprise HCM', time: '8 min', host: 'Elena' },
+            { slug: 'zoom', name: 'Zoom', category: 'Communication', time: '5 min', host: 'David' },
+            { slug: 'lever', name: 'Lever', category: 'ATS', time: '7 min', host: 'Sarah' },
+            { slug: 'criteria-corp', name: 'Criteria Corp', category: 'Assessment', time: '7 min', host: 'Elena' },
+            { slug: 'rippling', name: 'Rippling', category: 'HRIS', time: '5 min', host: 'Sarah' },
+          ].map(tool => (
+            <Link key={tool.slug} href={`/training/tool/${tool.slug}`}>
+              <Card className="hover:border-blue-300 hover:shadow-md transition-all cursor-pointer h-full">
+                <CardContent className="pt-5">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{tool.name}</h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">{tool.category}</span>
+                        <span className="text-xs text-gray-400 flex items-center gap-1">
+                          <Clock className="w-3 h-3" />{tool.time}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-400 mt-2">Hosted by {tool.host}</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-gray-300 mt-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Invite More */}
       <Card className="mt-6 border-dashed">
         <CardContent className="pt-6">

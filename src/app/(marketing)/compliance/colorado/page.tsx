@@ -160,10 +160,10 @@ export default function ColoradoCompliancePage() {
         </div>
       </section>
 
-      {/* How AIHireLaw Helps */}
+      {/* How EmployArmor Helps */}
       <section className="py-16 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-8">How AIHireLaw Helps</h2>
+          <h2 className="text-3xl font-bold mb-8">How EmployArmor Helps</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-blue-700 rounded-lg p-6">
               <h3 className="font-semibold text-lg mb-2">Impact Assessment Generator</h3>
@@ -264,11 +264,10 @@ export default function ColoradoCompliancePage() {
             </Card>
           </div>
 
-          {/* IL-only callout */}
           <div className="mt-10 text-center">
-            <p className="text-gray-600 mb-2">Only hiring in Illinois?</p>
-            <Link href="/compliance/illinois" className="text-blue-600 hover:underline font-medium">
-              Get the $199 one-time Illinois kit →
+            <p className="text-gray-600 mb-2">Only hiring in one state?</p>
+            <Link href="/quiz" className="text-blue-600 hover:underline font-medium">
+              See our Starter plan at $199/mo →
             </Link>
           </div>
         </div>

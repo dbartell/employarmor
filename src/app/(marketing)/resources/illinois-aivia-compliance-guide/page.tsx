@@ -2,7 +2,7 @@ import { ArticleLayout } from "@/components/marketing/ArticleLayout"
 import Link from "next/link"
 
 export const metadata = {
-  title: "Illinois AI Hiring Law: AIVIA Compliance Guide 2026 | AI Hire Law",
+  title: "Illinois AI Hiring Law: AIVIA Compliance Guide 2026 | EmployArmor",
   description: "Complete guide to Illinois AIVIA compliance. Learn disclosure requirements, consent rules, penalties, and how to stay compliant with HB 3773.",
 }
 
@@ -22,7 +22,7 @@ export default function IllinoisAIVIAComplianceGuidePage() {
         </div>
         <div>
           <p className="font-medium text-gray-900">Devyn Bartell</p>
-          <p className="text-sm text-gray-500">Founder, AI Hire Law</p>
+          <p className="text-sm text-gray-500">Founder, EmployArmor</p>
         </div>
       </div>
 
@@ -202,8 +202,8 @@ export default function IllinoisAIVIAComplianceGuidePage() {
         <li>☐ Regular audit schedule</li>
       </ul>
 
-      <h2>How AI Hire Law Helps</h2>
-      <p>We built AI Hire Law specifically for this problem. Our platform:</p>
+      <h2>How EmployArmor Helps</h2>
+      <p>We built EmployArmor specifically for this problem. Our platform:</p>
       <ul>
         <li><strong>Scans your job postings</strong> for AI tool usage and flags compliance gaps</li>
         <li><strong>Generates disclosure language</strong> tailored to your specific tools</li>
@@ -308,7 +308,7 @@ export default function IllinoisAIVIAComplianceGuidePage() {
       <div className="bg-gray-100 rounded-lg p-6 mt-8">
         <p className="text-sm text-gray-600">
           <em>
-            Devyn Bartell is the founder of AI Hire Law, an AI hiring compliance platform. This 
+            Devyn Bartell is the founder of EmployArmor, an AI hiring compliance platform. This 
             article is for informational purposes and does not constitute legal advice. Consult 
             with qualified legal counsel for specific compliance questions.
           </em>

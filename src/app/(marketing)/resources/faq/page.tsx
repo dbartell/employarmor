@@ -61,7 +61,7 @@ const faqCategories = [
       },
       {
         q: "How do I notify candidates about AI use?",
-        a: "Notification requirements vary by state but generally include: telling candidates AI will be used, what data is collected, how the AI works, and any available alternatives. AIHireLaw generates compliant disclosure notices automatically."
+        a: "Notification requirements vary by state but generally include: telling candidates AI will be used, what data is collected, how the AI works, and any available alternatives. EmployArmor generates compliant disclosure notices automatically."
       },
       {
         q: "Do candidates have the right to opt out?",
@@ -70,19 +70,19 @@ const faqCategories = [
     ]
   },
   {
-    name: "AIHireLaw",
+    name: "EmployArmor",
     questions: [
       {
-        q: "What does AIHireLaw do?",
-        a: "AIHireLaw is a compliance platform that helps companies audit their AI hiring tools, generate required disclosures and policies, train HR teams, and track candidate consent—all in one place."
+        q: "What does EmployArmor do?",
+        a: "EmployArmor is a compliance platform that helps companies audit their AI hiring tools, generate required disclosures and policies, train HR teams, and track candidate consent—all in one place."
       },
       {
-        q: "Do I need to integrate AIHireLaw with my ATS?",
-        a: "No. AIHireLaw works alongside your existing tools without requiring integrations. You can manually track compliance, generate documents, and manage training without connecting any systems."
+        q: "Do I need to integrate EmployArmor with my ATS?",
+        a: "No. EmployArmor works alongside your existing tools without requiring integrations. You can manually track compliance, generate documents, and manage training without connecting any systems."
       },
       {
-        q: "How much does AIHireLaw cost?",
-        a: "AIHireLaw offers three plans: Starter ($199/mo) for small teams, Pro ($499/mo) for growing companies, and Enterprise ($1,999/mo) for large organizations. All plans include a 14-day free trial."
+        q: "How much does EmployArmor cost?",
+        a: "EmployArmor offers three plans: Starter ($199/mo) for small teams, Growth ($499/mo) for growing companies, and Scale ($999/mo) for larger organizations. Enterprise pricing is custom — contact us for a quote. All plans include a 14-day free trial."
       },
       {
         q: "Is there a free trial?",

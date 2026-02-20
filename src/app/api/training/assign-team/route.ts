@@ -189,7 +189,7 @@ async function sendTrainingInviteEmail(params: {
       </div>
     </div>
     <div class="footer">
-      <p>This training is powered by AIHireLaw.</p>
+      <p>This training is powered by EmployArmor.</p>
     </div>
   </div>
 </body>
@@ -211,7 +211,7 @@ async function sendTrainingInviteEmail(params: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'AIHireLaw Training <training@aihirelaw.com>',
+        from: 'EmployArmor Training <training@employarmor.com>',
         to: [params.to],
         subject,
         html

@@ -676,6 +676,64 @@ export default function DashboardPage() {
         )}
 
         {/* ============================================================ */}
+        {/* NEW WIDGETS: Tool Registry, Training, Pending Approvals */}
+        {/* ============================================================ */}
+        {hasStates && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {/* Tool Registry Summary */}
+            <Link href="/tools" className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 rounded-lg bg-blue-50">
+                  <FileText className="w-5 h-5 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900">Tool Registry</h3>
+              </div>
+              <p className="text-sm text-gray-700 mb-2">
+                <span className="font-bold text-gray-900">12</span> tools approved · <span className="font-bold text-amber-600">3</span> pending review · <span className="font-bold text-red-600">1</span> expiring soon
+              </p>
+              <span className="text-xs text-blue-600 font-medium flex items-center gap-1">
+                View registry <ChevronRight className="w-3 h-3" />
+              </span>
+            </Link>
+
+            {/* Training Compliance */}
+            <Link href="/training" className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 rounded-lg bg-purple-50">
+                  <Users className="w-5 h-5 text-purple-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900">Training Compliance</h3>
+              </div>
+              <div className="mb-2">
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-gray-700"><span className="font-bold text-gray-900">18</span>/24 employees compliant</span>
+                  <span className="text-gray-500 font-medium">75%</span>
+                </div>
+                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full" style={{ width: '75%' }} />
+                </div>
+              </div>
+              <p className="text-xs text-amber-600">6 employees need training on newly approved tools</p>
+            </Link>
+
+            {/* Pending Approvals - only show if pending items exist */}
+            <Link href="/approvals" className="bg-white rounded-xl border border-amber-200 bg-amber-50/30 p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 rounded-lg bg-amber-100">
+                  <ClipboardCheck className="w-5 h-5 text-amber-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900">Pending Approvals</h3>
+              </div>
+              <p className="text-2xl font-bold text-amber-700 mb-1">3</p>
+              <p className="text-sm text-gray-600">tool requests pending your review</p>
+              <span className="text-xs text-amber-600 font-medium flex items-center gap-1 mt-2">
+                Review now <ChevronRight className="w-3 h-3" />
+              </span>
+            </Link>
+          </div>
+        )}
+
+        {/* ============================================================ */}
         {/* QUICK STATS ROW */}
         {/* ============================================================ */}
         {hasStates && (
@@ -809,7 +867,7 @@ export default function DashboardPage() {
           </div>
           <p className="text-sm">
             <a 
-              href="https://calendly.com/aihirelaw/compliance-review" 
+              href="https://calendly.com/employarmor/compliance-review" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:text-blue-700 font-medium hover:underline"

@@ -14,17 +14,23 @@ import {
   Menu, 
   X,
   Globe,
-  Trash2
+  Trash2,
+  Layers,
+  CheckSquare,
+  FolderCheck
 } from "lucide-react"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/audit", label: "Assessment", icon: ClipboardCheck },
+  { href: "/tools", label: "Tool Registry", icon: Layers },
+  { href: "/approvals", label: "Approvals", icon: CheckSquare },
+  { href: "/audit", label: "Risk Assessment", icon: ClipboardCheck },
   { href: "/documents", label: "Documents", icon: FileText },
   { href: "/disclosures", label: "Disclosures", icon: Globe },
   { href: "/training", label: "Training", icon: GraduationCap },
   { href: "/consent", label: "Consent", icon: UserCheck },
+  { href: "/compliance-packet", label: "Audit Packet", icon: FolderCheck },
 ]
 
 interface MobileSidebarProps {
@@ -46,7 +52,7 @@ export function MobileSidebar({ orgName, userEmail }: MobileSidebarProps) {
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <Shield className="w-5 h-5" />
           </div>
-          <span className="font-bold text-lg">AI Hire Law</span>
+          <span className="font-bold text-lg">EmployArmor</span>
         </Link>
         <button
           onClick={() => setIsOpen(true)}
@@ -81,7 +87,7 @@ export function MobileSidebar({ orgName, userEmail }: MobileSidebarProps) {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5" />
             </div>
-            <span className="font-bold text-lg">AI Hire Law</span>
+            <span className="font-bold text-lg">EmployArmor</span>
           </Link>
           <button
             onClick={closeMenu}

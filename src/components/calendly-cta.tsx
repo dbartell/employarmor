@@ -11,7 +11,7 @@ interface CalendlyCTAProps {
 }
 
 // Default Calendly URL - update this when you have one
-const DEFAULT_CALENDLY_URL = "https://calendly.com/aihirelaw/compliance-review"
+const DEFAULT_CALENDLY_URL = "https://calendly.com/employarmor/compliance-review"
 
 export function CalendlyCTA({ 
   variant = "inline",

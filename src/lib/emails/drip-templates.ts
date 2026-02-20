@@ -8,7 +8,7 @@ export function welcomeDripEmail(params: {
 }): { subject: string; html: string } {
   const content = `
     <div class="header">
-      <h1>Welcome to AIHireLaw, ${params.name}! 🎉</h1>
+      <h1>Welcome to EmployArmor, ${params.name}! 🎉</h1>
     </div>
     <div class="content">
       <p>Hi ${params.name},</p>
@@ -27,13 +27,13 @@ export function welcomeDripEmail(params: {
       
       <a href="${APP_URL}/dashboard" class="cta">Go to Dashboard →</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
       
       <p style="color: #6b7280; font-size: 14px;">P.S. Reply to this email if you have any questions. We read every message.</p>
     </div>`
 
   return {
-    subject: `Welcome to AIHireLaw — let's get ${params.company} compliant`,
+    subject: `Welcome to EmployArmor — let's get ${params.company} compliant`,
     html: emailWrapper(content),
   }
 }
@@ -72,7 +72,7 @@ export function incompleteDocumentEmail(params: {
       
       <a href="${APP_URL}/documents/impact-assessment" class="cta">Finish your ${params.documentName} →</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
     </div>`
 
   return {
@@ -117,7 +117,7 @@ export function teamTrainingReminderEmail(params: {
       
       <a href="${APP_URL}/settings/training" class="cta">Manage Training Assignments →</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
       
       <p style="color: #6b7280; font-size: 14px;">Training takes 15-30 minutes and includes a certificate of completion.</p>
     </div>`
@@ -143,7 +143,7 @@ export function trialEndingSoonEmail(params: {
     <div class="content">
       <p>Hi ${params.name},</p>
       
-      <p>Your AIHireLaw trial ends in <strong>${params.daysLeft} days</strong>. Here's where you stand:</p>
+      <p>Your EmployArmor trial ends in <strong>${params.daysLeft} days</strong>. Here's where you stand:</p>
       
       <div class="stat-box">
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -173,7 +173,7 @@ export function trialEndingSoonEmail(params: {
       
       <a href="${APP_URL}/dashboard" class="cta">Continue where you left off →</a>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
       
       <p style="color: #6b7280; font-size: 14px;">Want to keep your progress? <a href="${APP_URL}/settings/billing" style="color: #1e40af;">Upgrade anytime</a> to lock in your compliance work.</p>
     </div>`
@@ -200,7 +200,7 @@ export function trialEndsTomorrowEmail(params: {
     <div class="content">
       <p>Hi ${params.name},</p>
       
-      <p>This is your final reminder — your AIHireLaw trial expires <strong>tomorrow</strong>.</p>
+      <p>This is your final reminder — your EmployArmor trial expires <strong>tomorrow</strong>.</p>
       
       <div class="stat-box">
         <div style="font-size: 48px; font-weight: bold; text-align: center; color: ${isHighProgress ? '#059669' : '#3b82f6'};">
@@ -226,7 +226,7 @@ export function trialEndsTomorrowEmail(params: {
       
       <p>Questions? Reply to this email and we'll help you out.</p>
       
-      <p>— The AIHireLaw Team</p>
+      <p>— The EmployArmor Team</p>
     </div>`
 
   return {

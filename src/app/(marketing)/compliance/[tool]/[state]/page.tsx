@@ -53,7 +53,7 @@ export default async function ToolStatePage({ params }: Props) {
       <header className="bg-white border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-slate-900">
-            🛡️ AI Hire Law
+            🛡️ EmployArmor
           </Link>
           <Link
             href="/scorecard"
@@ -292,7 +292,7 @@ export default async function ToolStatePage({ params }: Props) {
       <footer className="bg-slate-900 text-slate-400 py-12 mt-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-sm">
-            © 2026 AI Hire Law. This page is for informational purposes only and does not constitute legal advice.
+            © 2026 EmployArmor. This page is for informational purposes only and does not constitute legal advice.
           </p>
         </div>
       </footer>

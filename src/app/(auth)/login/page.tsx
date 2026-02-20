@@ -48,7 +48,7 @@ function LoginForm() {
             <div className="w-10 h-10 bg-blue-800 rounded-lg flex items-center justify-center">
               <Shield className="w-6 h-6 text-white" />
             </div>
-            <span className="font-bold text-xl">AIHireLaw</span>
+            <span className="font-bold text-xl">EmployArmor</span>
           </Link>
           <CardTitle>Welcome back</CardTitle>
           <CardDescription>Sign in to your account to continue</CardDescription>

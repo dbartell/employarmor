@@ -203,10 +203,10 @@ export default function IllinoisCompliancePage() {
         </div>
       </section>
 
-      {/* How AIHireLaw Helps */}
+      {/* How EmployArmor Helps */}
       <section className="py-16 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-8">How AIHireLaw Helps</h2>
+          <h2 className="text-3xl font-bold mb-8">How EmployArmor Helps</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-blue-700 rounded-lg p-6">
               <h3 className="font-semibold text-lg mb-2">AI Tool Audit</h3>
@@ -247,23 +247,23 @@ export default function IllinoisCompliancePage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-4">Illinois Compliance — One Simple Price</h2>
-            <p className="text-gray-600">Get compliant today. No subscription required.</p>
+            <h2 className="text-3xl font-bold mb-4">Get Illinois Compliant</h2>
+            <p className="text-gray-600">Plans starting at $199/mo. 14-day free trial included.</p>
           </div>
           
           <div className="max-w-lg mx-auto">
             <Card className="border-blue-600 border-2 relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
-                One-Time Payment
+                Most Popular
               </div>
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Illinois Compliance Kit</CardTitle>
+                <CardTitle className="text-2xl">Starter Plan</CardTitle>
                 <p className="text-gray-500">Everything you need to comply with HB 3773</p>
                 <div className="mt-4">
                   <span className="text-5xl font-bold">$199</span>
-                  <span className="text-gray-600 ml-2">one-time</span>
+                  <span className="text-gray-600 ml-2">/month</span>
                 </div>
-                <p className="text-sm text-green-600 mt-2">No monthly fees. No subscriptions. Just compliance.</p>
+                <p className="text-sm text-green-600 mt-2">14-day free trial. Cancel anytime.</p>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 text-sm mb-6">
@@ -285,24 +285,24 @@ export default function IllinoisCompliancePage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Downloadable compliance packet (PDF)</span>
+                    <span>Compliance dashboard & document generator</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>1 year of regulatory update emails</span>
+                    <span>Ongoing regulatory updates</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>30-day email support</span>
+                    <span>Priority support</span>
                   </li>
                 </ul>
                 <Link href="/quiz?state=IL">
                   <Button className="w-full h-12 text-base" variant="cta">
-                    Get Illinois Compliant — $199
+                    Start Free Trial
                   </Button>
                 </Link>
                 <p className="text-xs text-center text-gray-500 mt-4">
-                  Takes about 30 minutes. No credit card until checkout.
+                  No credit card required to start.
                 </p>
               </CardContent>
             </Card>
@@ -312,7 +312,7 @@ export default function IllinoisCompliancePage() {
           <div className="mt-10 text-center">
             <p className="text-gray-600 mb-2">Hiring in multiple states?</p>
             <Link href="/quiz" className="text-blue-600 hover:underline font-medium">
-              See multi-state plans starting at $199/month →
+              See Growth ($499/mo) and Scale ($999/mo) plans →
             </Link>
           </div>
         </div>
@@ -337,7 +337,7 @@ export default function IllinoisCompliancePage() {
             </div>
             <div className="border-b pb-6">
               <h3 className="font-semibold text-lg mb-2">How detailed does the AI disclosure need to be?</h3>
-              <p className="text-gray-600">You must disclose the name of the AI system, its purpose in employment decisions, and what data it collects. AIHireLaw can generate compliant disclosure language for your specific tools.</p>
+              <p className="text-gray-600">You must disclose the name of the AI system, its purpose in employment decisions, and what data it collects. EmployArmor can generate compliant disclosure language for your specific tools.</p>
             </div>
           </div>
         </div>

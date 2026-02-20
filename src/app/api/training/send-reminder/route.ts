@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
       </div>
     </div>
     <div class="footer">
-      <p>This training is powered by AIHireLaw.</p>
+      <p>This training is powered by EmployArmor.</p>
     </div>
   </div>
 </body>
@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'AIHireLaw Training <training@aihirelaw.com>',
+          from: 'EmployArmor Training <training@employarmor.com>',
           to: [assignment.user_email],
           subject,
           html

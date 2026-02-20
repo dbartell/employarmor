@@ -102,7 +102,7 @@ export async function verifyOrgOwnership(orgId: string, agentId: string): Promis
  */
 export function generateApiKey(): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  const prefix = 'ahl_' // AIHireLaw prefix
+  const prefix = 'ahl_' // EmployArmor prefix
   let key = prefix
   for (let i = 0; i < 48; i++) {
     key += chars.charAt(Math.floor(Math.random() * chars.length))

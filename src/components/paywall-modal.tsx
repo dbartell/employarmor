@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { X, Sparkles, Check, Loader2, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { PaywallStatus, getPaywallMessage, getPricingInfo, isIllinoisOnly } from "@/lib/paywall"
+import { PaywallStatus, getPaywallMessage, getPricingInfo } from "@/lib/paywall"
 import { PRICES } from "@/lib/stripe"
 import { trackEvent } from "@/components/GoogleAnalytics"
 
@@ -15,20 +15,9 @@ interface PaywallModalProps {
   isGuest?: boolean
 }
 
-// Features for IL-only (one-time)
-const IL_FEATURES = [
-  "All required disclosure notices",
-  "Job posting templates",
-  "Employee handbook policy",
-  "4-year recordkeeping system",
-  "Downloadable compliance packet",
-  "1 year of regulatory updates",
-  "30-day email support",
-]
-
-// Features for multi-state (subscription)
-const MULTI_STATE_FEATURES = [
+const FEATURES = [
   "Unlimited compliance documents",
+  "All required disclosure notices",
   "IL + CO + CA + NYC coverage",
   "Impact assessments (Colorado)",
   "Team training & certificates",
@@ -49,7 +38,7 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
   // Get pricing based on selected states
   const states = status.states || []
   const pricing = getPricingInfo(states)
-  const features = isIllinoisOnly(states) ? IL_FEATURES : MULTI_STATE_FEATURES
+  const features = FEATURES
 
   // Pre-fill email from localStorage for guests
   useEffect(() => {
@@ -94,8 +83,7 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
           } catch (e) { /* ignore */ }
         }
 
-        // Use the correct price ID based on state selection
-        const priceId = pricing.priceId === 'IL_ONLY' ? PRICES.IL_ONLY : PRICES.STARTER
+        const priceId = PRICES.STARTER
 
         const res = await fetch('/api/checkout/guest', {
           method: 'POST',
@@ -225,8 +213,6 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 Loading...
               </>
-            ) : pricing.isOneTime ? (
-              `Get Compliant — ${pricing.price}`
             ) : (
               `Start Now — ${pricing.price}${pricing.label}`
             )}

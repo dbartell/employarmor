@@ -71,7 +71,7 @@ export async function POST(
       )
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://aihirelaw.com'
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://employarmor.com'
     
     // Generate magic link token
     const token = generateMagicToken()

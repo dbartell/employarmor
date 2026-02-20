@@ -13,34 +13,18 @@ export interface PaywallStatus {
 // Regulated states that require subscriptions (more complex requirements)
 export const SUBSCRIPTION_STATES = ['CO', 'CA', 'NYC', 'MD'] as const
 
-// Check if user qualifies for one-time IL-only pricing
-export function isIllinoisOnly(states: string[]): boolean {
-  return states.length === 1 && states[0] === 'IL'
-}
-
 // Get pricing info based on states
 export function getPricingInfo(states: string[]): {
-  isOneTime: boolean
   price: string
   priceId: string
   label: string
   description: string
 } {
-  if (isIllinoisOnly(states)) {
-    return {
-      isOneTime: true,
-      price: '$199',
-      priceId: 'IL_ONLY',
-      label: 'one-time',
-      description: 'Illinois compliance kit with 1 year of updates',
-    }
-  }
   return {
-    isOneTime: false,
     price: '$199',
     priceId: 'STARTER',
     label: '/month',
-    description: 'Multi-state compliance with ongoing support',
+    description: 'AI hiring compliance with ongoing support',
   }
 }
 
@@ -53,8 +37,8 @@ export function checkPaywallStatus(params: {
 }): PaywallStatus {
   const { trialStartedAt, documentsGenerated, subscriptionStatus, states = [] } = params
 
-  // Active subscribers or one-time purchasers get access
-  if (subscriptionStatus === 'active' || subscriptionStatus === 'il_only' || subscriptionStatus === 'lifetime') {
+  // Active subscribers get access
+  if (subscriptionStatus === 'active' || subscriptionStatus === 'lifetime') {
     return {
       shouldShowPaywall: false,
       reason: null,

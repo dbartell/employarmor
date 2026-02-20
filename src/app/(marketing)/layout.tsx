@@ -95,7 +95,7 @@ export default function MarketingLayout({
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Shield className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-lg text-gray-900 whitespace-nowrap">AI Hire Law</span>
+              <span className="font-bold text-lg text-gray-900 whitespace-nowrap">EmployArmor</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
@@ -162,7 +162,7 @@ export default function MarketingLayout({
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p>© 2026 AI Hire Law. All rights reserved.</p>
+            <p>© 2026 EmployArmor. All rights reserved.</p>
           </div>
         </div>
       </footer>

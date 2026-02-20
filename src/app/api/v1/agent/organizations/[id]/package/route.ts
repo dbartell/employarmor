@@ -82,7 +82,7 @@ export async function GET(
       .eq('org_id', orgId)
       .order('created_at', { ascending: false })
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://aihirelaw.com'
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://employarmor.com'
     
     const documents: Document[] = (docs || []).map(doc => ({
       id: doc.id,

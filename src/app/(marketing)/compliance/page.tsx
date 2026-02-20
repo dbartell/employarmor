@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { AI_TOOLS, STATES_WITH_LAWS } from '@/lib/seo-data'
 
 export const metadata: Metadata = {
-  title: 'AI Hiring Compliance by Tool & State | AIHireLaw',
+  title: 'AI Hiring Compliance by Tool & State | EmployArmor',
   description: 'Find compliance requirements for AI hiring tools like HireVue, Workday, Pymetrics in every state. Illinois, Colorado, NYC, Maryland and more.',
 }
 
@@ -14,7 +14,7 @@ export default function CompliancePage() {
       <header className="bg-white border-b">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-slate-900">
-            🛡️ AIHireLaw
+            🛡️ EmployArmor
           </Link>
           <Link
             href="/scorecard"

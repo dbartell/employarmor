@@ -135,7 +135,7 @@ export default function CertificatePage({ params }: PageProps) {
       // Footer
       doc.setFontSize(8)
       doc.setTextColor(107, 114, 128)
-      doc.text('Powered by AIHireLaw | www.aihirelaw.com', 148.5, 200, { align: 'center' })
+      doc.text('Powered by EmployArmor | www.employarmor.com', 148.5, 200, { align: 'center' })
 
       doc.save(`certificate-${certificate.certificate_number}.pdf`)
     } catch (err) {
@@ -249,7 +249,7 @@ export default function CertificatePage({ params }: PageProps) {
 
               {/* Footer */}
               <p className="text-xs text-gray-400 mt-6">
-                Powered by AIHireLaw | www.aihirelaw.com
+                Powered by EmployArmor | www.employarmor.com
               </p>
             </div>
           </div>

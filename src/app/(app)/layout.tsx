@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin } from "lucide-react"
+import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin, Layers, CheckSquare } from "lucide-react"
 import { createClient } from "@/lib/supabase/server"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 import { MobileSidebar } from "@/components/layout/mobile-sidebar"
@@ -33,7 +33,9 @@ export default async function AppLayout({
 
   const navItems = [
     { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { href: '/audit', icon: ClipboardCheck, label: 'Assessment' },
+    { href: '/tools', icon: Layers, label: 'Tool Registry' },
+    { href: '/approvals', icon: CheckSquare, label: 'Approvals' },
+    { href: '/audit', icon: ClipboardCheck, label: 'Risk Assessment' },
     { href: '/documents', icon: FileText, label: 'Documents' },
     { href: '/disclosures', icon: Globe, label: 'Disclosures' },
     { href: '/training', icon: GraduationCap, label: 'Training' },
@@ -53,7 +55,7 @@ export default async function AppLayout({
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5" />
             </div>
-            <span className="font-bold text-lg">AI Hire Law</span>
+            <span className="font-bold text-lg">EmployArmor</span>
           </Link>
         </div>
         

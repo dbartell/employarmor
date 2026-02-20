@@ -6,7 +6,7 @@ import { FileText, Shield, Calendar, AlertTriangle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 export const metadata = {
-  title: "Compliance Documents | AIHireLaw",
+  title: "Compliance Documents | EmployArmor",
   description: "Manage your compliance documents and renewal reminders",
 }
 

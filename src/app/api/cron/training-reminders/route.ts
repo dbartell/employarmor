@@ -44,7 +44,7 @@ async function sendEmail(to: string[], subject: string, html: string): Promise<s
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'AIHireLaw Training <training@aihirelaw.com>',
+        from: 'EmployArmor Training <training@employarmor.com>',
         to,
         subject,
         html,
@@ -153,7 +153,7 @@ function generateExpiryEmail(params: {
       </div>
     </div>
     <div class="footer">
-      <p>This training is powered by AIHireLaw.</p>
+      <p>This training is powered by EmployArmor.</p>
     </div>
   </div>
 </body>
@@ -179,7 +179,7 @@ export async function GET(request: NextRequest) {
   }
 
   const supabase = createClient(supabaseUrl, supabaseServiceKey)
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://app.aihirelaw.com'
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://app.employarmor.com'
 
   const results = {
     processed: 0,

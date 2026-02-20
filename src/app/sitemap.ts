@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { AI_TOOLS, STATES_WITH_LAWS } from '@/lib/seo-data'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://aihirelaw.com'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://employarmor.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

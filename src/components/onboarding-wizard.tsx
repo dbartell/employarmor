@@ -47,13 +47,13 @@ export function OnboardingWizard({
   const handleDismiss = async () => {
     setDismissed(true)
     // Save dismissal to localStorage
-    localStorage.setItem('aihirelaw_onboarding_dismissed', 'true')
+    localStorage.setItem('employarmor_onboarding_dismissed', 'true')
     onDismiss?.()
   }
 
   // Check if already dismissed
   useEffect(() => {
-    const wasDismissed = localStorage.getItem('aihirelaw_onboarding_dismissed')
+    const wasDismissed = localStorage.getItem('employarmor_onboarding_dismissed')
     if (wasDismissed === 'true') {
       setDismissed(true)
     }
@@ -77,7 +77,7 @@ export function OnboardingWizard({
       action: () => {
         // Pass lead data to audit if available
         if (leadData) {
-          sessionStorage.setItem('aihirelaw_audit_prefill', JSON.stringify(leadData))
+          sessionStorage.setItem('employarmor_audit_prefill', JSON.stringify(leadData))
         }
         router.push('/audit')
       },

@@ -180,7 +180,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // Generate API key for this org (for direct API access if needed)
     const orgApiKey = generateApiKey()
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://aihirelaw.com'
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://employarmor.com'
     
     const response: CreateOrgResponse = {
       org_id: userId,

@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useMemo, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Shield, ArrowRight, ArrowLeft, AlertTriangle, Loader2, Search, Globe, Plus } from 'lucide-react'
+import { Shield, ArrowRight, ArrowLeft, AlertTriangle, Loader2, Search, Globe, Plus, ChevronDown, ChevronUp } from 'lucide-react'
 import { trackEvent } from '@/components/GoogleAnalytics'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { createClient } from '@/lib/supabase/client'
 import { allStates, regulatedStates } from '@/data/states'
-import { aiHiringTools, usageTypes } from '@/data/tools'
+import { aiHiringTools, toolCategories, usageTypes } from '@/data/tools'
+import { analyzeToolStack } from '@/lib/tool-analysis'
 
 type Step = 'states' | 'tools' | 'usage' | 'employees' | 'email' | 'creating'
 
@@ -78,6 +79,7 @@ function OnboardPageContent() {
   const [isCreating, setIsCreating] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [toolSearch, setToolSearch] = useState('')
+  const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set())
   const [isLoaded, setIsLoaded] = useState(false)
   const [stateFromUrl, setStateFromUrl] = useState<string | null>(null)
   const router = useRouter()
@@ -186,6 +188,15 @@ function OnboardPageContent() {
     }))
   }
 
+  const toggleCategory = (cat: string) => {
+    setCollapsedCategories(prev => {
+      const next = new Set(prev)
+      if (next.has(cat)) next.delete(cat)
+      else next.add(cat)
+      return next
+    })
+  }
+
   const toggleUsage = (id: string) => {
     setData(prev => ({
       ...prev,
@@ -207,11 +218,15 @@ function OnboardPageContent() {
         ? [...data.tools.filter(t => t !== 'other'), data.customTool.trim()]
         : data.tools
       
+      // Run tool analysis
+      const analysis = analyzeToolStack(allTools, data.states)
+
       // Save completed data to localStorage (different key for completed data)
       const onboardData = {
         ...data,
         tools: allTools,
         riskScore,
+        analysis,
         completedAt: new Date().toISOString(),
       }
       localStorage.setItem('hireshield_onboard_data', JSON.stringify(onboardData))
@@ -270,7 +285,7 @@ function OnboardPageContent() {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <Shield className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-lg text-gray-900">AI Hire Law</span>
+              <span className="font-bold text-lg text-gray-900">EmployArmor</span>
             </div>
             {step !== 'creating' && (
               <div className="text-sm text-gray-500">
@@ -372,9 +387,9 @@ function OnboardPageContent() {
         {step === 'tools' && (
           <Card className="bg-white border-gray-200 shadow-sm">
             <CardContent className="pt-6">
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">What hiring tools do you use?</h1>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">What tools does your team use?</h1>
               <p className="text-gray-600 mb-6">
-                Select the AI-powered tools in your recruiting stack.
+                Select all that apply — we&apos;ll figure out the compliance stuff.
               </p>
               
               {/* Search input */}
@@ -388,78 +403,104 @@ function OnboardPageContent() {
                   className="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
+
+              {data.tools.length > 0 && (
+                <div className="text-sm text-blue-600 font-medium mb-4">
+                  {data.tools.filter(t => t !== 'other').length} tool{data.tools.filter(t => t !== 'other').length !== 1 ? 's' : ''} selected
+                </div>
+              )}
               
-              {/* Filtered tools grid */}
-              {(() => {
-                const filteredTools = aiHiringTools.filter(tool => 
-                  tool.id !== 'other' && (
-                    tool.name.toLowerCase().includes(toolSearch.toLowerCase()) ||
-                    tool.category.toLowerCase().includes(toolSearch.toLowerCase())
+              {/* Tools grouped by category with collapsible sections */}
+              <div className="space-y-3 mb-4 max-h-[28rem] overflow-y-auto pr-1">
+                {toolCategories.filter(cat => cat !== 'Other').map(category => {
+                  const categoryTools = aiHiringTools.filter(tool =>
+                    tool.category === category &&
+                    tool.id !== 'other' &&
+                    (toolSearch === '' ||
+                      tool.name.toLowerCase().includes(toolSearch.toLowerCase()) ||
+                      tool.category.toLowerCase().includes(toolSearch.toLowerCase()))
                   )
-                )
-                
-                return (
-                  <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
-                      {filteredTools.map(tool => (
-                        <button
-                          key={tool.id}
-                          onClick={() => toggleTool(tool.id)}
-                          className={`p-3 text-left rounded-lg border-2 transition-all ${
-                            data.tools.includes(tool.id)
-                              ? 'bg-blue-100 border-blue-600'
-                              : 'bg-gray-50 border-gray-200 hover:border-gray-300'
-                          }`}
-                        >
-                          <div className={`font-medium ${data.tools.includes(tool.id) ? 'text-blue-700' : 'text-gray-900'}`}>{tool.name}</div>
-                          <div className={`text-xs ${data.tools.includes(tool.id) ? 'text-blue-600' : 'text-gray-500'}`}>{tool.category}</div>
-                        </button>
-                      ))}
-                    </div>
-                    
-                    {/* Show "Other" option when search has no results or user wants custom */}
-                    {(filteredTools.length === 0 || toolSearch.length > 0) && (
-                      <div className="border-t border-gray-200 pt-4 mb-4">
-                        <p className="text-sm text-gray-600 mb-2">
-                          {filteredTools.length === 0 
-                            ? "Can't find your tool? Add it below:" 
-                            : "Using a different tool?"}
-                        </p>
-                        <div className="flex gap-2">
-                          <input
-                            type="text"
-                            value={data.customTool}
-                            onChange={(e) => setData(prev => ({ ...prev, customTool: e.target.value }))}
-                            placeholder="Enter tool name..."
-                            className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                          />
-                          <Button
-                            type="button"
-                            variant="outline"
-                            onClick={() => {
-                              if (data.customTool.trim() && !data.tools.includes('other')) {
-                                toggleTool('other')
-                              }
-                            }}
-                            disabled={!data.customTool.trim() || data.tools.includes('other')}
-                            className="border-gray-300"
-                          >
-                            <Plus className="w-4 h-4 mr-1" /> Add
-                          </Button>
+                  if (categoryTools.length === 0) return null
+                  
+                  const isCollapsed = collapsedCategories.has(category) && toolSearch === ''
+                  const selectedInCategory = categoryTools.filter(t => data.tools.includes(t.id)).length
+
+                  return (
+                    <div key={category} className="border border-gray-200 rounded-lg overflow-hidden">
+                      <button
+                        onClick={() => toggleCategory(category)}
+                        className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium text-gray-900 text-sm">{category}</span>
+                          {selectedInCategory > 0 && (
+                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">
+                              {selectedInCategory}
+                            </span>
+                          )}
                         </div>
-                        {data.tools.includes('other') && data.customTool && (
-                          <p className="text-sm text-green-600 mt-2">
-                            ✓ Added: {data.customTool}
-                          </p>
+                        {isCollapsed ? (
+                          <ChevronDown className="w-4 h-4 text-gray-400" />
+                        ) : (
+                          <ChevronUp className="w-4 h-4 text-gray-400" />
                         )}
-                      </div>
-                    )}
-                  </>
-                )
-              })()}
+                      </button>
+                      {!isCollapsed && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-3">
+                          {categoryTools.map(tool => (
+                            <button
+                              key={tool.id}
+                              onClick={() => toggleTool(tool.id)}
+                              className={`p-3 text-left rounded-lg border-2 transition-all ${
+                                data.tools.includes(tool.id)
+                                  ? 'bg-blue-100 border-blue-600'
+                                  : 'bg-white border-gray-200 hover:border-gray-300'
+                              }`}
+                            >
+                              <div className={`font-medium text-sm ${data.tools.includes(tool.id) ? 'text-blue-700' : 'text-gray-900'}`}>{tool.name}</div>
+                              <div className={`text-xs mt-0.5 ${data.tools.includes(tool.id) ? 'text-blue-600' : 'text-gray-500'}`}>{tool.description}</div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Add custom tool */}
+              <div className="border-t border-gray-200 pt-4 mb-4">
+                <p className="text-sm text-gray-600 mb-2">Don&apos;t see your tool? Add it:</p>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={data.customTool}
+                    onChange={(e) => setData(prev => ({ ...prev, customTool: e.target.value }))}
+                    placeholder="Enter tool name..."
+                    className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      if (data.customTool.trim() && !data.tools.includes('other')) {
+                        toggleTool('other')
+                      }
+                    }}
+                    disabled={!data.customTool.trim() || data.tools.includes('other')}
+                    className="border-gray-300"
+                  >
+                    <Plus className="w-4 h-4 mr-1" /> Add
+                  </Button>
+                </div>
+                {data.tools.includes('other') && data.customTool && (
+                  <p className="text-sm text-green-600 mt-2">
+                    ✓ Added: {data.customTool}
+                  </p>
+                )}
+              </div>
               
               <div className="flex gap-3">
-                {/* Only show Back button if we didn't come from a state URL param */}
                 {!stateFromUrl && (
                   <Button variant="outline" onClick={() => goToStep('states')} className="border-gray-300 text-gray-700 hover:bg-gray-100">
                     <ArrowLeft className="mr-2 w-4 h-4" /> Back

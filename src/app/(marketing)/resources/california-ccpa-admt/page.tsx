@@ -193,7 +193,7 @@ export default function CaliforniaCCPAADMTPage() {
         <li><strong>Federal EEO:</strong> EEOC guidance on AI and employment discrimination</li>
       </ul>
       <p>
-        AIHireLaw helps you maintain compliance across all applicable regulations from a single platform.
+        EmployArmor helps you maintain compliance across all applicable regulations from a single platform.
       </p>
 
       <h2>Frequently Asked Questions</h2>
