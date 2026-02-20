@@ -20,7 +20,7 @@ export default function NotFound() {
           className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
         >
           <ArrowLeft className="w-4 h-4" />
-          Go to HireShield
+          Go to EmployArmor
         </Link>
       </div>
     </div>

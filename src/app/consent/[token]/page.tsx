@@ -378,7 +378,7 @@ export default function PublicConsentPage({
             className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-600 transition-colors"
           >
             <Shield className="w-4 h-4" />
-            <span className="text-xs">Powered by HireShield</span>
+            <span className="text-xs">Powered by EmployArmor</span>
           </a>
         </footer>
       </main>

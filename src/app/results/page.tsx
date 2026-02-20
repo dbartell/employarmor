@@ -23,7 +23,7 @@ import { PaywallModal } from "@/components/paywall-modal"
 import { PaywallStatus } from "@/lib/paywall"
 import { analyzeToolStack, ToolAnalysisResult } from "@/lib/tool-analysis"
 
-const ONBOARD_STORAGE_KEY = 'hireshield_onboard_data'
+const ONBOARD_STORAGE_KEY = 'employarmor_onboard_data'
 
 // ============================================================
 // CIRCULAR PROGRESS RING COMPONENT

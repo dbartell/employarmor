@@ -26,7 +26,7 @@ const FEATURES = [
   "Priority support",
 ]
 
-const ONBOARD_STORAGE_KEY = 'hireshield_onboard_data'
+const ONBOARD_STORAGE_KEY = 'employarmor_onboard_data'
 
 export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallModalProps) {
   const router = useRouter()

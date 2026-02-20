@@ -1,4 +1,4 @@
-// HireShield Compliance Knowledge Base
+// EmployArmor Compliance Knowledge Base
 // Structured dataset of AI-in-hiring laws across US jurisdictions
 
 export interface ComplianceRequirement {

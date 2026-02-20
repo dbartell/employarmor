@@ -679,7 +679,7 @@ export default function DisclosureSettingsPage() {
                       Copy this code to embed a disclosure widget on your careers page:
                     </p>
                     <pre className="p-3 bg-gray-900 text-gray-100 rounded-lg text-xs overflow-x-auto">
-{`<div id="hireshield-disclosure"></div>
+{`<div id="employarmor-disclosure"></div>
 <script src="${typeof window !== 'undefined' ? window.location.origin : ''}/embed.js" 
         data-company="${formData.slug}"
         data-style="card">

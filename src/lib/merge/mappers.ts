@@ -1,7 +1,7 @@
 /**
  * Merge.dev Data Mappers
  * 
- * Transform Merge.dev API responses to HireShield database format.
+ * Transform Merge.dev API responses to EmployArmor database format.
  */
 
 import type {

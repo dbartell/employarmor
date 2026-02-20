@@ -335,8 +335,8 @@ export default function DashboardPage() {
       if (!orgCheck) {
         // Org doesn't exist - try to bootstrap from localStorage quiz data
         console.log('=== DASHBOARD: Org missing, attempting bootstrap ===')
-        const storedQuizData = typeof window !== 'undefined' ? localStorage.getItem('hireshield_onboard_data') : null
-        console.log('localStorage hireshield_onboard_data:', storedQuizData)
+        const storedQuizData = typeof window !== 'undefined' ? localStorage.getItem('employarmor_onboard_data') : null
+        console.log('localStorage employarmor_onboard_data:', storedQuizData)
         
         let quizData = null
         if (storedQuizData) {

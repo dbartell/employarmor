@@ -407,7 +407,7 @@ export default function DisclosuresPage() {
           {showEmbed && (
             <CardContent>
               <pre className="p-3 bg-gray-900 text-gray-100 rounded-lg text-xs overflow-x-auto">
-{`<div id="hireshield-disclosure"></div>
+{`<div id="employarmor-disclosure"></div>
 <script src="${typeof window !== 'undefined' ? window.location.origin : ''}/embed.js" 
         data-company="${page.slug}"
         data-style="card">

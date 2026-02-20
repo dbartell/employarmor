@@ -138,7 +138,7 @@ export default function InviteAcceptPage({
           </div>
           <CardTitle className="text-2xl">You&apos;re Invited!</CardTitle>
           <CardDescription>
-            Join {invite?.organization?.name || 'the team'} on HireShield
+            Join {invite?.organization?.name || 'the team'} on EmployArmor
           </CardDescription>
         </CardHeader>
 

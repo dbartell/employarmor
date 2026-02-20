@@ -72,7 +72,7 @@ function calculateRiskScore(data: OnboardData): number {
 }
 
 // LocalStorage key for onboard data
-const ONBOARD_STORAGE_KEY = 'hireshield_onboard_progress'
+const ONBOARD_STORAGE_KEY = 'employarmor_onboard_progress'
 
 function OnboardPageContent() {
   const [step, setStep] = useState<Step>('states')
@@ -229,7 +229,7 @@ function OnboardPageContent() {
         analysis,
         completedAt: new Date().toISOString(),
       }
-      localStorage.setItem('hireshield_onboard_data', JSON.stringify(onboardData))
+      localStorage.setItem('employarmor_onboard_data', JSON.stringify(onboardData))
       
       // Clear progress localStorage since we're done
       localStorage.removeItem(ONBOARD_STORAGE_KEY)

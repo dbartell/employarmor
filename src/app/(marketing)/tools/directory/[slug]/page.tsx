@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tool = getToolBySlug(slug)
   if (!tool) return { title: "Tool Not Found" }
   return {
-    title: `${tool.name} AI Compliance Requirements | HireShield`,
-    description: `Compliance profile for ${tool.name} by ${tool.vendor}. ${tool.aiFeatures.length} AI features analyzed across ${tool.complianceRequirements.length} state regulations.`,
+    title: `${tool.name} AI Compliance Requirements | EmployArmor`,
+    description: `Compliance profile for ${tool.name} by ${tool.vendor}. ${tool.aiFeatures.length} AI features analyzed across multiple state regulations.`,
     keywords: [tool.name, tool.vendor, "AI compliance", "hiring tools", tool.category, "HR technology"],
   }
 }
@@ -86,24 +86,22 @@ export default async function ToolProfilePage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* Compliance Requirements */}
+      {/* Triggered Laws */}
       <section className="mb-8">
         <h2 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-4">
-          <Landmark className="w-5 h-5 text-blue-600" /> Compliance Requirements by State
+          <Landmark className="w-5 h-5 text-blue-600" /> Triggered Compliance Laws
         </h2>
         <div className="space-y-4">
-          {tool.complianceRequirements.map((req, i) => (
-            <div key={i} className="bg-white border rounded-lg p-5">
+          {[...new Set(tool.aiFeatures.flatMap(f => f.triggeredLaws))].map((lawId) => (
+            <div key={lawId} className="bg-white border rounded-lg p-5">
               <div className="flex items-center gap-2 mb-3">
-                <span className="font-semibold text-gray-900">{req.state}</span>
-                <span className="text-sm text-gray-500">—</span>
-                <span className="text-sm font-medium text-blue-600">{req.lawName}</span>
+                <span className="font-semibold text-gray-900">{lawId}</span>
               </div>
               <ul className="space-y-2">
-                {req.requirements.map((r, j) => (
+                {tool.aiFeatures.filter(f => f.triggeredLaws.includes(lawId)).map((f, j) => (
                   <li key={j} className="flex items-start gap-2 text-sm text-gray-600">
                     <CheckCircle2 className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    {r}
+                    {f.name}: {f.description}
                   </li>
                 ))}
               </ul>

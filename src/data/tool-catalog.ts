@@ -1,4 +1,4 @@
-// HireShield Tool Catalog — Seed Data
+// EmployArmor Tool Catalog — Seed Data
 // 90+ HR/hiring tools with AI feature analysis and compliance mapping
 
 export interface AiFeature {
