@@ -1206,6 +1206,18 @@ export const catalogStats = {
   withAiFeatures: toolCatalog.filter((t) => t.hasAiFeatures).length,
 };
 
+// Risk level type
+export type RiskLevel = 'high' | 'medium' | 'low' | 'none' | 'critical';
+
+// Get related tools (same category, excluding current)
+export function getRelatedTools(slug: string, limit = 3): ToolCatalogEntry[] {
+  const tool = getToolBySlug(slug);
+  if (!tool) return [];
+  return toolCatalog
+    .filter((t) => t.category === tool.category && t.slug !== slug)
+    .slice(0, limit);
+}
+
 // Derived exports used by tool request page
 export const categories = [...new Set(toolCatalog.map((t) => t.category))];
 
