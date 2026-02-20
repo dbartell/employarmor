@@ -1205,3 +1205,17 @@ export const catalogStats = {
   },
   withAiFeatures: toolCatalog.filter((t) => t.hasAiFeatures).length,
 };
+
+// Derived exports used by tool request page
+export const categories = [...new Set(toolCatalog.map((t) => t.category))];
+
+export const teamRoles = [
+  "Recruiter",
+  "Hiring Manager",
+  "HR Director",
+  "Talent Acquisition",
+  "Compliance Officer",
+  "People Operations",
+  "HRBP",
+  "Executive",
+];
