@@ -57,6 +57,19 @@ export const stateRequirements: StateRequirement[] = [
       "Applies to automated employment decision tools (AEDT)"
     ],
     penalties: "$500 for first violation, $500-$1,500 per subsequent violation per day."
+  },
+  {
+    code: "MD",
+    name: "Maryland",
+    law: "HB 1202 - Facial Recognition in Hiring",
+    effective: "October 1, 2020",
+    requirements: [
+      "Employers may not use facial recognition technology during job interviews without written consent",
+      "Applicant must sign a waiver authorizing facial recognition use",
+      "Applies to all employers conducting interviews in Maryland",
+      "Covers any technology that creates a facial geometry template"
+    ],
+    penalties: "Enforced under Maryland employment law. Applicants may file complaints with the Maryland Commissioner of Labor."
   }
 ]
 
@@ -115,4 +128,4 @@ export const allStates = [
   { code: "WY", name: "Wyoming" },
 ]
 
-export const regulatedStates = ["IL", "CO", "CA", "NYC"]
+export const regulatedStates = ["IL", "CO", "CA", "NYC", "MD"]
