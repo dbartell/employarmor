@@ -110,24 +110,17 @@ export default async function ToolProfilePage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* Checklist */}
-      <section className="mb-8">
-        <h2 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-4">
-          <ClipboardCheck className="w-5 h-5 text-green-600" /> What You Need to Do
-        </h2>
-        <div className="bg-white border rounded-lg p-5">
-          <ul className="space-y-3">
-            {tool.checklist.map((item, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-100 text-green-700 text-xs font-semibold flex-shrink-0 mt-0.5">
-                  {i + 1}
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* Compliance Notes */}
+      {tool.complianceNotes && (
+        <section className="mb-8">
+          <h2 className="flex items-center gap-2 text-xl font-semibold text-gray-900 mb-4">
+            <ClipboardCheck className="w-5 h-5 text-green-600" /> Compliance Notes
+          </h2>
+          <div className="bg-white border rounded-lg p-5">
+            <p className="text-sm text-gray-700">{tool.complianceNotes}</p>
+          </div>
+        </section>
+      )}
 
       {/* Related Tools */}
       {related.length > 0 && (
