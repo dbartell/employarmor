@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function ComplianceProgramGuidePage() {
@@ -10,6 +12,8 @@ export default function ComplianceProgramGuidePage() {
       readTime="15 min read"
       publishedDate="January 22, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         With AI hiring regulations proliferating across states and cities, ad-hoc compliance isn't 
         sustainable. This guide walks you through building a comprehensive compliance program that 
@@ -327,6 +331,7 @@ export default function ComplianceProgramGuidePage() {
         <li><Link href="/resources/compliance-checklist-2026" className="text-blue-600 hover:underline">2026 Compliance Checklist</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

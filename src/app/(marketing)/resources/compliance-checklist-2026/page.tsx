@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function ComplianceChecklist2026Page() {
@@ -10,6 +12,8 @@ export default function ComplianceChecklist2026Page() {
       readTime="6 min read"
       publishedDate="January 30, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         2026 is the year AI hiring compliance gets real. With Illinois, Colorado, and enhanced 
         California requirements taking effect, plus NYC's Local Law 144 already in force, employers 
@@ -332,6 +336,7 @@ export default function ComplianceChecklist2026Page() {
         <li><Link href="/resources/vendor-assessment-guide" className="text-blue-600 hover:underline">Vendor Assessment Guide</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

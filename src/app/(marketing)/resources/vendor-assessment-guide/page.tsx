@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function VendorAssessmentGuidePage() {
@@ -10,6 +12,8 @@ export default function VendorAssessmentGuidePage() {
       readTime="8 min read"
       publishedDate="January 26, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         Your AI hiring vendors are partners in compliance — or liabilities waiting to happen. 
         Before adopting new AI tools or renewing existing contracts, conduct thorough due diligence 
@@ -294,6 +298,7 @@ export default function VendorAssessmentGuidePage() {
         <li><Link href="/resources/colorado-ai-act-employers" className="text-blue-600 hover:underline">Colorado AI Act Guide</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

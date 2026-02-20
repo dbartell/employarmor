@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function AIDisclosureDecisionTreePage() {
@@ -10,6 +12,8 @@ export default function AIDisclosureDecisionTreePage() {
       readTime="3 min read"
       publishedDate="June 30, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         Not sure if your hiring tools require candidate disclosure? This decision tree walks you 
         through the key questions to determine your obligations. Answer each question to identify 
@@ -246,6 +250,7 @@ export default function AIDisclosureDecisionTreePage() {
         <li><Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Building a Compliance Program</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

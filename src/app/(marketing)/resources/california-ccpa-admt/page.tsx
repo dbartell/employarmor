@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function CaliforniaCCPAADMTPage() {
@@ -10,6 +12,8 @@ export default function CaliforniaCCPAADMTPage() {
       readTime="11 min read"
       publishedDate="January 18, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         California's Consumer Privacy Rights Act (CPRA) amendments to the California Consumer Privacy 
         Act (CCPA) introduced significant new requirements for businesses using Automated Decision-Making 
@@ -226,6 +230,7 @@ export default function CaliforniaCCPAADMTPage() {
         <li><Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Building a Compliance Program</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

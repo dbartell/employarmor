@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function HRTrainingGuidePage() {
@@ -10,6 +12,8 @@ export default function HRTrainingGuidePage() {
       readTime="7 min read"
       publishedDate="January 24, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         Your compliance program is only as strong as the people executing it. HR teams, recruiters, 
         and hiring managers need to understand AI hiring regulations, recognize when requirements 
@@ -285,6 +289,7 @@ export default function HRTrainingGuidePage() {
         <li><Link href="/resources/compliance-checklist-2026" className="text-blue-600 hover:underline">2026 Compliance Checklist</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

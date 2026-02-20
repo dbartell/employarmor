@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function AIDisclosureNoticeTemplatePage() {
@@ -10,6 +12,8 @@ export default function AIDisclosureNoticeTemplatePage() {
       readTime="5 min read"
       publishedDate="January 28, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         Multiple jurisdictions now require employers to disclose when AI is used in hiring decisions. 
         A well-crafted disclosure notice protects your organization, builds candidate trust, and 
@@ -323,6 +327,7 @@ export default function AIDisclosureNoticeTemplatePage() {
         <li><Link href="/resources/illinois-ai-hiring-law" className="text-blue-600 hover:underline">Illinois HB 3773 Guide</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle, CheckCircle, ArrowRight, Calendar, DollarSign, Building, FileText } from "lucide-react"
@@ -27,6 +29,10 @@ export default function NYCCompliancePage() {
         </div>
       </section>
 
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AuthorByline publishDate="2025-02-20" />
+      </div>
       {/* Quick Facts */}
       <section className="py-12 border-b">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -223,6 +229,9 @@ export default function NYCCompliancePage() {
               Get Free Compliance Score <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
+        </div>
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LegalDisclaimer />
         </div>
       </section>
     </div>

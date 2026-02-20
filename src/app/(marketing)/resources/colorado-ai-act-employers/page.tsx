@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function ColoradoAIActPage() {
@@ -10,6 +12,8 @@ export default function ColoradoAIActPage() {
       readTime="10 min read"
       publishedDate="January 12, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         Colorado's Artificial Intelligence Act is one of the most comprehensive AI regulations in the 
         United States. For employers using AI in hiring, it introduces significant new requirements 
@@ -183,6 +187,7 @@ export default function ColoradoAIActPage() {
         <li><Link href="/resources/templates" className="text-blue-600 hover:underline">Compliance Templates</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

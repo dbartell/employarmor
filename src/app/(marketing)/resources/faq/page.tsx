@@ -1,5 +1,7 @@
 "use client"
 
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowLeft, HelpCircle, ChevronDown } from "lucide-react"
@@ -138,6 +140,8 @@ export default function FAQPage() {
           </p>
         </div>
 
+        <AuthorByline publishDate="2025-02-20" />
+
         {/* FAQ Categories */}
         {faqCategories.map((category) => (
           <div key={category.name} className="mb-12">
@@ -158,6 +162,7 @@ export default function FAQPage() {
           <p className="text-gray-600 mb-6">
             Take our free assessment to get personalized guidance for your situation.
           </p>
+          <LegalDisclaimer />
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/scorecard">
               <Button variant="cta" size="lg">

@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function NYCLocalLaw144Page() {
@@ -10,6 +12,8 @@ export default function NYCLocalLaw144Page() {
       readTime="9 min read"
       publishedDate="January 20, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         New York City Local Law 144 was one of the first laws in the United States to specifically 
         regulate AI in hiring. If you use automated tools to screen candidates or employees in NYC, 
@@ -249,6 +253,7 @@ export default function NYCLocalLaw144Page() {
         <li><Link href="/resources/ai-disclosure-notice-template" className="text-blue-600 hover:underline">AI Disclosure Notice Template</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

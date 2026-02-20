@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export default function IllinoisAIHiringLawPage() {
@@ -10,6 +12,8 @@ export default function IllinoisAIHiringLawPage() {
       readTime="12 min read"
       publishedDate="January 15, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       <p>
         Illinois House Bill 3773, signed into law in 2024, establishes new requirements for employers 
         using artificial intelligence in hiring and employment decisions. If you hire in Illinois, 
@@ -188,6 +192,7 @@ export default function IllinoisAIHiringLawPage() {
         <li><Link href="/resources/templates/ai-disclosure-notice" className="text-blue-600 hover:underline">AI Disclosure Notice Template</Link></li>
         <li><Link href="/scorecard" className="text-blue-600 hover:underline">Free Compliance Scorecard</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }

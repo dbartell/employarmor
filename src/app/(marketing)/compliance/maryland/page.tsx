@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle, CheckCircle, ArrowRight, Calendar, DollarSign, Building, FileText, Eye } from "lucide-react"
@@ -33,6 +35,10 @@ export default function MarylandCompliancePage() {
         </div>
       </section>
 
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AuthorByline publishDate="2025-02-20" />
+      </div>
       {/* Quick Facts */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -202,6 +208,9 @@ export default function MarylandCompliancePage() {
               Start Free Assessment <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </Link>
+        </div>
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LegalDisclaimer />
         </div>
       </section>
     </div>

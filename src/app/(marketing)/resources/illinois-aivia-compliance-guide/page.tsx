@@ -1,4 +1,6 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
+import { AuthorByline } from "@/components/author-byline"
+import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export const metadata = {
@@ -15,6 +17,8 @@ export default function IllinoisAIVIAComplianceGuidePage() {
       readTime="10 min read"
       publishedDate="February 9, 2026"
     >
+      <AuthorByline publishDate="2025-02-20" />
+
       {/* Author byline */}
       <div className="flex items-center gap-3 mb-8 pb-8 border-b">
         <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -322,6 +326,7 @@ export default function IllinoisAIVIAComplianceGuidePage() {
         <li><Link href="/resources/ai-disclosure-notice-template" className="text-blue-600 hover:underline">AI Disclosure Notice Template</Link></li>
         <li><Link href="/resources/ai-disclosure-decision-tree" className="text-blue-600 hover:underline">Do I Need to Disclose? Decision Tree</Link></li>
       </ul>
+      <LegalDisclaimer />
     </ArticleLayout>
   )
 }
