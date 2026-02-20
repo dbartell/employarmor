@@ -107,7 +107,7 @@ export default function AboutPage() {
               },
               {
                 title: 'Accessibility',
-                desc: 'Compliance shouldn't be a luxury. We price and design for companies of every size.',
+                desc: "Compliance shouldn't be a luxury. We price and design for companies of every size.",
               },
               {
                 title: 'Automation',
