@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
         quiz_score: quizScore,
         certificate_number: certNumber,
       },
-    }).then(() => {}).catch(() => {}) // Best effort
+    }) // Best effort - fire and forget
   }
 
   return NextResponse.json({ 
