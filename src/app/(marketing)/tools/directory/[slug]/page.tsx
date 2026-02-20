@@ -55,7 +55,7 @@ export default async function ToolProfilePage({ params }: { params: Promise<{ sl
             </div>
           </div>
           <a
-            href={tool.website}
+            href={tool.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800"
