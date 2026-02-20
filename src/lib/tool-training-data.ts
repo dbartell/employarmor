@@ -379,7 +379,6 @@ export const TOOL_TRAINING_TEMPLATES: Record<string, Omit<ToolTrainingModule, 't
       },
     ],
   },
-}
 
   'indeed': {
     toolName: 'Indeed',
@@ -1002,6 +1001,7 @@ export const TOOL_TRAINING_TEMPLATES: Record<string, Omit<ToolTrainingModule, 't
       },
     ],
   },
+}
 
 // Generate a tool training module for an org's specific context
 export function generateToolModule(
