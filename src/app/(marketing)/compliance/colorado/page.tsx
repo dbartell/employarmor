@@ -208,73 +208,96 @@ export default function ColoradoCompliancePage() {
 
       {/* Pricing */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-4">Colorado Compliance Pricing</h2>
-            <p className="text-gray-600">Impact assessments, notifications, and ongoing support</p>
-          </div>
-          
-          <div className="max-w-lg mx-auto">
-            <Card className="border-blue-600 border-2 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
-                Multi-State Plan
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+            Get Compliant Today
+          </h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            All plans include a 14-day free trial. No credit card required to start.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Starter */}
+            <div className="bg-white rounded-xl border p-6 flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-900">Starter</h3>
+              <p className="text-sm text-gray-500 mt-1">Small teams, single state</p>
+              <div className="mt-4 mb-6">
+                <span className="text-4xl font-bold text-gray-900">$199</span>
+                <span className="text-gray-500">/mo</span>
               </div>
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Full Compliance Platform</CardTitle>
-                <p className="text-gray-500">Colorado + Illinois + California + NYC</p>
-                <div className="mt-4">
-                  <span className="text-5xl font-bold">$199</span>
-                  <span className="text-gray-600 ml-2">/month</span>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-sm mb-6">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Annual impact assessment generator</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Risk management documentation</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Consumer notification templates</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Adverse decision workflow tools</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Team training + certificates</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Multi-state disclosure templates</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Annual renewal reminders</span>
-                  </li>
-                </ul>
-                <Link href="/quiz?state=CO">
-                  <Button className="w-full h-12 text-base" variant="cta">
-                    Start Free Trial
-                  </Button>
-                </Link>
-                <p className="text-xs text-center text-gray-500 mt-4">
-                  14-day free trial. No credit card required.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-10 text-center">
-            <p className="text-gray-600 mb-2">Only hiring in one state?</p>
-            <Link href="/quiz" className="text-blue-600 hover:underline font-medium">
-              See our Starter plan at $199/mo →
-            </Link>
+              <ul className="space-y-3 text-sm text-gray-600 mb-8 flex-1">
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>1 state compliance</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Up to 50 employees</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Compliance documents</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Risk assessment</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Email support</li>
+              </ul>
+              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+                Start Free Trial
+              </Link>
+            </div>
+            {/* Growth */}
+            <div className="bg-white rounded-xl border-2 border-blue-600 p-6 flex flex-col relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full">
+                Most Popular
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">Growth</h3>
+              <p className="text-sm text-gray-500 mt-1">Growing companies, multi-state</p>
+              <div className="mt-4 mb-6">
+                <span className="text-4xl font-bold text-gray-900">$499</span>
+                <span className="text-gray-500">/mo</span>
+              </div>
+              <ul className="space-y-3 text-sm text-gray-600 mb-8 flex-1">
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Up to 5 states</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Up to 500 employees</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>All compliance documents</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Training modules</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Priority support</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Quarterly compliance reviews</li>
+              </ul>
+              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+                Start Free Trial
+              </Link>
+            </div>
+            {/* Scale */}
+            <div className="bg-white rounded-xl border p-6 flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-900">Scale</h3>
+              <p className="text-sm text-gray-500 mt-1">Large organizations, nationwide</p>
+              <div className="mt-4 mb-6">
+                <span className="text-4xl font-bold text-gray-900">$999</span>
+                <span className="text-gray-500">/mo</span>
+              </div>
+              <ul className="space-y-3 text-sm text-gray-600 mb-8 flex-1">
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Unlimited states</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Unlimited employees</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>All compliance documents</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>All training modules</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Dedicated account manager</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Monthly compliance reviews</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Custom integrations</li>
+              </ul>
+              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+                Start Free Trial
+              </Link>
+            </div>
+            {/* Enterprise */}
+            <div className="bg-white rounded-xl border p-6 flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-900">Enterprise</h3>
+              <p className="text-sm text-gray-500 mt-1">Complex compliance needs</p>
+              <div className="mt-4 mb-6">
+                <span className="text-4xl font-bold text-gray-900">Custom</span>
+              </div>
+              <ul className="space-y-3 text-sm text-gray-600 mb-8 flex-1">
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Everything in Scale</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Multi-entity support</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Custom training content</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>API access</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>SSO / SAML</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>SLA guarantee</li>
+              </ul>
+              <Link href="/contact" className="block text-center bg-gray-900 text-white py-2.5 rounded-lg hover:bg-gray-800 font-medium">
+                Contact Sales
+              </Link>
+            </div>
           </div>
         </div>
       </section>

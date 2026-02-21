@@ -84,7 +84,7 @@ const faqCategories = [
       },
       {
         q: "How much does EmployArmor cost?",
-        a: "EmployArmor offers three plans: Starter ($199/mo) for small teams, Growth ($499/mo) for growing companies, and Scale ($999/mo) for larger organizations. Enterprise pricing is custom — contact us for a quote. All plans include a 14-day free trial."
+        a: "EmployArmor offers four plans: Starter ($199/mo) for small teams, Growth ($499/mo) for growing companies, Scale ($999/mo) for larger organizations, and Enterprise (custom pricing) for complex compliance needs. All plans include a 14-day free trial."
       },
       {
         q: "Is there a free trial?",

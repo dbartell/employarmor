@@ -29,16 +29,6 @@ export default async function ToolPage({ params }: Props) {
   if (!tool) notFound()
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-slate-900">🛡️ EmployArmor</Link>
-          <Link href="/scorecard" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-            Free Compliance Check
-          </Link>
-        </div>
-      </header>
-
       <main className="max-w-4xl mx-auto px-4 py-12">
         <nav className="text-sm text-slate-500 mb-8">
           <Link href="/" className="hover:text-slate-700">Home</Link>
@@ -131,6 +121,5 @@ export default async function ToolPage({ params }: Props) {
           </div>
         </section>
       </main>
-    </div>
   )
 }

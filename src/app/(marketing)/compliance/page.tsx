@@ -9,22 +9,6 @@ export const metadata: Metadata = {
 
 export default function CompliancePage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-white border-b">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-slate-900">
-            🛡️ EmployArmor
-          </Link>
-          <Link
-            href="/scorecard"
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700"
-          >
-            Free Compliance Check
-          </Link>
-        </div>
-      </header>
-
       <main className="max-w-6xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-slate-900 mb-4">
           AI Hiring Compliance Guide
@@ -157,6 +141,5 @@ export default function CompliancePage() {
           </Link>
         </section>
       </main>
-    </div>
   )
 }
