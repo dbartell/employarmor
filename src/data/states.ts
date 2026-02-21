@@ -150,3 +150,30 @@ export const lawCategoriesByState: Record<string, string[]> = {
   CT: ['fcra', 'wiretapping', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination', 'data-privacy'],
   UT: ['ai-specific', 'fcra', 'anti-discrimination', 'disability', 'age-discrimination', 'data-privacy'],
 }
+
+// State risk tiers based on number and severity of applicable law categories
+export type StateRiskTier = 'high' | 'moderate' | 'baseline'
+
+export const stateRiskTiers: Record<string, StateRiskTier> = {
+  // High risk: AI-specific laws + multiple additional categories
+  IL: 'high',   // AI-specific + biometric + wiretapping + lie-detector
+  CA: 'high',   // AI-specific + wiretapping + pay-transparency + data-privacy
+  CO: 'high',   // AI-specific + pay-transparency + data-privacy
+  NY: 'high',   // AI-specific (NYC LL144) + pay-transparency
+  // Moderate risk: State-specific laws beyond federal baseline
+  MA: 'moderate', // lie-detector + wiretapping + pay-transparency
+  MD: 'moderate', // AI-specific (facial rec) + lie-detector + wiretapping
+  TX: 'moderate', // AI-specific + biometric + data-privacy
+  FL: 'moderate', // wiretapping (felony!)
+  PA: 'moderate', // wiretapping (7yr felony!)
+  WA: 'moderate', // biometric + wiretapping + pay-transparency
+  CT: 'moderate', // wiretapping + pay-transparency + data-privacy
+  VA: 'moderate', // data-privacy
+  UT: 'moderate', // AI-specific + data-privacy
+  // All other states: federal baseline only
+}
+
+// Helper to get risk tier for any state
+export function getStateRiskTier(stateCode: string): StateRiskTier {
+  return stateRiskTiers[stateCode] || 'baseline'
+}

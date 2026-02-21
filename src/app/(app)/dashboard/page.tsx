@@ -21,6 +21,7 @@ import {
 } from "@/data/compliance-requirements"
 import { PaywallModal } from "@/components/paywall-modal"
 import { checkPaywallStatus, PaywallStatus } from "@/lib/paywall"
+import { computeComprehensiveRisk } from "@/lib/tool-analysis"
 
 // ============================================================
 // CIRCULAR PROGRESS RING COMPONENT
@@ -307,6 +308,8 @@ export default function DashboardPage() {
     subscriptionStatus: string | null
     trialStartedAt: Date | null
     documentsGenerated: number
+    quizTools: string[]
+    quizUsages: string[]
   } | null>(null)
   const [loading, setLoading] = useState(true)
   const [showConfetti, setShowConfetti] = useState(false)
@@ -371,7 +374,7 @@ export default function DashboardPage() {
 
       // Parallel fetch all data (re-fetch org after potential bootstrap)
       const [orgRes, docsRes, disclosureRes, trainingCompleteRes, trainingTotalRes, auditsRes, consentsRes, hiringStatesRes, leadsRes] = await Promise.all([
-        supabase.from('organizations').select('name, states, primary_state, active_states, subscription_status, trial_started_at, documents_generated').eq('id', orgId).single(),
+        supabase.from('organizations').select('name, states, primary_state, active_states, subscription_status, trial_started_at, documents_generated, quiz_tools, quiz_usages').eq('id', orgId).single(),
         supabase.from('documents').select('doc_type').eq('org_id', orgId),
         supabase.from('disclosure_pages').select('is_published').eq('organization_id', orgId).single(),
         supabase.from('training_assignments').select('*', { count: 'exact', head: true }).eq('org_id', orgId).eq('status', 'completed'),
@@ -420,6 +423,8 @@ export default function DashboardPage() {
         subscriptionStatus: orgRes.data?.subscription_status || null,
         trialStartedAt: orgRes.data?.trial_started_at ? new Date(orgRes.data.trial_started_at) : null,
         documentsGenerated: orgRes.data?.documents_generated || 0,
+        quizTools: orgRes.data?.quiz_tools || [],
+        quizUsages: orgRes.data?.quiz_usages || [],
       })
       setLoading(false)
     }
@@ -767,6 +772,87 @@ export default function DashboardPage() {
             />
           </div>
         )}
+
+        {/* ============================================================ */}
+        {/* LEGAL ATTACK SURFACE */}
+        {/* ============================================================ */}
+        {hasStates && data.quizTools.length > 0 && (() => {
+          const riskAssessment = computeComprehensiveRisk(
+            data.quizTools,
+            data.states,
+            data.quizUsages
+          )
+
+          return (
+            <div className="mb-8">
+              <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-blue-600" />
+                  Legal Attack Surface
+                </h2>
+                <p className="text-sm text-gray-500 mb-4">
+                  Your tools and usage patterns trigger compliance requirements across these categories
+                </p>
+                
+                {/* Category Risk Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {riskAssessment.categoryScores
+                    .filter(c => c.score !== 'low')
+                    .sort((a, b) => {
+                      const order = { critical: 0, high: 1, medium: 2, low: 3 }
+                      return order[a.score] - order[b.score]
+                    })
+                    .map(cat => (
+                      <div key={cat.category} className={`p-4 rounded-lg border ${
+                        cat.score === 'critical' ? 'bg-red-50 border-red-200' :
+                        cat.score === 'high' ? 'bg-orange-50 border-orange-200' :
+                        'bg-amber-50 border-amber-200'
+                      }`}>
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-semibold text-gray-900 text-sm">{cat.label}</span>
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                            cat.score === 'critical' ? 'bg-red-100 text-red-700' :
+                            cat.score === 'high' ? 'bg-orange-100 text-orange-700' :
+                            'bg-amber-100 text-amber-700'
+                          }`}>{cat.score.toUpperCase()}</span>
+                        </div>
+                        <p className="text-xs text-gray-600">{cat.description}</p>
+                        {cat.applicableStates.length > 0 && (
+                          <div className="mt-2 flex flex-wrap gap-1">
+                            {cat.applicableStates.slice(0, 8).map(s => (
+                              <span key={s} className="text-xs bg-white/60 px-1.5 py-0.5 rounded text-gray-600">{s}</span>
+                            ))}
+                            {cat.applicableStates.length > 8 && (
+                              <span className="text-xs text-gray-400">+{cat.applicableStates.length - 8} more</span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                </div>
+
+                {/* State Risk Map */}
+                <div className="mt-6">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3">State Compliance Map</h3>
+                  <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
+                    {Object.entries(riskAssessment.stateRiskMap)
+                      .sort((a, b) => b[1].lawCount - a[1].lawCount)
+                      .map(([state, info]) => (
+                        <div key={state} className={`p-2 rounded-lg border text-center ${
+                          info.tier === 'high' ? 'bg-red-50 border-red-200' :
+                          info.tier === 'moderate' ? 'bg-amber-50 border-amber-200' :
+                          'bg-gray-50 border-gray-200'
+                        }`}>
+                          <div className="font-bold text-sm text-gray-900">{state}</div>
+                          <div className="text-xs text-gray-500">{info.lawCount} categories</div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })()}
 
         {/* ============================================================ */}
         {/* NEXT STEP CTA */}

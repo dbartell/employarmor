@@ -1,5 +1,6 @@
 import { aiHiringTools } from "@/data/tools"
-import { regulatedStates } from "@/data/states"
+import { regulatedStates, lawCategoriesByState } from "@/data/states"
+import { LawCategory } from "@/types"
 
 export interface ToolAnalysisItem {
   toolId: string
@@ -14,6 +15,21 @@ export interface ToolAnalysisResult {
   high: ToolAnalysisItem[]   // 🔴 Immediate compliance action
   medium: ToolAnalysisItem[] // 🟡 AI features to be aware of
   low: ToolAnalysisItem[]    // 🟢 No current compliance requirements
+}
+
+export interface CategoryRiskScore {
+  category: LawCategory
+  label: string
+  score: 'low' | 'medium' | 'high' | 'critical'
+  applicableStates: string[]
+  description: string
+}
+
+export interface ComprehensiveRiskAssessment {
+  overallScore: number // 0-100
+  categoryScores: CategoryRiskScore[]
+  stateRiskMap: Record<string, { tier: string; categories: string[]; lawCount: number }>
+  totalApplicableLaws: number
 }
 
 // Tools that directly use AI for employment decisions — highest risk
@@ -190,4 +206,131 @@ export function analyzeToolStack(toolIds: string[], states: string[], usages?: s
     medium,
     low,
   }
+}
+
+const CATEGORY_LABELS: Record<LawCategory, string> = {
+  'ai-specific': 'AI-Specific Hiring Laws',
+  'lie-detector': 'Lie Detector / Polygraph',
+  'biometric': 'Biometric Privacy',
+  'fcra': 'FCRA (Consumer Reporting)',
+  'wiretapping': 'Wiretapping / Recording Consent',
+  'anti-discrimination': 'Anti-Discrimination',
+  'pay-transparency': 'Pay Transparency',
+  'disability': 'Disability Accommodation (ADA)',
+  'age-discrimination': 'Age Discrimination (ADEA)',
+  'data-privacy': 'Data Privacy',
+}
+
+export function computeComprehensiveRisk(
+  toolIds: string[],
+  states: string[],
+  usages: string[]
+): ComprehensiveRiskAssessment {
+  const allCategories: LawCategory[] = [
+    'ai-specific', 'lie-detector', 'biometric', 'fcra', 'wiretapping',
+    'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination', 'data-privacy'
+  ]
+  
+  // Determine which categories are triggered by usage patterns
+  const usageTriggeredCategories = new Set<LawCategory>()
+  
+  // Federal baseline always applies
+  usageTriggeredCategories.add('anti-discrimination')
+  usageTriggeredCategories.add('disability')
+  usageTriggeredCategories.add('age-discrimination')
+  
+  // Usage-based triggers
+  if (usages.some(u => ['screening', 'ranking', 'interview-analysis', 'assessment-scoring'].includes(u))) {
+    usageTriggeredCategories.add('ai-specific')
+  }
+  if (usages.includes('facial-analysis') || usages.includes('integrity-scoring')) {
+    usageTriggeredCategories.add('lie-detector')
+  }
+  if (usages.includes('facial-analysis') || usages.includes('voice-analysis') || usages.includes('video-recording')) {
+    usageTriggeredCategories.add('biometric')
+  }
+  if (usages.includes('third-party-reports') || usages.includes('background-check')) {
+    usageTriggeredCategories.add('fcra')
+  }
+  if (usages.includes('video-recording')) {
+    usageTriggeredCategories.add('wiretapping')
+  }
+  if (usages.includes('salary-filtering') || usages.includes('compensation')) {
+    usageTriggeredCategories.add('pay-transparency')
+  }
+  if (usages.some(u => ['screening', 'ranking', 'third-party-reports'].includes(u))) {
+    usageTriggeredCategories.add('data-privacy')
+    usageTriggeredCategories.add('fcra')
+  }
+
+  // Build category risk scores
+  const categoryScores: CategoryRiskScore[] = allCategories.map(category => {
+    const applicableStates = states.filter(s => {
+      const stateCats = lawCategoriesByState[s] || ['anti-discrimination', 'age-discrimination', 'disability', 'fcra', 'lie-detector']
+      return stateCats.includes(category)
+    })
+    
+    const isTriggered = usageTriggeredCategories.has(category)
+    
+    let score: 'low' | 'medium' | 'high' | 'critical' = 'low'
+    if (isTriggered && applicableStates.length > 0) {
+      if (category === 'biometric' && applicableStates.includes('IL')) score = 'critical' // BIPA private right of action
+      else if (category === 'wiretapping' && applicableStates.some(s => ['FL', 'PA', 'IL'].includes(s))) score = 'critical' // felony states
+      else if (category === 'lie-detector') score = 'high'
+      else if (applicableStates.length >= 3) score = 'high'
+      else score = 'medium'
+    } else if (isTriggered) {
+      score = 'medium' // triggered by usage but only federal
+    }
+    
+    return {
+      category,
+      label: CATEGORY_LABELS[category],
+      score,
+      applicableStates,
+      description: getDescriptionForCategory(category, isTriggered, applicableStates),
+    }
+  })
+  
+  // Build state risk map
+  const stateRiskMap: Record<string, { tier: string; categories: string[]; lawCount: number }> = {}
+  for (const state of states) {
+    const stateCats = lawCategoriesByState[state] || ['anti-discrimination', 'age-discrimination', 'disability', 'fcra', 'lie-detector']
+    const triggeredCats = stateCats.filter(c => usageTriggeredCategories.has(c as LawCategory))
+    const lawCount = triggeredCats.length
+    
+    let tier = 'baseline'
+    if (lawCount >= 6) tier = 'high'
+    else if (lawCount >= 4) tier = 'moderate'
+    
+    stateRiskMap[state] = { tier, categories: triggeredCats, lawCount }
+  }
+  
+  // Overall score
+  const criticalCount = categoryScores.filter(c => c.score === 'critical').length
+  const highCount = categoryScores.filter(c => c.score === 'high').length
+  const mediumCount = categoryScores.filter(c => c.score === 'medium').length
+  const overallScore = Math.min(100, criticalCount * 25 + highCount * 15 + mediumCount * 8 + states.length * 2)
+  
+  const totalApplicableLaws = categoryScores.filter(c => c.score !== 'low').length * states.length
+
+  return { overallScore, categoryScores, stateRiskMap, totalApplicableLaws }
+}
+
+function getDescriptionForCategory(category: LawCategory, isTriggered: boolean, states: string[]): string {
+  if (!isTriggered) return 'Not triggered by your current tool usage'
+  
+  const descriptions: Record<LawCategory, string> = {
+    'ai-specific': 'AI-specific hiring laws require disclosure, bias audits, and impact assessments',
+    'lie-detector': 'AI emotion/integrity scoring may violate federal and state polygraph laws',
+    'biometric': 'Facial recognition and voice analysis trigger strict biometric consent requirements',
+    'fcra': 'Third-party AI screening reports require FCRA disclosure and adverse action procedures',
+    'wiretapping': 'Recording video interviews requires explicit consent in all-party consent states',
+    'anti-discrimination': 'AI tools must not produce disparate impact on protected classes',
+    'pay-transparency': 'AI cannot filter candidates by salary history in pay transparency states',
+    'disability': 'AI assessments must accommodate candidates with disabilities',
+    'age-discrimination': 'AI screening must not use age proxies like graduation year',
+    'data-privacy': 'Applicant data processed by AI is subject to state privacy laws',
+  }
+  return descriptions[category]
 }

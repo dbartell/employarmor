@@ -7,7 +7,7 @@ import { trackEvent } from '@/components/GoogleAnalytics'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { createClient } from '@/lib/supabase/client'
-import { allStates, regulatedStates } from '@/data/states'
+import { allStates, regulatedStates, getStateRiskTier } from '@/data/states'
 import { aiHiringTools, toolCategories, usageTypes } from '@/data/tools'
 import { analyzeToolStack } from '@/lib/tool-analysis'
 
@@ -379,22 +379,45 @@ function OnboardPageContent() {
                     className={`p-2 text-sm rounded-lg border-2 transition-all ${
                       data.states.includes(state.code)
                         ? 'bg-blue-100 border-blue-600 text-blue-700'
-                        : 'bg-gray-50 border-gray-200 text-gray-700 hover:border-gray-300'
-                    } ${regulatedStates.includes(state.code) ? 'font-medium' : ''}`}
+                        : getStateRiskTier(state.code) === 'high'
+                          ? 'bg-red-50 border-red-200 text-gray-700 hover:border-red-300 font-medium'
+                          : getStateRiskTier(state.code) === 'moderate'
+                            ? 'bg-amber-50 border-amber-200 text-gray-700 hover:border-amber-300'
+                            : 'bg-gray-50 border-gray-200 text-gray-700 hover:border-gray-300'
+                    }`}
                   >
-                    {regulatedStates.includes(state.code) && (
-                      <AlertTriangle className="w-3 h-3 inline mr-1 text-amber-500" />
+                    {getStateRiskTier(state.code) === 'high' && (
+                      <span className="inline-block w-2 h-2 rounded-full bg-red-500 mr-1.5" />
+                    )}
+                    {getStateRiskTier(state.code) === 'moderate' && (
+                      <span className="inline-block w-2 h-2 rounded-full bg-amber-500 mr-1.5" />
                     )}
                     {state.name}
                   </button>
                 ))}
               </div>
               
-              {data.states.some(s => regulatedStates.includes(s)) && (
+              {/* Risk tier legend */}
+              <div className="flex items-center gap-4 mb-3 text-xs text-gray-500">
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500" /> High risk</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500" /> Moderate risk</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-gray-300" /> Federal baseline</span>
+              </div>
+
+              {data.states.some(s => getStateRiskTier(s) === 'high') && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+                  <p className="text-sm text-red-800">
+                    <AlertTriangle className="w-4 h-4 inline mr-1" />
+                    You&apos;ve selected high-risk states with multiple AI hiring regulations. Your tools may trigger 10+ compliance requirements.
+                  </p>
+                </div>
+              )}
+
+              {!data.states.some(s => getStateRiskTier(s) === 'high') && data.states.some(s => getStateRiskTier(s) === 'moderate') && (
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4">
                   <p className="text-sm text-amber-800">
                     <AlertTriangle className="w-4 h-4 inline mr-1" />
-                    You've selected states with AI hiring regulations. We'll show you what's required.
+                    You&apos;ve selected states with additional compliance requirements beyond federal baseline.
                   </p>
                 </div>
               )}
