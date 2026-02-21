@@ -288,6 +288,19 @@ export interface ATSAuditEvent {
   created_at: string
 }
 
+// Law categories
+export type LawCategory =
+  | 'ai-specific'
+  | 'lie-detector'
+  | 'biometric'
+  | 'fcra'
+  | 'wiretapping'
+  | 'anti-discrimination'
+  | 'pay-transparency'
+  | 'disability'
+  | 'age-discrimination'
+  | 'data-privacy'
+
 // App types
 
 export interface StateRequirement {

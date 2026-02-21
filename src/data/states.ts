@@ -129,3 +129,24 @@ export const allStates = [
 ]
 
 export const regulatedStates = ["IL", "CO", "CA", "NYC", "MD"]
+
+// Law categories by state - maps which compliance categories apply to each jurisdiction
+export const lawCategoriesByState: Record<string, string[]> = {
+  // All states get federal laws
+  ...Object.fromEntries(allStates.map(s => [s.code, ['anti-discrimination', 'age-discrimination', 'disability', 'fcra', 'lie-detector']])),
+  // States with specific additional categories
+  IL: ['ai-specific', 'lie-detector', 'biometric', 'fcra', 'wiretapping', 'anti-discrimination', 'disability', 'age-discrimination', 'data-privacy'],
+  CA: ['ai-specific', 'fcra', 'wiretapping', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination', 'data-privacy'],
+  CO: ['ai-specific', 'fcra', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination', 'data-privacy'],
+  NY: ['ai-specific', 'fcra', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination'],
+  NYC: ['ai-specific', 'fcra', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination'],
+  MD: ['ai-specific', 'lie-detector', 'fcra', 'wiretapping', 'anti-discrimination', 'disability', 'age-discrimination'],
+  MA: ['lie-detector', 'fcra', 'wiretapping', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination'],
+  TX: ['ai-specific', 'biometric', 'fcra', 'anti-discrimination', 'disability', 'age-discrimination', 'data-privacy'],
+  FL: ['fcra', 'wiretapping', 'anti-discrimination', 'disability', 'age-discrimination'],
+  PA: ['fcra', 'wiretapping', 'anti-discrimination', 'disability', 'age-discrimination'],
+  WA: ['biometric', 'fcra', 'wiretapping', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination'],
+  VA: ['fcra', 'anti-discrimination', 'disability', 'age-discrimination', 'data-privacy'],
+  CT: ['fcra', 'wiretapping', 'anti-discrimination', 'pay-transparency', 'disability', 'age-discrimination', 'data-privacy'],
+  UT: ['ai-specific', 'fcra', 'anti-discrimination', 'disability', 'age-discrimination', 'data-privacy'],
+}

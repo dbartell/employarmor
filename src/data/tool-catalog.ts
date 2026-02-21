@@ -27,6 +27,16 @@ const AEDT_LAWS = ['nyc-ll144', 'co-sb24205', 'ca-ccpa-admt', 'il-hrab'];
 const VIDEO_AI_LAWS = ['il-aivi', 'nyc-ll144', 'co-sb24205', 'ca-ccpa-admt', 'md-hb1202'];
 const SCREENING_LAWS = ['nyc-ll144', 'co-sb24205', 'ca-ccpa-admt', 'il-hrab'];
 
+// New law sets for expanded compliance coverage
+const POLYGRAPH_LAWS = ['federal-eppa', 'ma-lie-detector'];
+const BIOMETRIC_LAWS = ['il-bipa', 'tx-cubi', 'wa-biometric'];
+const FCRA_LAWS = ['federal-fcra'];
+const WIRETAP_ALL_PARTY = ['ca-wiretap', 'il-eavesdrop', 'fl-wiretap', 'pa-wiretap'];
+const WIRETAP_FEDERAL = ['federal-wiretap'];
+const ANTI_DISCRIMINATION_LAWS = ['federal-title-vii', 'federal-ada', 'federal-adea'];
+const PAY_TRANSPARENCY_LAWS = ['co-pay-transparency', 'ca-pay-transparency', 'ny-pay-transparency'];
+const DATA_PRIVACY_LAWS = ['ca-ccpa', 'va-cdpa', 'co-cpa-privacy', 'ct-cdpa'];
+
 export const toolCatalog: ToolCatalogEntry[] = [
   // ═══════════════════════════════════════════
   // ATS (Applicant Tracking Systems)
@@ -40,10 +50,10 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.greenhouse.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'AI-Assisted Resume Screening', description: 'Uses AI to parse and rank resumes against job requirements.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
-      { name: 'Candidate Auto-Tags', description: 'Automatically categorizes candidates based on profile data.', riskLevel: 'medium', triggeredLaws: SCREENING_LAWS },
+      { name: 'AI-Assisted Resume Screening', description: 'Uses AI to parse and rank resumes against job requirements.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...FCRA_LAWS] },
+      { name: 'Candidate Auto-Tags', description: 'Automatically categorizes candidates based on profile data.', riskLevel: 'medium', triggeredLaws: [...SCREENING_LAWS, ...FCRA_LAWS] },
     ],
-    complianceNotes: 'Greenhouse has built-in bias audit support and publishes a responsible AI page. NYC LL144 audit may be needed if AI screening features are enabled.',
+    complianceNotes: 'Greenhouse has built-in bias audit support and publishes a responsible AI page. NYC LL144 audit may be needed if AI screening features are enabled. AI-generated candidate assessments may constitute consumer reports under FCRA if provided by third-party vendors.',
     riskLevel: 'medium',
   },
   {
@@ -70,11 +80,11 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.workday.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'Candidate Scoring', description: 'ML-based scoring of candidates against job requirements and historical hiring patterns.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
-      { name: 'Skills Intelligence', description: 'AI-driven skills ontology that maps candidate skills to job needs.', riskLevel: 'medium', triggeredLaws: SCREENING_LAWS },
+      { name: 'Candidate Scoring', description: 'ML-based scoring of candidates against job requirements and historical hiring patterns.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...FCRA_LAWS] },
+      { name: 'Skills Intelligence', description: 'AI-driven skills ontology that maps candidate skills to job needs.', riskLevel: 'medium', triggeredLaws: [...SCREENING_LAWS, ...FCRA_LAWS] },
       { name: 'Job Recommendation Engine', description: 'Suggests relevant jobs to internal and external candidates.', riskLevel: 'medium', triggeredLaws: SCREENING_LAWS },
     ],
-    complianceNotes: 'Workday has faced a class action lawsuit (Mobley v. Workday) alleging AI screening discrimination. High scrutiny recommended. Ensure bias audits are current.',
+    complianceNotes: 'Workday has faced a class action lawsuit (Mobley v. Workday) alleging AI screening discrimination. High scrutiny recommended. Ensure bias audits are current. AI candidate scoring may constitute consumer reports under FCRA if used for employment decisions.',
     riskLevel: 'high',
   },
   {
@@ -125,10 +135,10 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.smartrecruiters.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'SmartAssistant AI Matching', description: 'AI that scores and ranks candidates based on job fit.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
-      { name: 'Automated Screening', description: 'Knock-out questions and AI-driven filtering of applicants.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
+      { name: 'SmartAssistant AI Matching', description: 'AI that scores and ranks candidates based on job fit.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...FCRA_LAWS] },
+      { name: 'Automated Screening', description: 'Knock-out questions and AI-driven filtering of applicants.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...FCRA_LAWS] },
     ],
-    complianceNotes: 'SmartAssistant is a clear AEDT. SmartRecruiters provides bias audit documentation. Ensure annual audits are maintained.',
+    complianceNotes: 'SmartAssistant is a clear AEDT. SmartRecruiters provides bias audit documentation. Ensure annual audits are maintained. AI scoring may trigger FCRA if provided as third-party consumer report.',
     riskLevel: 'high',
   },
   {
@@ -282,11 +292,11 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.hirevue.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'AI Video Assessment', description: 'Analyzes candidate video responses using NLP to evaluate competencies. (Facial analysis discontinued in 2021.)', riskLevel: 'high', triggeredLaws: VIDEO_AI_LAWS },
-      { name: 'Game-Based Assessments', description: 'Cognitive and behavioral assessments using neuroscience-based games with AI scoring.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
-      { name: 'Structured Interview Scoring', description: 'AI assists in scoring structured interview responses.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
+      { name: 'AI Video Assessment', description: 'Analyzes candidate video responses using NLP to evaluate competencies. (Facial analysis discontinued in 2021.)', riskLevel: 'high', triggeredLaws: [...VIDEO_AI_LAWS, ...POLYGRAPH_LAWS, ...BIOMETRIC_LAWS, ...WIRETAP_ALL_PARTY, ...WIRETAP_FEDERAL] },
+      { name: 'Game-Based Assessments', description: 'Cognitive and behavioral assessments using neuroscience-based games with AI scoring.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...POLYGRAPH_LAWS] },
+      { name: 'Structured Interview Scoring', description: 'AI assists in scoring structured interview responses.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...POLYGRAPH_LAWS] },
     ],
-    complianceNotes: 'HireVue discontinued facial analysis in 2021 after FTC scrutiny but NLP-based video analysis remains. Publishes annual bias audits. High-profile target for regulation. Triggers Illinois AIVI Act, NYC LL144, and Maryland facial recognition law (if any facial features are used).',
+    complianceNotes: 'HireVue discontinued facial analysis in 2021 after FTC scrutiny but NLP-based video analysis remains. Publishes annual bias audits. High-profile target for regulation. Triggers Illinois AIVI Act, NYC LL144, Maryland facial recognition law, federal EPPA (emotion/honesty detection), BIPA (if any biometric collection), and all-party consent wiretap laws in CA, IL, FL, PA.',
     riskLevel: 'high',
   },
   {
@@ -344,9 +354,9 @@ export const toolCatalog: ToolCatalogEntry[] = [
     hasAiFeatures: true,
     aiFeatures: [
       { name: 'AI Talent Analytics', description: 'Machine learning models for predicting job performance and potential.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
-      { name: 'Smart Interview', description: 'AI-scored video interviews analyzing verbal content.', riskLevel: 'high', triggeredLaws: VIDEO_AI_LAWS },
+      { name: 'Smart Interview', description: 'AI-scored video interviews analyzing verbal content.', riskLevel: 'high', triggeredLaws: [...VIDEO_AI_LAWS, ...POLYGRAPH_LAWS, ...BIOMETRIC_LAWS, ...WIRETAP_ALL_PARTY, ...WIRETAP_FEDERAL] },
     ],
-    complianceNotes: 'Enterprise assessment provider with comprehensive validity documentation. Video interview AI triggers Illinois and Maryland laws.',
+    complianceNotes: 'Enterprise assessment provider with comprehensive validity documentation. Video interview AI triggers Illinois AIVI Act, Maryland facial recognition law, EPPA (emotion detection), BIPA, and wiretap laws.',
     riskLevel: 'high',
   },
   {
@@ -407,10 +417,10 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.checkr.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'AI Record Matching', description: 'Machine learning matches criminal records to candidates, reducing false positives.', riskLevel: 'medium', triggeredLaws: SCREENING_LAWS },
-      { name: 'Automated Adjudication', description: 'AI applies employer-defined rules to automatically adjudicate background check results.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
+      { name: 'AI Record Matching', description: 'Machine learning matches criminal records to candidates, reducing false positives.', riskLevel: 'medium', triggeredLaws: [...SCREENING_LAWS, ...FCRA_LAWS] },
+      { name: 'Automated Adjudication', description: 'AI applies employer-defined rules to automatically adjudicate background check results.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...FCRA_LAWS] },
     ],
-    complianceNotes: 'Automated adjudication can constitute an AEDT if it substantially informs hiring decisions. Also subject to FCRA requirements. Checkr provides fair chance hiring features.',
+    complianceNotes: 'Automated adjudication can constitute an AEDT if it substantially informs hiring decisions. Subject to FCRA requirements including pre-adverse and adverse action notices. Checkr provides fair chance hiring features.',
     riskLevel: 'medium',
   },
   {
@@ -462,10 +472,10 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.certn.co',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'Risk Scoring', description: 'AI-generated risk scores based on background check results.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
-      { name: 'Social Media Screening', description: 'AI analysis of public social media for risk indicators.', riskLevel: 'high', triggeredLaws: AEDT_LAWS },
+      { name: 'Risk Scoring', description: 'AI-generated risk scores based on background check results.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...FCRA_LAWS] },
+      { name: 'Social Media Screening', description: 'AI analysis of public social media for risk indicators.', riskLevel: 'high', triggeredLaws: [...AEDT_LAWS, ...FCRA_LAWS] },
     ],
-    complianceNotes: 'AI risk scoring and social media screening are high-risk AEDT features. Social media screening raises significant bias and privacy concerns.',
+    complianceNotes: 'AI risk scoring and social media screening are high-risk AEDT features. AI-generated reports likely constitute consumer reports under FCRA. Social media screening raises significant bias and privacy concerns.',
     riskLevel: 'high',
   },
 
@@ -937,9 +947,9 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.sparkhire.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'AI Interview Insights', description: 'AI-generated summaries and evaluations of candidate video responses.', riskLevel: 'high', triggeredLaws: VIDEO_AI_LAWS },
+      { name: 'AI Interview Insights', description: 'AI-generated summaries and evaluations of candidate video responses.', riskLevel: 'high', triggeredLaws: [...VIDEO_AI_LAWS, ...POLYGRAPH_LAWS, ...BIOMETRIC_LAWS, ...WIRETAP_ALL_PARTY, ...WIRETAP_FEDERAL] },
     ],
-    complianceNotes: 'AI analysis of video interviews triggers Illinois AIVI Act, NYC LL144, and potentially Maryland HB 1202 if facial features are analyzed.',
+    complianceNotes: 'AI analysis of video interviews triggers Illinois AIVI Act, NYC LL144, Maryland HB 1202, EPPA (emotion detection), BIPA (if facial/voice analysis), and all-party consent wiretap laws.',
     riskLevel: 'high',
   },
   {
@@ -951,9 +961,9 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.vidcruiter.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'AI-Assisted Scoring', description: 'AI provides scoring suggestions for structured video interviews.', riskLevel: 'high', triggeredLaws: VIDEO_AI_LAWS },
+      { name: 'AI-Assisted Scoring', description: 'AI provides scoring suggestions for structured video interviews.', riskLevel: 'high', triggeredLaws: [...VIDEO_AI_LAWS, ...POLYGRAPH_LAWS, ...BIOMETRIC_LAWS, ...WIRETAP_ALL_PARTY, ...WIRETAP_FEDERAL] },
     ],
-    complianceNotes: 'AI scoring of video interviews constitutes AEDT use and triggers video-specific AI laws.',
+    complianceNotes: 'AI scoring of video interviews constitutes AEDT use and triggers video-specific AI laws, EPPA, BIPA, and wiretap compliance.',
     riskLevel: 'high',
   },
   {
@@ -965,10 +975,10 @@ export const toolCatalog: ToolCatalogEntry[] = [
     websiteUrl: 'https://www.myinterview.com',
     hasAiFeatures: true,
     aiFeatures: [
-      { name: 'AI Personality Insights', description: 'AI analyzes video responses to infer personality traits and competencies.', riskLevel: 'high', triggeredLaws: VIDEO_AI_LAWS },
-      { name: 'Smart Shortlisting', description: 'AI ranks candidates based on video interview analysis.', riskLevel: 'high', triggeredLaws: VIDEO_AI_LAWS },
+      { name: 'AI Personality Insights', description: 'AI analyzes video responses to infer personality traits and competencies.', riskLevel: 'high', triggeredLaws: [...VIDEO_AI_LAWS, ...POLYGRAPH_LAWS, ...BIOMETRIC_LAWS, ...WIRETAP_ALL_PARTY, ...WIRETAP_FEDERAL] },
+      { name: 'Smart Shortlisting', description: 'AI ranks candidates based on video interview analysis.', riskLevel: 'high', triggeredLaws: [...VIDEO_AI_LAWS, ...POLYGRAPH_LAWS, ...BIOMETRIC_LAWS] },
     ],
-    complianceNotes: 'Personality inference from video is among the highest-risk AI applications in hiring. Triggers all video AI laws. Acquired by HireVue.',
+    complianceNotes: 'Personality inference from video is among the highest-risk AI applications in hiring. Triggers all video AI laws, EPPA (personality/honesty assessment), BIPA, and wiretap laws. Acquired by HireVue.',
     riskLevel: 'high',
   },
 
