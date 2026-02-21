@@ -1,7 +1,20 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { AI_TOOLS, STATES_WITH_LAWS, getToolBySlug } from '@/lib/seo-data'
+import { redirect } from 'next/navigation'
+import { AI_TOOLS, STATES_WITH_LAWS, ALL_STATES, getToolBySlug } from '@/lib/seo-data'
+
+// Map state slugs to their proper compliance routes
+const STATE_REDIRECTS: Record<string, string> = {
+  'illinois': '/compliance/illinois',
+  'colorado': '/compliance/colorado',
+  'california': '/compliance/california',
+  'maryland': '/compliance/maryland',
+  'nyc': '/compliance/nyc',
+  'new-york-city': '/compliance/nyc',
+  'ny': '/compliance/nyc',
+  'new-york': '/compliance/nyc',
+}
 
 interface Props {
   params: Promise<{ tool: string }>
@@ -24,6 +37,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ToolPage({ params }: Props) {
   const { tool: toolSlug } = await params
+
+  // Redirect state slugs to proper compliance routes
+  if (STATE_REDIRECTS[toolSlug]) {
+    redirect(STATE_REDIRECTS[toolSlug])
+  }
+  // Redirect any other state slug to /compliance/state/[slug]
+  const matchedState = ALL_STATES.find(s => s.slug === toolSlug)
+  if (matchedState) {
+    redirect(`/compliance/state/${toolSlug}`)
+  }
+
   const tool = getToolBySlug(toolSlug)
 
   if (!tool) notFound()
