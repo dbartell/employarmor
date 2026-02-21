@@ -236,6 +236,98 @@ Some states (like Illinois for video interviews) require explicit consent before
             explanation: 'Always document opt-out requests and provide the human review alternative as required by law.'
           }
         ]
+      },
+      {
+        number: 4,
+        title: 'Beyond AI Laws: Hidden Compliance Risks',
+        description: 'Learn about lie detector, biometric, wiretapping, and FCRA laws that affect AI hiring tools',
+        videoDuration: 600,
+        content: `
+Most compliance training only covers AI-specific laws like Illinois HB 3773 or NYC Local Law 144. But your AI hiring tools can trigger 50+ other laws you might not know about.
+
+BIOMETRIC PRIVACY
+If your tools analyze facial features, voice patterns, or other biometric data:
+• Illinois BIPA requires written consent BEFORE collection — $1,000-$5,000 per violation with private right of action
+• Texas and Washington have similar laws
+• Each scan counts as a separate violation — liability can reach millions
+
+LIE DETECTOR / POLYGRAPH LAWS
+AI tools that score "integrity," "honesty," or "deception" may violate:
+• Federal EPPA — bans lie detector tests in employment ($10,000/violation)
+• 20+ state polygraph laws with broad "device" definitions
+• CVS settled a lawsuit over HireVue's facial "integrity scoring" under Massachusetts law
+
+WIRETAPPING / RECORDING CONSENT
+Recording AI video interviews without proper consent is a CRIME in 13 states:
+• California, Florida, Illinois, Pennsylvania — all require ALL-PARTY consent
+• Florida and Pennsylvania violations are FELONIES (5-7 years)
+• Always get explicit, recorded consent before any video interview
+
+FCRA (FAIR CREDIT REPORTING ACT)
+When a third-party AI vendor generates candidate scores or reports:
+• The vendor may legally be a "consumer reporting agency"
+• You must provide standalone written disclosure to the applicant
+• You must get written authorization BEFORE the report
+• Pre-adverse action notice with report copy is required
+• Violations: $100-$1,000 per person + punitive damages
+
+As a recruiter, your key actions:
+1. Always disclose AI use AND recording before video interviews
+2. Get written consent for biometric data collection
+3. Never use tools that claim to detect "deception" or "integrity"
+4. Follow FCRA procedures when using third-party screening reports
+5. Know which states your candidates are in — laws vary dramatically
+        `,
+        quiz: [
+          {
+            id: 'r4q1',
+            question: 'A candidate in Illinois completes a HireVue video interview. Which additional law beyond AI disclosure is most likely triggered?',
+            options: [
+              'OSHA workplace safety regulations',
+              'Illinois BIPA (Biometric Information Privacy Act)',
+              'Fair Labor Standards Act',
+              'HIPAA health privacy rules'
+            ],
+            correctAnswer: 1,
+            explanation: 'Illinois BIPA requires written consent before collecting biometric identifiers like facial geometry. Each scan is a separate violation with $1,000-$5,000 damages and private right of action.'
+          },
+          {
+            id: 'r4q2',
+            question: 'Your company uses an AI tool that scores candidates on "integrity" based on facial expressions. What federal law might this violate?',
+            options: [
+              'The Americans with Disabilities Act',
+              'The Fair Labor Standards Act',
+              'The Employee Polygraph Protection Act (EPPA)',
+              'The Family Medical Leave Act'
+            ],
+            correctAnswer: 2,
+            explanation: 'The EPPA broadly prohibits lie detector tests in employment. AI tools that assess honesty, integrity, or deception through physiological responses may qualify as electronic polygraph tests.'
+          },
+          {
+            id: 'r4q3',
+            question: 'Recording an AI video interview in Florida without explicit consent from the candidate could result in:',
+            options: [
+              'A small administrative fine',
+              'A written warning from the state',
+              'A felony charge with up to 5 years imprisonment',
+              'No consequences — federal law allows it'
+            ],
+            correctAnswer: 2,
+            explanation: 'Florida is an all-party consent state. Recording without consent violates §934.03, which is a felony carrying up to 5 years imprisonment plus civil damages.'
+          },
+          {
+            id: 'r4q4',
+            question: 'When using a third-party AI vendor for candidate screening, FCRA requires you to:',
+            options: [
+              'Nothing — the vendor handles compliance',
+              'Provide standalone written disclosure and get written authorization from the candidate',
+              'Only notify candidates after they are rejected',
+              'Post a notice on your website'
+            ],
+            correctAnswer: 1,
+            explanation: 'Under FCRA, employers must provide clear standalone disclosure AND get written authorization BEFORE procuring a consumer report. The vendor\'s compliance doesn\'t replace yours.'
+          }
+        ]
       }
     ]
   },
@@ -451,6 +543,88 @@ For every adverse action involving AI:
             ],
             correctAnswer: 1,
             explanation: 'Complete documentation includes AI tools, recommendations, scores, and the human review process.'
+          }
+        ]
+      },
+      {
+        number: 4,
+        title: 'Protecting Your Team from Hidden AI Risks',
+        description: 'Practical steps for managers to ensure AI hiring compliance beyond the basics',
+        videoDuration: 480,
+        content: `
+As a hiring manager, you may not control which AI tools your company uses, but you DO control how they're used in your hiring process. Here are the risks you need to watch for:
+
+VIDEO INTERVIEWS — THE TRIPLE THREAT:
+When you use AI-assisted video interviews, three categories of law activate simultaneously:
+1. Biometric Privacy — facial analysis requires written consent
+2. Wiretapping — recording requires consent in 13 states
+3. Lie Detector — "integrity scoring" may be an illegal polygraph test
+
+YOUR CHECKLIST BEFORE ANY AI VIDEO INTERVIEW:
+□ Candidate has been notified that AI will be used
+□ Candidate has been notified that the interview will be recorded
+□ Written consent obtained (biometric + recording)
+□ Candidate offered alternative (human-only interview)
+□ You know which state the candidate is in
+
+SALARY DISCUSSIONS — NEW RULES:
+In 17 states, you cannot:
+• Ask candidates about salary history
+• Use AI tools to filter by salary expectations
+• Post jobs without salary ranges
+
+If your ATS auto-filters candidates by salary data, you may be violating pay transparency laws.
+
+ACCOMMODATION REQUESTS:
+If a candidate says they can't complete an AI assessment due to a disability:
+• You MUST provide an alternative
+• Don't ask what the disability is
+• Route to human review immediately
+• Document the accommodation
+
+WHEN TO ESCALATE:
+Immediately flag to HR/Legal if:
+• A candidate mentions they're deaf/blind and can't use the AI tool
+• A candidate in IL, CA, or FL objects to video recording
+• A vendor claims their tool "detects deception" or scores "integrity"
+• A candidate asks about their data rights (may trigger privacy laws)
+        `,
+        quiz: [
+          {
+            id: 'm4q1',
+            question: 'When using AI video interviews, how many categories of law are simultaneously triggered?',
+            options: [
+              'Just one — the AI disclosure law',
+              'Two — AI disclosure and consent',
+              'Three — biometric privacy, wiretapping, and potentially lie detector laws',
+              'None — video interviews are unregulated'
+            ],
+            correctAnswer: 2,
+            explanation: 'AI video interviews trigger biometric privacy (facial analysis), wiretapping (recording consent), and potentially lie detector laws (if scoring integrity/honesty) — all on top of AI-specific disclosure requirements.'
+          },
+          {
+            id: 'm4q2',
+            question: 'A candidate says they cannot complete your AI video assessment due to hearing loss. What should you do?',
+            options: [
+              'Tell them the AI assessment is required for all candidates',
+              'Ask them to provide medical documentation first',
+              'Provide an alternative assessment method and document the accommodation',
+              'Skip them and move to the next candidate'
+            ],
+            correctAnswer: 2,
+            explanation: 'Under the ADA, you must provide reasonable accommodations. Provide an alternative assessment, don\'t ask about the specific disability, and document the accommodation.'
+          },
+          {
+            id: 'm4q3',
+            question: 'Your ATS automatically filters out candidates who expect a salary above $80K. In which states could this be a problem?',
+            options: [
+              'No states — salary filtering is always legal',
+              'Only California',
+              '17+ states with pay transparency laws that restrict salary-based filtering',
+              'Only states with AI-specific laws'
+            ],
+            correctAnswer: 2,
+            explanation: '17+ states (including CO, CA, NY, WA, MA, IL, CT) have pay transparency laws. Many prohibit using salary history in hiring decisions, and AI tools that auto-filter by salary may violate these laws.'
           }
         ]
       }
@@ -781,6 +955,110 @@ For every adverse action involving AI:
             explanation: 'Employees who haven\'t completed required training should not participate in hiring activities using AI tools.'
           }
         ]
+      },
+      {
+        number: 5,
+        title: 'Managing the Full Legal Attack Surface',
+        description: 'Build compliance programs that cover all 10 categories of AI hiring laws',
+        videoDuration: 720,
+        content: `
+Your compliance program needs to address 10 categories of law — not just the 5-7 AI-specific ones most companies focus on.
+
+THE 10 COMPLIANCE CATEGORIES:
+1. AI-Specific Hiring Laws (IL, NYC, CO, CA, TX, UT, MD)
+2. Lie Detector / Polygraph (Federal EPPA + 20 states)
+3. Biometric Privacy (IL BIPA, TX, WA + 13 other states)
+4. FCRA / Consumer Reporting (Federal — applies everywhere)
+5. Wiretapping / Recording Consent (13 all-party consent states)
+6. Anti-Discrimination (Federal Title VII — applies everywhere)
+7. Pay Transparency (17 states + DC)
+8. Disability / ADA (Federal — applies everywhere)
+9. Age Discrimination / ADEA (Federal — applies everywhere)
+10. Data Privacy (12+ states with comprehensive privacy laws)
+
+BUILDING A COMPREHENSIVE PROGRAM:
+
+Step 1: Audit Your Tool Stack
+Map every AI tool to the law categories it triggers:
+• Video interview tools → biometric, wiretapping, lie-detector, AI-specific
+• Resume screening → FCRA, AI-specific, anti-discrimination, age
+• Background check vendors → FCRA, data privacy
+• Salary tools → pay transparency
+• All tools → ADA, Title VII, ADEA (federal baseline)
+
+Step 2: Map Your State Exposure
+For each state where you hire:
+• Identify state-specific laws beyond federal baseline
+• Flag high-risk combinations (e.g., IL = biometric + wiretapping + AI-specific)
+• Track upcoming effective dates (CO AI Act: June 2026)
+
+Step 3: Implement Per-Category Controls
+Each category needs specific controls:
+• Biometric: written consent forms, retention policies, destruction schedules
+• Wiretapping: recording consent mechanisms, state-aware interview routing
+• FCRA: disclosure templates, authorization forms, adverse action procedures
+• Pay transparency: salary range inclusion in all postings, history ban compliance
+• Data privacy: applicant data inventories, opt-out mechanisms, deletion procedures
+
+Step 4: Train and Monitor
+• Role-specific training (recruiters, managers, executives)
+• Quarterly compliance audits
+• Incident response procedures
+• Document retention policies
+
+THE COMPETITIVE ADVANTAGE:
+Most companies only address AI-specific laws. By covering all 10 categories, you're ahead of 95% of employers and significantly reducing litigation risk.
+        `,
+        quiz: [
+          {
+            id: 'a5q1',
+            question: 'How many categories of law can AI hiring tools potentially violate?',
+            options: [
+              '3-4 (just the AI-specific ones)',
+              '5-7 (AI-specific plus a few others)',
+              '10 distinct categories covering 50+ individual laws',
+              'Only 1 — there is one unified AI hiring law'
+            ],
+            correctAnswer: 2,
+            explanation: 'AI hiring tools can trigger laws across 10 distinct categories: AI-specific, lie detector, biometric, FCRA, wiretapping, anti-discrimination, pay transparency, disability, age discrimination, and data privacy.'
+          },
+          {
+            id: 'a5q2',
+            question: 'Which combination represents the highest compliance risk?',
+            options: [
+              'Using an ATS in a state with no AI-specific law',
+              'Using video interview AI in Illinois (biometric + wiretapping + AI-specific)',
+              'Using a job board in Wyoming',
+              'Manual resume review in any state'
+            ],
+            correctAnswer: 1,
+            explanation: 'Illinois has AI-specific laws, BIPA (biometric with private right of action), eavesdropping law (wiretapping), and lie detector restrictions — making video AI the highest-risk combination.'
+          },
+          {
+            id: 'a5q3',
+            question: 'What is the first step in building a comprehensive AI hiring compliance program?',
+            options: [
+              'Hire an employment attorney',
+              'Stop using all AI tools',
+              'Audit your tool stack and map each tool to triggered law categories',
+              'Only hire in states with no regulations'
+            ],
+            correctAnswer: 2,
+            explanation: 'The foundation is understanding your exposure. Map every AI tool to the law categories it triggers, then layer on state-specific requirements based on where you operate.'
+          },
+          {
+            id: 'a5q4',
+            question: 'Federal baseline laws (Title VII, ADA, ADEA, EPPA, FCRA) apply to:',
+            options: [
+              'Only companies with 500+ employees',
+              'Only companies in regulated states',
+              'All employers using AI in hiring, in every state',
+              'Only government contractors'
+            ],
+            correctAnswer: 2,
+            explanation: 'Federal laws apply nationwide. Every employer using AI in hiring must comply with anti-discrimination (Title VII), disability accommodation (ADA), age discrimination (ADEA), polygraph (EPPA), and consumer reporting (FCRA) requirements.'
+          }
+        ]
       }
     ]
   },
@@ -927,6 +1205,76 @@ For every adverse action involving AI:
             ],
             correctAnswer: 1,
             explanation: 'Executives should regularly verify what AI tools are in use and whether the organization is compliant in all hiring jurisdictions.'
+          }
+        ]
+      },
+      {
+        number: 3,
+        title: 'The Full Legal Attack Surface',
+        description: 'Understanding the 50+ laws your AI hiring tools must comply with',
+        videoDuration: 480,
+        content: `
+As an executive, you need to understand the FULL scope of legal exposure from AI hiring tools — not just the headline AI laws.
+
+THE HEADLINE NUMBER: 50+ LAWS
+Your AI hiring tools potentially violate laws across 10 categories. Most of your competitors are only tracking 5-7 AI-specific laws. This creates both risk and opportunity.
+
+THE BIGGEST RISKS YOU DIDN'T KNOW ABOUT:
+
+1. Illinois BIPA — $1,000-$5,000 PER SCAN
+If your video interview tool analyzes facial features in Illinois, every single scan is a separate violation. One class action reached $17 billion in potential liability. This is the #1 financial risk in AI hiring.
+
+2. Wiretapping Is a FELONY
+Recording AI video interviews without consent in Florida (5 years) or Pennsylvania (7 years) isn't a civil matter — it's criminal. Most companies don't even realize their tools are recording.
+
+3. FCRA Class Actions Are Coming
+When AI vendors generate candidate scores, they may be operating as unregistered consumer reporting agencies. The CFPB has confirmed this interpretation. Eightfold AI is already facing a class action.
+
+4. Lie Detector Laws Apply to AI
+CVS settled a lawsuit because HireVue scored candidates on "integrity" using facial expressions. The federal EPPA and 20+ state laws ban this. If your tools assess "honesty" or "deception," you're exposed.
+
+WHAT THIS MEANS FOR THE BOARD:
+• Budget for compliance across all 10 categories, not just AI-specific
+• Insurance: verify AI liability coverage includes biometric and wiretapping claims
+• Vendor contracts: require compliance representations covering ALL categories
+• Incident response: have a plan for biometric breaches and consent failures
+        `,
+        quiz: [
+          {
+            id: 'e3q1',
+            question: 'What is the estimated potential liability in Illinois BIPA class actions involving AI hiring tools?',
+            options: [
+              'Thousands of dollars',
+              'Hundreds of thousands',
+              'Potentially billions (per-scan accrual)',
+              'There are no financial penalties'
+            ],
+            correctAnswer: 2,
+            explanation: 'BIPA allows $1,000-$5,000 per violation, and the IL Supreme Court ruled each scan is a separate violation. One case reached $17 billion in potential liability.'
+          },
+          {
+            id: 'e3q2',
+            question: 'Recording an AI video interview without proper consent in Pennsylvania could result in:',
+            options: [
+              'A compliance fine',
+              'A civil lawsuit only',
+              'A felony charge with up to 7 years imprisonment',
+              'No consequences'
+            ],
+            correctAnswer: 2,
+            explanation: 'Pennsylvania is an all-party consent state with felony penalties up to 7 years for unauthorized recording — making this a criminal, not just civil, risk.'
+          },
+          {
+            id: 'e3q3',
+            question: 'What should the board ensure regarding AI hiring tool vendor contracts?',
+            options: [
+              'Only check the price',
+              'Require compliance representations covering ALL 10 law categories',
+              'Let the vendor handle everything',
+              'Only require AI-specific law compliance'
+            ],
+            correctAnswer: 1,
+            explanation: 'Vendor contracts should require compliance representations across all categories — AI-specific, biometric, wiretapping, FCRA, etc. Employers are liable even when using third-party tools.'
           }
         ]
       }

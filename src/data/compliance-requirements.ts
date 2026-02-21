@@ -239,6 +239,155 @@ export const generalRequirements: ComplianceRequirement[] = [
   },
 ]
 
+export interface ComplianceAction {
+  id: string
+  category: string // LawCategory
+  title: string
+  description: string
+  priority: 'critical' | 'high' | 'medium' | 'low'
+  estimatedMinutes: number
+  triggerUsages: string[] // which usages trigger this action
+  triggerStates?: string[] // specific states, or empty = all
+}
+
+export const complianceActions: ComplianceAction[] = [
+  // Biometric Privacy
+  {
+    id: 'bio-consent-form',
+    category: 'biometric',
+    title: 'Create Biometric Data Consent Form',
+    description: 'Written consent form for candidates before collecting facial geometry, voice patterns, or other biometric identifiers',
+    priority: 'critical',
+    estimatedMinutes: 15,
+    triggerUsages: ['facial-analysis', 'voice-analysis', 'video-recording'],
+    triggerStates: ['IL', 'TX', 'WA'],
+  },
+  {
+    id: 'bio-retention-policy',
+    category: 'biometric',
+    title: 'Establish Biometric Data Retention Policy',
+    description: 'Written policy specifying how long biometric data is stored and when it will be destroyed',
+    priority: 'high',
+    estimatedMinutes: 30,
+    triggerUsages: ['facial-analysis', 'voice-analysis', 'video-recording'],
+    triggerStates: ['IL', 'TX', 'WA'],
+  },
+  // Wiretapping
+  {
+    id: 'wire-consent-mechanism',
+    category: 'wiretapping',
+    title: 'Implement Recording Consent Mechanism',
+    description: 'Add explicit consent capture before recording any video/audio interview. Must be affirmative opt-in, not passive notice.',
+    priority: 'critical',
+    estimatedMinutes: 20,
+    triggerUsages: ['video-recording'],
+    triggerStates: ['CA', 'FL', 'IL', 'PA', 'MA', 'MD', 'WA', 'CT', 'NH', 'NV', 'DE', 'MI', 'MT'],
+  },
+  // Lie Detector
+  {
+    id: 'poly-tool-audit',
+    category: 'lie-detector',
+    title: 'Audit AI Tools for Integrity/Deception Scoring',
+    description: 'Review all AI tools for features that assess honesty, integrity, or deception — these may violate EPPA and state polygraph laws',
+    priority: 'critical',
+    estimatedMinutes: 45,
+    triggerUsages: ['integrity-scoring', 'facial-analysis'],
+  },
+  // FCRA
+  {
+    id: 'fcra-disclosure',
+    category: 'fcra',
+    title: 'Create FCRA Standalone Disclosure',
+    description: 'Standalone written notice informing candidates that a consumer report will be obtained via AI screening',
+    priority: 'high',
+    estimatedMinutes: 15,
+    triggerUsages: ['third-party-reports', 'background-check'],
+  },
+  {
+    id: 'fcra-authorization',
+    category: 'fcra',
+    title: 'Create FCRA Authorization Form',
+    description: 'Written authorization form for candidates to sign before AI screening reports are procured',
+    priority: 'high',
+    estimatedMinutes: 10,
+    triggerUsages: ['third-party-reports', 'background-check'],
+  },
+  {
+    id: 'fcra-adverse-action',
+    category: 'fcra',
+    title: 'Set Up FCRA Adverse Action Procedure',
+    description: 'Pre-adverse action notice template + post-adverse action notice with rights summary',
+    priority: 'high',
+    estimatedMinutes: 30,
+    triggerUsages: ['third-party-reports', 'background-check'],
+  },
+  // Pay Transparency
+  {
+    id: 'pay-posting-audit',
+    category: 'pay-transparency',
+    title: 'Audit Job Postings for Salary Ranges',
+    description: 'Ensure all job postings include required salary ranges and AI tools do not filter by salary history',
+    priority: 'high',
+    estimatedMinutes: 30,
+    triggerUsages: ['salary-filtering', 'compensation'],
+    triggerStates: ['CO', 'CA', 'NY', 'WA', 'MA', 'IL', 'CT'],
+  },
+  {
+    id: 'pay-history-ban',
+    category: 'pay-transparency',
+    title: 'Disable Salary History Filtering',
+    description: 'Configure AI tools to not use salary history data for candidate screening or ranking',
+    priority: 'critical',
+    estimatedMinutes: 15,
+    triggerUsages: ['salary-filtering'],
+    triggerStates: ['CO', 'CA', 'NY', 'WA', 'MA', 'IL', 'CT'],
+  },
+  // Data Privacy
+  {
+    id: 'privacy-notice',
+    category: 'data-privacy',
+    title: 'Create Applicant Data Privacy Notice',
+    description: 'Inform applicants what data AI tools collect, how it is processed, and their opt-out/deletion rights',
+    priority: 'high',
+    estimatedMinutes: 20,
+    triggerUsages: ['screening', 'ranking', 'third-party-reports'],
+    triggerStates: ['CA', 'VA', 'CO', 'CT'],
+  },
+  {
+    id: 'privacy-opt-out',
+    category: 'data-privacy',
+    title: 'Implement Applicant Opt-Out Mechanism',
+    description: 'Allow applicants to opt out of AI profiling and automated decision-making',
+    priority: 'high',
+    estimatedMinutes: 30,
+    triggerUsages: ['screening', 'ranking', 'assessment-scoring'],
+    triggerStates: ['CA', 'VA', 'CO', 'CT'],
+  },
+  // ADA
+  {
+    id: 'ada-alternatives',
+    category: 'disability',
+    title: 'Establish AI Assessment Accommodation Process',
+    description: 'Create procedure for providing alternative assessments when candidates request disability accommodations',
+    priority: 'high',
+    estimatedMinutes: 20,
+    triggerUsages: ['interview-analysis', 'assessment-scoring', 'video-recording'],
+  },
+]
+
+// Helper: get applicable actions based on usages and states
+export function getApplicableActions(usages: string[], states: string[]): ComplianceAction[] {
+  return complianceActions.filter(action => {
+    const usageMatch = action.triggerUsages.some(u => usages.includes(u))
+    if (!usageMatch) return false
+    if (!action.triggerStates || action.triggerStates.length === 0) return true // federal, applies everywhere
+    return action.triggerStates.some(s => states.includes(s))
+  }).sort((a, b) => {
+    const order = { critical: 0, high: 1, medium: 2, low: 3 }
+    return order[a.priority] - order[b.priority]
+  })
+}
+
 // Get requirements for a list of state codes
 export function getRequirementsForStates(stateCodes: string[]): {
   stateRequirements: { state: StateCompliance; requirements: ComplianceRequirement[] }[]
