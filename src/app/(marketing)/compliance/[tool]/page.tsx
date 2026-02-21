@@ -41,9 +41,17 @@ export default async function ToolPage({ params }: Props) {
         <h1 className="text-4xl font-bold text-slate-900 mb-4">
           {tool.name} Compliance Guide
         </h1>
-        <p className="text-xl text-slate-600 mb-8">
+        <p className="text-xl text-slate-600 mb-4">
           AI hiring compliance requirements for {tool.name} ({tool.category}) by state.
         </p>
+        {'description' in tool && tool.description && (
+          <p className="text-slate-600 mb-4">{tool.description}</p>
+        )}
+        {'website' in tool && tool.website && (
+          <a href={tool.website} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline mb-8 inline-block">
+            Visit {tool.name} →
+          </a>
+        )}
 
         <section className="bg-white rounded-xl border p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">About {tool.name}</h2>
