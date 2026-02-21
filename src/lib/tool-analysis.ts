@@ -54,7 +54,7 @@ const MONITORING_PRIVACY_LAWS: Record<string, string> = {
   CO: "CO Privacy Act",
 }
 
-export function analyzeToolStack(toolIds: string[], states: string[]): ToolAnalysisResult {
+export function analyzeToolStack(toolIds: string[], states: string[], usages?: string[]): ToolAnalysisResult {
   const selectedTools = toolIds
     .map(id => aiHiringTools.find(t => t.id === id))
     .filter(Boolean) as typeof aiHiringTools
@@ -66,16 +66,80 @@ export function analyzeToolStack(toolIds: string[], states: string[]): ToolAnaly
   const medium: ToolAnalysisItem[] = []
   const low: ToolAnalysisItem[] = []
 
+  // Video interview tools that trigger biometric/wiretapping/lie-detector
+  const videoInterviewToolIds = new Set(['hirevue', 'spark-hire'])
+  
+  // Background check tools that trigger FCRA
+  const backgroundCheckToolIds = new Set(['checkr', 'hireright', 'sterling', 'goodhire'])
+  
+  // All-party consent states for wiretapping
+  const allPartyConsentStates = new Set(['CA', 'FL', 'IL', 'PA', 'MA', 'MD', 'WA', 'CT', 'NH', 'NV', 'DE', 'MI', 'MT'])
+  
+  // Pay transparency states
+  const payTransparencyStates = new Set(['CO', 'CA', 'NY', 'WA', 'MA', 'IL', 'CT'])
+
   for (const tool of selectedTools) {
     if (tool.id === "other") continue
 
+    const toolLaws: string[] = []
+    let isHighRisk = false
+    let riskReason = ""
+
+    // Video interview tools
+    if (videoInterviewToolIds.has(tool.id)) {
+      isHighRisk = true
+      toolLaws.push("Biometric Privacy")
+      
+      // Check if in all-party consent state
+      if (states.some(s => allPartyConsentStates.has(s))) {
+        toolLaws.push("Wiretapping/Recording Consent")
+      }
+      
+      // Video analysis could trigger lie detector laws
+      if (usages?.includes('facial-analysis') || usages?.includes('integrity-scoring')) {
+        toolLaws.push("Lie Detector/Polygraph Laws")
+      }
+      
+      riskReason = "Video interview analysis triggers biometric and consent laws"
+    }
+    
+    // Background check tools trigger FCRA
+    if (backgroundCheckToolIds.has(tool.id) || usages?.includes('third-party-reports')) {
+      toolLaws.push("FCRA (Fair Credit Reporting Act)")
+      if (!isHighRisk) {
+        isHighRisk = true
+        riskReason = "Third-party screening reports require FCRA compliance"
+      }
+    }
+    
+    // Salary filtering triggers pay transparency
+    if (usages?.includes('salary-filtering') && states.some(s => payTransparencyStates.has(s))) {
+      toolLaws.push("Pay Transparency Laws")
+      if (!isHighRisk) {
+        isHighRisk = true
+        riskReason = "Salary-based filtering in pay transparency state"
+      }
+    }
+
+    // Standard high-risk tools in regulated states
     if (HIGH_RISK_TOOL_IDS.has(tool.id) && hasRegulatedStates) {
+      isHighRisk = true
+      toolLaws.push(...applicableLaws.map(l => l.shortName))
+      if (!riskReason) {
+        riskReason = `Uses AI for employment decisions in regulated state(s)`
+      }
+    }
+
+    // Add federal baseline laws for all tools
+    const federalLaws = ["Anti-Discrimination (Title VII)", "Age Discrimination (ADEA)", "Disability (ADA)"]
+    
+    if (isHighRisk) {
       high.push({
         toolId: tool.id,
         toolName: tool.name,
         category: tool.category,
-        laws: applicableLaws.map(l => l.shortName),
-        reason: `Uses AI for employment decisions in regulated state(s)`,
+        laws: [...new Set([...toolLaws, ...federalLaws])],
+        reason: riskReason,
       })
     } else if (MEDIUM_RISK_TOOL_IDS.has(tool.id)) {
       const laws: string[] = []
@@ -92,7 +156,7 @@ export function analyzeToolStack(toolIds: string[], states: string[]): ToolAnaly
         toolId: tool.id,
         toolName: tool.name,
         category: tool.category,
-        laws,
+        laws: [...new Set([...laws, ...federalLaws])],
         reason: tool.category === "Monitoring"
           ? "Employee monitoring with potential privacy implications"
           : "Has AI features that could influence employment decisions",
@@ -102,7 +166,7 @@ export function analyzeToolStack(toolIds: string[], states: string[]): ToolAnaly
         toolId: tool.id,
         toolName: tool.name,
         category: tool.category,
-        laws: [],
+        laws: federalLaws,
         reason: "No current AI compliance requirements identified",
       })
     }
@@ -115,7 +179,7 @@ export function analyzeToolStack(toolIds: string[], states: string[]): ToolAnaly
       toolId: id,
       toolName: id,
       category: "Custom",
-      laws: [],
+      laws: ["Anti-Discrimination (Title VII)", "Age Discrimination (ADEA)", "Disability (ADA)"],
       reason: "Custom tool — review for AI features manually",
     })
   })

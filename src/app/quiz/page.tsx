@@ -59,9 +59,36 @@ function calculateRiskScore(data: OnboardData): number {
     }
   })
   
-  const highRiskUsages = ['screening', 'ranking', 'interview-analysis', 'assessment-scoring', 'termination', 'promotion']
+  const highRiskUsages = [
+    'screening', 'ranking', 'interview-analysis', 'assessment-scoring', 
+    'termination', 'promotion', 'video-recording', 'facial-analysis', 
+    'voice-analysis', 'integrity-scoring', 'salary-filtering', 'third-party-reports'
+  ]
   if (data.usages.some(u => highRiskUsages.includes(u))) {
     score += 15
+  }
+  
+  // Extra risk weighting for specific usage combinations
+  // Lie detector/biometric = very high risk
+  if (data.usages.includes('facial-analysis') || data.usages.includes('integrity-scoring')) {
+    score += 20
+  }
+  
+  // All-party consent states with video recording
+  const allPartyConsentStates = ['CA', 'FL', 'IL', 'PA', 'MA', 'MD', 'WA', 'CT', 'NH', 'NV', 'DE', 'MI', 'MT']
+  if (data.usages.includes('video-recording') && data.states.some(s => allPartyConsentStates.includes(s))) {
+    score += 15
+  }
+  
+  // FCRA exposure
+  if (data.usages.includes('third-party-reports')) {
+    score += 10
+  }
+  
+  // Pay transparency laws
+  const payTransparencyStates = ['CO', 'CA', 'NY', 'WA', 'MA', 'IL', 'CT']
+  if (data.usages.includes('salary-filtering') && data.states.some(s => payTransparencyStates.includes(s))) {
+    score += 10
   }
   
   if (data.tools.length > 0) {
@@ -219,7 +246,7 @@ function OnboardPageContent() {
         : data.tools
       
       // Run tool analysis
-      const analysis = analyzeToolStack(allTools, data.states)
+      const analysis = analyzeToolStack(allTools, data.states, data.usages)
 
       // Save completed data to localStorage (different key for completed data)
       const onboardData = {

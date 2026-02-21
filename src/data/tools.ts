@@ -338,5 +338,11 @@ export const usageTypes = [
   { id: "background-check", label: "Background Check Review", description: "AI assists in reviewing background checks" },
   { id: "compensation", label: "Compensation Decisions", description: "AI informs salary or offer decisions" },
   { id: "promotion", label: "Promotion Decisions", description: "AI influences internal promotion decisions" },
-  { id: "termination", label: "Termination Decisions", description: "AI factors into termination decisions" }
+  { id: "termination", label: "Termination Decisions", description: "AI factors into termination decisions" },
+  { id: "video-recording", label: "Video Interview Recording", description: "AI records and analyzes video interviews" },
+  { id: "facial-analysis", label: "Facial/Emotion Analysis", description: "AI analyzes facial expressions or emotions" },
+  { id: "voice-analysis", label: "Voice/Speech Analysis", description: "AI analyzes voice patterns or speech" },
+  { id: "integrity-scoring", label: "Integrity/Honesty Scoring", description: "AI assesses candidate integrity or truthfulness" },
+  { id: "salary-filtering", label: "Salary-Based Filtering", description: "AI filters candidates based on salary history or expectations" },
+  { id: "third-party-reports", label: "Third-Party Screening Reports", description: "External AI vendor generates candidate scores or reports" }
 ]

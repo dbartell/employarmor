@@ -242,7 +242,7 @@ export default function PreviewPage() {
           // Rebuild analysis if not stored, or use stored
           const analysis = onboardData.analysis || 
             (onboardData.tools && onboardData.states 
-              ? analyzeToolStack(onboardData.tools, onboardData.states) 
+              ? analyzeToolStack(onboardData.tools, onboardData.states, onboardData.usages) 
               : null)
           setData({
             orgName: onboardData.company || 'Your Company',
@@ -515,6 +515,120 @@ export default function PreviewPage() {
                 </div>
               </div>
             )}
+
+            {/* Additional Compliance Risks Breakdown */}
+            {(() => {
+              const allLaws = [...data.analysis.high, ...data.analysis.medium]
+                .flatMap(item => item.laws)
+              const uniqueLaws = [...new Set(allLaws)]
+              
+              const lawCategories = {
+                biometric: uniqueLaws.filter(l => l.toLowerCase().includes('biometric')),
+                lieDetector: uniqueLaws.filter(l => l.toLowerCase().includes('lie detector') || l.toLowerCase().includes('polygraph')),
+                wiretapping: uniqueLaws.filter(l => l.toLowerCase().includes('wiretap') || l.toLowerCase().includes('recording consent')),
+                fcra: uniqueLaws.filter(l => l.toLowerCase().includes('fcra') || l.toLowerCase().includes('fair credit')),
+                payTransparency: uniqueLaws.filter(l => l.toLowerCase().includes('pay transparency')),
+                federal: uniqueLaws.filter(l => 
+                  l.toLowerCase().includes('title vii') || 
+                  l.toLowerCase().includes('adea') || 
+                  l.toLowerCase().includes('ada') ||
+                  l.toLowerCase().includes('anti-discrimination') ||
+                  l.toLowerCase().includes('age discrimination') ||
+                  l.toLowerCase().includes('disability')
+                ),
+              }
+
+              const hasAdditionalRisks = 
+                lawCategories.biometric.length > 0 ||
+                lawCategories.lieDetector.length > 0 ||
+                lawCategories.wiretapping.length > 0 ||
+                lawCategories.fcra.length > 0 ||
+                lawCategories.payTransparency.length > 0
+
+              if (!hasAdditionalRisks) return null
+
+              return (
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                  <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <AlertCircle className="w-5 h-5 text-amber-500" />
+                    Additional Compliance Risks Detected
+                  </h3>
+                  <div className="space-y-3">
+                    {lawCategories.biometric.length > 0 && (
+                      <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                        <span className="text-xl flex-shrink-0">⚠️</span>
+                        <div>
+                          <div className="font-semibold text-red-900">Biometric Privacy</div>
+                          <div className="text-sm text-red-700">
+                            Your tools analyze facial features or voice patterns, triggering strict biometric privacy laws
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {lawCategories.lieDetector.length > 0 && (
+                      <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                        <span className="text-xl flex-shrink-0">⚠️</span>
+                        <div>
+                          <div className="font-semibold text-red-900">Lie Detector / Polygraph Laws</div>
+                          <div className="text-sm text-red-700">
+                            Integrity scoring or emotion analysis may be considered electronic polygraph testing
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {lawCategories.wiretapping.length > 0 && (
+                      <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
+                        <span className="text-xl flex-shrink-0">⚠️</span>
+                        <div>
+                          <div className="font-semibold text-amber-900">Wiretapping / Recording Consent</div>
+                          <div className="text-sm text-amber-700">
+                            Video/audio recording in all-party consent states requires explicit candidate permission
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {lawCategories.fcra.length > 0 && (
+                      <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
+                        <span className="text-xl flex-shrink-0">⚠️</span>
+                        <div>
+                          <div className="font-semibold text-amber-900">FCRA (Fair Credit Reporting Act)</div>
+                          <div className="text-sm text-amber-700">
+                            Third-party screening reports require disclosure, authorization, and adverse action notices
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {lawCategories.payTransparency.length > 0 && (
+                      <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                        <span className="text-xl flex-shrink-0">⚠️</span>
+                        <div>
+                          <div className="font-semibold text-blue-900">Pay Transparency Laws</div>
+                          <div className="text-sm text-blue-700">
+                            Salary-based filtering is restricted or prohibited in your selected states
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {lawCategories.federal.length > 0 && (
+                      <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <span className="text-xl flex-shrink-0">📋</span>
+                        <div>
+                          <div className="font-semibold text-gray-900">Federal Baseline Requirements</div>
+                          <div className="text-sm text-gray-700">
+                            All AI hiring tools must comply with anti-discrimination, age discrimination, and disability laws
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })()}
 
             <div className="mt-6 pt-4 border-t border-gray-100">
               <button
