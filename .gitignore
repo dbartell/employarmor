@@ -43,3 +43,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env.local
+tests/e2e/upload-confluence.py
+tests/e2e/upload-confluence.sh

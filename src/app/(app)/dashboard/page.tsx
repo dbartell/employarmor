@@ -645,10 +645,10 @@ export default function DashboardPage() {
                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
                       <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium ${
                         progress >= 70 
-                          ? 'bg-green-500/40 text-white border border-green-400/50' 
+                          ? 'bg-green-500 text-white border border-green-400' 
                           : progress >= 40 
-                            ? 'bg-amber-500/40 text-white border border-amber-400/50'
-                            : 'bg-red-500/40 text-white border border-red-400/50'
+                            ? 'bg-amber-500 text-white border border-amber-400'
+                            : 'bg-red-500 text-white border border-red-400'
                       }`}>
                         <ShieldCheck className="w-4 h-4" />
                         {progress >= 70 ? 'Protected' : progress >= 40 ? 'In Progress' : 'At Risk'}

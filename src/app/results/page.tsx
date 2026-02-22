@@ -402,7 +402,7 @@ export default function PreviewPage() {
                 </p>
                 
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                  <div className="inline-flex items-center gap-2 bg-red-400/30 text-white rounded-full px-4 py-2 text-sm font-medium">
+                  <div className="inline-flex items-center gap-2 bg-red-500 text-white rounded-full px-4 py-2 text-sm font-medium">
                     <ShieldCheck className="w-4 h-4" />
                     At Risk
                   </div>
