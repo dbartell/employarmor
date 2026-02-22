@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
         },
       ],
       success_url: `${req.nextUrl.origin}/dashboard?checkout=success`,
-      cancel_url: `${req.nextUrl.origin}/quiz?checkout=cancelled`,
+      cancel_url: `${req.nextUrl.origin}/scan?checkout=cancelled`,
       allow_promotion_codes: true,
       metadata: {
         supabase_user_id: user.id,

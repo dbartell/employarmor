@@ -2,14 +2,17 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle, Shield, Building2, Users, Briefcase, Mail } from 'lucide-react'
+import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle, Shield, Building2, Users, Briefcase, Mail, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { allStates } from '@/data/states'
 import { aiHiringTools, toolCategories } from '@/data/tools'
 import { analyzeToolStack } from '@/lib/tool-analysis'
+import { createClient } from '@/lib/supabase/client'
 
-type Step = 'states' | 'employees' | 'tools' | 'email' | 'results'
+type Step = 'states' | 'employees' | 'tools' | 'email' | 'results' | 'signup' | 'creating'
 
 interface ScanData {
   states: string[]
@@ -30,6 +33,9 @@ export default function ScanPage() {
   const [step, setStep] = useState<Step>('states')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [analysis, setAnalysis] = useState<any>(null)
+  const [password, setPassword] = useState('')
+  const [companyName, setCompanyName] = useState('')
+  const [signupError, setSignupError] = useState<string | null>(null)
   
   const [data, setData] = useState<ScanData>({
     states: [],
@@ -57,7 +63,7 @@ export default function ScanPage() {
   }
 
   const nextStep = () => {
-    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results']
+    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results', 'signup', 'creating']
     const currentIndex = steps.indexOf(step)
     if (currentIndex < steps.length - 1) {
       setStep(steps[currentIndex + 1])
@@ -66,7 +72,7 @@ export default function ScanPage() {
   }
 
   const prevStep = () => {
-    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results']
+    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results', 'signup', 'creating']
     const currentIndex = steps.indexOf(step)
     if (currentIndex > 0) {
       setStep(steps[currentIndex - 1])
@@ -135,12 +141,87 @@ export default function ScanPage() {
     }
   }
 
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSignupError(null)
+    setStep('creating')
+
+    if (password.length < 6) {
+      setSignupError("Password must be at least 6 characters")
+      setStep('signup')
+      return
+    }
+
+    try {
+      const supabase = createClient()
+      
+      // Create auth account
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        email: data.email,
+        password,
+        options: {
+          data: {
+            company_name: companyName,
+          },
+        },
+      })
+
+      if (signUpError) throw signUpError
+      if (!authData.user) throw new Error("Failed to create account")
+
+      // Create organization record
+      await supabase
+        .from('organizations')
+        .insert({
+          id: authData.user.id,
+          name: companyName,
+          size: data.employeeCount,
+          primary_state: data.states[0] || 'IL',
+          active_states: data.states,
+        })
+
+      // Create owner employee profile
+      await supabase
+        .from('employee_profiles')
+        .insert({
+          user_id: authData.user.id,
+          organization_id: authData.user.id,
+          email: data.email,
+          role: 'owner',
+          joined_at: new Date().toISOString(),
+        })
+
+      // Redirect to Stripe checkout
+      const checkoutResponse = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}), // Will use default price
+      })
+
+      const { url: checkoutUrl } = await checkoutResponse.json()
+
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl
+      } else {
+        // Fallback if Stripe fails - go to dashboard
+        router.push('/dashboard')
+      }
+
+    } catch (err: any) {
+      console.error('Signup error:', err)
+      setSignupError(err.message || "Failed to create account")
+      setStep('signup')
+    }
+  }
+
   const progress = {
     states: 25,
     employees: 50,
     tools: 75,
     email: 100,
     results: 100,
+    signup: 100,
+    creating: 100,
   }[step]
 
   const canContinue = {
@@ -149,6 +230,8 @@ export default function ScanPage() {
     tools: data.tools.length > 0,
     email: data.email.length > 0 && data.email.includes('@'),
     results: true,
+    signup: true,
+    creating: false,
   }[step]
 
   return (
@@ -169,11 +252,15 @@ export default function ScanPage() {
             Free Compliance Scan
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            {step === 'results' ? 'Your Compliance Report' : 'Find Your Compliance Gaps'}
+            {step === 'results' || step === 'signup' ? 'Your Compliance Report' : 
+             step === 'creating' ? 'Creating Your Account...' :
+             'Find Your Compliance Gaps'}
           </h1>
           <p className="text-xl text-gray-600">
-            {step === 'results' 
+            {step === 'results' || step === 'signup'
               ? 'See where you stand with AI hiring laws'
+              : step === 'creating'
+              ? 'Please wait while we set up your account'
               : 'Answer 4 quick questions to see your risk level'
             }
           </p>
@@ -473,18 +560,105 @@ export default function ScanPage() {
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-3">Ready to Fix These Gaps?</h3>
                 <p className="text-blue-100 mb-6">
-                  Sign up for EmployArmor and get compliant in minutes
+                  Create your account and get started with EmployArmor
                 </p>
                 <Button 
                   size="lg"
                   className="bg-white text-blue-600 hover:bg-gray-100"
-                  onClick={() => router.push('/quiz')}
+                  onClick={() => setStep('signup')}
                 >
-                  Sign Up Now
+                  Get Protected Now
                 </Button>
               </div>
             </Card>
           </div>
+        )}
+
+        {/* Signup Form */}
+        {step === 'signup' && (
+          <div className="space-y-6">
+            <Card className="p-8">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Your Account</h2>
+                <p className="text-gray-600">Your email is already filled in from the scan</p>
+              </div>
+
+              <form onSubmit={handleSignup} className="space-y-4">
+                {signupError && (
+                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                    {signupError}
+                  </div>
+                )}
+
+                <div>
+                  <Label htmlFor="companyName">Company Name *</Label>
+                  <Input
+                    id="companyName"
+                    type="text"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    placeholder="Acme Corp"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="email">Work Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={data.email}
+                    disabled
+                    className="bg-gray-50"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    This was pre-filled from your scan
+                  </p>
+                </div>
+
+                <div>
+                  <Label htmlFor="password">Create Password *</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Min. 6 characters"
+                    required
+                    minLength={6}
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <Button type="submit" size="lg" className="w-full">
+                    Create Account & Continue to Checkout
+                  </Button>
+                  <p className="text-xs text-gray-500 text-center mt-3">
+                    You'll be redirected to secure payment after account creation
+                  </p>
+                </div>
+              </form>
+            </Card>
+
+            <div className="flex justify-start">
+              <Button variant="outline" size="lg" onClick={() => setStep('results')} className="gap-2">
+                <ArrowLeft className="w-5 h-5" /> Back to Results
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* Creating Account */}
+        {step === 'creating' && (
+          <Card className="p-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Setting up your account...</h2>
+              <p className="text-gray-600">This will only take a moment</p>
+            </div>
+          </Card>
         )}
       </div>
     </div>

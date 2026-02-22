@@ -579,7 +579,7 @@ export default function DashboardPage() {
             setPendingNavigation(null)
           }}
           onUpgrade={() => {
-            router.push('/quiz')
+            router.push('/signup')
           }}
         />
       )}

@@ -138,12 +138,10 @@ export default function TrainingSettingsPage() {
               <RefreshCw className="w-4 h-4 mr-2" />
               Refresh
             </Button>
-            <Link href="/onboarding/team-setup">
-              <Button>
-                <UserPlus className="w-4 h-4 mr-2" />
-                Assign Training
-              </Button>
-            </Link>
+            <Button onClick={() => setShowAddModal(true)}>
+              <UserPlus className="w-4 h-4 mr-2" />
+              Assign Training
+            </Button>
           </div>
         </div>
 
@@ -214,12 +212,10 @@ export default function TrainingSettingsPage() {
               <p className="text-gray-600 mb-6 max-w-md mx-auto">
                 Get started by assigning compliance training to your team members.
               </p>
-              <Link href="/onboarding/team-setup">
-                <Button>
-                  <UserPlus className="w-4 h-4 mr-2" />
-                  Set Up Team Training
-                </Button>
-              </Link>
+              <Button onClick={() => setShowAddModal(true)}>
+                <UserPlus className="w-4 h-4 mr-2" />
+                Set Up Team Training
+              </Button>
             </CardContent>
           </Card>
         )}

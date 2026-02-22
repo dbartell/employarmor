@@ -251,13 +251,13 @@ export default function PreviewPage() {
             analysis,
           })
         } catch (e) {
-          // Invalid data, redirect to onboard
-          router.push('/quiz')
+          // Invalid data, redirect to scan
+          router.push('/scan')
           return
         }
       } else {
-        // No data, redirect to onboard
-        router.push('/quiz')
+        // No data, redirect to scan
+        router.push('/scan')
         return
       }
       setLoading(false)
@@ -370,7 +370,7 @@ export default function PreviewPage() {
           status={paywallStatus}
           isGuest={true}
           onClose={() => setShowPaywall(false)}
-          onUpgrade={() => router.push('/quiz')}
+          onUpgrade={() => router.push('/scan')}
         />
       )}
       
