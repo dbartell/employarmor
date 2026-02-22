@@ -30,13 +30,23 @@ function CircularProgress({
   percentage, 
   size = 200, 
   strokeWidth = 12,
-  isComplete = false 
+  isComplete = false,
+  label = 'Complete',
+  color = 'blue',
 }: { 
   percentage: number
   size?: number
   strokeWidth?: number
   isComplete?: boolean
+  label?: string
+  color?: 'red' | 'amber' | 'green' | 'blue'
 }) {
+  const colorGradients: Record<string, [string, string]> = {
+    red: ['#ef4444', '#dc2626'],
+    amber: ['#f59e0b', '#d97706'],
+    green: ['#22c55e', '#16a34a'],
+    blue: ['#3b82f6', '#8b5cf6'],
+  }
   const [animatedPercentage, setAnimatedPercentage] = useState(0)
   
   useEffect(() => {
@@ -78,8 +88,8 @@ function CircularProgress({
         />
         <defs>
           <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={isComplete ? "#22c55e" : "#3b82f6"} />
-            <stop offset="100%" stopColor={isComplete ? "#16a34a" : "#8b5cf6"} />
+            <stop offset="0%" stopColor={isComplete ? "#22c55e" : colorGradients[color][0]} />
+            <stop offset="100%" stopColor={isComplete ? "#16a34a" : colorGradients[color][1]} />
           </linearGradient>
         </defs>
       </svg>
@@ -88,7 +98,7 @@ function CircularProgress({
         <span className={`text-4xl font-bold ${isComplete ? 'text-green-600' : 'text-white'}`}>
           {animatedPercentage}%
         </span>
-        <span className="text-sm text-white/80 mt-1">Complete</span>
+        <span className="text-sm text-white/80 mt-1">{label}</span>
       </div>
     </div>
   )
@@ -592,10 +602,12 @@ export default function DashboardPage() {
               <div className="flex-shrink-0">
                 <div className="bg-white/10 backdrop-blur-sm rounded-full p-4">
                   <CircularProgress 
-                    percentage={progress} 
+                    percentage={data.riskScore ?? 0} 
                     size={180} 
                     strokeWidth={14}
                     isComplete={allComplete}
+                    label="Risk Score"
+                    color={data.riskScore !== null ? (data.riskScore > 50 ? 'red' : data.riskScore > 25 ? 'amber' : 'green') : 'blue'}
                   />
                 </div>
               </div>
@@ -626,17 +638,17 @@ export default function DashboardPage() {
                       Compliance Dashboard
                     </h1>
                     <p className="text-white/80 text-lg mb-4">
-                      {completedReqs} of {totalReqs} requirements complete
+                      {data.riskScore !== null ? `Risk Score: ${data.riskScore}/100` : 'Not yet assessed'} · {completedReqs}/{totalReqs} tasks complete
                     </p>
                     
                     {/* Status badges */}
                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
                       <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium ${
                         progress >= 70 
-                          ? 'bg-green-400/30 text-white' 
+                          ? 'bg-green-500/40 text-white border border-green-400/50' 
                           : progress >= 40 
-                            ? 'bg-amber-400/30 text-white'
-                            : 'bg-red-400/30 text-white'
+                            ? 'bg-amber-500/40 text-white border border-amber-400/50'
+                            : 'bg-red-500/40 text-white border border-red-400/50'
                       }`}>
                         <ShieldCheck className="w-4 h-4" />
                         {progress >= 70 ? 'Protected' : progress >= 40 ? 'In Progress' : 'At Risk'}
@@ -694,7 +706,7 @@ export default function DashboardPage() {
                 <h3 className="font-semibold text-gray-900">Tool Registry</h3>
               </div>
               <p className="text-sm text-gray-700 mb-2">
-                <span className="font-bold text-gray-900">12</span> tools approved · <span className="font-bold text-amber-600">3</span> pending review · <span className="font-bold text-red-600">1</span> expiring soon
+                <span className="font-bold text-gray-900">{data.quizTools.length}</span> tools tracked
               </p>
               <span className="text-xs text-blue-600 font-medium flex items-center gap-1">
                 View registry <ChevronRight className="w-3 h-3" />
@@ -711,14 +723,20 @@ export default function DashboardPage() {
               </div>
               <div className="mb-2">
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-700"><span className="font-bold text-gray-900">18</span>/24 employees compliant</span>
-                  <span className="text-gray-500 font-medium">75%</span>
+                  <span className="text-gray-700"><span className="font-bold text-gray-900">{data.trainingComplete}</span>/{data.trainingTotal || '—'} assignments complete</span>
+                  <span className="text-gray-500 font-medium">{data.trainingTotal > 0 ? Math.round((data.trainingComplete / data.trainingTotal) * 100) : 0}%</span>
                 </div>
                 <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full" style={{ width: '75%' }} />
+                  <div className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full" style={{ width: `${data.trainingTotal > 0 ? Math.round((data.trainingComplete / data.trainingTotal) * 100) : 0}%` }} />
                 </div>
               </div>
-              <p className="text-xs text-amber-600">6 employees need training on newly approved tools</p>
+              {data.trainingTotal === 0 ? (
+                <p className="text-xs text-gray-500">No training assigned yet</p>
+              ) : data.trainingComplete < data.trainingTotal ? (
+                <p className="text-xs text-amber-600">{data.trainingTotal - data.trainingComplete} assignments remaining</p>
+              ) : (
+                <p className="text-xs text-green-600">All training complete ✓</p>
+              )}
             </Link>
 
             {/* Pending Approvals - only show if pending items exist */}
@@ -729,8 +747,8 @@ export default function DashboardPage() {
                 </div>
                 <h3 className="font-semibold text-gray-900">Pending Approvals</h3>
               </div>
-              <p className="text-2xl font-bold text-amber-700 mb-1">3</p>
-              <p className="text-sm text-gray-600">tool requests pending your review</p>
+              <p className="text-2xl font-bold text-gray-900 mb-1">—</p>
+              <p className="text-sm text-gray-600">Set up tool approvals workflow</p>
               <span className="text-xs text-amber-600 font-medium flex items-center gap-1 mt-2">
                 Review now <ChevronRight className="w-3 h-3" />
               </span>
