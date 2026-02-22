@@ -408,12 +408,12 @@ export default function ScanPage() {
               </div>
               
               <div className="space-y-4">
-                {Object.entries(toolCategories).map(([catKey, catName]) => {
-                  const categoryTools = aiHiringTools.filter(t => t.category === catKey)
+                {toolCategories.map((catName) => {
+                  const categoryTools = aiHiringTools.filter(t => t.category === catName)
                   if (categoryTools.length === 0) return null
                   
                   return (
-                    <div key={catKey}>
+                    <div key={catName}>
                       <div className="font-semibold text-sm text-gray-700 mb-2">{catName}</div>
                       <div className="grid md:grid-cols-2 gap-2">
                         {categoryTools.slice(0, 10).map(tool => (
