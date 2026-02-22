@@ -1,11 +1,12 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin, Layers, CheckSquare, Users, BookOpen } from "lucide-react"
+import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin, Layers, CheckSquare, Users, BookOpen, Home, Wrench } from "lucide-react"
 import { createClient } from "@/lib/supabase/server"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 import { MobileSidebar } from "@/components/layout/mobile-sidebar"
 import { StateProvider } from "@/lib/state-context"
 import { getStateName } from "@/lib/state-utils"
+import { getEmployeeProfile, ensureOwnerProfile, isAdmin, type UserRole } from "@/lib/auth/roles"
 
 export default async function AppLayout({
   children,
@@ -32,22 +33,53 @@ export default async function AppLayout({
   const activeStates = org?.active_states || ['IL']
   const stateName = getStateName(primaryState)
 
-  const navItems = [
+  // Get or create employee profile
+  let profile = null
+  let userRole: UserRole | null = null
+  
+  // If user owns an organization, auto-create owner profile
+  if (org) {
+    profile = await ensureOwnerProfile(user.id, user.id)
+    userRole = profile?.role || null
+  } else {
+    // User is an employee, not org owner - find their profile
+    const { data: employeeProfiles } = await supabase
+      .from('employee_profiles')
+      .select('*')
+      .eq('user_id', user.id)
+      .limit(1)
+    
+    if (employeeProfiles && employeeProfiles.length > 0) {
+      profile = employeeProfiles[0]
+      userRole = profile.role as UserRole
+    }
+  }
+
+  // Nav items based on role
+  const navItems = userRole && isAdmin(userRole) ? [
+    // Admin/Owner navigation
     { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { href: '/employees', icon: Users, label: 'Team' },
     { href: '/tools', icon: Layers, label: 'Tool Registry' },
     { href: '/approvals', icon: CheckSquare, label: 'Approvals' },
     { href: '/audit', icon: ClipboardCheck, label: 'Risk Assessment' },
     { href: '/candidate-notices', icon: FileText, label: 'Candidate Notices' },
-    { href: '/employee-disclosures', icon: Users, label: 'Employee Disclosures' },
+    { href: '/employee-disclosures', icon: FileText, label: 'Employee Disclosures' },
     { href: '/handbook', icon: BookOpen, label: 'Handbook Policy' },
     { href: '/training', icon: GraduationCap, label: 'Training' },
     { href: '/compliance-packet', icon: FolderCheck, label: 'Audit Packet' },
+  ] : [
+    // Employee/Manager navigation
+    { href: '/portal', icon: Home, label: 'My Dashboard' },
+    { href: '/portal/disclosures', icon: FileText, label: 'My Disclosures' },
+    { href: '/portal/training', icon: GraduationCap, label: 'My Training' },
+    { href: '/portal/tools', icon: Wrench, label: 'Tool Requests' },
   ]
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Mobile sidebar (hamburger menu) */}
-      <MobileSidebar orgName={orgName} userEmail={userEmail} />
+      <MobileSidebar orgName={orgName} userEmail={userEmail} navItems={navItems} />
 
       {/* Desktop sidebar - hidden on mobile */}
       <aside className="hidden md:flex w-56 bg-gray-900 text-white flex-col fixed inset-y-0 left-0">

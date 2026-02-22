@@ -5,42 +5,27 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { 
   Shield, 
-  LayoutDashboard, 
-  ClipboardCheck, 
-  FileText, 
-  GraduationCap, 
-  UserCheck, 
   Settings, 
   Menu, 
   X,
-  Globe,
   Trash2,
-  Layers,
-  CheckSquare,
-  FolderCheck,
-  Users,
-  BookOpen
+  type LucideIcon
 } from "lucide-react"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 
-const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/tools", label: "Tool Registry", icon: Layers },
-  { href: "/approvals", label: "Approvals", icon: CheckSquare },
-  { href: "/audit", label: "Risk Assessment", icon: ClipboardCheck },
-  { href: "/candidate-notices", label: "Candidate Notices", icon: FileText },
-  { href: "/employee-disclosures", label: "Employee Disclosures", icon: Users },
-  { href: "/handbook", label: "Handbook Policy", icon: BookOpen },
-  { href: "/training", label: "Training", icon: GraduationCap },
-  { href: "/compliance-packet", label: "Audit Packet", icon: FolderCheck },
-]
+interface NavItem {
+  href: string
+  label: string
+  icon: LucideIcon
+}
 
 interface MobileSidebarProps {
   orgName: string
   userEmail: string
+  navItems: NavItem[]
 }
 
-export function MobileSidebar({ orgName, userEmail }: MobileSidebarProps) {
+export function MobileSidebar({ orgName, userEmail, navItems }: MobileSidebarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 

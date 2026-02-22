@@ -1,95 +1,159 @@
-'use client'
+"use client"
 
-import { useState, useEffect, use } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { Shield, CheckCircle, XCircle, Loader2, LogIn, UserPlus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { getRoleLabel, getRoleDescription } from '@/lib/permissions'
-import type { MemberRole } from '@/types'
+import { useEffect, useState } from "react"
+import { useParams, useRouter } from "next/navigation"
+import { Shield, Mail, UserPlus, CheckCircle2 } from "lucide-react"
+import { createClient } from "@/lib/supabase/client"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card } from "@/components/ui/card"
 
-interface InviteDetails {
+interface InviteData {
+  id: string
   email: string
-  role: Exclude<MemberRole, 'owner'>
+  role: string
+  department: string | null
+  organization_id: string
+  organization_name: string
   expires_at: string
-  organization?: {
-    name: string
-  }
+  accepted_at: string | null
 }
 
-export default function InviteAcceptPage({ 
-  params 
-}: { 
-  params: Promise<{ token: string }> 
-}) {
-  const { token } = use(params)
+export default function InviteAcceptPage() {
+  const params = useParams()
   const router = useRouter()
-  const [invite, setInvite] = useState<InviteDetails | null>(null)
+  const token = params.token as string
+  
   const [loading, setLoading] = useState(true)
+  const [invite, setInvite] = useState<InviteData | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [accepting, setAccepting] = useState(false)
-  const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
-  const [errorCode, setErrorCode] = useState('')
 
   useEffect(() => {
-    async function fetchInvite() {
-      try {
-        const res = await fetch(`/api/invite/${token}`)
-        const data = await res.json()
-        
-        if (!res.ok) {
-          setError(data.error || 'Invalid invite')
-          return
-        }
-        
-        setInvite(data.invite)
-      } catch (err) {
-        setError('Failed to load invite')
-      } finally {
-        setLoading(false)
-      }
-    }
-    
-    fetchInvite()
+    loadInvite()
   }, [token])
 
-  const handleAccept = async () => {
-    setAccepting(true)
-    setError('')
-    setErrorCode('')
-
+  async function loadInvite() {
     try {
-      const res = await fetch(`/api/invite/${token}`, {
-        method: 'POST',
-      })
-      const data = await res.json()
+      const supabase = createClient()
+      
+      // Get invite details
+      const { data: inviteData, error: inviteError } = await supabase
+        .from('employee_invites')
+        .select('*, organization:organizations(name)')
+        .eq('token', token)
+        .is('accepted_at', null)
+        .single()
 
-      if (!res.ok) {
-        setError(data.error || 'Failed to accept invite')
-        setErrorCode(data.code || '')
+      if (inviteError || !inviteData) {
+        setError("Invalid or expired invitation link")
+        setLoading(false)
         return
       }
 
-      setSuccess(true)
-      setTimeout(() => {
-        router.push(data.redirect || '/dashboard')
-      }, 2000)
+      // Check if expired
+      if (new Date(inviteData.expires_at) < new Date()) {
+        setError("This invitation has expired")
+        setLoading(false)
+        return
+      }
+
+      setInvite({
+        ...inviteData,
+        organization_name: inviteData.organization?.name || 'Unknown Organization'
+      })
+      setLoading(false)
     } catch (err) {
-      setError('Failed to accept invite')
-    } finally {
+      console.error("Error loading invite:", err)
+      setError("Failed to load invitation")
+      setLoading(false)
+    }
+  }
+
+  async function handleAcceptInvite(e: React.FormEvent) {
+    e.preventDefault()
+    
+    if (!invite) return
+    
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters")
+      return
+    }
+    
+    if (password !== confirmPassword) {
+      setError("Passwords do not match")
+      return
+    }
+
+    setAccepting(true)
+    setError(null)
+
+    try {
+      const supabase = createClient()
+
+      // Create auth account
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        email: invite.email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/portal`
+        }
+      })
+
+      if (signUpError) throw signUpError
+      if (!authData.user) throw new Error("Failed to create account")
+
+      // Create employee profile
+      const { error: profileError } = await supabase
+        .from('employee_profiles')
+        .insert({
+          user_id: authData.user.id,
+          organization_id: invite.organization_id,
+          role: invite.role,
+          department: invite.department,
+          invited_at: new Date().toISOString(),
+          joined_at: new Date().toISOString()
+        })
+
+      if (profileError) throw profileError
+
+      // Mark invite as accepted
+      const { error: updateError } = await supabase
+        .from('employee_invites')
+        .update({
+          accepted_at: new Date().toISOString(),
+          employee_profile_id: authData.user.id
+        })
+        .eq('id', invite.id)
+
+      if (updateError) throw updateError
+
+      setSuccess(true)
+      
+      // Redirect to portal after 2 seconds
+      setTimeout(() => {
+        router.push('/portal')
+      }, 2000)
+
+    } catch (err: any) {
+      console.error("Accept invite error:", err)
+      setError(err.message || "Failed to accept invitation")
       setAccepting(false)
     }
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <Loader2 className="w-8 h-8 text-blue-600 animate-spin mb-4" />
-            <p className="text-gray-600">Loading invite...</p>
-          </CardContent>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <p className="mt-4 text-gray-600">Loading invitation...</p>
+          </div>
         </Card>
       </div>
     )
@@ -97,16 +161,16 @@ export default function InviteAcceptPage({
 
   if (error && !invite) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <XCircle className="w-12 h-12 text-red-500 mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Invalid Invite</h2>
-            <p className="text-gray-600 text-center mb-6">{error}</p>
-            <Link href="/login">
-              <Button>Go to Login</Button>
-            </Link>
-          </CardContent>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center">
+            <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-6 h-6 text-red-600" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Invalid Invitation</h1>
+            <p className="text-gray-600 mb-6">{error}</p>
+            <Button onClick={() => router.push('/login')}>Go to Login</Button>
+          </div>
         </Card>
       </div>
     )
@@ -114,115 +178,85 @@ export default function InviteAcceptPage({
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <CheckCircle className="w-12 h-12 text-green-500 mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Welcome to the team!</h2>
-            <p className="text-gray-600 text-center mb-2">
-              You&apos;ve successfully joined {invite?.organization?.name || 'the organization'}.
-            </p>
-            <p className="text-sm text-gray-500">Redirecting to dashboard...</p>
-          </CardContent>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md p-8">
+          <div className="text-center">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle2 className="w-6 h-6 text-green-600" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome to EmployArmor!</h1>
+            <p className="text-gray-600 mb-4">Your account has been created successfully.</p>
+            <p className="text-sm text-gray-500">Redirecting to your portal...</p>
+          </div>
         </Card>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-7 h-7 text-white" />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md p-8">
+        <div className="text-center mb-6">
+          <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <Shield className="w-6 h-6 text-white" />
           </div>
-          <CardTitle className="text-2xl">You&apos;re Invited!</CardTitle>
-          <CardDescription>
-            Join {invite?.organization?.name || 'the team'} on EmployArmor
-          </CardDescription>
-        </CardHeader>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Join {invite?.organization_name}</h1>
+          <p className="text-gray-600">You've been invited as a <span className="font-semibold capitalize">{invite?.role}</span></p>
+        </div>
 
-        <CardContent>
-          {/* Invite Details */}
-          <div className="bg-gray-50 rounded-lg p-4 mb-6">
-            <div className="space-y-3">
-              <div>
-                <div className="text-xs text-gray-500 uppercase tracking-wide">Organization</div>
-                <div className="font-medium text-gray-900">
-                  {invite?.organization?.name || 'Unknown Organization'}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs text-gray-500 uppercase tracking-wide">Your Role</div>
-                <div className="font-medium text-gray-900">{getRoleLabel(invite?.role || 'member')}</div>
-                <div className="text-sm text-gray-500">{getRoleDescription(invite?.role || 'member')}</div>
-              </div>
-              <div>
-                <div className="text-xs text-gray-500 uppercase tracking-wide">Invited Email</div>
-                <div className="font-medium text-gray-900">{invite?.email}</div>
-              </div>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <div className="flex items-center gap-2 text-sm">
+            <Mail className="w-4 h-4 text-blue-600" />
+            <span className="text-gray-700">{invite?.email}</span>
+          </div>
+          {invite?.department && (
+            <div className="flex items-center gap-2 text-sm mt-2">
+              <UserPlus className="w-4 h-4 text-blue-600" />
+              <span className="text-gray-700">{invite.department}</span>
             </div>
+          )}
+        </div>
+
+        <form onSubmit={handleAcceptInvite} className="space-y-4">
+          <div>
+            <Label htmlFor="password">Create Password</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Min. 8 characters"
+              required
+              minLength={8}
+            />
           </div>
 
-          {/* Error Message */}
+          <div>
+            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Input
+              id="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Re-enter password"
+              required
+            />
+          </div>
+
           {error && (
-            <div className="bg-red-50 text-red-700 p-3 rounded-lg mb-4 text-sm">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
-              
-              {/* Special handling for auth errors */}
-              {errorCode === 'UNAUTHORIZED' && (
-                <div className="mt-3 flex gap-2">
-                  <Link href={`/login?redirect=/invite/${token}`}>
-                    <Button size="sm" variant="outline" className="gap-1">
-                      <LogIn className="w-4 h-4" />
-                      Log In
-                    </Button>
-                  </Link>
-                  <Link href={`/signup?redirect=/invite/${token}&email=${encodeURIComponent(invite?.email || '')}`}>
-                    <Button size="sm" variant="outline" className="gap-1">
-                      <UserPlus className="w-4 h-4" />
-                      Sign Up
-                    </Button>
-                  </Link>
-                </div>
-              )}
-              
-              {errorCode === 'EMAIL_MISMATCH' && (
-                <div className="mt-3">
-                  <Link href={`/login?redirect=/invite/${token}`}>
-                    <Button size="sm" variant="outline">
-                      Log in with {invite?.email}
-                    </Button>
-                  </Link>
-                </div>
-              )}
             </div>
           )}
 
-          {/* Accept Button */}
-          <Button
-            onClick={handleAccept}
-            disabled={accepting}
-            className="w-full"
-            size="lg"
-          >
-            {accepting ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Joining...
-              </>
-            ) : (
-              'Accept Invite'
-            )}
+          <Button type="submit" className="w-full" disabled={accepting}>
+            {accepting ? "Creating Account..." : "Accept Invitation & Create Account"}
           </Button>
+        </form>
 
-          <p className="text-center text-sm text-gray-500 mt-4">
-            By accepting, you agree to our{' '}
-            <Link href="/terms" className="text-blue-600 hover:underline">Terms of Service</Link>
-            {' '}and{' '}
-            <Link href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</Link>
-          </p>
-        </CardContent>
+        <p className="text-xs text-gray-500 text-center mt-6">
+          By accepting, you agree to EmployArmor's Terms of Service and Privacy Policy
+        </p>
       </Card>
     </div>
   )
