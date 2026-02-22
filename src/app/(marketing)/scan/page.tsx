@@ -415,7 +415,7 @@ export default function ScanPage() {
                     ? 'You have significant compliance gaps that need immediate attention'
                     : analysis.riskLevel === 'Medium'
                     ? 'You have some compliance gaps to address'
-                    : 'You're in good shape, but stay vigilant'
+                    : 'You\'re in good shape, but stay vigilant'
                   }
                 </p>
               </div>
