@@ -2,7 +2,10 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { allStates } from '@/data/states'
+import { getStateName } from '@/lib/state-utils'
+
+// Re-export for backwards compatibility
+export { getStateName }
 
 interface StateContextType {
   currentState: string
@@ -13,12 +16,6 @@ interface StateContextType {
 }
 
 const StateContext = createContext<StateContextType | undefined>(undefined)
-
-// Map state codes to full names
-export function getStateName(code: string): string {
-  const state = allStates.find(s => s.code === code)
-  return state?.name || code
-}
 
 interface StateProviderProps {
   children: ReactNode

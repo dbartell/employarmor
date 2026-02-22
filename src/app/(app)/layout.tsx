@@ -4,7 +4,8 @@ import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserC
 import { createClient } from "@/lib/supabase/server"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 import { MobileSidebar } from "@/components/layout/mobile-sidebar"
-import { StateProvider, getStateName } from "@/lib/state-context"
+import { StateProvider } from "@/lib/state-context"
+import { getStateName } from "@/lib/state-utils"
 
 export default async function AppLayout({
   children,
