@@ -3,11 +3,13 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle2, Accessibility, FileText, ClipboardList, BarChart3 } from 'lucide-react'
+import { ApplicabilityBanner } from '@/components/compliance/applicability-banner'
 
 export default function AdaPage() {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto space-y-8">
+        <ApplicabilityBanner sectionHref="/ada" />
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">ADA Accommodations</h1>
           <p className="text-lg text-gray-600 mb-4">

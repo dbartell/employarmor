@@ -42,6 +42,7 @@ interface NavItem {
   label: string
   icon: string
   hasAction?: boolean
+  applies?: boolean
 }
 
 interface MobileSidebarProps {
@@ -132,6 +133,7 @@ export function MobileSidebar({ orgName, userEmail, navItems, complianceScore }:
             {navItems.map((item) => {
               const Icon = iconMap[item.icon] || FileText
               const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+              const applies = item.applies !== false
               return (
                 <Link
                   key={item.href}
@@ -141,13 +143,15 @@ export function MobileSidebar({ orgName, userEmail, navItems, complianceScore }:
                     flex items-center gap-3 px-3 py-3 rounded-lg transition-colors
                     ${isActive 
                       ? 'bg-blue-600 text-white' 
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                      : applies
+                        ? 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                        : 'text-gray-600 hover:bg-gray-800/50 hover:text-gray-400'
                     }
                   `}
                 >
                   <Icon className="w-5 h-5" />
                   <span className="flex-1">{item.label}</span>
-                  {item.hasAction && (
+                  {applies && item.hasAction && (
                     <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />
                   )}
                 </Link>

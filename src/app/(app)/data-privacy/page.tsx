@@ -3,11 +3,13 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { AlertTriangle, Lock, FileText, ToggleRight, Database } from 'lucide-react'
+import { ApplicabilityBanner } from '@/components/compliance/applicability-banner'
 
 export default function DataPrivacyPage() {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto space-y-8">
+        <ApplicabilityBanner sectionHref="/data-privacy" />
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Data Privacy</h1>
           <p className="text-lg text-gray-600 mb-4">

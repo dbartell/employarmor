@@ -8,6 +8,7 @@ import { SidebarComplianceScore } from "@/components/layout/sidebar-compliance-s
 import { StateProvider } from "@/lib/state-context"
 import { getEmployeeProfile, ensureOwnerProfile, isAdmin, type UserRole } from "@/lib/auth/roles"
 import { getSidebarCompliance, type SectionStatus } from "@/lib/actions/sidebar-compliance"
+import { sectionApplies } from "@/data/compliance-sections"
 
 export default async function AppLayout({
   children,
@@ -113,7 +114,8 @@ export default async function AppLayout({
   // String-only version for client component (MobileSidebar)
   const mobileNavItems = navItems.map(({ href, iconName, label }) => ({ 
     href, icon: iconName, label, 
-    hasAction: sectionStatus[href]?.hasAction || false 
+    hasAction: sectionStatus[href]?.hasAction || false,
+    applies: sectionApplies(href, activeStates),
   }))
 
   return (
@@ -151,15 +153,20 @@ export default async function AppLayout({
                 <div className="space-y-0.5">
                   {section.items.map((item) => {
                     const status = sectionStatus[item.href] as SectionStatus | undefined
+                    const applies = sectionApplies(item.href, activeStates)
                     return (
                       <Link 
                         key={item.href}
                         href={item.href} 
-                        className="flex items-center gap-3 px-3 py-1.5 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors text-sm"
+                        className={`flex items-center gap-3 px-3 py-1.5 rounded-lg transition-colors text-sm ${
+                          applies 
+                            ? 'text-gray-300 hover:bg-gray-800 hover:text-white' 
+                            : 'text-gray-600 hover:bg-gray-800/50 hover:text-gray-400'
+                        }`}
                       >
                         <item.icon className="w-4 h-4 flex-shrink-0" />
                         <span className="flex-1 truncate">{item.label}</span>
-                        {status?.hasAction && (
+                        {applies && status?.hasAction && (
                           <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" title={status.label} />
                         )}
                       </Link>

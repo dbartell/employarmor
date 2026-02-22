@@ -3,11 +3,13 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { AlertTriangle, PlayCircle, FolderOpen, ShieldAlert } from 'lucide-react'
+import { ApplicabilityBanner } from '@/components/compliance/applicability-banner'
 
 export default function ImpactAssessmentPage() {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto space-y-8">
+        <ApplicabilityBanner sectionHref="/impact-assessment" />
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-8">
           <div className="flex items-start justify-between">
             <div className="flex-1">

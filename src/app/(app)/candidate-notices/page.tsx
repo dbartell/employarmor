@@ -10,6 +10,7 @@ import {
   ExternalLink, Eye, Download, Copy, Globe, CheckCircle2,
   Clock, XCircle, Plus, ArrowRight
 } from 'lucide-react'
+import { ApplicabilityBanner } from '@/components/compliance/applicability-banner'
 
 interface Document {
   id: string
@@ -125,6 +126,7 @@ export default function CandidateNoticesPage() {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto space-y-8">
+        <ApplicabilityBanner sectionHref="/candidate-notices" />
         {/* Hero Section */}
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-8">
           <div className="flex items-start justify-between">

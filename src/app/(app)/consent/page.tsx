@@ -12,6 +12,7 @@ import {
   getConsentRecords, createConsentRecord, updateConsentRecord, 
   deleteConsentRecord, bulkImportConsent, getConsentStats, ConsentRecord 
 } from "@/lib/actions/consent"
+import { ApplicabilityBanner } from '@/components/compliance/applicability-banner'
 
 interface ConsentStats {
   total: number
@@ -340,6 +341,7 @@ export default function ConsentPage() {
 
   return (
     <div className="p-6 md:p-8 max-w-5xl mx-auto">
+      <ApplicabilityBanner sectionHref="/consent" />
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Consent Tracking</h1>
