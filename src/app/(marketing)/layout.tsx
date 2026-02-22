@@ -34,6 +34,7 @@ const resources = [
   { name: "Blog", href: "/resources", description: "Latest insights on AI hiring compliance" },
   { name: "Guides", href: "/resources/guides", description: "Step-by-step compliance guides" },
   { name: "Templates", href: "/resources/templates", description: "Ready-to-use compliance documents" },
+  { name: "Integrations", href: "/integrations", description: "Supported ATS and HRIS platforms" },
   { name: "Glossary", href: "/glossary", description: "Key terms and definitions" },
   { name: "Tool Comparisons", href: "/compare", description: "Compare AI hiring tools" },
   { name: "FAQ", href: "/resources/faq", description: "Common questions answered" },

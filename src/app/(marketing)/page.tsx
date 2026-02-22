@@ -15,11 +15,11 @@ export default function HomePage() {
               New AI hiring laws now in effect
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Your AI Compliance Agent
-              <span className="text-blue-600"> That Never Sleeps</span>
+              AI Hiring Laws Are Here.
+              <span className="text-blue-600"> Are You Compliant?</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              An AI agent that monitors your hiring tools and keeps you compliant with Illinois, Colorado, California, and NYC AI hiring laws—24/7.
+              EmployArmor connects to your hiring tools, tracks every law that applies, and keeps your organization compliant — automatically.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/scorecard">
@@ -91,6 +91,35 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Integrations Section */}
+      <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Connect to Your Hiring Tools
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              EmployArmor integrates with the platforms you already use
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-center justify-items-center max-w-4xl mx-auto">
+            {["Greenhouse", "Lever", "Workday", "BambooHR", "JazzHR", "iCIMS", "Jobvite", "SmartRecruiters", "Ashby", "Rippling"].map((platform) => (
+              <div key={platform} className="flex items-center justify-center h-16 px-4 text-gray-700 font-semibold text-center">
+                {platform}
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-8">
+            Powered by 50+ ATS and HRIS integrations
+          </p>
+          <div className="text-center mt-6">
+            <Link href="/integrations" className="text-blue-600 hover:text-blue-700 font-medium">
+              View all integrations →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Solution Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,7 +128,7 @@ export default function HomePage() {
               Your AI Compliance Officer—No Salary Required
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              EmployArmor is an AI agent that actively monitors your compliance, alerts you to risks, and keeps you protected—no IT department required.
+              EmployArmor connects to your ATS and hiring platforms to monitor compliance in real-time, generate required documents, and alert you before deadlines hit.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -108,17 +137,16 @@ export default function HomePage() {
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                   <Shield className="w-6 h-6 text-blue-600" />
                 </div>
-                <CardTitle>Monitor</CardTitle>
+                <CardTitle>Connect</CardTitle>
                 <CardDescription>
-                  Your agent watches for compliance risks
+                  Integrates with your hiring tools
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="text-sm text-gray-600 space-y-2">
-                  <li>• AI tool inventory tracking</li>
-                  <li>• State-by-state risk alerts</li>
-                  <li>• Automated gap detection</li>
-                  <li>• Continuous compliance scoring</li>
+                  <li>• Connect to Greenhouse, Lever, Workday & more</li>
+                  <li>• Automatic AI tool detection</li>
+                  <li>• Real-time compliance monitoring</li>
                 </ul>
               </CardContent>
             </Card>
@@ -130,7 +158,7 @@ export default function HomePage() {
                 </div>
                 <CardTitle>Generate</CardTitle>
                 <CardDescription>
-                  Auto-create compliant documents
+                  Auto-create documents based on your connected tools
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -170,7 +198,7 @@ export default function HomePage() {
                 </div>
                 <CardTitle>Alert</CardTitle>
                 <CardDescription>
-                  Your agent keeps you informed
+                  Get notified when laws change or deadlines approach
                 </CardDescription>
               </CardHeader>
               <CardContent>

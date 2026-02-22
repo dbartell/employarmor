@@ -15,23 +15,23 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "EmployArmor - Your AI Compliance Agent",
+    default: "EmployArmor - AI Hiring Compliance, Automated",
     template: "%s | EmployArmor",
   },
-  description: "Your AI compliance agent that monitors your hiring tools and keeps you compliant with Colorado, Illinois, NYC, and beyond. 24/7 protection from AI hiring law violations.",
+  description: "EmployArmor connects to your hiring tools and automates compliance with AI hiring laws in Colorado, Illinois, NYC, California and beyond. Track obligations, generate notices, monitor risks.",
   keywords: ["AI hiring law", "AI hiring compliance", "Colorado AI Act", "Illinois AIPA", "NYC Local Law 144", "automated employment decisions", "AEDT compliance", "AI compliance agent"],
   metadataBase: new URL("https://employarmor.com"),
   openGraph: {
-    title: "EmployArmor - Your AI Compliance Agent",
-    description: "Your AI compliance agent that monitors your hiring tools and keeps you compliant. 24/7 protection from AI hiring law violations.",
+    title: "EmployArmor - AI Hiring Compliance, Automated",
+    description: "EmployArmor connects to your hiring tools and automates compliance with AI hiring laws in Colorado, Illinois, NYC, California and beyond.",
     url: "https://employarmor.com",
     siteName: "EmployArmor",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "EmployArmor - Your AI Compliance Agent",
-    description: "Your AI compliance agent that monitors your hiring tools and keeps you compliant. 24/7 protection from AI hiring law violations.",
+    title: "EmployArmor - AI Hiring Compliance, Automated",
+    description: "EmployArmor connects to your hiring tools and automates compliance with AI hiring laws in Colorado, Illinois, NYC, California and beyond.",
   },
 };
 
