@@ -39,7 +39,7 @@ export default async function AppLayout({
   
   // If user owns an organization, auto-create owner profile
   if (org) {
-    profile = await ensureOwnerProfile(user.id, user.id)
+    profile = await ensureOwnerProfile(user.id, user.id, userEmail)
     userRole = profile?.role || null
   } else {
     // User is an employee, not org owner - find their profile

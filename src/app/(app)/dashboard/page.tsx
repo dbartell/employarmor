@@ -635,10 +635,10 @@ export default function DashboardPage() {
                 ) : (
                   <>
                     <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                      Compliance Dashboard
+                      Your Compliance Agent
                     </h1>
                     <p className="text-white/80 text-lg mb-4">
-                      {data.riskScore !== null ? `Risk Score: ${data.riskScore}/100` : 'Not yet assessed'} · {completedReqs}/{totalReqs} tasks complete
+                      {data.riskScore !== null ? `Monitoring your risk: ${data.riskScore}/100` : 'Not yet monitoring'} · {completedReqs}/{totalReqs} tasks complete
                     </p>
                     
                     {/* Status badges */}

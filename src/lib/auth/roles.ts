@@ -7,6 +7,7 @@ export interface EmployeeProfile {
   id: string
   user_id: string
   organization_id: string
+  email: string
   role: UserRole
   department: string | null
   manager_id: string | null
@@ -69,7 +70,7 @@ export async function getEmployeeProfileClient(userId: string, orgId: string): P
 /**
  * Create owner profile for existing org admin (auto-provision)
  */
-export async function ensureOwnerProfile(userId: string, orgId: string): Promise<EmployeeProfile | null> {
+export async function ensureOwnerProfile(userId: string, orgId: string, userEmail: string): Promise<EmployeeProfile | null> {
   const supabase = await createServerClient()
   
   // Check if profile already exists
@@ -82,6 +83,7 @@ export async function ensureOwnerProfile(userId: string, orgId: string): Promise
     .insert({
       user_id: userId,
       organization_id: orgId,
+      email: userEmail,
       role: 'owner',
       joined_at: new Date().toISOString()
     })

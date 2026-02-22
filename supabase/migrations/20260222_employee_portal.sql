@@ -6,6 +6,7 @@ create table if not exists employee_profiles (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id) on delete cascade,
   organization_id uuid references organizations(id) on delete cascade,
+  email text not null,
   role text not null default 'employee' check (role in ('owner', 'admin', 'manager', 'employee')),
   department text,
   manager_id uuid references employee_profiles(id),

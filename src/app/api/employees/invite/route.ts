@@ -48,34 +48,26 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if email is already invited or part of the org
+    // Check if email is already invited (pending or accepted)
     const { data: existingInvite } = await supabase
       .from('employee_invites')
-      .select('id')
+      .select('id, accepted_at')
       .eq('organization_id', org.id)
       .eq('email', email)
-      .is('accepted_at', null)
       .single()
 
     if (existingInvite) {
-      return NextResponse.json(
-        { error: "An active invitation already exists for this email" },
-        { status: 400 }
-      )
-    }
-
-    const { data: existingProfile } = await supabase
-      .from('employee_profiles')
-      .select('id')
-      .eq('organization_id', org.id)
-      .eq('user_id', (await supabase.auth.admin.getUserByEmail(email)).data?.user?.id || '')
-      .single()
-
-    if (existingProfile) {
-      return NextResponse.json(
-        { error: "This email is already part of your organization" },
-        { status: 400 }
-      )
+      if (existingInvite.accepted_at) {
+        return NextResponse.json(
+          { error: "This email is already part of your organization" },
+          { status: 400 }
+        )
+      } else {
+        return NextResponse.json(
+          { error: "An active invitation already exists for this email" },
+          { status: 400 }
+        )
+      }
     }
 
     // Generate secure token

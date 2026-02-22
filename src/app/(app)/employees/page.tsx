@@ -51,7 +51,7 @@ export default function EmployeesPage() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return
 
-    // Load employees
+    // Load employees (email is now stored in employee_profiles)
     const { data: employeeData } = await supabase
       .from('employee_profiles')
       .select('*')
@@ -59,17 +59,7 @@ export default function EmployeesPage() {
       .order('created_at', { ascending: false })
 
     if (employeeData) {
-      // Get emails from auth.users for employees with user_id
-      const employeesWithEmails = await Promise.all(
-        employeeData.map(async (emp) => {
-          if (emp.user_id) {
-            const { data: userData } = await supabase.auth.admin.getUserById(emp.user_id)
-            return { ...emp, email: userData?.user?.email }
-          }
-          return emp
-        })
-      )
-      setEmployees(employeesWithEmails)
+      setEmployees(employeeData)
     }
 
     // Load invites

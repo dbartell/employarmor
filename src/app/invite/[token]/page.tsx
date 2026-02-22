@@ -113,6 +113,7 @@ export default function InviteAcceptPage() {
         .insert({
           user_id: authData.user.id,
           organization_id: invite.organization_id,
+          email: invite.email,
           role: invite.role,
           department: invite.department,
           invited_at: new Date().toISOString(),

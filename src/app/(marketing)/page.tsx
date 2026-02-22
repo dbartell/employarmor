@@ -15,11 +15,11 @@ export default function HomePage() {
               New AI hiring laws now in effect
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              AI Hiring Compliance
-              <span className="text-blue-600"> Made Simple</span>
+              Your AI Compliance Agent
+              <span className="text-blue-600"> That Never Sleeps</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Audit your tools. Generate disclosures. Train your team. Stay compliant with Illinois, Colorado, California, and NYC AI hiring laws.
+              An AI agent that monitors your hiring tools and keeps you compliant with Illinois, Colorado, California, and NYC AI hiring laws—24/7.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/scorecard">
@@ -96,10 +96,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              One Platform for Complete Compliance
+              Your AI Compliance Officer—No Salary Required
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              EmployArmor gives you everything you need to comply with AI hiring laws—no IT department required.
+              EmployArmor is an AI agent that actively monitors your compliance, alerts you to risks, and keeps you protected—no IT department required.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -108,17 +108,17 @@ export default function HomePage() {
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                   <Shield className="w-6 h-6 text-blue-600" />
                 </div>
-                <CardTitle>Audit</CardTitle>
+                <CardTitle>Monitor</CardTitle>
                 <CardDescription>
-                  Identify which tools trigger which laws
+                  Your agent watches for compliance risks
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="text-sm text-gray-600 space-y-2">
-                  <li>• AI tool inventory</li>
-                  <li>• State-by-state analysis</li>
-                  <li>• Risk scoring</li>
-                  <li>• Gap identification</li>
+                  <li>• AI tool inventory tracking</li>
+                  <li>• State-by-state risk alerts</li>
+                  <li>• Automated gap detection</li>
+                  <li>• Continuous compliance scoring</li>
                 </ul>
               </CardContent>
             </Card>
@@ -128,9 +128,9 @@ export default function HomePage() {
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                   <FileText className="w-6 h-6 text-green-600" />
                 </div>
-                <CardTitle>Document</CardTitle>
+                <CardTitle>Generate</CardTitle>
                 <CardDescription>
-                  Generate required compliance documents
+                  Auto-create compliant documents
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -150,15 +150,15 @@ export default function HomePage() {
                 </div>
                 <CardTitle>Train</CardTitle>
                 <CardDescription>
-                  Educate your HR team on requirements
+                  Your agent ensures team compliance
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="text-sm text-gray-600 space-y-2">
-                  <li>• Video courses</li>
+                  <li>• Automated training assignments</li>
                   <li>• Knowledge quizzes</li>
                   <li>• Certificates</li>
-                  <li>• Annual re-certification</li>
+                  <li>• Annual re-certification tracking</li>
                 </ul>
               </CardContent>
             </Card>
@@ -168,9 +168,9 @@ export default function HomePage() {
                 <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
                   <ClipboardCheck className="w-6 h-6 text-orange-600" />
                 </div>
-                <CardTitle>Track</CardTitle>
+                <CardTitle>Alert</CardTitle>
                 <CardDescription>
-                  Maintain audit trail for regulators
+                  Your agent keeps you informed
                 </CardDescription>
               </CardHeader>
               <CardContent>
