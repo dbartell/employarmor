@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create Supabase client (no auth required for public endpoint)
-    const supabase = createClient()
+    const supabase = await createClient()
 
     // Insert scan lead
     const { data, error } = await supabase
