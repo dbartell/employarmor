@@ -56,30 +56,33 @@ export default async function AppLayout({
   }
 
   // Nav items based on role
-  const navItems = userRole && isAdmin(userRole) ? [
-    // Admin/Owner navigation
-    { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { href: '/employees', icon: Users, label: 'Team' },
-    { href: '/tools', icon: Layers, label: 'Tool Registry' },
-    { href: '/approvals', icon: CheckSquare, label: 'Approvals' },
-    { href: '/audit', icon: ClipboardCheck, label: 'Risk Assessment' },
-    { href: '/candidate-notices', icon: FileText, label: 'Candidate Notices' },
-    { href: '/employee-disclosures', icon: FileText, label: 'Employee Disclosures' },
-    { href: '/handbook', icon: BookOpen, label: 'Handbook Policy' },
-    { href: '/training', icon: GraduationCap, label: 'Training' },
-    { href: '/compliance-packet', icon: FolderCheck, label: 'Audit Packet' },
-  ] : [
-    // Employee/Manager navigation
-    { href: '/portal', icon: Home, label: 'My Dashboard' },
-    { href: '/portal/disclosures', icon: FileText, label: 'My Disclosures' },
-    { href: '/portal/training', icon: GraduationCap, label: 'My Training' },
-    { href: '/portal/tools', icon: Wrench, label: 'Tool Requests' },
+  // Icon names are passed as strings to avoid server/client serialization issues
+  const adminNavItems = [
+    { href: '/dashboard', icon: LayoutDashboard, iconName: 'LayoutDashboard', label: 'Dashboard' },
+    { href: '/employees', icon: Users, iconName: 'Users', label: 'Team' },
+    { href: '/tools', icon: Layers, iconName: 'Layers', label: 'Tool Registry' },
+    { href: '/approvals', icon: CheckSquare, iconName: 'SquareCheckBig', label: 'Approvals' },
+    { href: '/audit', icon: ClipboardCheck, iconName: 'ClipboardCheck', label: 'Risk Assessment' },
+    { href: '/candidate-notices', icon: FileText, iconName: 'FileText', label: 'Candidate Notices' },
+    { href: '/employee-disclosures', icon: FileText, iconName: 'FileText', label: 'Employee Disclosures' },
+    { href: '/handbook', icon: BookOpen, iconName: 'BookOpen', label: 'Handbook Policy' },
+    { href: '/training', icon: GraduationCap, iconName: 'GraduationCap', label: 'Training' },
+    { href: '/compliance-packet', icon: FolderCheck, iconName: 'FolderCheck', label: 'Audit Packet' },
   ]
+  const employeeNavItems = [
+    { href: '/portal', icon: Home, iconName: 'Home', label: 'My Dashboard' },
+    { href: '/portal/disclosures', icon: FileText, iconName: 'FileText', label: 'My Disclosures' },
+    { href: '/portal/training', icon: GraduationCap, iconName: 'GraduationCap', label: 'My Training' },
+    { href: '/portal/tools', icon: Wrench, iconName: 'Wrench', label: 'Tool Requests' },
+  ]
+  const navItems = userRole && isAdmin(userRole) ? adminNavItems : employeeNavItems
+  // String-only version for client component (MobileSidebar)
+  const mobileNavItems = navItems.map(({ href, iconName, label }) => ({ href, icon: iconName, label }))
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Mobile sidebar (hamburger menu) */}
-      <MobileSidebar orgName={orgName} userEmail={userEmail} navItems={navItems} />
+      <MobileSidebar orgName={orgName} userEmail={userEmail} navItems={mobileNavItems} />
 
       {/* Desktop sidebar - hidden on mobile */}
       <aside className="hidden md:flex w-56 bg-gray-900 text-white flex-col fixed inset-y-0 left-0">

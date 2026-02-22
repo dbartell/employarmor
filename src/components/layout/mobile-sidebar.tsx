@@ -9,14 +9,30 @@ import {
   Menu, 
   X,
   Trash2,
+  LayoutDashboard,
+  Users,
+  Layers,
+  SquareCheckBig,
+  ClipboardCheck,
+  FileText,
+  BookOpen,
+  GraduationCap,
+  FolderCheck,
+  Home,
+  Wrench,
   type LucideIcon
 } from "lucide-react"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 
+const iconMap: Record<string, LucideIcon> = {
+  LayoutDashboard, Users, Layers, SquareCheckBig, ClipboardCheck,
+  FileText, BookOpen, GraduationCap, FolderCheck, Home, Wrench, Settings,
+}
+
 interface NavItem {
   href: string
   label: string
-  icon: LucideIcon
+  icon: string
 }
 
 interface MobileSidebarProps {
@@ -88,7 +104,7 @@ export function MobileSidebar({ orgName, userEmail, navItems }: MobileSidebarPro
         <nav className="flex-1 p-3 overflow-y-auto">
           <div className="space-y-1">
             {navItems.map((item) => {
-              const Icon = item.icon
+              const Icon = iconMap[item.icon] || FileText
               const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
               return (
                 <Link
