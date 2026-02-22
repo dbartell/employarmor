@@ -4,9 +4,10 @@ import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserC
 import { createClient } from "@/lib/supabase/server"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 import { MobileSidebar } from "@/components/layout/mobile-sidebar"
+import { SidebarComplianceScore } from "@/components/layout/sidebar-compliance-score"
 import { StateProvider } from "@/lib/state-context"
-import { getStateName } from "@/lib/state-utils"
 import { getEmployeeProfile, ensureOwnerProfile, isAdmin, type UserRole } from "@/lib/auth/roles"
+import { getSidebarCompliance, type SectionStatus } from "@/lib/actions/sidebar-compliance"
 
 export default async function AppLayout({
   children,
@@ -31,8 +32,6 @@ export default async function AppLayout({
   const userEmail = user.email || ''
   const primaryState = org?.primary_state || 'IL'
   const activeStates = org?.active_states || ['IL']
-  const stateName = getStateName(primaryState)
-
   // Get or create employee profile
   let profile = null
   let userRole: UserRole | null = null
@@ -54,6 +53,10 @@ export default async function AppLayout({
       userRole = profile.role as UserRole
     }
   }
+
+  // Get compliance data for sidebar (admin only)
+  const complianceData = (userRole && isAdmin(userRole)) ? await getSidebarCompliance() : null
+  const sectionStatus = complianceData?.sections || {}
 
   // Nav items based on role
   // Icon names are passed as strings to avoid server/client serialization issues
@@ -77,12 +80,15 @@ export default async function AppLayout({
   ]
   const navItems = userRole && isAdmin(userRole) ? adminNavItems : employeeNavItems
   // String-only version for client component (MobileSidebar)
-  const mobileNavItems = navItems.map(({ href, iconName, label }) => ({ href, icon: iconName, label }))
+  const mobileNavItems = navItems.map(({ href, iconName, label }) => ({ 
+    href, icon: iconName, label, 
+    hasAction: sectionStatus[href]?.hasAction || false 
+  }))
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Mobile sidebar (hamburger menu) */}
-      <MobileSidebar orgName={orgName} userEmail={userEmail} navItems={mobileNavItems} />
+      <MobileSidebar orgName={orgName} userEmail={userEmail} navItems={mobileNavItems} complianceScore={complianceData?.score ?? null} />
 
       {/* Desktop sidebar - hidden on mobile */}
       <aside className="hidden md:flex w-56 bg-gray-900 text-white flex-col fixed inset-y-0 left-0">
@@ -95,27 +101,31 @@ export default async function AppLayout({
           </Link>
         </div>
         
-        {/* State Badge - Shows active state for state-as-product */}
-        <div className="px-3 py-3 border-b border-gray-800">
-          <div className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-500/30 rounded-lg">
-            <span className="text-lg">🏛️</span>
-            <span className="text-sm font-medium text-blue-300">{stateName}</span>
-            <span className="ml-auto text-xs bg-blue-600/50 text-blue-200 px-1.5 py-0.5 rounded">Active</span>
+        {/* Compliance Score */}
+        {complianceData && (
+          <div className="px-3 py-3 border-b border-gray-800">
+            <SidebarComplianceScore initialScore={complianceData.score} />
           </div>
-        </div>
+        )}
         
         <nav className="flex-1 p-3 overflow-y-auto">
           <div className="space-y-1">
-            {navItems.map((item) => (
-              <Link 
-                key={item.href}
-                href={item.href} 
-                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors"
-              >
-                <item.icon className="w-5 h-5" />
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const status = sectionStatus[item.href] as SectionStatus | undefined
+              return (
+                <Link 
+                  key={item.href}
+                  href={item.href} 
+                  className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors group relative"
+                >
+                  <item.icon className="w-5 h-5" />
+                  <span className="flex-1">{item.label}</span>
+                  {status?.hasAction && (
+                    <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" title={status.label} />
+                  )}
+                </Link>
+              )
+            })}
           </div>
           
           <div className="mt-6 pt-4 border-t border-gray-800 space-y-1">

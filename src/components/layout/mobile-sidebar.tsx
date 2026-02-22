@@ -33,15 +33,17 @@ interface NavItem {
   href: string
   label: string
   icon: string
+  hasAction?: boolean
 }
 
 interface MobileSidebarProps {
   orgName: string
   userEmail: string
   navItems: NavItem[]
+  complianceScore?: number | null
 }
 
-export function MobileSidebar({ orgName, userEmail, navItems }: MobileSidebarProps) {
+export function MobileSidebar({ orgName, userEmail, navItems, complianceScore }: MobileSidebarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
@@ -101,6 +103,22 @@ export function MobileSidebar({ orgName, userEmail, navItems }: MobileSidebarPro
           </button>
         </div>
 
+        {complianceScore != null && (
+          <div className="px-3 py-3 border-b border-gray-800">
+            <div className="flex items-center gap-3 px-3 py-2">
+              <div className={`text-2xl font-bold ${complianceScore >= 80 ? 'text-green-400' : complianceScore >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                {complianceScore}
+              </div>
+              <div>
+                <div className="text-xs text-gray-400">Compliance Score</div>
+                <div className={`text-sm font-semibold ${complianceScore >= 80 ? 'text-green-400' : complianceScore >= 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                  {complianceScore >= 80 ? 'Strong' : complianceScore >= 50 ? 'Fair' : 'At Risk'}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <nav className="flex-1 p-3 overflow-y-auto">
           <div className="space-y-1">
             {navItems.map((item) => {
@@ -120,7 +138,10 @@ export function MobileSidebar({ orgName, userEmail, navItems }: MobileSidebarPro
                   `}
                 >
                   <Icon className="w-5 h-5" />
-                  {item.label}
+                  <span className="flex-1">{item.label}</span>
+                  {item.hasAction && (
+                    <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />
+                  )}
                 </Link>
               )
             })}
