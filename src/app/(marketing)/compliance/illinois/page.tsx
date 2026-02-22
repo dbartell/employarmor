@@ -274,7 +274,7 @@ export default function IllinoisCompliancePage() {
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Risk assessment</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Email support</li>
               </ul>
-              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+              <Link href="/scan" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
                 Start Free Trial
               </Link>
             </div>
@@ -297,7 +297,7 @@ export default function IllinoisCompliancePage() {
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Priority support</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Quarterly compliance reviews</li>
               </ul>
-              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+              <Link href="/scan" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
                 Start Free Trial
               </Link>
             </div>
@@ -318,7 +318,7 @@ export default function IllinoisCompliancePage() {
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Monthly compliance reviews</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Custom integrations</li>
               </ul>
-              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+              <Link href="/scan" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
                 Start Free Trial
               </Link>
             </div>

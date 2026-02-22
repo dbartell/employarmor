@@ -2,23 +2,23 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle, Shield, Building2, Users, Briefcase, Mail, Loader2 } from 'lucide-react'
+import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle, Shield, Building2, Users, Briefcase, Mail, Lock, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { allStates } from '@/data/states'
 import { aiHiringTools, toolCategories } from '@/data/tools'
 import { analyzeToolStack } from '@/lib/tool-analysis'
 import { createClient } from '@/lib/supabase/client'
 
-type Step = 'states' | 'employees' | 'tools' | 'email' | 'results' | 'signup' | 'creating'
+type Step = 'states' | 'employees' | 'tools' | 'email' | 'results' | 'signup'
 
 interface ScanData {
   states: string[]
   employeeCount: string
   tools: string[]
   email: string
+  password: string
+  companyName: string
 }
 
 const employeeTiers = [
@@ -32,16 +32,17 @@ export default function ScanPage() {
   const router = useRouter()
   const [step, setStep] = useState<Step>('states')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showSignupForm, setShowSignupForm] = useState(false)
   const [analysis, setAnalysis] = useState<any>(null)
-  const [password, setPassword] = useState('')
-  const [companyName, setCompanyName] = useState('')
-  const [signupError, setSignupError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
   
   const [data, setData] = useState<ScanData>({
     states: [],
     employeeCount: '',
     tools: [],
     email: '',
+    password: '',
+    companyName: '',
   })
 
   const toggleState = (code: string) => {
@@ -63,7 +64,7 @@ export default function ScanPage() {
   }
 
   const nextStep = () => {
-    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results', 'signup', 'creating']
+    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results']
     const currentIndex = steps.indexOf(step)
     if (currentIndex < steps.length - 1) {
       setStep(steps[currentIndex + 1])
@@ -72,7 +73,7 @@ export default function ScanPage() {
   }
 
   const prevStep = () => {
-    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results', 'signup', 'creating']
+    const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results']
     const currentIndex = steps.indexOf(step)
     if (currentIndex > 0) {
       setStep(steps[currentIndex - 1])
@@ -135,7 +136,7 @@ export default function ScanPage() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
       console.error('Scan submission error:', err)
-      alert('Something went wrong. Please try again.')
+      setError('Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -143,74 +144,105 @@ export default function ScanPage() {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSignupError(null)
-    setStep('creating')
-
-    if (password.length < 6) {
-      setSignupError("Password must be at least 6 characters")
-      setStep('signup')
-      return
-    }
+    setError(null)
+    setIsSubmitting(true)
 
     try {
+      // Validate inputs
+      if (!data.companyName.trim()) {
+        setError('Company name is required')
+        setIsSubmitting(false)
+        return
+      }
+
+      if (!data.password || data.password.length < 6) {
+        setError('Password must be at least 6 characters')
+        setIsSubmitting(false)
+        return
+      }
+
+      // Create Supabase account
       const supabase = createClient()
-      
-      // Create auth account
-      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email: data.email,
-        password,
+        password: data.password,
         options: {
           data: {
-            company_name: companyName,
+            company_name: data.companyName,
           },
         },
       })
 
-      if (signUpError) throw signUpError
-      if (!authData.user) throw new Error("Failed to create account")
+      if (authError) {
+        setError(authError.message)
+        setIsSubmitting(false)
+        return
+      }
 
-      // Create organization record
-      await supabase
+      if (!authData.user) {
+        setError('Failed to create account')
+        setIsSubmitting(false)
+        return
+      }
+
+      // Auto sign-in
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      })
+
+      if (signInError) {
+        setError('Account created but failed to sign in. Please log in manually.')
+        setIsSubmitting(false)
+        return
+      }
+
+      // Create organization
+      const { error: orgError } = await supabase
         .from('organizations')
         .insert({
           id: authData.user.id,
-          name: companyName,
-          size: data.employeeCount,
-          primary_state: data.states[0] || 'IL',
-          active_states: data.states,
+          name: data.companyName,
+          states: data.states,
+          quiz_tools: data.tools,
+          quiz_risk_score: analysis?.riskScore || null,
+          employee_count: data.employeeCount,
         })
 
-      // Create owner employee profile
-      await supabase
-        .from('employee_profiles')
-        .insert({
-          user_id: authData.user.id,
-          organization_id: authData.user.id,
-          email: data.email,
-          role: 'owner',
-          joined_at: new Date().toISOString(),
-        })
-
-      // Redirect to Stripe checkout
-      const checkoutResponse = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}), // Will use default price
-      })
-
-      const { url: checkoutUrl } = await checkoutResponse.json()
-
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl
-      } else {
-        // Fallback if Stripe fails - go to dashboard
-        router.push('/dashboard')
+      if (orgError) {
+        console.error('Failed to create organization:', orgError)
+        // Continue anyway - user is created
       }
 
-    } catch (err: any) {
+      // Create user record
+      await supabase
+        .from('users')
+        .insert({
+          id: authData.user.id,
+          org_id: authData.user.id,
+          email: data.email,
+          role: 'admin',
+        })
+
+      // Redirect to Stripe Checkout
+      const checkoutRes = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}), // Use default price (PILOT/STARTER)
+      })
+
+      const checkoutData = await checkoutRes.json()
+
+      if (checkoutData.url) {
+        window.location.href = checkoutData.url
+      } else {
+        setError('Failed to create checkout session')
+        setIsSubmitting(false)
+      }
+    } catch (err) {
       console.error('Signup error:', err)
-      setSignupError(err.message || "Failed to create account")
-      setStep('signup')
+      setError('Something went wrong. Please try again.')
+      setIsSubmitting(false)
     }
   }
 
@@ -221,7 +253,6 @@ export default function ScanPage() {
     email: 100,
     results: 100,
     signup: 100,
-    creating: 100,
   }[step]
 
   const canContinue = {
@@ -231,7 +262,6 @@ export default function ScanPage() {
     email: data.email.length > 0 && data.email.includes('@'),
     results: true,
     signup: true,
-    creating: false,
   }[step]
 
   return (
@@ -252,15 +282,11 @@ export default function ScanPage() {
             Free Compliance Scan
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            {step === 'results' || step === 'signup' ? 'Your Compliance Report' : 
-             step === 'creating' ? 'Creating Your Account...' :
-             'Find Your Compliance Gaps'}
+            {step === 'results' ? 'Your Compliance Report' : 'Find Your Compliance Gaps'}
           </h1>
           <p className="text-xl text-gray-600">
-            {step === 'results' || step === 'signup'
+            {step === 'results' 
               ? 'See where you stand with AI hiring laws'
-              : step === 'creating'
-              ? 'Please wait while we set up your account'
               : 'Answer 4 quick questions to see your risk level'
             }
           </p>
@@ -555,110 +581,102 @@ export default function ScanPage() {
               </Card>
             )}
 
-            {/* CTA */}
-            <Card className="p-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-3">Ready to Fix These Gaps?</h3>
-                <p className="text-blue-100 mb-6">
-                  Create your account and get started with EmployArmor
-                </p>
-                <Button 
-                  size="lg"
-                  className="bg-white text-blue-600 hover:bg-gray-100"
-                  onClick={() => setStep('signup')}
-                >
-                  Get Protected Now
-                </Button>
-              </div>
-            </Card>
-          </div>
-        )}
-
-        {/* Signup Form */}
-        {step === 'signup' && (
-          <div className="space-y-6">
-            <Card className="p-8">
-              <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Your Account</h2>
-                <p className="text-gray-600">Your email is already filled in from the scan</p>
-              </div>
-
-              <form onSubmit={handleSignup} className="space-y-4">
-                {signupError && (
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                    {signupError}
+            {/* CTA - Signup Form */}
+            {!showSignupForm ? (
+              <Card className="p-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold mb-3">Ready to Fix These Gaps?</h3>
+                  <p className="text-blue-100 mb-6">
+                    Sign up for EmployArmor and get compliant in minutes
+                  </p>
+                  <Button 
+                    size="lg"
+                    className="bg-white text-blue-600 hover:bg-gray-100"
+                    onClick={() => setShowSignupForm(true)}
+                  >
+                    Get Protected Now
+                  </Button>
+                </div>
+              </Card>
+            ) : (
+              <Card className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Create Your Account</h3>
+                <p className="text-gray-600 mb-6 text-center">One more step to get protected</p>
+                
+                {error && (
+                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                    {error}
                   </div>
                 )}
 
-                <div>
-                  <Label htmlFor="companyName">Company Name *</Label>
-                  <Input
-                    id="companyName"
-                    type="text"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    placeholder="Acme Corp"
-                    required
-                  />
-                </div>
+                <form onSubmit={handleSignup} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={data.email}
+                      readOnly
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-600"
+                    />
+                  </div>
 
-                <div>
-                  <Label htmlFor="email">Work Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={data.email}
-                    disabled
-                    className="bg-gray-50"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">
-                    This was pre-filled from your scan
-                  </p>
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      value={data.companyName}
+                      onChange={e => setData(prev => ({ ...prev, companyName: e.target.value }))}
+                      placeholder="Acme Inc."
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
 
-                <div>
-                  <Label htmlFor="password">Create Password *</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Min. 6 characters"
-                    required
-                    minLength={6}
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      value={data.password}
+                      onChange={e => setData(prev => ({ ...prev, password: e.target.value }))}
+                      placeholder="••••••••"
+                      required
+                      minLength={6}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">At least 6 characters</p>
+                  </div>
 
-                <div className="pt-4">
-                  <Button type="submit" size="lg" className="w-full">
-                    Create Account & Continue to Checkout
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Creating account...
+                      </>
+                    ) : (
+                      <>
+                        Sign Up & Subscribe <ArrowRight className="w-5 h-5 ml-2" />
+                      </>
+                    )}
                   </Button>
-                  <p className="text-xs text-gray-500 text-center mt-3">
-                    You'll be redirected to secure payment after account creation
+
+                  <p className="text-xs text-gray-500 text-center">
+                    You'll be redirected to Stripe to complete your subscription
                   </p>
-                </div>
-              </form>
-            </Card>
-
-            <div className="flex justify-start">
-              <Button variant="outline" size="lg" onClick={() => setStep('results')} className="gap-2">
-                <ArrowLeft className="w-5 h-5" /> Back to Results
-              </Button>
-            </div>
+                </form>
+              </Card>
+            )}
           </div>
-        )}
-
-        {/* Creating Account */}
-        {step === 'creating' && (
-          <Card className="p-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Setting up your account...</h2>
-              <p className="text-gray-600">This will only take a moment</p>
-            </div>
-          </Card>
         )}
       </div>
     </div>

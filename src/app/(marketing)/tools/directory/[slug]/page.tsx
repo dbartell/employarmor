@@ -160,7 +160,7 @@ export default async function ToolProfilePage({ params }: { params: Promise<{ sl
           Get a complete compliance action plan, generate required documents, and stay audit-ready.
         </p>
         <Link
-          href="/quiz"
+          href="/scan"
           className="inline-flex items-center gap-2 bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors"
         >
           Start Free Assessment <ArrowRight className="w-5 h-5" />

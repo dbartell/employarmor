@@ -27,7 +27,7 @@ export default function MarylandCompliancePage() {
           <p className="text-xl text-gray-600 mb-8">
             Maryland prohibits employers from using facial recognition technology during interviews without explicit written consent. Here&apos;s what you need to know.
           </p>
-          <Link href="/quiz">
+          <Link href="/scan">
             <Button size="lg" variant="cta">
               Check Your Compliance <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
@@ -219,7 +219,7 @@ export default function MarylandCompliancePage() {
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Risk assessment</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Email support</li>
               </ul>
-              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+              <Link href="/scan" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
                 Start Free Trial
               </Link>
             </div>
@@ -242,7 +242,7 @@ export default function MarylandCompliancePage() {
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Priority support</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Quarterly compliance reviews</li>
               </ul>
-              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+              <Link href="/scan" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
                 Start Free Trial
               </Link>
             </div>
@@ -263,7 +263,7 @@ export default function MarylandCompliancePage() {
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Monthly compliance reviews</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Custom integrations</li>
               </ul>
-              <Link href="/quiz" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
+              <Link href="/scan" className="block text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium">
                 Start Free Trial
               </Link>
             </div>
@@ -299,7 +299,7 @@ export default function MarylandCompliancePage() {
           <p className="text-amber-100 text-lg mb-8 max-w-2xl mx-auto">
             EmployArmor generates your consent forms, trains your team, and tracks compliance — so you can focus on hiring.
           </p>
-          <Link href="/quiz">
+          <Link href="/scan">
             <Button size="lg" className="bg-white text-amber-700 hover:bg-amber-50">
               Start Free Assessment <ArrowRight className="ml-2 w-4 h-4" />
             </Button>

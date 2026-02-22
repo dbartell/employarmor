@@ -343,7 +343,7 @@ export default function ToolRegistryPage() {
               : "Try adjusting your search or filter."}
           </p>
           {tools.length === 0 && (
-            <Link href="/quiz" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            <Link href="/scan" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
               Take Compliance Quiz
             </Link>
           )}

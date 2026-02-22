@@ -253,7 +253,7 @@ function MobileMenu() {
 
             <div className="pt-2 border-t space-y-2">
               <Link href="/login" className="block py-2 text-gray-700">Log in</Link>
-              <Link href="/quiz" className="block py-2 text-blue-600 font-semibold">Free Compliance Score</Link>
+              <Link href="/scan" className="block py-2 text-blue-600 font-semibold">Free Compliance Score</Link>
             </div>
           </div>
         </div>
@@ -289,7 +289,7 @@ export default function MarketingLayout({
               <Link href="/login">
                 <Button variant="ghost">Log in</Button>
               </Link>
-              <Link href="/quiz">
+              <Link href="/scan">
                 <Button variant="cta">Free Compliance Score</Button>
               </Link>
             </div>
@@ -311,7 +311,7 @@ export default function MarketingLayout({
             <div>
               <h3 className="text-white font-semibold mb-4">Product</h3>
               <ul className="space-y-2">
-                <li><Link href="/quiz" className="hover:text-white">Free Assessment</Link></li>
+                <li><Link href="/scan" className="hover:text-white">Free Assessment</Link></li>
                 <li><Link href="/demo" className="hover:text-white">Request Demo</Link></li>
                 <li><Link href="/scorecard" className="hover:text-white">Compliance Score</Link></li>
               </ul>
