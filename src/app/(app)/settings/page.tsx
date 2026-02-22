@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Building2, Mail, Users, Shield, ChevronRight, Phone } from "lucide-react"
+import { Building2, Mail, Users, Shield, ChevronRight, Phone, FileCheck } from "lucide-react"
 import Link from "next/link"
 
 export default async function SettingsPage() {
@@ -58,6 +58,30 @@ export default async function SettingsPage() {
                 <Link href="/settings/team">
                   <Button variant={canManageTeam ? "default" : "outline"} className="gap-2">
                     {canManageTeam ? 'Manage Team' : 'View Team'}
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Employee Disclosures */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <FileCheck className="w-5 h-5" />
+                Employee Disclosures
+              </CardTitle>
+              <CardDescription>Send AI tool disclosure notices and track employee acknowledgments</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm text-gray-500">Manage employee disclosure notices</div>
+                </div>
+                <Link href="/settings/employees">
+                  <Button variant="default" className="gap-2">
+                    Manage Disclosures
                     <ChevronRight className="w-4 h-4" />
                   </Button>
                 </Link>
