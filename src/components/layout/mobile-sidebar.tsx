@@ -20,6 +20,13 @@ import {
   FolderCheck,
   Home,
   Wrench,
+  Scale,
+  BarChart3,
+  UserCheck2,
+  Fingerprint,
+  Lock,
+  Accessibility,
+  DollarSign,
   type LucideIcon
 } from "lucide-react"
 import { SignOutButton } from "@/components/auth/sign-out-button"
@@ -27,6 +34,7 @@ import { SignOutButton } from "@/components/auth/sign-out-button"
 const iconMap: Record<string, LucideIcon> = {
   LayoutDashboard, Users, Layers, SquareCheckBig, ClipboardCheck,
   FileText, BookOpen, GraduationCap, FolderCheck, Home, Wrench, Settings,
+  Scale, BarChart3, UserCheck2, Fingerprint, Lock, Accessibility, DollarSign,
 }
 
 interface NavItem {

@@ -75,6 +75,18 @@ export async function getSidebarCompliance(): Promise<SidebarComplianceData | nu
 
   // Section statuses (notification indicators)
   const unsignedCount = totalEmployees - signedEmployees
+
+  // Check for bias audit (NYC requirement)
+  const { data: biasAudit } = await supabase
+    .from('documents')
+    .select('id')
+    .eq('org_id', orgId)
+    .eq('doc_type', 'bias-audit')
+    .limit(1)
+
+  // Check consent records
+  const hasConsent = (consentCount || 0) > 0
+
   const sections: Record<string, SectionStatus> = {
     '/candidate-notices': {
       hasAction: docs === 0,
@@ -83,6 +95,38 @@ export async function getSidebarCompliance(): Promise<SidebarComplianceData | nu
     '/employee-disclosures': {
       hasAction: totalEmployees === 0 || unsignedCount > 0,
       label: totalEmployees === 0 ? 'No employees' : unsignedCount > 0 ? `${unsignedCount} unsigned` : undefined,
+    },
+    '/bias-audit': {
+      hasAction: !biasAudit?.length,
+      label: !biasAudit?.length ? 'No audit' : undefined,
+    },
+    '/impact-assessment': {
+      hasAction: true, // Always show until we have impact assessment table
+      label: 'Not started',
+    },
+    '/consent': {
+      hasAction: !hasConsent,
+      label: !hasConsent ? 'No records' : undefined,
+    },
+    '/fcra': {
+      hasAction: true, // Show until configured
+      label: 'Not configured',
+    },
+    '/biometric': {
+      hasAction: true,
+      label: 'Not configured',
+    },
+    '/data-privacy': {
+      hasAction: true,
+      label: 'Not configured',
+    },
+    '/ada': {
+      hasAction: true,
+      label: 'Not configured',
+    },
+    '/pay-transparency': {
+      hasAction: true,
+      label: 'Not configured',
     },
     '/handbook': {
       hasAction: !hasHandbook,

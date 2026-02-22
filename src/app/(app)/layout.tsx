@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin, Layers, CheckSquare, Users, BookOpen, Home, Wrench } from "lucide-react"
+import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin, Layers, CheckSquare, Users, BookOpen, Home, Wrench, Scale, BarChart3, UserCheck2, Fingerprint, Lock, Accessibility, DollarSign, type LucideIcon } from "lucide-react"
 import { createClient } from "@/lib/supabase/server"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 import { MobileSidebar } from "@/components/layout/mobile-sidebar"
@@ -60,18 +60,49 @@ export default async function AppLayout({
 
   // Nav items based on role
   // Icon names are passed as strings to avoid server/client serialization issues
-  const adminNavItems = [
-    { href: '/dashboard', icon: LayoutDashboard, iconName: 'LayoutDashboard', label: 'Dashboard' },
-    { href: '/employees', icon: Users, iconName: 'Users', label: 'Team' },
-    { href: '/tools', icon: Layers, iconName: 'Layers', label: 'Tool Registry' },
-    { href: '/approvals', icon: CheckSquare, iconName: 'SquareCheckBig', label: 'Approvals' },
-    { href: '/audit', icon: ClipboardCheck, iconName: 'ClipboardCheck', label: 'Risk Assessment' },
-    { href: '/candidate-notices', icon: FileText, iconName: 'FileText', label: 'Candidate Notices' },
-    { href: '/employee-disclosures', icon: FileText, iconName: 'FileText', label: 'Employee Disclosures' },
-    { href: '/handbook', icon: BookOpen, iconName: 'BookOpen', label: 'Handbook Policy' },
-    { href: '/training', icon: GraduationCap, iconName: 'GraduationCap', label: 'Training' },
-    { href: '/compliance-packet', icon: FolderCheck, iconName: 'FolderCheck', label: 'Audit Packet' },
+  // Grouped nav structure for admin sidebar
+  const adminNavSections = [
+    {
+      label: null, // No header for top section
+      items: [
+        { href: '/dashboard', icon: LayoutDashboard, iconName: 'LayoutDashboard', label: 'Dashboard' },
+        { href: '/employees', icon: Users, iconName: 'Users', label: 'Team' },
+        { href: '/tools', icon: Layers, iconName: 'Layers', label: 'Tool Registry' },
+        { href: '/approvals', icon: CheckSquare, iconName: 'SquareCheckBig', label: 'Approvals' },
+      ],
+    },
+    {
+      label: 'Compliance',
+      items: [
+        { href: '/candidate-notices', icon: FileText, iconName: 'FileText', label: 'Candidate Notices' },
+        { href: '/employee-disclosures', icon: FileText, iconName: 'FileText', label: 'Employee Disclosures' },
+        { href: '/bias-audit', icon: Scale, iconName: 'Scale', label: 'Bias Audit' },
+        { href: '/impact-assessment', icon: BarChart3, iconName: 'BarChart3', label: 'Impact Assessment' },
+        { href: '/consent', icon: UserCheck2, iconName: 'UserCheck2', label: 'Consent & Opt-Out' },
+        { href: '/fcra', icon: ClipboardCheck, iconName: 'ClipboardCheck', label: 'FCRA' },
+        { href: '/biometric', icon: Fingerprint, iconName: 'Fingerprint', label: 'Biometric Data' },
+        { href: '/data-privacy', icon: Lock, iconName: 'Lock', label: 'Data Privacy' },
+        { href: '/ada', icon: Accessibility, iconName: 'Accessibility', label: 'ADA Accommodations' },
+        { href: '/pay-transparency', icon: DollarSign, iconName: 'DollarSign', label: 'Pay Transparency' },
+      ],
+    },
+    {
+      label: 'Policies & Training',
+      items: [
+        { href: '/handbook', icon: BookOpen, iconName: 'BookOpen', label: 'Handbook Policy' },
+        { href: '/training', icon: GraduationCap, iconName: 'GraduationCap', label: 'Training' },
+      ],
+    },
+    {
+      label: 'Reports',
+      items: [
+        { href: '/audit', icon: ClipboardCheck, iconName: 'ClipboardCheck', label: 'Risk Assessment' },
+        { href: '/compliance-packet', icon: FolderCheck, iconName: 'FolderCheck', label: 'Audit Packet' },
+      ],
+    },
   ]
+  // Flat list for compatibility
+  const adminNavItems = adminNavSections.flatMap(s => s.items)
   const employeeNavItems = [
     { href: '/portal', icon: Home, iconName: 'Home', label: 'My Dashboard' },
     { href: '/portal/disclosures', icon: FileText, iconName: 'FileText', label: 'My Disclosures' },
@@ -109,23 +140,34 @@ export default async function AppLayout({
         )}
         
         <nav className="flex-1 p-3 overflow-y-auto">
-          <div className="space-y-1">
-            {navItems.map((item) => {
-              const status = sectionStatus[item.href] as SectionStatus | undefined
-              return (
-                <Link 
-                  key={item.href}
-                  href={item.href} 
-                  className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors group relative"
-                >
-                  <item.icon className="w-5 h-5" />
-                  <span className="flex-1">{item.label}</span>
-                  {status?.hasAction && (
-                    <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" title={status.label} />
-                  )}
-                </Link>
-              )
-            })}
+          <div className="space-y-4">
+            {(userRole && isAdmin(userRole) ? adminNavSections : [{ label: null, items: employeeNavItems }]).map((section, si) => (
+              <div key={si}>
+                {section.label && (
+                  <div className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+                    {section.label}
+                  </div>
+                )}
+                <div className="space-y-0.5">
+                  {section.items.map((item) => {
+                    const status = sectionStatus[item.href] as SectionStatus | undefined
+                    return (
+                      <Link 
+                        key={item.href}
+                        href={item.href} 
+                        className="flex items-center gap-3 px-3 py-1.5 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors text-sm"
+                      >
+                        <item.icon className="w-4 h-4 flex-shrink-0" />
+                        <span className="flex-1 truncate">{item.label}</span>
+                        {status?.hasAction && (
+                          <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" title={status.label} />
+                        )}
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
           
           <div className="mt-6 pt-4 border-t border-gray-800 space-y-1">
