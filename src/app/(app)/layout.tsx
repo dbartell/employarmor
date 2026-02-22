@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin, Layers, CheckSquare } from "lucide-react"
+import { Shield, LayoutDashboard, ClipboardCheck, FileText, GraduationCap, UserCheck, Settings, Globe, Trash2, FolderCheck, MapPin, Layers, CheckSquare, Users, BookOpen } from "lucide-react"
 import { createClient } from "@/lib/supabase/server"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 import { MobileSidebar } from "@/components/layout/mobile-sidebar"
@@ -37,10 +37,10 @@ export default async function AppLayout({
     { href: '/tools', icon: Layers, label: 'Tool Registry' },
     { href: '/approvals', icon: CheckSquare, label: 'Approvals' },
     { href: '/audit', icon: ClipboardCheck, label: 'Risk Assessment' },
-    { href: '/documents', icon: FileText, label: 'Documents' },
-    { href: '/disclosures', icon: Globe, label: 'Disclosures' },
+    { href: '/candidate-notices', icon: FileText, label: 'Candidate Notices' },
+    { href: '/employee-disclosures', icon: Users, label: 'Employee Disclosures' },
+    { href: '/handbook', icon: BookOpen, label: 'Handbook Policy' },
     { href: '/training', icon: GraduationCap, label: 'Training' },
-    { href: '/consent', icon: UserCheck, label: 'Consent' },
     { href: '/compliance-packet', icon: FolderCheck, label: 'Audit Packet' },
   ]
 

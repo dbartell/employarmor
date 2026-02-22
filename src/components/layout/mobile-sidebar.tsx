@@ -17,7 +17,9 @@ import {
   Trash2,
   Layers,
   CheckSquare,
-  FolderCheck
+  FolderCheck,
+  Users,
+  BookOpen
 } from "lucide-react"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 
@@ -26,10 +28,10 @@ const navItems = [
   { href: "/tools", label: "Tool Registry", icon: Layers },
   { href: "/approvals", label: "Approvals", icon: CheckSquare },
   { href: "/audit", label: "Risk Assessment", icon: ClipboardCheck },
-  { href: "/documents", label: "Documents", icon: FileText },
-  { href: "/disclosures", label: "Disclosures", icon: Globe },
+  { href: "/candidate-notices", label: "Candidate Notices", icon: FileText },
+  { href: "/employee-disclosures", label: "Employee Disclosures", icon: Users },
+  { href: "/handbook", label: "Handbook Policy", icon: BookOpen },
   { href: "/training", label: "Training", icon: GraduationCap },
-  { href: "/consent", label: "Consent", icon: UserCheck },
   { href: "/compliance-packet", label: "Audit Packet", icon: FolderCheck },
 ]
 

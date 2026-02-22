@@ -79,7 +79,7 @@ export default async function SettingsPage() {
                 <div>
                   <div className="text-sm text-gray-500">Manage employee disclosure notices</div>
                 </div>
-                <Link href="/settings/employees">
+                <Link href="/employee-disclosures">
                   <Button variant="default" className="gap-2">
                     Manage Disclosures
                     <ChevronRight className="w-4 h-4" />

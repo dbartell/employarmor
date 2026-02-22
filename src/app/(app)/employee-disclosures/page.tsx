@@ -4,7 +4,10 @@ import { useEffect, useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Users, Send, Upload, Plus, RefreshCw, CheckCircle2, Clock, Eye, Mail } from 'lucide-react'
+import { 
+  Users, Send, Upload, Plus, RefreshCw, CheckCircle2, Clock, Eye, Mail,
+  TrendingUp, Shield, AlertTriangle, ArrowRight
+} from 'lucide-react'
 
 interface Employee {
   id: string
@@ -26,7 +29,7 @@ const STATUS_BADGES: Record<string, { label: string; color: string }> = {
   signed: { label: 'Signed', color: 'bg-green-100 text-green-700' },
 }
 
-export default function EmployeesPage() {
+export default function EmployeeDisclosuresPage() {
   const [employees, setEmployees] = useState<Employee[]>([])
   const [loading, setLoading] = useState(true)
   const [name, setName] = useState('')
@@ -128,6 +131,7 @@ export default function EmployeesPage() {
 
   const total = employees.length
   const sentCount = employees.filter(e => ['sent', 'viewed', 'signed'].includes(e.status)).length
+  const viewedCount = employees.filter(e => ['viewed', 'signed'].includes(e.status)).length
   const signedCount = employees.filter(e => e.status === 'signed').length
   const pct = total > 0 ? Math.round((signedCount / total) * 100) : 0
 
@@ -135,27 +139,55 @@ export default function EmployeesPage() {
 
   return (
     <div className="p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-            <p className="text-blue-800 text-sm">
-              This page has moved! Visit the new{' '}
-              <a href="/employee-disclosures" className="font-semibold underline">Employee Disclosures</a>{' '}
-              module for an enhanced experience.
+      <div className="max-w-6xl mx-auto space-y-8">
+        {/* Hero Section */}
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-8">
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Employee AI Disclosures</h1>
+            <p className="text-lg text-gray-600 mb-4">
+              Notify your team about AI tools used in workplace processes
+            </p>
+            
+            <div className="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-800 px-4 py-2 rounded-lg mb-4">
+              <CheckCircle2 className="w-5 h-5 text-green-600" />
+              <span className="font-semibold">Recommended</span>
+            </div>
+
+            <p className="text-gray-600 max-w-2xl">
+              While not always legally required, employee AI disclosures significantly strengthen your compliance 
+              posture and reduce litigation risk. Adding employee disclosures to your compliance program demonstrates 
+              proactive governance and can be the difference in defending against an employment claim.
             </p>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Employee Disclosures</h1>
-          <p className="text-gray-600">Send AI tool disclosure notices and track acknowledgments</p>
         </div>
 
+        {/* Compliance Impact */}
+        <Card className="border-green-200 bg-green-50/50">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <TrendingUp className="w-6 h-6 text-green-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-1">Compliance Impact</h3>
+                <p className="text-lg font-bold text-green-700 mb-2">Adds up to 15 points to your compliance score</p>
+                <div className="text-sm text-gray-600 space-y-1">
+                  <p><strong>Required in:</strong> Illinois (BIPA — for biometric AI tools), NYC (LL 144 — for AEDT used on employees)</p>
+                  <p><strong>Recommended in:</strong> All other states — demonstrates proactive AI governance</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {message && (
-          <div className={`mb-6 p-4 rounded-lg text-sm font-medium ${message.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+          <div className={`p-4 rounded-lg text-sm font-medium ${message.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
             {message.text}
           </div>
         )}
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <Card>
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-gray-900">{total}</div>
@@ -166,6 +198,12 @@ export default function EmployeesPage() {
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-blue-600">{sentCount}</div>
               <div className="text-sm text-gray-500">Sent</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="text-2xl font-bold text-yellow-600">{viewedCount}</div>
+              <div className="text-sm text-gray-500">Viewed</div>
             </CardContent>
           </Card>
           <Card>
@@ -183,7 +221,7 @@ export default function EmployeesPage() {
         </div>
 
         {/* Add Employee */}
-        <Card className="mb-6">
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg">
               <Plus className="w-5 h-5" />
@@ -237,7 +275,7 @@ export default function EmployeesPage() {
         </Card>
 
         {/* Bulk Actions */}
-        <div className="flex gap-3 mb-6">
+        <div className="flex gap-3">
           <Button
             onClick={async () => { setBulkSending(true); await sendDisclosure(); setBulkSending(false) }}
             disabled={bulkSending}
