@@ -15,7 +15,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { FileText, CheckCircle2, Clock, Loader2 } from "lucide-react"
-import { signDisclosure, getDisclosureContent, type Disclosure } from "@/lib/actions/portal-disclosures"
+import { signDisclosure, type Disclosure } from "@/lib/actions/portal-disclosures"
+import { getDisclosureContent } from "@/lib/constants/disclosures"
 
 interface DisclosuresClientProps {
   disclosures: Disclosure[]

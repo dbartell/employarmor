@@ -17,7 +17,8 @@ import {
 import Link from "next/link"
 import type { Course } from "@/lib/actions/training"
 import type { TrainingAssignment } from "@/lib/actions/portal-training"
-import { updateTrainingStatus, getQuizQuestions, submitQuiz } from "@/lib/actions/portal-training"
+import { updateTrainingStatus, submitQuiz } from "@/lib/actions/portal-training"
+import { getQuizQuestions } from "@/lib/constants/quizzes"
 
 interface CourseClientProps {
   course: Course

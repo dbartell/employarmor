@@ -16,7 +16,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Wrench, Plus, CheckCircle2, Clock, XCircle, ExternalLink, Loader2 } from "lucide-react"
-import { createToolRequest, DATA_TYPE_OPTIONS, type ToolRequest } from "@/lib/actions/portal-tool-requests"
+import { createToolRequest, type ToolRequest } from "@/lib/actions/portal-tool-requests"
+import { DATA_TYPE_OPTIONS } from "@/lib/constants/tool-requests"
 
 interface ToolsClientProps {
   requests: ToolRequest[]
