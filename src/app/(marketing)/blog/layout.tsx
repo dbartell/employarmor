@@ -1,4 +1,5 @@
-import { Breadcrumb } from "@/components/marketing/Breadcrumb"
+import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
 
 export default function BlogLayout({
   children,
@@ -7,14 +8,6 @@ export default function BlogLayout({
 }) {
   return (
     <div className="relative">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-8">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Blog", href: "/blog" },
-          ]}
-        />
-      </div>
       {children}
     </div>
   )

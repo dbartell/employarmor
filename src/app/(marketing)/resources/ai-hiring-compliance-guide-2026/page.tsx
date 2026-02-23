@@ -423,7 +423,7 @@ export default function AIHiringComplianceGuide2026Page() {
       <p><strong>Red flags:</strong></p>
       <ul>
         <li>Vendor cannot explain how their AI makes decisions</li>
-        <li>No bias audit available (or audit is >2 years old)</li>
+        <li>No bias audit available (or audit is more than 2 years old)</li>
         <li>Vendor refuses to indemnify you for compliance violations</li>
         <li>Tool collects protected class data without clear business justification</li>
       </ul>
