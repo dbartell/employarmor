@@ -10,21 +10,25 @@ export const TOOL_DETAILS: Record<string, {
   laws: string[]
 }> = {
   'hirevue': {
-    description: 'AI-powered video interview platform that analyzes candidate responses, including speech patterns and language.',
+    description: 'AI-powered skill validation platform using video interviews, game-based assessments, and virtual job tryouts. Uses machine learning to analyze communication patterns, behavioral analytics, and role-specific competencies.',
     aiFeatures: [
-      'Game-based assessments',
-      'Structured interview analysis',
-      'Natural language processing',
-      'Competency scoring',
+      'Interview Insights with AI analysis',
+      'Virtual job tryouts and skill validation',
+      'Game-based cognitive assessments',
+      'Structured interview evaluation with NLP',
+      'Behavioral analytics and competency scoring',
+      'Automated candidate engagement',
     ],
     complianceConsiderations: [
-      'AEDT under NYC Local Law 144 - requires bias audit',
+      'AEDT under NYC Local Law 144 - requires annual bias audit',
       'Illinois AIVI consent required for video analysis',
-      'Colorado AI Act high-risk system notification',
+      'Colorado AI Act high-risk system notification required',
+      'Facial expression analysis may trigger additional biometric consent laws',
+      'Speech pattern analysis requires transparency disclosures',
     ],
     biasRiskLevel: 'High',
-    dataCollected: ['Video recordings', 'Audio analysis', 'Text transcripts', 'Assessment scores'],
-    laws: ['NYC Local Law 144', 'Illinois AIVI', 'Colorado AI Act', 'Maryland HB 1202'],
+    dataCollected: ['Video recordings', 'Audio and speech patterns', 'Facial expressions', 'Text transcripts', 'Assessment scores', 'Behavioral data from games'],
+    laws: ['NYC Local Law 144', 'Illinois AIVI', 'Colorado AI Act', 'Maryland HB 1202', 'Texas CUBI'],
   },
   'pymetrics': {
     description: 'Neuroscience-based assessments using games to measure cognitive and emotional traits, matched against successful employee profiles.',
