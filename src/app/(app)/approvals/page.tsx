@@ -32,13 +32,10 @@ export default function ApprovalsPage() {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <CheckSquare className="w-7 h-7 text-blue-600" />
-          Approvals
-        </h1>
-        <p className="text-gray-500 mt-1">Review tool requests and manage your approval workflow</p>
+      {/* Hero */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-8 mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Approvals</h1>
+        <p className="text-lg text-gray-600 mb-4">Review and approve employee tool requests and access changes</p>
       </div>
 
       {/* Pending Requests */}
@@ -54,9 +51,10 @@ export default function ApprovalsPage() {
         </h2>
 
         {pendingRequests.length === 0 ? (
-          <div className="bg-white border border-gray-200 rounded-xl p-8 text-center">
-            <CheckCircle2 className="w-12 h-12 text-green-400 mx-auto mb-3" />
-            <p className="text-gray-500">No pending requests. All caught up!</p>
+          <div className="bg-white border border-gray-200 rounded-xl p-12 text-center">
+            <CheckSquare className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No pending approvals</h3>
+            <p className="text-gray-500 max-w-sm mx-auto">Tool requests from employees will appear here for review</p>
           </div>
         ) : (
           <div className="space-y-4">

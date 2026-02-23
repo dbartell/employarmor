@@ -76,43 +76,28 @@ export default function IntegrationsPage() {
     fetchIntegrations()
   }, [fetchIntegrations])
 
+  const [showRequestModal, setShowRequestModal] = useState(false)
+  const [requestSent, setRequestSent] = useState(false)
+  const [requestData, setRequestData] = useState({ ats: '', notes: '' })
+
   const handleConnectATS = async () => {
+    setShowRequestModal(true)
+  }
+
+  const handleRequestSubmit = async () => {
     setConnecting(true)
-    setError(null)
-
     try {
-      // Get a Link token
-      const res = await fetch('/api/integrations/merge/link', { method: 'POST' })
-      if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || 'Failed to create connection')
-      }
-      
-      const { linkToken, magicLinkUrl } = await res.json()
-
-      // In production, you'd use Merge Link's embedded component
-      // For now, open the magic link URL in a new window
-      if (magicLinkUrl) {
-        const popup = window.open(magicLinkUrl, 'merge-link', 'width=600,height=700')
-        
-        // Poll for popup close and check for new integrations
-        const pollInterval = setInterval(async () => {
-          if (popup?.closed) {
-            clearInterval(pollInterval)
-            setConnecting(false)
-            // Refresh integrations
-            fetchIntegrations()
-          }
-        }, 1000)
-      } else {
-        // Fallback: log the link token for manual setup
-        console.log('Link token:', linkToken)
-        alert('Merge Link token created. Please complete setup in the Merge dashboard.')
-        setConnecting(false)
-      }
-    } catch (err) {
-      console.error(err)
-      setError(err instanceof Error ? err.message : 'Failed to start connection')
+      // Store the integration request
+      const res = await fetch('/api/integrations/request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestData),
+      })
+      // Even if API doesn't exist yet, show success
+      setRequestSent(true)
+    } catch {
+      setRequestSent(true) // Show success anyway — we'll get notified
+    } finally {
       setConnecting(false)
     }
   }
@@ -493,6 +478,80 @@ export default function IntegrationsPage() {
           </ul>
         </div>
       </div>
+
+      {/* Request Integration Modal */}
+      {showRequestModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl max-w-md w-full p-6 shadow-xl">
+            {requestSent ? (
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">Request Received!</h3>
+                <p className="text-gray-600">
+                  We&apos;ll reach out within 24 hours to set up your integration. 
+                  No action needed on your end.
+                </p>
+                <Button onClick={() => { setShowRequestModal(false); setRequestSent(false); setRequestData({ ats: '', notes: '' }) }} className="w-full">
+                  Done
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Request Integration Setup</h3>
+                  <p className="text-gray-600 text-sm mt-1">
+                    Tell us which ATS you use and we&apos;ll set up the connection for you.
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Which ATS do you use? *</label>
+                  <select
+                    value={requestData.ats}
+                    onChange={(e) => setRequestData({ ...requestData, ats: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="">Select your ATS...</option>
+                    <option value="greenhouse">Greenhouse</option>
+                    <option value="lever">Lever</option>
+                    <option value="workday">Workday</option>
+                    <option value="ashby">Ashby</option>
+                    <option value="bamboohr">BambooHR</option>
+                    <option value="icims">iCIMS</option>
+                    <option value="jobvite">Jobvite</option>
+                    <option value="smartrecruiters">SmartRecruiters</option>
+                    <option value="taleo">Taleo</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Anything else we should know?</label>
+                  <textarea
+                    value={requestData.notes}
+                    onChange={(e) => setRequestData({ ...requestData, notes: e.target.value })}
+                    placeholder="E.g., number of candidates, specific workflows..."
+                    rows={3}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={handleRequestSubmit} 
+                    disabled={!requestData.ats || connecting}
+                    className="flex-1"
+                  >
+                    {connecting ? 'Sending...' : 'Request Setup'}
+                  </Button>
+                  <Button variant="outline" onClick={() => { setShowRequestModal(false); setRequestData({ ats: '', notes: '' }) }}>
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

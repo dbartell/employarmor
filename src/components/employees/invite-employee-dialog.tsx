@@ -97,7 +97,7 @@ export function InviteEmployeeDialog({ orgId }: InviteEmployeeDialogProps) {
         </DialogHeader>
 
         {inviteUrl ? (
-          <div className="space-y-4">
+          <div className="space-y-4 pt-2">
             <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700">
               <CheckCircle className="w-5 h-5 flex-shrink-0" />
               <span className="text-sm font-medium">Invitation sent successfully!</span>
@@ -149,7 +149,7 @@ export function InviteEmployeeDialog({ orgId }: InviteEmployeeDialogProps) {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4 pt-2">
             {error && (
               <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />

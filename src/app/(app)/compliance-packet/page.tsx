@@ -2,12 +2,13 @@
 
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { 
   FileText, Download, Shield, CheckCircle, AlertTriangle, 
   Loader2, Building2, Users, ClipboardCheck, Scale, Award,
-  Calendar, RefreshCw, Lock
+  Calendar, RefreshCw, Lock, FolderCheck
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { TaskHeader } from "@/components/task-header"
@@ -241,6 +242,8 @@ export default function CompliancePacketPage() {
     return <div className="p-8">Failed to load data</div>
   }
 
+  const isPacketEmpty = data.tools.length === 0 && !data.disclosures.hasPublicPage && data.training.completed === 0 && data.consents.totalCollected === 0
+
   const isActive = data.organization.subscriptionStatus === 'active'
   const statusColors = {
     compliant: 'bg-green-100 text-green-800 border-green-200',
@@ -283,6 +286,34 @@ export default function CompliancePacketPage() {
             </Button>
           </div>
         </div>
+
+        {/* Empty Packet State */}
+        {isPacketEmpty && (
+          <div className="mb-6 p-6 bg-white border border-gray-200 rounded-xl">
+            <div className="text-center mb-6">
+              <FolderCheck className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Your compliance packet will populate as you complete sections</h3>
+              <p className="text-gray-500 max-w-md mx-auto mb-6">Complete the items below to build your audit-ready documentation</p>
+            </div>
+            <div className="space-y-3 max-w-md mx-auto">
+              {[
+                { label: 'Register your AI tools', done: data.tools.length > 0, href: '/tools' },
+                { label: 'Publish candidate disclosures', done: data.disclosures.hasPublicPage, href: '/candidate-notices' },
+                { label: 'Complete team training', done: data.training.completed > 0, href: '/training' },
+                { label: 'Collect candidate consent records', done: data.consents.totalCollected > 0, href: '/consent' },
+              ].map((item, i) => (
+                <Link key={i} href={item.href} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-gray-50 transition-colors">
+                  {item.done ? (
+                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  ) : (
+                    <div className="w-5 h-5 rounded-full border-2 border-gray-300 flex-shrink-0" />
+                  )}
+                  <span className={`text-sm ${item.done ? 'text-gray-500 line-through' : 'text-gray-900 font-medium'}`}>{item.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Inactive Warning */}
         {!isActive && (

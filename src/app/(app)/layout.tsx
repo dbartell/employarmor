@@ -185,6 +185,25 @@ export default async function AppLayout({
               <Settings className="w-5 h-5" />
               Settings
             </Link>
+            <div className="space-y-0.5 ml-1">
+              {[
+                { href: '/settings', label: 'Organization' },
+                { href: '/settings/team', label: 'Team' },
+                { href: '/settings/disclosure', label: 'Disclosures' },
+                { href: '/settings/integrations', label: 'Integrations' },
+                { href: '/settings/training', label: 'Training' },
+                { href: '/settings/adverse-decisions', label: 'Adverse Decisions' },
+                { href: '/settings/contact', label: 'Contact' },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block pl-10 py-1 text-xs text-gray-500 hover:text-gray-300 transition-colors rounded"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
             {userEmail === 'bartelldevyn@gmail.com' && (
               <Link 
                 href="/settings/delete-account" 

@@ -35,7 +35,14 @@ export default function TrainingSectionPage({ params }: PageProps) {
   const isLastSection = sectionNumber === track.sections.length
   const nextSection = sectionNumber + 1
 
+  // Admin browsing mode (no assignment) — skip progress tracking
+  const isPreview = !assignmentId && !token
+
   useEffect(() => {
+    if (isPreview) {
+      setLoading(false)
+      return
+    }
     // Load progress for this section
     loadProgress()
   }, [])
@@ -65,6 +72,11 @@ export default function TrainingSectionPage({ params }: PageProps) {
   }
 
   const handleMarkVideoComplete = async () => {
+    if (isPreview) {
+      setVideoWatched(true)
+      setShowQuiz(true)
+      return
+    }
     try {
       await fetch('/api/training/progress', {
         method: 'POST',
@@ -141,6 +153,13 @@ export default function TrainingSectionPage({ params }: PageProps) {
   return (
     <div className="p-8">
       <div className="max-w-4xl mx-auto">
+        {/* Preview Banner */}
+        {isPreview && (
+          <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-center gap-2 text-amber-800 text-sm">
+            <BookOpen className="w-4 h-4 flex-shrink-0" />
+            <span><strong>Preview mode</strong> — You&apos;re viewing this as an admin. Assign training to employees to track their progress.</span>
+          </div>
+        )}
         {/* Header */}
         <div className="mb-6">
           <Link 

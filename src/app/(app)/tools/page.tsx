@@ -206,26 +206,21 @@ export default function ToolRegistryPage() {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Layers className="w-7 h-7 text-blue-600" />
-            Tool Registry
-          </h1>
-          <p className="text-gray-500 mt-1">
-            {tools.length > 0
-              ? `${tools.length} tool${tools.length !== 1 ? "s" : ""} in your hiring stack`
-              : "No tools registered yet — complete the compliance quiz to get started"}
-          </p>
+      {/* Hero */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-8 mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Tool Registry</h1>
+            <p className="text-lg text-gray-600 mb-4">Register and monitor the AI tools your organization uses in hiring</p>
+          </div>
+          <Link
+            href="/tools/request"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Request New Tool
+          </Link>
         </div>
-        <Link
-          href="/tools/request"
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-          Request New Tool
-        </Link>
       </div>
 
       {/* Summary Cards */}
@@ -335,16 +330,17 @@ export default function ToolRegistryPage() {
         <div className="text-center py-16 bg-white rounded-xl border border-gray-200">
           <Layers className="w-12 h-12 text-gray-300 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            {tools.length === 0 ? "No tools yet" : "No matching tools"}
+            {tools.length === 0 ? "No AI tools registered yet" : "No matching tools"}
           </h3>
-          <p className="text-gray-500 mb-4">
+          <p className="text-gray-500 mb-4 max-w-md mx-auto">
             {tools.length === 0
-              ? "Complete the compliance quiz to identify tools in your hiring stack."
+              ? "Register the AI tools your organization uses in hiring to track compliance requirements"
               : "Try adjusting your search or filter."}
           </p>
           {tools.length === 0 && (
-            <Link href="/scan" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Take Compliance Quiz
+            <Link href="/tools/request" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">
+              <Plus className="w-4 h-4" />
+              Add Your First Tool
             </Link>
           )}
         </div>

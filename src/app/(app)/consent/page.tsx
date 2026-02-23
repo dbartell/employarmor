@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { 
   Upload, Search, Download, Plus, CheckCircle, Clock, AlertTriangle, 
   Trash2, Loader2, X, Edit2, TrendingUp, Calendar, Link2, Copy, Eye,
-  ExternalLink, Code, ToggleLeft, ToggleRight
+  ExternalLink, Code, ToggleLeft, ToggleRight, UserCheck
 } from "lucide-react"
 import { 
   getConsentRecords, createConsentRecord, updateConsentRecord, 
@@ -641,10 +641,16 @@ export default function ConsentPage() {
                   <Loader2 className="w-6 h-6 animate-spin mx-auto text-gray-400" />
                 </div>
               ) : records.length === 0 ? (
-                <div className="text-center py-8 text-gray-500">
-                  {searchQuery || statusFilter !== 'all' 
-                    ? 'No records match your filters'
-                    : 'No records yet. Use the quick add form above.'}
+                <div className="text-center py-12">
+                  <UserCheck className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {searchQuery || statusFilter !== 'all' ? 'No records match your filters' : 'No consent records yet'}
+                  </h3>
+                  <p className="text-gray-500 max-w-md mx-auto">
+                    {searchQuery || statusFilter !== 'all'
+                      ? 'Try adjusting your search or filter criteria'
+                      : 'Start tracking candidate consent by creating your first record or connecting your ATS'}
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-2">
