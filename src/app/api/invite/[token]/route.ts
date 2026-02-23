@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { sendEmail } from '@/lib/emails/send'
+import { employeeJoinedEmail } from '@/lib/emails/notification-templates'
+import { shouldNotify, getOrgAdmins } from '@/lib/emails/should-notify'
 
 // GET - Get invite details (for the invite page)
 export async function GET(
@@ -171,6 +174,24 @@ export async function POST(
       .update({ accepted_at: new Date().toISOString() })
       .eq('id', invite.id)
     
+    // Notify admins about new member
+    try {
+      const admins = await getOrgAdmins(invite.organization_id)
+      for (const admin of admins) {
+        if (await shouldNotify(admin.userId, invite.organization_id, 'employee_joined')) {
+          const emailContent = employeeJoinedEmail({
+            adminName: admin.name,
+            newMemberName: user.user_metadata?.full_name || user.email?.split('@')[0] || 'New member',
+            newMemberEmail: user.email || '',
+            role: invite.role,
+          })
+          await sendEmail({ to: admin.email, subject: emailContent.subject, html: emailContent.html })
+        }
+      }
+    } catch (notifErr) {
+      console.error('Error sending join notification:', notifErr)
+    }
+
     return NextResponse.json({ 
       success: true,
       message: 'Welcome to the team!',

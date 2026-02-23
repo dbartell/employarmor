@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { requirePermission } from '@/lib/permissions-server'
+import { sendEmail } from '@/lib/emails/send'
+import { inviteEmail } from '@/lib/emails/notification-templates'
 import type { MemberRole } from '@/types'
 
 export async function POST(req: NextRequest) {
@@ -78,9 +80,31 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to create invite' }, { status: 500 })
     }
     
-    // TODO: Send invite email via Resend
-    // For now, just return the invite with token
     const inviteUrl = `${req.nextUrl.origin}/invite/${invite.token}`
+
+    // Get org name for the email
+    const { data: orgData } = await supabase
+      .from('organizations')
+      .select('name')
+      .eq('id', membership.organization_id)
+      .single()
+
+    const expiresAt = new Date(invite.expires_at).toLocaleDateString('en-US', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    })
+
+    const emailContent = inviteEmail({
+      orgName: orgData?.name || 'your organization',
+      role,
+      inviteUrl,
+      expiresAt,
+    })
+
+    await sendEmail({
+      to: email.toLowerCase(),
+      subject: emailContent.subject,
+      html: emailContent.html,
+    })
     
     return NextResponse.json({ 
       success: true, 

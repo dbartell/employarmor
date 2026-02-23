@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
+import { sendEmail } from "@/lib/emails/send"
+import { toolRequestDecidedEmail } from "@/lib/emails/notification-templates"
+import { shouldNotify } from "@/lib/emails/should-notify"
+import { createClient as createServiceClient } from "@supabase/supabase-js"
 
 export async function POST(request: NextRequest) {
   try {
@@ -57,6 +61,31 @@ export async function POST(request: NextRequest) {
       actor_id: user.id,
       details: { conditions, reason, expires_at: expiresAt },
     })
+
+    // Notify the requesting employee
+    try {
+      if (entry.requested_by) {
+        const serviceClient = createServiceClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY!
+        )
+        const { data: userData } = await serviceClient.auth.admin.getUserById(entry.requested_by)
+        if (userData?.user?.email) {
+          const canNotify = await shouldNotify(entry.requested_by, entry.org_id, 'tool_request_decided')
+          if (canNotify) {
+            const emailContent = toolRequestDecidedEmail({
+              employeeName: userData.user.user_metadata?.full_name || userData.user.email.split('@')[0],
+              toolName: entry.tool_name || 'Unknown tool',
+              decision: action as 'approved' | 'denied',
+              adminNotes: reason || undefined,
+            })
+            await sendEmail({ to: userData.user.email, subject: emailContent.subject, html: emailContent.html })
+          }
+        }
+      }
+    } catch (notifErr) {
+      console.error('Error sending tool decision notification:', notifErr)
+    }
 
     return NextResponse.json({ success: true, entry })
   } catch (err: unknown) {

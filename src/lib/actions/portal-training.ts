@@ -4,6 +4,9 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { getCourseContent, type Course } from './training'
 import { getQuizQuestions } from '@/lib/constants/quizzes'
+import { sendEmail } from '@/lib/emails/send'
+import { trainingCompletedEmail } from '@/lib/emails/notification-templates'
+import { shouldNotify, getOrgAdmins } from '@/lib/emails/should-notify'
 
 export interface TrainingAssignment {
   id: string
@@ -171,6 +174,44 @@ export async function submitQuiz(
   
   if (passed) {
     await updateTrainingStatus(assignmentId, 'completed', score)
+
+    // Notify admins
+    try {
+      const supabase = await createClient()
+      const { data: assignment } = await supabase
+        .from('training_assignments')
+        .select('organization_id, employee_id, training_title')
+        .eq('id', assignmentId)
+        .single()
+
+      if (assignment) {
+        const { data: employee } = await supabase
+          .from('employee_profiles')
+          .select('full_name')
+          .eq('id', assignment.employee_id)
+          .single()
+
+        const admins = await getOrgAdmins(assignment.organization_id)
+        const completionDate = new Date().toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        })
+
+        for (const admin of admins) {
+          if (await shouldNotify(admin.userId, assignment.organization_id, 'training_completed')) {
+            const email = trainingCompletedEmail({
+              adminName: admin.name,
+              employeeName: employee?.full_name || 'An employee',
+              trackTitle: assignment.training_title || courseId,
+              completionDate,
+              score,
+            })
+            await sendEmail({ to: admin.email, subject: email.subject, html: email.html })
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Error sending training completion notification:', e)
+    }
   }
   
   return { score, passed, error: null }

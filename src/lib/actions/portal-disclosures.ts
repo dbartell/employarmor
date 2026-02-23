@@ -3,6 +3,9 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { DISCLOSURE_TEMPLATES } from '@/lib/constants/disclosures'
+import { sendEmail } from '@/lib/emails/send'
+import { disclosureSignedEmail } from '@/lib/emails/notification-templates'
+import { shouldNotify, getOrgAdmins } from '@/lib/emails/should-notify'
 
 export interface Disclosure {
   id: string
@@ -123,6 +126,42 @@ export async function signDisclosure(
   if (error) {
     console.error('Error signing disclosure:', error)
     return { error: error.message }
+  }
+
+  // Send notification to admins
+  try {
+    const { data: disclosure } = await supabase
+      .from('disclosure_acknowledgments')
+      .select('document_title, organization_id, employee_id')
+      .eq('id', disclosureId)
+      .single()
+
+    if (disclosure) {
+      const { data: employee } = await supabase
+        .from('employee_profiles')
+        .select('full_name')
+        .eq('id', disclosure.employee_id)
+        .single()
+
+      const admins = await getOrgAdmins(disclosure.organization_id)
+      const signedDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      })
+
+      for (const admin of admins) {
+        if (await shouldNotify(admin.userId, disclosure.organization_id, 'disclosure_signed')) {
+          const email = disclosureSignedEmail({
+            adminName: admin.name,
+            employeeName: employee?.full_name || 'An employee',
+            disclosureTitle: disclosure.document_title || 'Disclosure',
+            signedDate,
+          })
+          await sendEmail({ to: admin.email, subject: email.subject, html: email.html })
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Error sending disclosure notification:', e)
   }
   
   revalidatePath('/portal/disclosures')

@@ -2,6 +2,9 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { sendEmail } from '@/lib/emails/send'
+import { toolRequestSubmittedEmail } from '@/lib/emails/notification-templates'
+import { shouldNotify, getOrgAdmins } from '@/lib/emails/should-notify'
 
 export interface ToolRequest {
   id: string
@@ -69,6 +72,30 @@ export async function createToolRequest(
   if (error) {
     console.error('Error creating tool request:', error)
     return { request: null, error: error.message }
+  }
+
+  // Notify admins
+  try {
+    const { data: employee } = await supabase
+      .from('employee_profiles')
+      .select('full_name')
+      .eq('id', employeeId)
+      .single()
+
+    const admins = await getOrgAdmins(organizationId)
+    for (const admin of admins) {
+      if (await shouldNotify(admin.userId, organizationId, 'tool_request_submitted')) {
+        const email = toolRequestSubmittedEmail({
+          adminName: admin.name,
+          employeeName: employee?.full_name || 'An employee',
+          toolName: toolData.tool_name,
+          reason: toolData.use_case,
+        })
+        await sendEmail({ to: admin.email, subject: email.subject, html: email.html })
+      }
+    }
+  } catch (e) {
+    console.error('Error sending tool request notification:', e)
   }
   
   revalidatePath('/portal/tools')
