@@ -38,19 +38,32 @@ if (!fs.existsSync(ANALYSIS_DIR)) {
 function extractTextFromTSX(tsxContent) {
   let text = tsxContent;
   
-  // Remove comments
+  // Remove comments (both /* */ and //)
+  text = text.replace(/\/\*[\s\S]*?\*\//g, '');
+  text = text.replace(/\/\/.*/g, '');
   text = text.replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
   
   // Remove import statements
-  text = text.replace(/import\s+.*?from\s+['"].*?['"]/g, '');
+  text = text.replace(/import\s+.*?from\s+['"].*?['"];?/g, '');
   
   // Remove export statements
-  text = text.replace(/export\s+(const|default|function)\s+.*?=/g, '');
+  text = text.replace(/export\s+(const|default|function|class)\s+[\s\S]*?\{/g, '');
+  text = text.replace(/export\s+const\s+\w+\s*=\s*\{[\s\S]*?\}/g, '');
   
-  // Remove JSX tags but keep content
-  text = text.replace(/<[^>]+>/g, ' ');
+  // Remove script-like content in curly braces but preserve quoted strings
+  text = text.replace(/className=["'][^"']*["']/g, '');
+  text = text.replace(/\bhref=["'][^"']*["']/g, '');
   
-  // Remove curly braces content (JS expressions)
+  // Remove JSX self-closing tags
+  text = text.replace(/<\w+[^>]*\/>/g, ' ');
+  
+  // Remove opening tags but keep content
+  text = text.replace(/<\w+[^>]*>/g, ' ');
+  
+  // Remove closing tags
+  text = text.replace(/<\/\w+>/g, ' ');
+  
+  // Remove remaining curly brace expressions
   text = text.replace(/\{[^}]+\}/g, '');
   
   // Clean up whitespace
@@ -104,9 +117,13 @@ async function analyzeWithGoogleNLP(text, endpoint) {
     document: {
       type: 'PLAIN_TEXT',
       content: text.substring(0, 100000) // API limit
-    },
-    encodingType: 'UTF8'
+    }
   };
+  
+  // Only add encodingType for endpoints that support it (not classifyText)
+  if (endpoint !== 'classifyText') {
+    payload.encodingType = 'UTF8';
+  }
   
   try {
     const response = await fetch(url, {
