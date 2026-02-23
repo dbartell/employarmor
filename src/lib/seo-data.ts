@@ -78,9 +78,9 @@ export const STATES_WITH_LAWS = [
     slug: 'texas', 
     name: 'Texas', 
     code: 'TX',
-    laws: ['CUBI'],
-    effectiveDate: '2009-09-01',
-    summary: 'Biometric data capture requires consent'
+    laws: ['CUBI', 'TRAIGA'],
+    effectiveDate: '2026-01-01',
+    summary: 'TRAIGA prohibits intentional AI discrimination, requires disclosure of AI interactions. CUBI requires biometric data consent.'
   },
   { 
     slug: 'washington', 

@@ -1059,6 +1059,187 @@ Most companies only address AI-specific laws. By covering all 10 categories, you
             explanation: 'Federal laws apply nationwide. Every employer using AI in hiring must comply with anti-discrimination (Title VII), disability accommodation (ADA), age discrimination (ADEA), polygraph (EPPA), and consumer reporting (FCRA) requirements.'
           }
         ]
+      },
+      {
+        number: 6,
+        title: 'Texas TRAIGA Compliance',
+        description: 'Understanding the Texas Responsible AI Governance Act',
+        videoDuration: 480,
+        content: `
+## Texas TRAIGA Overview
+
+The Texas Responsible AI Governance Act (TRAIGA, HB 149) took effect January 1, 2026. While less prescriptive than NYC LL144 or Colorado AI Act, TRAIGA establishes important requirements for employers using AI in hiring decisions for Texas residents.
+
+### Key Principles
+
+TRAIGA takes an **intent-based liability** approach rather than impact-based. This means:
+- Liability requires proof of discriminatory *intent*, not just disparate impact
+- Focus is on preventing intentional AI misuse
+- Risk management policies serve as safe harbor defense
+
+### Prohibited Uses of AI
+
+TRAIGA prohibits developing or deploying AI systems **intended** for:
+1. **Behavioral manipulation or coercion** — AI designed to manipulate candidates into decisions
+2. **Discrimination** — Intentionally using AI to discriminate based on protected characteristics
+3. **Constitutional rights violations** — AI designed to infringe freedoms protected by U.S. or Texas constitutions
+4. **Unlawful content creation** — Deepfakes, unauthorized content using candidate likenesses
+
+### Disclosure Requirements
+
+Unlike NYC's detailed candidate notices, TRAIGA requires **high-level system disclosures**:
+- Purpose and intended use of the AI system
+- Type of data used for training/programming
+- Categories of data collected from users
+- Deployment context and benefits
+
+**Where to publish:** Company website, AI system documentation, or hiring portal — must be available before deployment
+
+**When to update:** Annually or when material changes occur
+
+### Texas Artificial Intelligence Council
+
+The Act creates the Texas Artificial Intelligence Council to:
+- Provide guidance on ethical AI use
+- Monitor the AI Regulatory Sandbox Program
+- Recommend policy reforms to the legislature
+- Study regulatory barriers to AI innovation
+
+### Penalties
+
+- Civil penalties: **$100,000 per violation**
+- Continuing violations: **$40,000 per day**
+- Enforcement: Exclusive to Texas Attorney General (no private right of action)
+- Sanctions: AG may recommend license suspension/revocation for regulated parties
+
+### AI Regulatory Sandbox
+
+Texas offers a 36-month safe harbor for testing innovative AI:
+- Immunity from state enforcement during testing
+- Requires application describing system, risks, benefits, mitigation plans
+- Managed by Department of Information Resources
+- Ideal for high-risk experimental AI before full deployment
+
+### Compliance Steps for Employers
+
+1. **Document Intent**
+   - Record decision-making processes during AI development/procurement
+   - Maintain proof of non-discriminatory purposes
+   - Train teams on prohibited intents
+
+2. **Publish Disclosures**
+   - Add TRAIGA disclosures to hiring portal or website
+   - Include: system purpose, data used, deployment context
+   - Review annually
+
+3. **Build Risk Management Policy**
+   - Section 551.008 of TRAIGA encourages risk management policies
+   - Policy serves as potential safe harbor defense
+   - Include oversight procedures, training, anti-discrimination checks
+
+4. **Constitutional Rights Assessment**
+   - Evaluate whether AI could infringe speech, due process, or other constitutional rights
+   - Document how AI respects individual freedoms
+
+5. **Monitor Texas AI Council**
+   - Track guidance and best practice recommendations
+   - Participate in sandbox if testing novel AI approaches
+
+### TRAIGA vs. Other State Laws
+
+**Less prescriptive than:**
+- NYC LL144 (no annual bias audits required)
+- Colorado AI Act (no impact assessments mandated)
+- Illinois AIVI (no per-candidate consent for video AI)
+
+**More flexible approach:**
+- Intent-based liability is harder for plaintiffs to prove
+- Risk management policies provide safe harbor
+- Focus on innovation-friendly framework
+
+**Still requires:**
+- System-level disclosures
+- Intent audits and documentation
+- Compliance with federal baseline (Title VII, ADA, ADEA)
+
+### Integration with Existing Compliance
+
+Texas employers must still comply with:
+- **CUBI (Biometric Identifier Act)** — Written consent before collecting biometric data
+- **Federal baseline** — Title VII, ADA, ADEA, EPPA, FCRA
+- **Multi-state operations** — If hiring in NYC, CO, IL, CA — those laws also apply
+
+### Action Items
+
+✓ Add Texas to your AI compliance jurisdiction map
+✓ Publish TRAIGA-compliant system disclosures on website
+✓ Update intent documentation in AI development/procurement
+✓ Add TRAIGA training to compliance program
+✓ Review AI contracts for vendor TRAIGA representations
+✓ Monitor Texas AI Council for evolving guidance
+        `,
+        quiz: [
+          {
+            id: 'a6q1',
+            question: 'What is TRAIGA\'s key legal framework for AI discrimination?',
+            options: [
+              'Strict liability — any disparate impact is illegal',
+              'Intent-based — requires proof of discriminatory intent',
+              'No discrimination standard',
+              'Same as federal Title VII'
+            ],
+            correctAnswer: 1,
+            explanation: 'TRAIGA uses intent-based liability, requiring proof that AI was designed or deployed with discriminatory intent, not just disparate impact.'
+          },
+          {
+            id: 'a6q2',
+            question: 'What disclosure requirement does TRAIGA impose on employers?',
+            options: [
+              'Per-candidate notification before each AI interaction',
+              'High-level system disclosures (purpose, data used, deployment context) published before deployment',
+              'Annual bias audit results',
+              'No disclosure requirement'
+            ],
+            correctAnswer: 1,
+            explanation: 'TRAIGA requires publishing high-level disclosures about AI system purpose, data used, and deployment context — not per-candidate notices like Illinois AIVI.'
+          },
+          {
+            id: 'a6q3',
+            question: 'What is the maximum civil penalty for a TRAIGA violation?',
+            options: [
+              '$1,000 per violation',
+              '$10,000 per violation',
+              '$100,000 per violation, $40,000/day for continuing violations',
+              'No monetary penalties'
+            ],
+            correctAnswer: 2,
+            explanation: 'TRAIGA authorizes civil penalties up to $100,000 per violation and $40,000 per day for continuing violations, enforced exclusively by the Texas Attorney General.'
+          },
+          {
+            id: 'a6q4',
+            question: 'What does the Texas AI Regulatory Sandbox provide?',
+            options: [
+              'Free AI development tools',
+              '36-month immunity from state enforcement while testing innovative AI',
+              'Tax credits for AI adoption',
+              'Exemption from all federal laws'
+            ],
+            correctAnswer: 1,
+            explanation: 'The Sandbox provides 36-month immunity from state enforcement for testing innovative AI, requiring application with risk/benefit assessments and mitigation plans.'
+          },
+          {
+            id: 'a6q5',
+            question: 'Texas employers using AI hiring tools must comply with:',
+            options: [
+              'Only TRAIGA',
+              'Only TRAIGA and CUBI',
+              'TRAIGA, CUBI, federal baseline (Title VII, ADA, ADEA), plus laws from other states where they hire',
+              'No laws — Texas has no AI hiring regulations'
+            ],
+            correctAnswer: 2,
+            explanation: 'Texas employers must comply with TRAIGA, CUBI (biometric consent), all federal baseline laws, AND laws from other states where they operate (e.g., NYC LL144 for NYC hires).'
+          }
+        ]
       }
     ]
   },

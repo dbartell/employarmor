@@ -649,6 +649,77 @@ export const complianceLaws: ComplianceLaw[] = [
   },
 
   // ─────────────────────────────────────────────
+  // TEXAS — TRAIGA (Responsible AI Governance Act)
+  // ─────────────────────────────────────────────
+  {
+    id: 'tx-traiga',
+    jurisdiction: 'TX',
+    jurisdictionName: 'Texas',
+    lawName: 'Texas Responsible AI Governance Act',
+    lawCode: 'HB 149',
+    effectiveDate: '2026-01-01',
+    summary:
+      'Regulates use of AI systems in Texas through intent-based prohibitions and disclosure requirements. Bans intentional AI discrimination and manipulation. Requires system-level disclosures. Creates Texas AI Council for oversight. Preempts local AI regulation.',
+    triggers: [
+      'AI-based resume screening or candidate ranking',
+      'Automated employment decision tools (AEDTs)',
+      'AI video interview analysis',
+      'AI-powered skills assessments',
+      'Any AI system substantially assisting hiring decisions for Texas residents',
+      'AI systems deployed by entities conducting business in Texas',
+    ],
+    requirements: [
+      {
+        id: 'tx-traiga-disclosure',
+        type: 'disclosure',
+        description: 'Publish AI system disclosures',
+        details:
+          'Deployers must provide high-level disclosures including: purpose and intended use of AI system, type of data used for training/programming, categories of data collected from users, deployment context and benefits. Must be publicly available before deployment (e.g., on company website or hiring portal).',
+        deadline: 'Before deployment, updated annually',
+        toolTypes: ['ats', 'screening', 'video-interview', 'assessment', 'chatbot', 'sourcing'],
+      },
+      {
+        id: 'tx-traiga-intent-prohibition',
+        type: 'notice',
+        description: 'Prohibited intentional AI uses',
+        details:
+          'Cannot develop or deploy AI systems INTENDED for: (1) behavioral manipulation or coercion, (2) discrimination based on protected characteristics, (3) infringement of constitutional rights, (4) creation of unlawful content including deepfakes. Intent-based liability requires proof of discriminatory purpose, not just disparate impact.',
+        toolTypes: ['all'],
+      },
+      {
+        id: 'tx-traiga-intent-documentation',
+        type: 'assessment',
+        description: 'Document non-discriminatory intent',
+        details:
+          'Maintain records of AI procurement, development, and deployment decision-making processes. Document that AI systems were not designed or deployed with prohibited intents. This documentation serves as evidence in AG enforcement actions.',
+        deadline: 'Ongoing during AI lifecycle',
+        toolTypes: ['ats', 'screening', 'video-interview', 'assessment'],
+      },
+      {
+        id: 'tx-traiga-risk-policy',
+        type: 'assessment',
+        description: 'AI risk management policy (safe harbor)',
+        details:
+          'Section 551.008 encourages development of AI risk management policies covering oversight, training, and anti-discrimination measures. Such policies may serve as safe harbor defense in enforcement actions. Should include: governance structure, training procedures, bias mitigation, constitutional rights assessment.',
+        toolTypes: ['all'],
+      },
+    ],
+    penalties: [
+      'Civil penalties up to $100,000 per violation',
+      'Continuing violations: $40,000 per day',
+      'Enforcement exclusively by Texas Attorney General',
+      'No private right of action',
+      'AG may recommend license suspension/revocation for regulated entities',
+    ],
+    exemptions: [
+      'AI Regulatory Sandbox participants (36-month immunity during testing)',
+      'Certain financial services uses (subject to separate oversight)',
+    ],
+    relatedLaws: ['tx-cubi', 'nyc-ll144', 'co-sb24205', 'il-hrab'],
+    category: 'ai-specific',
+  },
+
+  // ─────────────────────────────────────────────
   // WASHINGTON — Biometric Privacy
   // ─────────────────────────────────────────────
   {
