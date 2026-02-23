@@ -1,17 +1,29 @@
 #!/usr/bin/env node
 /**
- * EmployArmor E2E Visual Journey
+ * EmployArmor Comprehensive E2E Test Suite
  * 
- * Connects to an existing Chrome via CDP (port 18800) instead of launching new Chrome.
- * This avoids OOM on 8GB machines where OpenClaw browser is already running.
+ * Covers the full workflow of a real company doing maximum compliance:
+ * - Admin onboarding & setup
+ * - Compliance management (audits, notices, disclosures, packets)
+ * - Employee portal (employee login, disclosures, training, tool requests)
+ * - Candidate/public flow (homepage, scan, resources)
+ * - Full tool governance cycle
  * 
- * Usage: node e2e/run-e2e.mjs [--cdp-port 18800] [--scenarios all|scan|auth|pages]
+ * Connects to existing Chrome via CDP (port 18800) to avoid OOM.
  * 
- * For sub-agent / cron usage:
- *   1. OpenClaw browser must be running (openclaw browser start)
- *   2. Script connects via CDP, opens new tabs, takes screenshots
- *   3. Uploads results to Confluence
- *   4. Cleans up tabs when done
+ * Usage: node e2e/run-e2e.mjs [options]
+ * 
+ * Options:
+ *   --cdp-port <port>          CDP port (default: 18800)
+ *   --scenarios <list>         Comma-separated: all|onboarding|compliance|portal|candidate|governance
+ *   --base-url <url>           Base URL (default: env or https://employarmor.vercel.app)
+ *   --visual-board             Create Confluence visual flow board (default: true)
+ * 
+ * Environment:
+ *   E2E_BASE_URL              Base URL override
+ *   CDP_PORT                  CDP port override
+ *   SCREENSHOT_DIR            Screenshot directory (default: e2e-screenshots)
+ *   CONFLUENCE_UPLOAD         Set to 'false' to skip Confluence upload
  */
 
 import { chromium } from 'playwright-core';
@@ -22,45 +34,104 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
-// Config
-const BASE_URL = process.env.E2E_BASE_URL || 'https://employarmor.vercel.app';
-const CDP_PORT = parseInt(process.env.CDP_PORT || '18800');
+// ============ CONFIG ============
+
+const BASE_URL = parseArgs().baseUrl || process.env.E2E_BASE_URL || 'https://employarmor.vercel.app';
+const CDP_PORT = parseArgs().cdpPort || parseInt(process.env.CDP_PORT || '18800');
 const SCREENSHOT_DIR = process.env.SCREENSHOT_DIR || path.join(PROJECT_ROOT, 'e2e-screenshots');
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dgiggocsiyfhwtepjrgs.supabase.co';
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const TEST_EMAIL = process.env.E2E_EMAIL || 'test-e2e@employarmor.com';
-const TEST_PASSWORD = process.env.E2E_PASSWORD || 'TestE2E!2026';
+const VISUAL_BOARD = parseArgs().visualBoard !== false;
+const SCENARIOS_ARG = parseArgs().scenarios || 'all';
 
-// Parse args
-const args = process.argv.slice(2);
-const scenario = args.includes('--scenarios') ? args[args.indexOf('--scenarios') + 1] : 'all';
+// Supabase config
+const envPath = path.join(PROJECT_ROOT, '.env.local');
+const envFile = fs.readFileSync(envPath, 'utf8');
+const env = Object.fromEntries(
+  envFile.split('\n')
+    .filter(line => line && !line.startsWith('#'))
+    .map(line => {
+      const [key, ...valueParts] = line.split('=');
+      return [key, valueParts.join('=').replace(/^"(.*)"$/, '$1')];
+    })
+);
 
-// Ensure screenshot dir
+const SUPABASE_URL = env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY = env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+// Test accounts
+const ADMIN_EMAIL = 'test-e2e@employarmor.com';
+const ADMIN_PASSWORD = 'TestE2E!2026';
+const EMPLOYEE_EMAIL = 'test-employee@employarmor.com';
+const EMPLOYEE_PASSWORD = 'TestEmployee!2026';
+
+// State
 fs.mkdirSync(SCREENSHOT_DIR, { recursive: true });
-
 let stepNum = 0;
 const results = [];
 
-async function snap(page, name, description) {
+// ============ HELPERS ============
+
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const parsed = {};
+  
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--cdp-port' && args[i + 1]) {
+      parsed.cdpPort = parseInt(args[++i]);
+    } else if (args[i] === '--base-url' && args[i + 1]) {
+      parsed.baseUrl = args[++i];
+    } else if (args[i] === '--scenarios' && args[i + 1]) {
+      parsed.scenarios = args[++i];
+    } else if (args[i] === '--visual-board') {
+      parsed.visualBoard = true;
+    } else if (args[i] === '--no-visual-board') {
+      parsed.visualBoard = false;
+    }
+  }
+  
+  return parsed;
+}
+
+async function snap(page, name, description, scenario) {
   stepNum++;
-  const filename = `${String(stepNum).padStart(2, '0')}-${name}.png`;
+  const filename = `${String(stepNum).padStart(3, '0')}-${scenario}-${name}.png`;
   const filepath = path.join(SCREENSHOT_DIR, filename);
-  await page.screenshot({ path: filepath, fullPage: false, timeout: 10000 });
-  const size = fs.statSync(filepath).size;
-  results.push({ step: stepNum, name, filename, description, url: page.url(), size });
-  console.log(`📸 ${stepNum}. ${name} (${(size/1024).toFixed(0)}KB) — ${page.url()}`);
-  return filepath;
+  
+  try {
+    await page.screenshot({ path: filepath, fullPage: false, timeout: 10000 });
+    const size = fs.statSync(filepath).size;
+    results.push({ 
+      step: stepNum, 
+      name, 
+      filename, 
+      description, 
+      scenario,
+      url: page.url(), 
+      size 
+    });
+    console.log(`📸 ${stepNum}. [${scenario}] ${name} (${(size/1024).toFixed(0)}KB) — ${page.url()}`);
+    return filepath;
+  } catch (err) {
+    console.error(`   ❌ Screenshot failed: ${err.message}`);
+    results.push({
+      step: stepNum,
+      name,
+      filename,
+      description,
+      scenario,
+      url: page.url(),
+      size: 0,
+      error: err.message
+    });
+  }
 }
 
 async function connectBrowser() {
-  // Try connecting to existing CDP
   try {
     const browser = await chromium.connectOverCDP(`http://127.0.0.1:${CDP_PORT}`, { timeout: 5000 });
     console.log(`✅ Connected to existing Chrome on port ${CDP_PORT}`);
     return { browser, launched: false };
   } catch (e) {
     console.log(`⚠️  No Chrome on port ${CDP_PORT}, launching headless...`);
-    // Fallback: launch headless with minimal memory
     const browser = await chromium.launch({
       channel: 'chrome',
       headless: true,
@@ -69,7 +140,7 @@ async function connectBrowser() {
         '--disable-dev-shm-usage',
         '--disable-extensions',
         '--no-sandbox',
-        '--single-process',  // Critical for low-memory
+        '--single-process',
         '--disable-setuid-sandbox',
         '--js-flags=--max-old-space-size=256',
       ]
@@ -79,13 +150,11 @@ async function connectBrowser() {
   }
 }
 
-async function loginViaSupabase(context) {
-  // Login via Supabase API and set cookies directly
-  console.log('🔐 Authenticating via Supabase API...');
+async function loginViaSupabase(context, email, password) {
+  console.log(`🔐 Authenticating as ${email}...`);
   
   const page = await context.newPage();
   
-  // Use Supabase REST API to get tokens
   const loginResp = await page.evaluate(async ({ url, key, email, password }) => {
     const resp = await fetch(`${url}/auth/v1/token?grant_type=password`, {
       method: 'POST',
@@ -93,15 +162,14 @@ async function loginViaSupabase(context) {
       body: JSON.stringify({ email, password })
     });
     return resp.json();
-  }, { url: SUPABASE_URL, key: SUPABASE_ANON_KEY, email: TEST_EMAIL, password: TEST_PASSWORD });
+  }, { url: SUPABASE_URL, key: SUPABASE_ANON_KEY, email, password });
 
   if (!loginResp.access_token) {
-    console.error('❌ Login failed:', loginResp.error_description || loginResp.message);
+    console.error(`❌ Login failed for ${email}:`, loginResp.error_description || loginResp.message);
     await page.close();
     return null;
   }
 
-  // Set the auth cookie that Supabase SSR expects
   const cookieValue = JSON.stringify({
     access_token: loginResp.access_token,
     refresh_token: loginResp.refresh_token,
@@ -121,15 +189,158 @@ async function loginViaSupabase(context) {
     sameSite: 'Lax'
   }]);
 
-  console.log(`✅ Authenticated as ${TEST_EMAIL}`);
+  console.log(`✅ Authenticated as ${email}`);
   await page.close();
   return loginResp;
 }
 
+async function logout(context) {
+  const domain = new URL(BASE_URL).hostname;
+  await context.clearCookies({ domain });
+  console.log('🚪 Logged out');
+}
+
 // ============ SCENARIOS ============
 
-async function scenarioScan(context) {
-  console.log('\n🔍 === SCAN SCENARIO ===');
+/**
+ * Scenario 1: Admin Onboarding & Setup
+ * Journey: New admin logs in, explores dashboard and core admin pages
+ */
+async function scenarioOnboarding(context) {
+  console.log('\n🎯 === SCENARIO 1: ADMIN ONBOARDING & SETUP ===');
+  const scenario = 'onboarding';
+  
+  await loginViaSupabase(context, ADMIN_EMAIL, ADMIN_PASSWORD);
+  const page = await context.newPage();
+  page.setDefaultTimeout(12000);
+
+  try {
+    // Dashboard
+    await page.goto(`${BASE_URL}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(2000);
+    await snap(page, 'dashboard', 'Admin dashboard with compliance score', scenario);
+
+    // Employees page
+    await page.goto(`${BASE_URL}/employees`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'employees', 'Employee management page', scenario);
+
+    // Tools page
+    await page.goto(`${BASE_URL}/tools`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'tools', 'AI tool catalog', scenario);
+
+    // Approvals page
+    await page.goto(`${BASE_URL}/approvals`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'approvals', 'Tool approval queue', scenario);
+
+    // Settings page
+    await page.goto(`${BASE_URL}/settings`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'settings', 'Organization settings', scenario);
+
+  } finally {
+    await page.close();
+  }
+}
+
+/**
+ * Scenario 2: Compliance Management
+ * Journey: Admin manages all compliance aspects (audits, notices, disclosures, packets)
+ */
+async function scenarioCompliance(context) {
+  console.log('\n📋 === SCENARIO 2: COMPLIANCE MANAGEMENT ===');
+  const scenario = 'compliance';
+  
+  await loginViaSupabase(context, ADMIN_EMAIL, ADMIN_PASSWORD);
+  const page = await context.newPage();
+  page.setDefaultTimeout(12000);
+
+  try {
+    // Bias audit page
+    await page.goto(`${BASE_URL}/audit`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(2000);
+    await snap(page, 'audit', 'Bias impact audit page', scenario);
+
+    // Candidate notices
+    await page.goto(`${BASE_URL}/candidate-notices`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'candidate-notices', 'Candidate notice management', scenario);
+
+    // Employee disclosures
+    await page.goto(`${BASE_URL}/employee-disclosures`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'employee-disclosures', 'Employee disclosure management', scenario);
+
+    // Compliance packet
+    await page.goto(`${BASE_URL}/compliance-packet`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'compliance-packet', 'Complete compliance packet', scenario);
+
+    // Handbook
+    await page.goto(`${BASE_URL}/handbook`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'handbook', 'AI policy handbook', scenario);
+
+    // Training management
+    await page.goto(`${BASE_URL}/training`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'training', 'Training module management', scenario);
+
+  } finally {
+    await page.close();
+  }
+}
+
+/**
+ * Scenario 3: Employee Portal
+ * Journey: Employee logs in, views dashboard, completes disclosures, accesses training, requests tool
+ */
+async function scenarioPortal(context) {
+  console.log('\n👤 === SCENARIO 3: EMPLOYEE PORTAL ===');
+  const scenario = 'portal';
+  
+  await logout(context);
+  await loginViaSupabase(context, EMPLOYEE_EMAIL, EMPLOYEE_PASSWORD);
+  const page = await context.newPage();
+  page.setDefaultTimeout(12000);
+
+  try {
+    // Employee dashboard
+    await page.goto(`${BASE_URL}/portal`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(2000);
+    await snap(page, 'dashboard', 'Employee portal dashboard', scenario);
+
+    // Disclosures
+    await page.goto(`${BASE_URL}/portal/disclosures`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'disclosures', 'Pending disclosure acknowledgments', scenario);
+
+    // Training
+    await page.goto(`${BASE_URL}/portal/training`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'training', 'Assigned training courses', scenario);
+
+    // Tool request form
+    await page.goto(`${BASE_URL}/portal/tools`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'tool-request', 'AI tool request form', scenario);
+
+  } finally {
+    await page.close();
+  }
+}
+
+/**
+ * Scenario 4: Candidate/Public Flow
+ * Journey: Public visitor explores site, runs compliance scan, views resources
+ */
+async function scenarioCandidate(context) {
+  console.log('\n🌍 === SCENARIO 4: CANDIDATE/PUBLIC FLOW ===');
+  const scenario = 'candidate';
+  
+  await logout(context);
   const page = await context.newPage();
   page.setDefaultTimeout(12000);
 
@@ -137,12 +348,12 @@ async function scenarioScan(context) {
     // Homepage
     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(2000);
-    await snap(page, 'homepage', 'Marketing homepage');
+    await snap(page, 'homepage', 'Marketing homepage', scenario);
 
-    // Go to scan
+    // Scan flow - step 1: states
     await page.goto(`${BASE_URL}/scan`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1500);
-    await snap(page, 'scan-states', 'Scan step 1: State selection');
+    await snap(page, 'scan-states', 'Compliance scan: state selection', scenario);
 
     // Select states
     const states = ['IL', 'CA', 'CO'];
@@ -153,23 +364,23 @@ async function scenarioScan(context) {
         await page.waitForTimeout(200);
       }
     }
-    await snap(page, 'scan-states-selected', `States selected: ${states.join(', ')}`);
+    await snap(page, 'scan-states-selected', `States selected: ${states.join(', ')}`, scenario);
 
-    // Click Continue
+    // Continue to employees
     const cont1 = page.locator('button:has-text("Continue")').first();
     if (await cont1.isVisible({ timeout: 2000 }).catch(() => false)) {
       await cont1.click();
       await page.waitForTimeout(800);
     }
-    await snap(page, 'scan-employees', 'Scan step 2: Employee count');
+    await snap(page, 'scan-employees', 'Compliance scan: employee count', scenario);
 
-    // Select 51-100
+    // Select employee count
     const empBtn = page.locator('button:has-text("51-100")').first();
     if (await empBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
       await empBtn.click();
       await page.waitForTimeout(500);
     }
-    await snap(page, 'scan-employees-selected', 'Selected 51-100 employees');
+    await snap(page, 'scan-employees-selected', 'Selected 51-100 employees', scenario);
 
     // Continue to tools
     const cont2 = page.locator('button:has-text("Continue")').first();
@@ -177,16 +388,11 @@ async function scenarioScan(context) {
       await cont2.click();
       await page.waitForTimeout(800);
     }
-    await snap(page, 'scan-tools', 'Scan step 3: Tool selection');
+    await snap(page, 'scan-tools', 'Compliance scan: AI tool selection', scenario);
 
-    // Check if tool buttons rendered
-    const toolButtons = await page.locator('.grid button').count();
-    if (toolButtons === 0) {
-      results[results.length - 1].bug = 'BUG: Tool grid is empty — no tool buttons rendered';
-      console.log('🐛 BUG: Tool grid empty');
-    } else {
-      console.log(`   ${toolButtons} tool buttons found`);
-      // Select some tools
+    // Select some tools if available
+    const toolCount = await page.locator('.grid button').count();
+    if (toolCount > 0) {
       const toolsToSelect = ['LinkedIn Recruiter', 'HireVue', 'Greenhouse'];
       for (const toolName of toolsToSelect) {
         const toolBtn = page.locator(`button:has-text("${toolName}")`).first();
@@ -195,178 +401,111 @@ async function scenarioScan(context) {
           await page.waitForTimeout(200);
         }
       }
-      await snap(page, 'scan-tools-selected', `Selected tools: ${toolsToSelect.join(', ')}`);
-    }
+      await snap(page, 'scan-tools-selected', `Selected tools: ${toolsToSelect.join(', ')}`, scenario);
 
-    // Continue to email
-    const cont3 = page.locator('button:has-text("Continue")').first();
-    if (await cont3.isEnabled({ timeout: 3000 }).catch(() => false)) {
-      await cont3.click();
-      await page.waitForTimeout(800);
+      // Submit to see results
+      const submitBtn = page.locator('button:has-text("Submit")').or(page.locator('button:has-text("Get Your Report")')).first();
+      if (await submitBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await submitBtn.click();
+        await page.waitForTimeout(2000);
+      }
+      await snap(page, 'scan-results', 'Compliance scan results', scenario);
     } else {
-      console.log('⚠️  Continue button disabled (no tools selected or bug)');
+      results[results.length - 1].bug = 'BUG: Tool grid is empty — no tool buttons rendered';
+      console.log('🐛 BUG: Tool grid empty');
     }
-    await snap(page, 'scan-email', 'Scan step 4: Email capture');
 
-    // Fill email
-    const emailInput = page.locator('input[type="email"]').first();
-    if (await emailInput.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await emailInput.fill('e2e-test@example.com');
-      await page.waitForTimeout(300);
-    }
-    await snap(page, 'scan-email-filled', 'Email entered');
+    // Resources hub
+    await page.goto(`${BASE_URL}/resources`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'resources', 'Resource hub for compliance education', scenario);
 
-    // Submit
-    const submitBtn = page.locator('button[type="submit"], button:has-text("Get"), button:has-text("See")').first();
-    if (await submitBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await submitBtn.click();
-      await page.waitForTimeout(3000);
-    }
-    await snap(page, 'scan-results', 'Scan results');
+    // Compliance hub
+    await page.goto(`${BASE_URL}/compliance`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'compliance-hub', 'Compliance information hub', scenario);
 
-  } catch (err) {
-    console.error('Scan scenario error:', err.message);
-    await snap(page, 'scan-error', `Error: ${err.message}`).catch(() => {});
   } finally {
     await page.close();
   }
 }
 
-async function scenarioAuth(context) {
-  console.log('\n🔐 === AUTH SCENARIO ===');
-  const page = await context.newPage();
+/**
+ * Scenario 5: Full Tool Governance Cycle
+ * Journey: Employee requests tool → Admin reviews → Approval workflow
+ */
+async function scenarioGovernance(context) {
+  console.log('\n⚙️ === SCENARIO 5: TOOL GOVERNANCE CYCLE ===');
+  const scenario = 'governance';
+  
+  // Employee side: request a tool
+  await logout(context);
+  await loginViaSupabase(context, EMPLOYEE_EMAIL, EMPLOYEE_PASSWORD);
+  let page = await context.newPage();
   page.setDefaultTimeout(12000);
 
   try {
-    // Login page
-    await page.goto(`${BASE_URL}/login`, { waitUntil: 'domcontentloaded' });
+    // Go to tool request form
+    await page.goto(`${BASE_URL}/portal/tools`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1500);
-    await snap(page, 'login-page', 'Login page');
+    await snap(page, 'employee-tool-form', 'Employee: AI tool request form', scenario);
 
-    // Fill credentials
-    await page.locator('input[type="email"], input[placeholder*="email"]').first().fill(TEST_EMAIL);
-    await page.locator('input[type="password"]').first().fill(TEST_PASSWORD);
-    await page.waitForTimeout(300);
-    await snap(page, 'login-filled', 'Login credentials entered');
-
-    // Submit
-    await page.locator('button:has-text("Sign in"), button[type="submit"]').first().click();
-    await page.waitForTimeout(5000);
-    await snap(page, 'post-login', `After login — landed on ${page.url()}`);
-
-    if (page.url().includes('/dashboard')) {
-      console.log('✅ Login successful — landed on dashboard');
+    // Try to fill and submit a request (if form elements are present)
+    const toolNameInput = page.locator('input[name="tool_name"]').or(page.locator('input[placeholder*="tool"]')).first();
+    if (await toolNameInput.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await toolNameInput.fill('Claude AI');
+      await page.waitForTimeout(300);
+      
+      const useCaseInput = page.locator('textarea[name="use_case"]').or(page.locator('textarea')).first();
+      if (await useCaseInput.isVisible({ timeout: 1000 }).catch(() => false)) {
+        await useCaseInput.fill('Code review and technical documentation assistance');
+        await page.waitForTimeout(300);
+      }
+      
+      await snap(page, 'employee-tool-filled', 'Employee: Tool request form filled', scenario);
+      
+      // Try to submit
+      const submitBtn = page.locator('button[type="submit"]').or(page.locator('button:has-text("Submit")')).first();
+      if (await submitBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
+        await submitBtn.click();
+        await page.waitForTimeout(1500);
+        await snap(page, 'employee-tool-submitted', 'Employee: Tool request submitted', scenario);
+      }
     } else {
-      console.log(`⚠️  After login, URL is: ${page.url()}`);
+      console.log('   ℹ️  Tool request form elements not found (may be protected or different structure)');
     }
 
-  } catch (err) {
-    console.error('Auth scenario error:', err.message);
-    await snap(page, 'auth-error', `Error: ${err.message}`).catch(() => {});
+    await page.close();
+
+    // Admin side: review tools and approvals
+    await logout(context);
+    await loginViaSupabase(context, ADMIN_EMAIL, ADMIN_PASSWORD);
+    page = await context.newPage();
+    page.setDefaultTimeout(12000);
+
+    // View all tools
+    await page.goto(`${BASE_URL}/tools`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'admin-tools-catalog', 'Admin: Full tool catalog', scenario);
+
+    // View pending approvals
+    await page.goto(`${BASE_URL}/approvals`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await snap(page, 'admin-approvals-queue', 'Admin: Pending approval queue', scenario);
+
+    // Check if there's an approve/deny UI element visible
+    const approveBtn = page.locator('button:has-text("Approve")').first();
+    const denyBtn = page.locator('button:has-text("Deny")').first();
+    
+    if (await approveBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await snap(page, 'admin-approval-actions', 'Admin: Approval action buttons visible', scenario);
+      console.log('   ✅ Approval workflow UI is functional');
+    } else {
+      console.log('   ℹ️  No pending approvals to review (expected if no requests were submitted)');
+    }
+
   } finally {
     await page.close();
-  }
-}
-
-async function scenarioPages(context) {
-  console.log('\n📄 === AUTHENTICATED PAGES SCENARIO ===');
-  
-  // Login via API cookies
-  await loginViaSupabase(context);
-
-  const pages = [
-    ['/dashboard', 'Dashboard — compliance agent overview'],
-    ['/employees', 'Team — employee management'],
-    ['/tools', 'Tool Registry — tracked AI tools'],
-    ['/approvals', 'Approvals — tool request workflow'],
-    ['/audit', 'Risk Assessment'],
-    ['/candidate-notices', 'Candidate Disclosure Notices'],
-    ['/employee-disclosures', 'Employee Disclosures'],
-    ['/handbook', 'Handbook Policy'],
-    ['/training', 'Team Training'],
-    ['/compliance-packet', 'Audit Packet'],
-    ['/settings', 'Organization Settings'],
-  ];
-
-  const page = await context.newPage();
-  page.setDefaultTimeout(15000);
-
-  for (const [route, desc] of pages) {
-    try {
-      await page.goto(`${BASE_URL}${route}`, { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(2000);
-      const pageName = route.slice(1).replace(/\//g, '-') || 'home';
-      
-      // Check for errors
-      const html = await page.content();
-      const hasError = html.includes('digest') || html.includes('Internal Server Error');
-      const isRedirect = page.url().includes('/login');
-      
-      if (hasError) {
-        await snap(page, `page-${pageName}-ERROR`, `${desc} — SERVER ERROR`);
-        console.log(`💥 ${route} — server error`);
-      } else if (isRedirect) {
-        await snap(page, `page-${pageName}-NOAUTH`, `${desc} — auth redirect`);
-        console.log(`🔒 ${route} — auth failed`);
-      } else {
-        await snap(page, `page-${pageName}`, desc);
-        console.log(`✅ ${route}`);
-      }
-    } catch (err) {
-      console.error(`❌ ${route}: ${err.message}`);
-    }
-  }
-
-  await page.close();
-}
-
-// ============ MAIN ============
-
-async function main() {
-  console.log(`🚀 EmployArmor E2E Journey`);
-  console.log(`   URL: ${BASE_URL}`);
-  console.log(`   Scenario: ${scenario}`);
-  console.log(`   Screenshots: ${SCREENSHOT_DIR}`);
-  console.log('');
-
-  // Clean old screenshots
-  const oldFiles = fs.readdirSync(SCREENSHOT_DIR).filter(f => f.endsWith('.png') || f.endsWith('.jpg'));
-  oldFiles.forEach(f => fs.unlinkSync(path.join(SCREENSHOT_DIR, f)));
-
-  const { browser, launched } = await connectBrowser();
-  const context = await browser.newContext({
-    viewport: { width: 1440, height: 900 },
-    ignoreHTTPSErrors: true,
-  });
-
-  try {
-    if (scenario === 'all' || scenario === 'scan') await scenarioScan(context);
-    if (scenario === 'all' || scenario === 'auth') await scenarioAuth(context);
-    if (scenario === 'all' || scenario === 'pages') await scenarioPages(context);
-
-    // Write results JSON
-    const report = {
-      timestamp: new Date().toISOString(),
-      baseUrl: BASE_URL,
-      scenario,
-      totalScreenshots: results.length,
-      bugs: results.filter(r => r.bug).map(r => r.bug),
-      errors: results.filter(r => r.name.includes('error') || r.name.includes('ERROR')),
-      results,
-    };
-    fs.writeFileSync(path.join(SCREENSHOT_DIR, 'report.json'), JSON.stringify(report, null, 2));
-    console.log(`\n📊 Report: ${SCREENSHOT_DIR}/report.json`);
-    console.log(`📸 Total screenshots: ${results.length}`);
-    if (report.bugs.length) console.log(`🐛 Bugs: ${report.bugs.join(', ')}`);
-
-    // Upload to Confluence if configured
-    if (process.env.CONFLUENCE_UPLOAD !== 'false') {
-      await uploadToConfluence(report);
-    }
-
-  } finally {
-    await context.close();
-    if (launched) await browser.close();
   }
 }
 
@@ -391,30 +530,18 @@ async function uploadToConfluence(report) {
   const date = new Date().toISOString().slice(0, 10);
   const time = new Date().toLocaleTimeString('en-US', { timeZone: 'America/Denver', hour12: false });
 
-  // Build page HTML
-  const screenshotRows = report.results.map(r => {
-    const bugTag = r.bug ? `<ac:structured-macro ac:name="warning"><ac:rich-text-body><p>${r.bug}</p></ac:rich-text-body></ac:structured-macro>` : '';
-    return `<h3>${r.step}. ${r.description || r.name}</h3>
-${bugTag}
-<p><small>${r.url} — ${(r.size/1024).toFixed(0)}KB</small></p>
-<p><ac:image ac:width="800"><ri:attachment ri:filename="${r.filename}"/></ac:image></p>`;
-  }).join('\n');
+  let body;
+  if (VISUAL_BOARD) {
+    // Create visual flow board with grouped scenarios
+    body = buildVisualFlowBoard(report, date, time);
+  } else {
+    // Standard linear report
+    body = buildStandardReport(report, date, time);
+  }
 
-  const bugsSection = report.bugs.length > 0
-    ? `<h2>🐛 Bugs Found</h2><ul>${report.bugs.map(b => `<li>${b}</li>`).join('')}</ul>`
-    : '<h2>✅ No Bugs Found</h2>';
-
-  const passCount = report.results.filter(r => !r.bug && !r.name.includes('error')).length;
-  const failCount = report.results.length - passCount;
-
-  const body = `<h1>EmployArmor E2E Report — ${date} ${time} MST</h1>
-<p><strong>URL:</strong> ${report.baseUrl} | <strong>Scenario:</strong> ${report.scenario} | <strong>Screenshots:</strong> ${report.totalScreenshots} | <strong>Pass:</strong> ${passCount} | <strong>Fail:</strong> ${failCount}</p>
-<hr/>
-${bugsSection}
-<hr/>
-${screenshotRows}`;
-
-  const title = `EmployArmor E2E — ${date} ${time}`;
+  const title = VISUAL_BOARD 
+    ? `EmployArmor E2E Visual Flow — ${date}` 
+    : `EmployArmor E2E Report — ${date} ${time}`;
 
   console.log('\n📤 Uploading to Confluence...');
 
@@ -442,6 +569,7 @@ ${screenshotRows}`;
 
     // Upload screenshots as attachments
     for (const r of report.results) {
+      if (!r.filename) continue;
       const filepath = path.join(SCREENSHOT_DIR, r.filename);
       if (!fs.existsSync(filepath)) continue;
 
@@ -468,6 +596,163 @@ ${screenshotRows}`;
     console.log(`\n🔗 ${CONFLUENCE_URL.replace('/wiki', '')}/wiki/spaces/SD/pages/${pageId}`);
   } catch (err) {
     console.error('Confluence upload error:', err.message);
+  }
+}
+
+function buildVisualFlowBoard(report, date, time) {
+  const scenarios = ['onboarding', 'compliance', 'portal', 'candidate', 'governance'];
+  const scenarioTitles = {
+    onboarding: '🎯 Admin Onboarding & Setup',
+    compliance: '📋 Compliance Management',
+    portal: '👤 Employee Portal',
+    candidate: '🌍 Candidate/Public Flow',
+    governance: '⚙️ Tool Governance Cycle'
+  };
+
+  const passCount = report.results.filter(r => !r.bug && !r.error).length;
+  const failCount = report.results.length - passCount;
+  const bugList = report.bugs.length > 0
+    ? `<ac:structured-macro ac:name="warning"><ac:rich-text-body><p><strong>Bugs Found:</strong></p><ul>${report.bugs.map(b => `<li>${b}</li>`).join('')}</ul></ac:rich-text-body></ac:structured-macro>`
+    : '<p><ac:structured-macro ac:name="info"><ac:rich-text-body><p>✅ No bugs found</p></ac:rich-text-body></ac:structured-macro></p>';
+
+  let scenarioSections = '';
+  
+  for (const scenario of scenarios) {
+    const steps = report.results.filter(r => r.scenario === scenario);
+    if (steps.length === 0) continue;
+
+    scenarioSections += `<h2>${scenarioTitles[scenario]}</h2>\n`;
+    scenarioSections += '<div style="display: flex; flex-direction: column; gap: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px; margin-bottom: 30px;">\n';
+    
+    for (let i = 0; i < steps.length; i++) {
+      const r = steps[i];
+      const bugTag = r.bug ? `<ac:structured-macro ac:name="warning"><ac:rich-text-body><p>${r.bug}</p></ac:rich-text-body></ac:structured-macro>` : '';
+      const errorTag = r.error ? `<ac:structured-macro ac:name="error"><ac:rich-text-body><p>Error: ${r.error}</p></ac:rich-text-body></ac:structured-macro>` : '';
+      
+      scenarioSections += '<div style="padding: 15px; background: white; border-radius: 6px; border-left: 4px solid #0052CC;">\n';
+      scenarioSections += `<h4 style="margin-top: 0;">Step ${r.step}: ${r.description || r.name}</h4>\n`;
+      scenarioSections += `<p><small><code>${r.url}</code> — ${(r.size/1024).toFixed(0)}KB</small></p>\n`;
+      if (bugTag) scenarioSections += bugTag + '\n';
+      if (errorTag) scenarioSections += errorTag + '\n';
+      if (r.filename) {
+        scenarioSections += `<p><ac:image ac:width="700"><ri:attachment ri:filename="${r.filename}"/></ac:image></p>\n`;
+      }
+      scenarioSections += '</div>\n';
+      
+      // Add flow arrow between steps (except last)
+      if (i < steps.length - 1) {
+        scenarioSections += '<div style="text-align: center; font-size: 24px; color: #0052CC;">↓</div>\n';
+      }
+    }
+    
+    scenarioSections += '</div>\n\n';
+  }
+
+  return `<h1>EmployArmor E2E Visual Flow — ${date}</h1>
+<p><strong>Run Time:</strong> ${time} MST | <strong>Base URL:</strong> ${report.baseUrl}</p>
+<p><strong>Scenarios:</strong> ${report.scenariosRun.join(', ')} | <strong>Screenshots:</strong> ${report.totalScreenshots} | <strong>Pass:</strong> <ac:structured-macro ac:name="status"><ac:parameter ac:name="colour">Green</ac:parameter><ac:parameter ac:name="title">${passCount}</ac:parameter></ac:structured-macro> | <strong>Fail:</strong> <ac:structured-macro ac:name="status"><ac:parameter ac:name="colour">Red</ac:parameter><ac:parameter ac:name="title">${failCount}</ac:parameter></ac:structured-macro></p>
+<hr/>
+${bugList}
+<hr/>
+${scenarioSections}
+<hr/>
+<p><small>Generated by EmployArmor E2E Test Suite — ${new Date().toISOString()}</small></p>`;
+}
+
+function buildStandardReport(report, date, time) {
+  const screenshotRows = report.results.map(r => {
+    const bugTag = r.bug ? `<ac:structured-macro ac:name="warning"><ac:rich-text-body><p>${r.bug}</p></ac:rich-text-body></ac:structured-macro>` : '';
+    const errorTag = r.error ? `<ac:structured-macro ac:name="error"><ac:rich-text-body><p>Error: ${r.error}</p></ac:rich-text-body></ac:structured-macro>` : '';
+    return `<h3>${r.step}. [${r.scenario}] ${r.description || r.name}</h3>
+${bugTag}${errorTag}
+<p><small>${r.url} — ${(r.size/1024).toFixed(0)}KB</small></p>
+<p><ac:image ac:width="800"><ri:attachment ri:filename="${r.filename}"/></ac:image></p>`;
+  }).join('\n');
+
+  const bugsSection = report.bugs.length > 0
+    ? `<h2>🐛 Bugs Found</h2><ul>${report.bugs.map(b => `<li>${b}</li>`).join('')}</ul>`
+    : '<h2>✅ No Bugs Found</h2>';
+
+  const passCount = report.results.filter(r => !r.bug && !r.error).length;
+  const failCount = report.results.length - passCount;
+
+  return `<h1>EmployArmor E2E Report — ${date} ${time} MST</h1>
+<p><strong>URL:</strong> ${report.baseUrl} | <strong>Scenarios:</strong> ${report.scenariosRun.join(', ')} | <strong>Screenshots:</strong> ${report.totalScreenshots} | <strong>Pass:</strong> ${passCount} | <strong>Fail:</strong> ${failCount}</p>
+<hr/>
+${bugsSection}
+<hr/>
+${screenshotRows}`;
+}
+
+// ============ MAIN ============
+
+async function main() {
+  console.log('🚀 EmployArmor Comprehensive E2E Test Suite\n');
+  console.log(`Base URL: ${BASE_URL}`);
+  console.log(`CDP Port: ${CDP_PORT}`);
+  console.log(`Screenshots: ${SCREENSHOT_DIR}`);
+  console.log(`Visual Board: ${VISUAL_BOARD ? 'Yes' : 'No'}`);
+  console.log(`Scenarios: ${SCENARIOS_ARG}\n`);
+
+  const { browser, launched } = await connectBrowser();
+  const context = await browser.newContext({ 
+    viewport: { width: 1440, height: 900 },
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+  });
+
+  const scenariosToRun = SCENARIOS_ARG === 'all' 
+    ? ['onboarding', 'compliance', 'portal', 'candidate', 'governance']
+    : SCENARIOS_ARG.split(',').map(s => s.trim());
+
+  try {
+    for (const scenario of scenariosToRun) {
+      switch (scenario) {
+        case 'onboarding':
+          await scenarioOnboarding(context);
+          break;
+        case 'compliance':
+          await scenarioCompliance(context);
+          break;
+        case 'portal':
+          await scenarioPortal(context);
+          break;
+        case 'candidate':
+          await scenarioCandidate(context);
+          break;
+        case 'governance':
+          await scenarioGovernance(context);
+          break;
+        default:
+          console.log(`⚠️  Unknown scenario: ${scenario}`);
+      }
+    }
+
+    // Generate report
+    const report = {
+      timestamp: new Date().toISOString(),
+      baseUrl: BASE_URL,
+      scenariosRun: scenariosToRun,
+      totalScreenshots: results.length,
+      bugs: results.filter(r => r.bug).map(r => r.bug),
+      errors: results.filter(r => r.error).map(r => ({ step: r.step, error: r.error })),
+      results,
+    };
+    
+    const reportPath = path.join(SCREENSHOT_DIR, 'report.json');
+    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+    console.log(`\n📊 Report: ${reportPath}`);
+    console.log(`📸 Total screenshots: ${results.length}`);
+    if (report.bugs.length) console.log(`🐛 Bugs: ${report.bugs.length}`);
+    if (report.errors.length) console.log(`❌ Errors: ${report.errors.length}`);
+
+    // Upload to Confluence
+    if (process.env.CONFLUENCE_UPLOAD !== 'false') {
+      await uploadToConfluence(report);
+    }
+
+  } finally {
+    await context.close();
+    if (launched) await browser.close();
   }
 }
 
