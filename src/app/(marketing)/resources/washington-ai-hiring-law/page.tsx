@@ -6,450 +6,430 @@ import { LegalDisclaimer } from "@/components/legal-disclaimer"
 import Link from "next/link"
 
 export const metadata = {
-  title: "Washington State AI Hiring Law (SB 5116): Compliance Guide 2026 | EmployArmor",
-  description: "Complete guide to Washington State AI hiring law SB 5116. Learn disclosure requirements, impact assessment obligations, and compliance steps.",
+  title: "Washington State AI Hiring Laws 2026: Regulations & Proposals | EmployArmor",
+  description: "Complete guide to Washington State AI hiring regulations. Understand current protections, pending legislation, biometric privacy law, and compliance requirements for WA employers.",
 }
 
 export default function WashingtonAIHiringLawPage() {
   return (
     <ArticleLayout
-      title="Washington State AI Hiring Law: SB 5116 Compliance Guide"
-      description="Washington's approach to AI hiring regulation balances innovation with accountability. Here's what employers need to know about SB 5116 and related consumer protection requirements."
+      title="Washington State AI Hiring: Current Laws & Future Regulations"
+      description="Washington has not yet enacted comprehensive AI-specific hiring legislation like Illinois, Colorado, or California—but several proposals are advancing through the legislature, and existing employment and privacy protections already apply to AI tools. Here's what Washington employers need to know."
       category="State Compliance"
-      readTime="9 min read"
+      readTime="11 min read"
       publishedDate="February 23, 2026"
     >
       <AuthorByline publishDate="2026-02-23" />
 
+      <div className="bg-amber-50 border-l-4 border-amber-500 p-6 my-8">
+        <p className="font-semibold text-amber-900 mb-2">🔔 Important Context: No Comprehensive Law Yet</p>
+        <p className="text-amber-800">
+          As of February 2026, Washington State has <strong>not enacted</strong> a comprehensive AI-specific hiring law 
+          comparable to Illinois HB 3773, NYC Local Law 144, or Colorado SB24-205. However, several bills are advancing 
+          through the legislature, and existing state laws—including the Washington Law Against Discrimination (WLAD), 
+          My Health My Data Act, and proposed biometric privacy protections—create compliance obligations for employers 
+          using AI in hiring.
+        </p>
+      </div>
+
       <p>
-        Washington State passed SB 5116 in 2024, establishing requirements for automated employment decision systems. 
-        While less prescriptive than NYC's Local Law 144 or Illinois' AIVIA, Washington's law creates meaningful 
-        compliance obligations—particularly around disclosure and impact assessments for high-risk AI systems.
+        Washington employers should not interpret the absence of AI-specific legislation as permission to use AI hiring 
+        tools without oversight. Existing employment discrimination laws, consumer protection regulations, and privacy 
+        statutes all apply to algorithmic decision-making—and pending legislation may establish explicit requirements 
+        as early as 2027.
+      </p>
+
+      <h2>Current Legal Framework for AI Hiring in Washington</h2>
+
+      <h3>Washington Law Against Discrimination (WLAD) - RCW 49.60</h3>
+
+      <p>
+        Washington's primary employment anti-discrimination statute prohibits discrimination based on race, sex, age, 
+        disability, religion, national origin, sexual orientation, gender identity, and other protected characteristics. 
+        WLAD applies to AI hiring tools just as it applies to human decision-making.
+      </p>
+
+      <p><strong>Key implications for AI hiring:</strong></p>
+
+      <ul>
+        <li><strong>Disparate impact liability:</strong> If an AI tool disproportionately screens out candidates from 
+        protected classes, employers face liability under WLAD even if discrimination was unintentional. The Washington 
+        State Human Rights Commission (WSHRC) and courts apply disparate impact analysis similar to federal Title VII 
+        frameworks.</li>
+        <li><strong>Reasonable accommodation:</strong> AI assessment tools must accommodate candidates with disabilities. 
+        If an automated video interview platform penalizes speech patterns associated with disabilities, employers violate 
+        WLAD and the Americans with Disabilities Act (ADA).</li>
+        <li><strong>Employer responsibility:</strong> Employers cannot outsource liability to AI vendors. Using a third-party 
+        tool that produces discriminatory outcomes exposes you to WLAD violations.</li>
+      </ul>
+
+      <p><strong>Enforcement:</strong></p>
+      <ul>
+        <li>Washington State Human Rights Commission (WSHRC) investigates complaints</li>
+        <li>Private right of action—individuals can sue directly in state court</li>
+        <li>Remedies include back pay, front pay, compensatory damages, and attorney's fees</li>
+        <li>No statutory cap on damages (unlike federal Title VII)</li>
+      </ul>
+
+      <h3>My Health My Data Act (MHMDA) - Chapter 19.373 RCW</h3>
+
+      <p>
+        Enacted in 2023 and effective March 31, 2024, MHMDA is one of the nation's most comprehensive health data privacy 
+        laws. While primarily focused on health data, MHMDA's broad definition may capture certain AI hiring tools—particularly 
+        those analyzing biometric or health-related information.
+      </p>
+
+      <p><strong>When MHMDA applies to hiring:</strong></p>
+
+      <ul>
+        <li><strong>Biometric health data:</strong> AI tools analyzing voice stress, facial expressions for emotional states, 
+        or physiological indicators (heart rate from video analysis) may collect "consumer health data" under MHMDA</li>
+        <li><strong>Mental health inferences:</strong> Personality assessments or AI that infers psychological characteristics 
+        could fall within MHMDA's scope if they analyze or infer mental health conditions</li>
+        <li><strong>Broad definition:</strong> MHMDA defines consumer health data as information "that identifies or is reasonably 
+        capable of being associated with a consumer and identifies the consumer's health status"—potentially capturing more 
+        than traditional medical records</li>
+      </ul>
+
+      <p><strong>MHMDA compliance requirements:</strong></p>
+
+      <ul>
+        <li><strong>Consent before collection:</strong> Obtain consent before collecting health data from applicants</li>
+        <li><strong>Privacy policy disclosure:</strong> Clearly disclose what health data is collected and how it's used</li>
+        <li><strong>Geofencing restrictions:</strong> Prohibits geofencing around healthcare facilities to identify health status 
+        (less relevant for hiring but demonstrates law's breadth)</li>
+        <li><strong>Sale prohibition:</strong> Cannot sell consumer health data</li>
+        <li><strong>Security requirements:</strong> Must implement reasonable security measures</li>
+      </ul>
+
+      <p><strong>Enforcement:</strong></p>
+      <ul>
+        <li>Washington Attorney General has exclusive enforcement authority</li>
+        <li>Civil penalties up to $7,500 per violation</li>
+        <li>No private right of action</li>
+      </ul>
+
+      <h3>Consumer Protection Act (CPA) - Chapter 19.86 RCW</h3>
+
+      <p>
+        Washington's CPA is a broad consumer protection statute prohibiting unfair or deceptive practices. While not specific 
+        to employment, the Attorney General has authority to pursue CPA enforcement for deceptive AI practices—including 
+        failure to disclose AI use in hiring or making false claims about AI fairness.
+      </p>
+
+      <p><strong>Potential CPA violations in AI hiring:</strong></p>
+
+      <ul>
+        <li>Failing to disclose use of AI in hiring decisions</li>
+        <li>Misrepresenting AI tool capabilities or fairness</li>
+        <li>Collecting more data than disclosed in privacy policies</li>
+        <li>Using AI in ways inconsistent with vendor representations</li>
+      </ul>
+
+      <h2>Pending Legislation: What May Be Coming</h2>
+
+      <h3>Overview of Proposed Bills</h3>
+
+      <p>
+        Multiple AI-related bills were introduced in the 2024-2026 Washington legislative sessions. While none have been 
+        enacted as of February 2026, several proposals signal regulatory priorities:
+      </p>
+
+      <h4>Algorithmic Accountability and Transparency</h4>
+
+      <p>
+        Proposed legislation would require:
+      </p>
+
+      <ul>
+        <li><strong>Impact assessments:</strong> Businesses deploying high-risk AI systems (including employment decisions) 
+        would conduct and document impact assessments evaluating potential discrimination, privacy risks, and accuracy</li>
+        <li><strong>Consumer notifications:</strong> Notice to individuals before automated decision-making affects them</li>
+        <li><strong>Right to explanation:</strong> Consumers could request information about how automated systems influenced 
+        decisions</li>
+        <li><strong>Human review rights:</strong> Options to request human review of automated employment decisions</li>
+      </ul>
+
+      <h4>Biometric Privacy Protection</h4>
+
+      <p>
+        Following Illinois' BIPA model, proposed Washington legislation would regulate biometric data in employment:
+      </p>
+
+      <ul>
+        <li>Written consent before collecting biometric identifiers (facial geometry, voiceprints, fingerprints)</li>
+        <li>Disclosure of retention schedules and destruction timelines</li>
+        <li>Private right of action with statutory damages ($1,000-$5,000 per violation)</li>
+        <li>Prohibition on selling biometric data</li>
+      </ul>
+
+      <h4>AI Hiring Disclosure Requirements</h4>
+
+      <p>
+        Proposals modeled after NYC Local Law 144 would require:
+      </p>
+
+      <ul>
+        <li>Pre-use notification to applicants</li>
+        <li>Disclosure of what data is collected and analyzed</li>
+        <li>Explanation of how AI influences hiring decisions</li>
+        <li>Annual bias audits for automated employment decision tools</li>
+        <li>Public posting of audit results</li>
+      </ul>
+
+      <h3>Legislative Timeline</h3>
+
+      <p>
+        <strong>2024-2025:</strong> Multiple AI bills introduced; none advanced to governor's desk. Committee hearings 
+        highlighted employer concerns about compliance burdens and vendor reluctance to provide bias audit data.
+      </p>
+
+      <p>
+        <strong>2026 Session (ongoing):</strong> Revised proposals with narrower scope and longer implementation timelines 
+        are under consideration. Industry groups and labor advocates continue negotiations.
+      </p>
+
+      <p>
+        <strong>Likely timeline if enacted:</strong> 12-18 month implementation period after passage, meaning effective dates 
+        in 2027 or later.
       </p>
 
       <div className="bg-blue-50 border-l-4 border-blue-500 p-6 my-8">
-        <p className="font-semibold text-blue-900 mb-2">Key Requirements:</p>
-        <ul className="text-blue-800 space-y-1">
-          <li>✓ Disclosure to candidates when AI is used in hiring</li>
-          <li>✓ Impact assessments for high-risk automated systems</li>
-          <li>✓ Consumer protection enforcement mechanisms</li>
-          <li>✓ Biometric data privacy protections (separate law)</li>
+        <p className="font-semibold text-blue-900 mb-2">Monitor Legislative Developments</p>
+        <p className="text-blue-800">
+          Washington employers should actively monitor legislative activity. Bills can move quickly once momentum builds. 
+          Subscribe to Washington State Legislature bill tracking for HB and SB proposals containing "artificial intelligence," 
+          "automated decision," or "algorithmic."
+        </p>
+        <p className="text-blue-800 mt-2">
+          <strong>Key committees to watch:</strong> House Labor & Workplace Standards, Senate Labor & Commerce, House 
+          Innovation, Community & Economic Development, and Technology & Economic Development
+        </p>
+      </div>
+
+      <h2>Best Practices for Washington Employers (Even Without Specific Law)</h2>
+
+      <h3>1. Conduct Voluntary Bias Testing</h3>
+
+      <p>
+        Even without a legal mandate, proactively test AI tools for disparate impact. This serves multiple purposes:
+      </p>
+
+      <ul>
+        <li><strong>WLAD compliance:</strong> Demonstrates due diligence if discriminatory outcomes are challenged</li>
+        <li><strong>Federal compliance:</strong> Aligns with EEOC expectations for selection procedures</li>
+        <li><strong>Preparedness:</strong> If Washington enacts audit requirements, you're already compliant</li>
+        <li><strong>Risk mitigation:</strong> Identifies problems before they result in complaints or lawsuits</li>
+      </ul>
+
+      <p><strong>Recommended testing approach:</strong></p>
+      <ul>
+        <li>Annual analysis of selection rates by race/ethnicity and sex/gender</li>
+        <li>Calculate impact ratios (compare selection rate of each group to highest-performing group)</li>
+        <li>Investigate any ratio below 0.80 (four-fifths rule threshold)</li>
+        <li>Document findings and corrective actions</li>
+      </ul>
+
+      <h3>2. Provide Transparent Disclosures</h3>
+
+      <p>
+        Disclose AI use even if not legally required:
+      </p>
+
+      <div className="bg-gray-50 border rounded-lg p-6 my-6">
+        <p className="font-semibold text-gray-900 mb-3">Sample Washington AI Hiring Disclosure:</p>
+        <p className="text-gray-700 mb-2">
+          <strong>Use of Automated Technology in Hiring</strong>
+        </p>
+        <p className="text-gray-700 mb-3">
+          [Company Name] uses automated decision-making technology to assist in evaluating job applications. This includes 
+          software that analyzes resumes, scores assessment responses, and ranks candidates based on qualifications and 
+          job fit.
+        </p>
+        <p className="text-gray-700 mb-2">
+          <strong>What This Means for You:</strong>
+        </p>
+        <ul className="text-gray-700 mb-3 list-disc list-inside">
+          <li>Your application materials may be analyzed by algorithms that identify relevant skills and experience</li>
+          <li>Assessment responses may be automatically scored and compared to job requirements</li>
+          <li>Automated outputs help recruiters prioritize candidates, but humans make final hiring decisions</li>
         </ul>
+        <p className="text-gray-700">
+          If you have questions about our use of automated technology or believe it has affected your application unfairly, 
+          contact [hr@company.com] or [phone number]. You may request human review of any automated decision.
+        </p>
       </div>
 
-      <h2>What is Washington SB 5116?</h2>
+      <h3>3. Implement Human Oversight</h3>
 
       <p>
-        Senate Bill 5116, effective March 31, 2024, regulates automated employment decision systems under Washington's 
-        consumer protection framework. The law requires:
+        Maintain meaningful human involvement in hiring decisions:
       </p>
 
       <ul>
-        <li><strong>Notice and disclosure</strong> when automated systems are used in employment decisions</li>
-        <li><strong>Impact assessments</strong> for AI systems deemed "high-risk"</li>
-        <li><strong>Algorithmic discrimination protections</strong> aligned with federal and state anti-discrimination law</li>
-        <li><strong>Enforcement</strong> via Washington Attorney General under Consumer Protection Act</li>
+        <li>AI can screen, score, or recommend—but humans make final decisions</li>
+        <li>Recruiters must have authority to override AI recommendations</li>
+        <li>Document when and why AI recommendations are overridden</li>
+        <li>Train staff to recognize potential AI bias</li>
       </ul>
 
-      <h3>Legislative Context</h3>
+      <h3>4. Vendor Due Diligence</h3>
 
       <p>
-        Washington's AI law was part of a broader consumer protection and privacy legislative package. The approach 
-        emphasizes transparency and risk management rather than prescriptive technical requirements like bias audits.
-      </p>
-
-      <h2>Scope: What's Covered</h2>
-
-      <h3>Automated Employment Decision Systems</h3>
-
-      <p>
-        The law applies to systems that use algorithms, machine learning, or AI to:
+        Thoroughly vet AI hiring vendors:
       </p>
 
       <ul>
-        <li>Screen job applicants</li>
-        <li>Evaluate candidates</li>
-        <li>Make or substantially influence hiring, promotion, or termination decisions</li>
-        <li>Determine compensation or work assignments</li>
+        <li>Request bias testing results and methodologies</li>
+        <li>Verify WLAD and ADA compliance claims</li>
+        <li>Require contractual commitments to notify you of model changes</li>
+        <li>Ensure vendor cooperation with any future audits or investigations</li>
+        <li>Obtain indemnification for vendor-caused discrimination (though this doesn't eliminate your liability)</li>
       </ul>
 
-      <p><strong>Examples of covered tools:</strong></p>
-      <ul>
-        <li>Resume screening AI</li>
-        <li>Video interview analysis platforms</li>
-        <li>Skills assessment tools with automated scoring</li>
-        <li>Candidate ranking and matching systems</li>
-        <li>Chatbot-based screening interviews</li>
-      </ul>
-
-      <h3>What's NOT Covered</h3>
-
-      <ul>
-        <li>Simple keyword filtering (no machine learning/AI)</li>
-        <li>Applicant tracking systems that only organize data without evaluation</li>
-        <li>Scheduling and administrative automation</li>
-        <li>Background check services (unless they use AI to evaluate results)</li>
-      </ul>
-
-      <h2>Disclosure Requirements</h2>
+      <h3>5. Document Compliance Efforts</h3>
 
       <p>
-        Employers using automated employment decision systems in Washington must provide <strong>clear notice</strong> 
-        to candidates and employees. While the law doesn't specify exact disclosure language, best practices include:
-      </p>
-
-      <h3>What to Disclose</h3>
-
-      <ul>
-        <li>That an automated system is being used</li>
-        <li>What the system evaluates (skills, qualifications, traits)</li>
-        <li>How the system influences employment decisions</li>
-        <li>How candidates can request more information or human review</li>
-      </ul>
-
-      <h3>When to Disclose</h3>
-
-      <p>
-        The law requires disclosure "at or before" the time the automated system is used. Conservative approach:
+        Create a paper trail demonstrating good faith:
       </p>
 
       <ul>
-        <li><strong>Job postings:</strong> Include general notice of AI use</li>
-        <li><strong>Application stage:</strong> Specific disclosure before AI evaluation begins</li>
-        <li><strong>Assessment invitations:</strong> Remind candidates of AI use before they participate</li>
+        <li>Maintain records of bias testing</li>
+        <li>Document vendor assessments and selection criteria</li>
+        <li>Track candidate notifications and disclosures</li>
+        <li>Preserve evidence of human oversight</li>
+        <li>Retain records for at least 3 years (federal EEOC standard)</li>
       </ul>
 
-      <h3>Sample Washington-Compliant Disclosure</h3>
+      <h2>Comparison: Washington vs. Other States</h2>
 
-      <blockquote className="border-l-4 border-gray-300 pl-4 my-6 text-gray-700 bg-gray-50 p-4 text-sm">
-        <p className="font-semibold mb-2">Automated Hiring Technology Notice</p>
-        <p className="mb-2">
-          [Company Name] uses automated decision-making technology to assist in evaluating job applicants. This 
-          technology analyzes [specific factors—e.g., qualifications, skills, work history] to [specific use—e.g., 
-          "identify candidates for interview," "rank applicants based on job fit"].
-        </p>
-        <p className="mb-2">
-          While automated systems assist our hiring process, final employment decisions are made by humans. If you 
-          have questions about our use of automated technology or wish to request human review of any automated 
-          decision, contact [email/phone].
-        </p>
-        <p>
-          For more information about your rights under Washington law, visit [link to state resources or company policy].
-        </p>
-      </blockquote>
-
-      <h2>Impact Assessment Requirements</h2>
+      <table className="w-full my-8 border-collapse border border-gray-300">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="border border-gray-300 p-3 text-left">State</th>
+            <th className="border border-gray-300 p-3 text-left">Status</th>
+            <th className="border border-gray-300 p-3 text-left">Key Requirements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="border border-gray-300 p-3"><strong>Washington</strong></td>
+            <td className="border border-gray-300 p-3">No comprehensive law; proposals pending</td>
+            <td className="border border-gray-300 p-3">WLAD anti-discrimination, MHMDA health data privacy, voluntary best practices</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="border border-gray-300 p-3"><strong>Illinois</strong></td>
+            <td className="border border-gray-300 p-3">Enacted (HB 3773, effective Jan 2026)</td>
+            <td className="border border-gray-300 p-3">Pre-use notice, non-discrimination requirement, regular assessments</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 p-3"><strong>Colorado</strong></td>
+            <td className="border border-gray-300 p-3">Enacted (SB24-205, effective Feb 2026)</td>
+            <td className="border border-gray-300 p-3">Impact assessments, disclosures, opt-out rights, appeal process</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="border border-gray-300 p-3"><strong>California</strong></td>
+            <td className="border border-gray-300 p-3">CCPA ADMT regulations (effective 2026-2027)</td>
+            <td className="border border-gray-300 p-3">Pre-use notice, opt-out, risk assessments, CPPA submissions</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 p-3"><strong>NYC</strong></td>
+            <td className="border border-gray-300 p-3">Enacted (Local Law 144, effective 2023)</td>
+            <td className="border border-gray-300 p-3">Annual bias audits, public posting, 10-day advance notice</td>
+          </tr>
+        </tbody>
+      </table>
 
       <p>
-        For "high-risk" automated employment systems, Washington law requires <strong>algorithmic impact assessments</strong>. 
-        While the law doesn't define "high-risk" with precision, guidance suggests systems are high-risk if they:
+        Washington employers benefit from observing other states' implementation challenges. Common issues include:
       </p>
 
       <ul>
-        <li>Make or substantially replace human decision-making</li>
-        <li>Have potential for significant impact on employment opportunities</li>
-        <li>Process large volumes of candidates</li>
-        <li>Use sensitive or complex data inputs</li>
-        <li>Have limited transparency or explainability</li>
+        <li>Vendor reluctance to provide audit data or bias testing results</li>
+        <li>Difficulty defining what qualifies as "AI" or "automated decision-making"</li>
+        <li>Challenges establishing alternative processes for opt-out requests</li>
+        <li>Resource constraints for small employers</li>
       </ul>
 
-      <h3>What an Impact Assessment Includes</h3>
+      <h2>Practical Compliance Roadmap for Washington Employers</h2>
 
-      <p>
-        Washington's framework is modeled on privacy impact assessments. A compliant assessment should evaluate:
-      </p>
+      <h3>Immediate Actions (Now)</h3>
 
       <ul>
-        <li><strong>Purpose and use:</strong> What the system does and why it's being used</li>
-        <li><strong>Data inputs:</strong> What data is collected and analyzed</li>
-        <li><strong>Decision-making logic:</strong> How the system reaches conclusions (to extent explainable)</li>
-        <li><strong>Potential harms:</strong> Risks of discrimination, bias, privacy violations, or unfair outcomes</li>
-        <li><strong>Mitigation measures:</strong> Steps taken to reduce identified risks</li>
-        <li><strong>Human oversight:</strong> How humans review and can override automated decisions</li>
-        <li><strong>Monitoring:</strong> Ongoing evaluation of system performance</li>
+        <li>☐ Inventory all AI and automated tools used in hiring</li>
+        <li>☐ Review tools for potential WLAD discrimination risks</li>
+        <li>☐ Assess whether tools collect health data under MHMDA</li>
+        <li>☐ Implement candidate disclosures (even if not legally required)</li>
+        <li>☐ Conduct voluntary bias testing</li>
+        <li>☐ Document human oversight processes</li>
+        <li>☐ Train HR staff on AI risks and compliance</li>
       </ul>
 
-      <h3>Frequency of Impact Assessments</h3>
-
-      <p>
-        The law doesn't specify frequency, but best practice:
-      </p>
+      <h3>If/When Legislation Passes</h3>
 
       <ul>
-        <li><strong>Before deployment:</strong> Initial impact assessment before using a new AI system</li>
-        <li><strong>After material changes:</strong> Re-assess if the system is significantly updated</li>
-        <li><strong>Annually:</strong> Regular review even if system hasn't changed (models drift over time)</li>
-        <li><strong>Post-incident:</strong> Re-assess if problems are discovered or complaints received</li>
+        <li>☐ Review specific requirements and effective dates</li>
+        <li>☐ Update disclosures to match statutory language</li>
+        <li>☐ Commission independent bias audits if required</li>
+        <li>☐ Complete impact assessments</li>
+        <li>☐ Establish opt-out and appeal processes</li>
+        <li>☐ Update vendor contracts with compliance terms</li>
+        <li>☐ Refresh HR training on new requirements</li>
       </ul>
 
-      <h3>Documentation and Retention</h3>
-
-      <p>
-        Washington law doesn't explicitly require public posting of impact assessments (unlike NYC bias audits), but 
-        employers should:
-      </p>
+      <h3>Ongoing</h3>
 
       <ul>
-        <li>Retain assessment documentation for at least 3 years</li>
-        <li>Make assessments available to regulators upon request</li>
-        <li>Consider making summaries available to candidates (transparency builds trust)</li>
+        <li>☐ Monitor legislative developments quarterly</li>
+        <li>☐ Review selection rate data quarterly</li>
+        <li>☐ Annual bias testing</li>
+        <li>☐ Update disclosures when tools change</li>
+        <li>☐ Maintain compliance documentation</li>
       </ul>
 
-      <h2>Algorithmic Discrimination Protections</h2>
+      <h2>Key Takeaways for Washington Employers</h2>
 
-      <p>
-        Washington's law emphasizes that automated systems must not discriminate. This aligns with federal and state 
-        anti-discrimination law but adds specific accountability mechanisms:
-      </p>
-
-      <h3>Prohibited Practices</h3>
-
-      <ul>
-        <li>Using automated systems that produce disparate impact on protected classes</li>
-        <li>Collecting or using protected class data inappropriately in algorithms</li>
-        <li>Deploying systems without reasonable steps to prevent discrimination</li>
-        <li>Failing to provide human oversight and review mechanisms</li>
+      <ul className="space-y-2 my-8">
+        <li>✓ <strong>No comprehensive AI hiring law yet,</strong> but existing anti-discrimination and privacy protections 
+        apply to AI tools</li>
+        <li>✓ <strong>WLAD liability risk is real</strong> — disparate impact from AI can trigger complaints and lawsuits</li>
+        <li>✓ <strong>My Health My Data Act</strong> may apply if AI analyzes health-related biometric data</li>
+        <li>✓ <strong>Pending legislation</strong> could establish explicit requirements as early as 2027</li>
+        <li>✓ <strong>Proactive compliance</strong> (voluntary bias testing, transparent disclosures) reduces legal risk and 
+        prepares for future regulations</li>
+        <li>✓ <strong>Monitor other states</strong> — Washington proposals borrow heavily from Illinois, Colorado, and NYC frameworks</li>
+        <li>✓ <strong>Vendor due diligence is critical</strong> — you can't outsource liability for discriminatory AI tools</li>
       </ul>
-
-      <h3>Affirmative Obligations</h3>
-
-      <p>
-        Employers should:
-      </p>
-
-      <ul>
-        <li>Test automated systems for discriminatory outcomes before deployment</li>
-        <li>Monitor systems continuously for bias</li>
-        <li>Maintain human review capacity</li>
-        <li>Provide candidates with mechanisms to challenge automated decisions</li>
-      </ul>
-
-      <h2>Biometric Data Privacy (Separate Law)</h2>
-
-      <p>
-        In addition to SB 5116, Washington passed <strong>HB 1493</strong> (effective March 31, 2024) regulating 
-        biometric data in employment. This impacts AI hiring tools that use:
-      </p>
-
-      <ul>
-        <li>Facial recognition or analysis</li>
-        <li>Voice analysis</li>
-        <li>Fingerprint or retina scanning</li>
-        <li>Other biometric identifiers</li>
-      </ul>
-
-      <h3>HB 1493 Requirements</h3>
-
-      <ul>
-        <li><strong>Notice:</strong> Inform employees/candidates before collecting biometric data</li>
-        <li><strong>Consent:</strong> Obtain written consent (similar to Illinois BIPA)</li>
-        <li><strong>Purpose limitation:</strong> Use biometric data only for stated purposes</li>
-        <li><strong>Data protection:</strong> Implement reasonable security measures</li>
-        <li><strong>Retention limits:</strong> Delete biometric data when no longer needed</li>
-      </ul>
-
-      <p>
-        <strong>Practical impact:</strong> If your video interview platform analyzes facial features or voice patterns, 
-        you need both SB 5116 disclosure (automated system use) AND HB 1493 biometric consent.
-      </p>
-
-      <h2>Enforcement and Penalties</h2>
-
-      <h3>Enforcement Authority</h3>
-
-      <p>
-        Washington Attorney General enforces SB 5116 under the Consumer Protection Act (CPA). Violations can result in:
-      </p>
-
-      <ul>
-        <li><strong>Civil penalties:</strong> Up to $2,500 per violation</li>
-        <li><strong>Injunctive relief:</strong> Court orders to stop using non-compliant systems</li>
-        <li><strong>Corrective action:</strong> Required remediation and compliance measures</li>
-        <li><strong>Costs and fees:</strong> Defendants may pay AG's investigation and litigation costs</li>
-      </ul>
-
-      <h3>Private Right of Action</h3>
-
-      <p>
-        Unlike some states, Washington's AI law doesn't create a private right of action for individual candidates. 
-        However, candidates can:
-      </p>
-
-      <ul>
-        <li>File complaints with the AG's office</li>
-        <li>Bring discrimination claims under Washington Law Against Discrimination (WLAD)</li>
-        <li>Bring federal claims under Title VII, ADA, etc.</li>
-        <li>Pursue consumer protection claims if other CPA violations exist</li>
-      </ul>
-
-      <h3>Current Enforcement Activity</h3>
-
-      <p>
-        As of Q1 2026, Washington AG has:
-      </p>
-
-      <ul>
-        <li>Opened <strong>12 investigations</strong> into AI hiring practices</li>
-        <li>Issued <strong>compliance guidance</strong> for employers</li>
-        <li>Partnered with EEOC on <strong>joint investigations</strong></li>
-        <li>No public enforcement actions yet, but several cases under review</li>
-      </ul>
-
-      <h2>Comparison to Other State Laws</h2>
-
-      <div className="overflow-x-auto my-6">
-        <table className="min-w-full border border-gray-200 rounded-lg text-sm">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-900 border-b">Requirement</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-900 border-b">Washington</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-900 border-b">NYC LL144</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-900 border-b">Illinois AIVIA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b">
-              <td className="px-3 py-2 text-gray-900 font-medium">Disclosure</td>
-              <td className="px-3 py-2 text-green-600">Required</td>
-              <td className="px-3 py-2 text-green-600">Required (10 days advance)</td>
-              <td className="px-3 py-2 text-green-600">Required (before use)</td>
-            </tr>
-            <tr className="border-b bg-gray-50">
-              <td className="px-3 py-2 text-gray-900 font-medium">Consent</td>
-              <td className="px-3 py-2 text-gray-500">Not required</td>
-              <td className="px-3 py-2 text-gray-500">Not required</td>
-              <td className="px-3 py-2 text-green-600">Required</td>
-            </tr>
-            <tr className="border-b">
-              <td className="px-3 py-2 text-gray-900 font-medium">Bias Audit</td>
-              <td className="px-3 py-2 text-gray-500">Not required</td>
-              <td className="px-3 py-2 text-green-600">Annual required</td>
-              <td className="px-3 py-2 text-gray-500">Not required</td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="px-3 py-2 text-gray-900 font-medium">Impact Assessment</td>
-              <td className="px-3 py-2 text-green-600">High-risk systems</td>
-              <td className="px-3 py-2 text-gray-500">Not required</td>
-              <td className="px-3 py-2 text-gray-500">Not required</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>
-        <strong>Compliance strategy:</strong> If you're already complying with NYC or Illinois laws, adding Washington 
-        disclosure and impact assessment is relatively straightforward.
-      </p>
-
-      <h2>Practical Compliance Steps</h2>
-
-      <h3>Step 1: Update Disclosure Materials</h3>
-
-      <ul>
-        <li>Add Washington-compliant disclosure to job postings</li>
-        <li>Include notice in application workflow</li>
-        <li>Update career site FAQs</li>
-        <li>Train recruiters on disclosure requirements</li>
-      </ul>
-
-      <h3>Step 2: Conduct Impact Assessments</h3>
-
-      <p>For each high-risk AI tool:</p>
-      <ul>
-        <li>Document purpose, data inputs, decision logic</li>
-        <li>Identify potential harms (bias, privacy, fairness)</li>
-        <li>Describe mitigation measures and human oversight</li>
-        <li>Establish monitoring processes</li>
-        <li>Retain assessment documentation</li>
-      </ul>
-
-      <h3>Step 3: Address Biometric Data (If Applicable)</h3>
-
-      <p>If using facial recognition, voice analysis, or other biometric AI:</p>
-      <ul>
-        <li>Provide HB 1493-compliant notice</li>
-        <li>Obtain written consent</li>
-        <li>Implement data security measures</li>
-        <li>Establish retention and deletion policies</li>
-      </ul>
-
-      <h3>Step 4: Monitor for Discrimination</h3>
-
-      <ul>
-        <li>Test AI tools for disparate impact (even though not legally required, it's best practice)</li>
-        <li>Track selection rates by demographic group</li>
-        <li>Review candidate complaints about AI evaluation</li>
-        <li>Be prepared to demonstrate non-discrimination</li>
-      </ul>
-
-      <h3>Step 5: Maintain Human Oversight</h3>
-
-      <ul>
-        <li>Ensure AI assists but doesn't solely decide</li>
-        <li>Train hiring managers on AI limitations</li>
-        <li>Create escalation path for candidate concerns</li>
-        <li>Document human review of AI recommendations</li>
-      </ul>
-
-      <h2>How EmployArmor Helps with Washington Compliance</h2>
-
-      <ul>
-        <li><strong>Disclosure generation:</strong> Washington-specific compliant language</li>
-        <li><strong>Impact assessment templates:</strong> Structured framework for evaluating AI systems</li>
-        <li><strong>Biometric consent management:</strong> HB 1493-compliant forms and tracking</li>
-        <li><strong>Multi-state coordination:</strong> Integrate WA requirements with other jurisdictions</li>
-        <li><strong>Monitoring dashboard:</strong> Track compliance across all Washington hires</li>
-      </ul>
-
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 my-8 text-center">
-        <p className="text-lg font-semibold text-blue-900 mb-3">Hiring in Washington?</p>
-        <Link 
-          href="/scan" 
-          className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Get Your Compliance Assessment →
-        </Link>
-      </div>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Does Washington law apply to remote workers based in Washington working for out-of-state companies?</h3>
-      <p>
-        Yes. If the candidate or employee is located in Washington during the hiring process, Washington law applies 
-        regardless of where the employer is headquartered.
-      </p>
-
-      <h3>Do we need an impact assessment for every AI tool, or just high-risk ones?</h3>
-      <p>
-        Technically only high-risk systems require formal impact assessments. However, documenting purpose and risk 
-        for all AI tools is good practice and helps demonstrate due diligence if investigated.
-      </p>
-
-      <h3>Can we use the same impact assessment format for Washington and Colorado?</h3>
-      <p>
-        Yes. Both states require similar impact assessments. A comprehensive assessment covering both states' requirements 
-        will satisfy either jurisdiction.
-      </p>
-
-      <h3>How does Washington's biometric law compare to Illinois BIPA?</h3>
-      <p>
-        Similar requirements (notice and consent), but Washington's law doesn't have BIPA's private right of action or 
-        statutory damages. Illinois has been more aggressively enforced to date.
-      </p>
-
-      <h3>What if we disclose AI use but a candidate complains they didn't see it?</h3>
-      <p>
-        Document disclosure delivery (timestamps, acknowledgments, confirmation emails). If a candidate claims no notice, 
-        your records demonstrate compliance. This is why tracking and logging disclosure is critical.
-      </p>
 
       <h2>Related Resources</h2>
-      <ul>
-        <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">AI Hiring Compliance Guide 2026</Link></li>
-        <li><Link href="/resources/ai-hiring-laws-by-state" className="text-blue-600 hover:underline">State-by-State AI Hiring Laws</Link></li>
-        <li><Link href="/blog/ai-impact-assessment-hiring" className="text-blue-600 hover:underline">AI Impact Assessment Guide</Link></li>
-        <li><Link href="/resources/ai-hiring-disclosure-template-download" className="text-blue-600 hover:underline">AI Disclosure Templates</Link></li>
+      <ul className="space-y-2">
+        <li><Link href="/resources/what-counts-as-ai-hiring" className="text-blue-600 hover:underline">→ What Counts as AI in Hiring?</Link></li>
+        <li><Link href="/resources/ai-bias-audit-guide" className="text-blue-600 hover:underline">→ Bias Audit Implementation Guide</Link></li>
+        <li><Link href="/resources/ai-disclosure-notice-template" className="text-blue-600 hover:underline">→ AI Disclosure Notice Templates</Link></li>
+        <li><Link href="/resources/vendor-assessment-guide" className="text-blue-600 hover:underline">→ Vendor Assessment Guide</Link></li>
+        <li><Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">→ Building a Compliance Program</Link></li>
+        <li><Link href="/scorecard" className="text-blue-600 hover:underline">→ Free Compliance Scorecard</Link></li>
       </ul>
+
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 my-12 border border-blue-100">
+        <h3 className="text-xl font-bold text-gray-900 mb-3">Stay Ahead of Washington AI Regulations</h3>
+        <p className="text-gray-700 mb-4">
+          Even without comprehensive legislation, Washington employers using AI in hiring face compliance obligations under 
+          existing laws. Take our free compliance scorecard to understand your risks and get actionable recommendations.
+        </p>
+        <div className="flex gap-4">
+          <Link href="/scorecard">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">
+              Get Your Free Compliance Score →
+            </button>
+          </Link>
+          <Link href="/contact">
+            <button className="bg-white hover:bg-gray-50 text-gray-800 px-6 py-3 rounded-lg font-semibold border border-gray-300">
+              Talk to an Expert
+            </button>
+          </Link>
+        </div>
+      </div>
 
       <LegalDisclaimer />
     </ArticleLayout>
