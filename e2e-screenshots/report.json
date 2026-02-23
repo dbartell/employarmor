@@ -1,464 +1,202 @@
 {
-  "timestamp": "2026-02-22T20:26:55.070Z",
-  "company": {
-    "name": "Meridian Technologies",
-    "states": [
-      "IL",
-      "CA",
-      "CO",
-      "NYC",
-      "MD",
-      "TX"
-    ],
-    "employeeCount": "100+",
-    "tools": [
-      "LinkedIn Recruiter",
-      "HireVue",
-      "Greenhouse",
-      "Lever",
-      "Workday Recruiting",
-      "Pymetrics",
-      "Textio",
-      "Paradox",
-      "Indeed",
-      "ZipRecruiter",
-      "BambooHR",
-      "Rippling"
-    ],
-    "newEmployee": {
-      "email": "jane.doe@meridian-tech.test",
-      "role": "manager",
-      "department": "Engineering"
-    },
-    "newToolRequest": {
-      "name": "Claude AI Screener",
-      "url": "https://claude.ai",
-      "useCase": "Resume screening and candidate shortlisting using AI analysis",
-      "dataTypes": [
-        "resumes",
-        "interview-notes"
-      ]
-    }
-  },
+  "timestamp": "2026-02-23T00:01:04.761Z",
   "baseUrl": "https://employarmor.vercel.app",
-  "totalScreenshots": 52,
+  "scenario": "all",
+  "totalScreenshots": 24,
   "bugs": [],
+  "errors": [],
   "results": [
     {
       "step": 1,
       "name": "homepage",
       "filename": "01-homepage.png",
-      "description": "Homepage — first impression",
+      "description": "Marketing homepage",
       "url": "https://employarmor.vercel.app/",
       "size": 113407
     },
     {
       "step": 2,
-      "name": "homepage-features",
-      "filename": "02-homepage-features.png",
-      "description": "Homepage — features & integrations",
-      "url": "https://employarmor.vercel.app/",
-      "size": 109289
-    },
-    {
-      "step": 3,
-      "name": "scan-start",
-      "filename": "03-scan-start.png",
-      "description": "Compliance Scan — step 1: states",
+      "name": "scan-states",
+      "filename": "02-scan-states.png",
+      "description": "Scan step 1: State selection",
       "url": "https://employarmor.vercel.app/scan",
       "size": 275969
     },
     {
-      "step": 4,
+      "step": 3,
       "name": "scan-states-selected",
-      "filename": "04-scan-states-selected.png",
-      "description": "States selected: IL, CA, CO, NYC, MD, TX",
+      "filename": "03-scan-states-selected.png",
+      "description": "States selected: IL, CA, CO",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 242424
+      "size": 278068
     },
     {
-      "step": 5,
+      "step": 4,
       "name": "scan-employees",
-      "filename": "05-scan-employees.png",
-      "description": "Step 2: Employee count",
+      "filename": "04-scan-employees.png",
+      "description": "Scan step 2: Employee count",
       "url": "https://employarmor.vercel.app/scan",
       "size": 268550
     },
     {
-      "step": 6,
+      "step": 5,
       "name": "scan-employees-selected",
-      "filename": "06-scan-employees-selected.png",
-      "description": "Selected: 100+ employees",
+      "filename": "05-scan-employees-selected.png",
+      "description": "Selected 51-100 employees",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 268927
+      "size": 268743
     },
     {
-      "step": 7,
+      "step": 6,
       "name": "scan-tools",
-      "filename": "07-scan-tools.png",
-      "description": "Step 3: AI tool selection",
+      "filename": "06-scan-tools.png",
+      "description": "Scan step 3: Tool selection",
       "url": "https://employarmor.vercel.app/scan",
       "size": 270785
     },
     {
-      "step": 8,
+      "step": 7,
       "name": "scan-tools-selected",
-      "filename": "08-scan-tools-selected.png",
-      "description": "12 tools selected",
+      "filename": "07-scan-tools-selected.png",
+      "description": "Selected tools: LinkedIn Recruiter, HireVue, Greenhouse",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 228602
+      "size": 270713
+    },
+    {
+      "step": 8,
+      "name": "scan-email",
+      "filename": "08-scan-email.png",
+      "description": "Scan step 4: Email capture",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 281153
     },
     {
       "step": 9,
-      "name": "scan-email",
-      "filename": "09-scan-email.png",
-      "description": "Step 4: Email capture",
+      "name": "scan-email-filled",
+      "filename": "09-scan-email-filled.png",
+      "description": "Email entered",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 281634
+      "size": 281912
     },
     {
       "step": 10,
       "name": "scan-results",
       "filename": "10-scan-results.png",
-      "description": "Compliance scan results",
+      "description": "Scan results",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 249505
+      "size": 255415
     },
     {
       "step": 11,
-      "name": "scan-results-scrolled",
-      "filename": "11-scan-results-scrolled.png",
-      "description": "Compliance scan results (scrolled)",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 298928
-    },
-    {
-      "step": 12,
-      "name": "login",
-      "filename": "12-login.png",
+      "name": "login-page",
+      "filename": "11-login-page.png",
       "description": "Login page",
       "url": "https://employarmor.vercel.app/login",
       "size": 47026
     },
     {
-      "step": 13,
+      "step": 12,
       "name": "login-filled",
-      "filename": "13-login-filled.png",
-      "description": "Credentials entered",
+      "filename": "12-login-filled.png",
+      "description": "Login credentials entered",
       "url": "https://employarmor.vercel.app/login",
       "size": 49132
     },
     {
+      "step": 13,
+      "name": "post-login",
+      "filename": "13-post-login.png",
+      "description": "After login — landed on https://employarmor.vercel.app/dashboard",
+      "url": "https://employarmor.vercel.app/dashboard",
+      "size": 334098
+    },
+    {
       "step": 14,
-      "name": "dashboard",
-      "filename": "14-dashboard.png",
+      "name": "page-dashboard",
+      "filename": "14-page-dashboard.png",
       "description": "Dashboard — compliance agent overview",
       "url": "https://employarmor.vercel.app/dashboard",
-      "size": 323572
+      "size": 333417
     },
     {
       "step": 15,
-      "name": "dashboard-scrolled",
-      "filename": "15-dashboard-scrolled.png",
-      "description": "Dashboard — compliance agent overview (scrolled)",
-      "url": "https://employarmor.vercel.app/dashboard",
-      "size": 292070
+      "name": "page-employees",
+      "filename": "15-page-employees.png",
+      "description": "Team — employee management",
+      "url": "https://employarmor.vercel.app/employees",
+      "size": 106635
     },
     {
       "step": 16,
-      "name": "states-overview",
-      "filename": "16-states-overview.png",
-      "description": "State compliance overview",
-      "url": "https://employarmor.vercel.app/states",
-      "size": 112255
+      "name": "page-tools",
+      "filename": "16-page-tools.png",
+      "description": "Tool Registry — tracked AI tools",
+      "url": "https://employarmor.vercel.app/tools",
+      "size": 110069
     },
     {
       "step": 17,
-      "name": "tool-registry",
-      "filename": "17-tool-registry.png",
-      "description": "Tool Registry — tracked AI tools",
-      "url": "https://employarmor.vercel.app/tools",
-      "size": 100308
+      "name": "page-approvals",
+      "filename": "17-page-approvals.png",
+      "description": "Approvals — tool request workflow",
+      "url": "https://employarmor.vercel.app/approvals",
+      "size": 167257
     },
     {
       "step": 18,
-      "name": "tool-request-form",
-      "filename": "18-tool-request-form.png",
-      "description": "New tool request form",
-      "url": "https://employarmor.vercel.app/tools/request",
-      "size": 96008
+      "name": "page-audit",
+      "filename": "18-page-audit.png",
+      "description": "Risk Assessment",
+      "url": "https://employarmor.vercel.app/audit",
+      "size": 129303
     },
     {
       "step": 19,
-      "name": "tool-request-filled",
-      "filename": "19-tool-request-filled.png",
-      "description": "Tool request filled — Claude AI Screener",
-      "url": "https://employarmor.vercel.app/tools/request",
-      "size": 97101
+      "name": "page-candidate-notices",
+      "filename": "19-page-candidate-notices.png",
+      "description": "Candidate Disclosure Notices",
+      "url": "https://employarmor.vercel.app/candidate-notices",
+      "size": 142539
     },
     {
       "step": 20,
-      "name": "approvals",
-      "filename": "20-approvals.png",
-      "description": "Approvals queue",
-      "url": "https://employarmor.vercel.app/approvals",
-      "size": 157038
+      "name": "page-employee-disclosures",
+      "filename": "20-page-employee-disclosures.png",
+      "description": "Employee Disclosures",
+      "url": "https://employarmor.vercel.app/employee-disclosures",
+      "size": 142764
     },
     {
       "step": 21,
-      "name": "candidate-notices",
-      "filename": "21-candidate-notices.png",
-      "description": "Candidate Disclosure Notices",
-      "url": "https://employarmor.vercel.app/candidate-notices",
-      "size": 132145
+      "name": "page-handbook",
+      "filename": "21-page-handbook.png",
+      "description": "Handbook Policy",
+      "url": "https://employarmor.vercel.app/handbook",
+      "size": 143903
     },
     {
       "step": 22,
-      "name": "candidate-notices-scrolled",
-      "filename": "22-candidate-notices-scrolled.png",
-      "description": "Candidate Disclosure Notices (scrolled)",
-      "url": "https://employarmor.vercel.app/candidate-notices",
-      "size": 112109
+      "name": "page-training",
+      "filename": "22-page-training.png",
+      "description": "Team Training",
+      "url": "https://employarmor.vercel.app/training",
+      "size": 114727
     },
     {
       "step": 23,
-      "name": "notice-generated",
-      "filename": "23-notice-generated.png",
-      "description": "Generated candidate disclosure notice",
-      "url": "https://employarmor.vercel.app/documents?type=disclosure-candidate",
-      "size": 117375
+      "name": "page-compliance-packet",
+      "filename": "23-page-compliance-packet.png",
+      "description": "Audit Packet",
+      "url": "https://employarmor.vercel.app/compliance-packet",
+      "size": 145531
     },
     {
       "step": 24,
-      "name": "employee-disclosures",
-      "filename": "24-employee-disclosures.png",
-      "description": "Employee Disclosures dashboard",
-      "url": "https://employarmor.vercel.app/employee-disclosures",
-      "size": 132734
-    },
-    {
-      "step": 25,
-      "name": "handbook",
-      "filename": "25-handbook.png",
-      "description": "Handbook AI Policy",
-      "url": "https://employarmor.vercel.app/handbook",
-      "size": 133864
-    },
-    {
-      "step": 26,
-      "name": "handbook-generated",
-      "filename": "26-handbook-generated.png",
-      "description": "Generated AI use policy for handbook",
-      "url": "https://employarmor.vercel.app/handbook",
-      "size": 134194
-    },
-    {
-      "step": 27,
-      "name": "handbook-generated-scrolled",
-      "filename": "27-handbook-generated-scrolled.png",
-      "description": "Generated AI use policy for handbook (scrolled)",
-      "url": "https://employarmor.vercel.app/handbook",
-      "size": 153489
-    },
-    {
-      "step": 28,
-      "name": "compliance-packet",
-      "filename": "28-compliance-packet.png",
-      "description": "Audit-ready compliance packet",
-      "url": "https://employarmor.vercel.app/compliance-packet",
-      "size": 134568
-    },
-    {
-      "step": 29,
-      "name": "compliance-packet-scrolled",
-      "filename": "29-compliance-packet-scrolled.png",
-      "description": "Audit-ready compliance packet (scrolled)",
-      "url": "https://employarmor.vercel.app/compliance-packet",
-      "size": 147895
-    },
-    {
-      "step": 30,
-      "name": "team-before",
-      "filename": "30-team-before.png",
-      "description": "Team page — before invite",
-      "url": "https://employarmor.vercel.app/employees",
-      "size": 81043
-    },
-    {
-      "step": 31,
-      "name": "invite-dialog",
-      "filename": "31-invite-dialog.png",
-      "description": "Invite Employee dialog",
-      "url": "https://employarmor.vercel.app/employees",
-      "size": 103668
-    },
-    {
-      "step": 32,
-      "name": "invite-filled",
-      "filename": "32-invite-filled.png",
-      "description": "Invite form filled — jane.doe@meridian-tech.test",
-      "url": "https://employarmor.vercel.app/employees",
-      "size": 104184
-    },
-    {
-      "step": 33,
-      "name": "invite-sent",
-      "filename": "33-invite-sent.png",
-      "description": "Invite sent — confirmation",
-      "url": "https://employarmor.vercel.app/employees",
-      "size": 115987
-    },
-    {
-      "step": 34,
-      "name": "team-after",
-      "filename": "34-team-after.png",
-      "description": "Team page — after invite",
-      "url": "https://employarmor.vercel.app/employees",
-      "size": 96358
-    },
-    {
-      "step": 35,
-      "name": "disclosure-send-ready",
-      "filename": "35-disclosure-send-ready.png",
-      "description": "Ready to send employee disclosures",
-      "url": "https://employarmor.vercel.app/employee-disclosures",
-      "size": 132734
-    },
-    {
-      "step": 36,
-      "name": "disclosure-sent",
-      "filename": "36-disclosure-sent.png",
-      "description": "Employee disclosures sent",
-      "url": "https://employarmor.vercel.app/employee-disclosures",
-      "size": 126523
-    },
-    {
-      "step": 37,
-      "name": "training-overview",
-      "filename": "37-training-overview.png",
-      "description": "Training — AI Hiring Compliance Certification",
-      "url": "https://employarmor.vercel.app/training",
-      "size": 104338
-    },
-    {
-      "step": 38,
-      "name": "training-section",
-      "filename": "38-training-section.png",
-      "description": "Training section — Understanding AI Laws",
-      "url": "https://employarmor.vercel.app/training/ai-compliance/understanding-ai-laws",
-      "size": 14030
-    },
-    {
-      "step": 39,
-      "name": "settings-training",
-      "filename": "39-settings-training.png",
-      "description": "Training settings & assignments",
-      "url": "https://employarmor.vercel.app/settings/training",
-      "size": 91005
-    },
-    {
-      "step": 40,
-      "name": "risk-assessment",
-      "filename": "40-risk-assessment.png",
-      "description": "Risk Assessment overview",
-      "url": "https://employarmor.vercel.app/audit",
-      "size": 118877
-    },
-    {
-      "step": 41,
-      "name": "risk-assessment-scrolled",
-      "filename": "41-risk-assessment-scrolled.png",
-      "description": "Risk Assessment overview (scrolled)",
-      "url": "https://employarmor.vercel.app/audit",
-      "size": 109760
-    },
-    {
-      "step": 42,
-      "name": "remediation",
-      "filename": "42-remediation.png",
-      "description": "Remediation items",
-      "url": "https://employarmor.vercel.app/audit/remediation",
-      "size": 65515
-    },
-    {
-      "step": 43,
-      "name": "impact-assessment",
-      "filename": "43-impact-assessment.png",
-      "description": "AI Impact Assessment",
-      "url": "https://employarmor.vercel.app/documents/impact-assessment",
-      "size": 107378
-    },
-    {
-      "step": 44,
-      "name": "audit-packet",
-      "filename": "44-audit-packet.png",
-      "description": "Complete audit packet",
-      "url": "https://employarmor.vercel.app/compliance-packet",
-      "size": 134568
-    },
-    {
-      "step": 45,
-      "name": "audit-packet-scrolled",
-      "filename": "45-audit-packet-scrolled.png",
-      "description": "Complete audit packet (scrolled)",
-      "url": "https://employarmor.vercel.app/compliance-packet",
-      "size": 147895
-    },
-    {
-      "step": 46,
-      "name": "settings-settings",
-      "filename": "46-settings-settings.png",
+      "name": "page-settings",
+      "filename": "24-page-settings.png",
       "description": "Organization Settings",
       "url": "https://employarmor.vercel.app/settings",
-      "size": 105450
-    },
-    {
-      "step": 47,
-      "name": "settings-settings-scrolled",
-      "filename": "47-settings-settings-scrolled.png",
-      "description": "Organization Settings (scrolled)",
-      "url": "https://employarmor.vercel.app/settings",
-      "size": 106382
-    },
-    {
-      "step": 48,
-      "name": "settings-disclosure",
-      "filename": "48-settings-disclosure.png",
-      "description": "Disclosure Settings — customize notices",
-      "url": "https://employarmor.vercel.app/settings/disclosure",
-      "size": 130666
-    },
-    {
-      "step": 49,
-      "name": "settings-integrations",
-      "filename": "49-settings-integrations.png",
-      "description": "Integration Settings — ATS/HRIS connections",
-      "url": "https://employarmor.vercel.app/settings/integrations",
-      "size": 128447
-    },
-    {
-      "step": 50,
-      "name": "settings-adverse-decisions",
-      "filename": "50-settings-adverse-decisions.png",
-      "description": "Adverse Decision Settings",
-      "url": "https://employarmor.vercel.app/settings/adverse-decisions",
-      "size": 135542
-    },
-    {
-      "step": 51,
-      "name": "settings-adverse-decisions-scrolled",
-      "filename": "51-settings-adverse-decisions-scrolled.png",
-      "description": "Adverse Decision Settings (scrolled)",
-      "url": "https://employarmor.vercel.app/settings/adverse-decisions",
-      "size": 164652
-    },
-    {
-      "step": 52,
-      "name": "settings-employees",
-      "filename": "52-settings-employees.png",
-      "description": "Employee Management Settings",
-      "url": "https://employarmor.vercel.app/settings/employees",
-      "size": 96662
+      "size": 115532
     }
   ]
 }
