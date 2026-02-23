@@ -567,6 +567,25 @@ export default function HireVueCompliancePage() {
         risk.
       </p>
 
+      <h3>How often do we need to renew HireVue bias audits?</h3>
+      <p>
+        <strong>NYC:</strong> Annually, within 12 months of the previous audit. <strong>California:</strong> At least 
+        annually per AB 2930. <strong>Best practice:</strong> Re-audit annually or whenever HireVue updates its 
+        algorithm (version changes), whichever is more frequent. HireVue may provide audit updates to customers, but 
+        you should also validate results against your specific candidate pool and outcomes. Budget $15,000-30,000 
+        per audit cycle for independent auditing services.
+      </p>
+
+      <h3>What if HireVue makes us more efficient but produces adverse impact?</h3>
+      <p>
+        Efficiency is not a legal defense for discriminatory impact under Title VII or state civil rights laws. If 
+        HireVue produces statistically significant adverse impact against protected groups (measured by the EEOC's 
+        80% rule), you must either: (1) demonstrate business necessity and lack of less discriminatory alternatives, 
+        (2) adjust the algorithm or usage to eliminate impact, or (3) discontinue use. The EEOC has specifically warned 
+        that "we didn't know the AI was biased" is insufficient—employers have due diligence obligations. For guidance, 
+        see our <Link href="/resources/eeoc-ai-hiring-guidance" className="text-blue-600 hover:underline">EEOC AI Hiring Guidance resource</Link>.
+      </p>
+
       <h2>Conclusion: Compliance is Non-Negotiable</h2>
 
       <p>

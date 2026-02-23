@@ -279,7 +279,309 @@ export default function HRTrainingGuidePage() {
         <li><strong>Time to completion:</strong> For e-learning modules</li>
         <li><strong>Compliance incidents:</strong> Training-preventable issues (should decrease)</li>
         <li><strong>Trainee feedback:</strong> Satisfaction and usefulness ratings</li>
+        <li><strong>Behavioral observation:</strong> Spot-check whether trained behaviors appear in practice</li>
+        <li><strong>Disclosure delivery rates:</strong> Should approach 100% after training</li>
       </ul>
+
+      <h2>Detailed Training Scenarios</h2>
+      <p>
+        Scenario-based learning improves retention and builds confidence. Use these in live sessions 
+        or as part of e-learning modules:
+      </p>
+
+      <h3>Scenario 1: Geographic Complexity</h3>
+      <p className="font-semibold">
+        Situation: You're hiring for a remote role open to candidates nationwide. A candidate applies 
+        from Texas but will work remotely from Colorado starting next month.
+      </p>
+      <p><strong>Question:</strong> Do you need to provide Colorado AI Act disclosures?</p>
+      <p><strong>Answer:</strong> Yes. The Colorado AI Act applies to employment decisions affecting 
+      Colorado residents or positions based in Colorado. Since the candidate will be working from 
+      Colorado, provide Colorado-compliant disclosures including the pre-use notice and information 
+      about alternative evaluation processes. Better practice: provide the most comprehensive disclosure 
+      (Colorado-style) to all candidates nationwide to simplify operations and ensure over-compliance.
+      </p>
+
+      <h3>Scenario 2: Opt-Out Request Mid-Process</h3>
+      <p className="font-semibold">
+        Situation: A candidate completed an AI-scored video interview three days ago. Today they email 
+        requesting to opt out of AI evaluation.
+      </p>
+      <p><strong>Question:</strong> How should you handle this?</p>
+      <p><strong>Answer:</strong> Honor the opt-out request even though AI analysis already occurred. 
+      Disregard the AI scores and conduct a fresh human-only evaluation of their application and video 
+      interview (watch the video without AI analysis overlay). Document that human review was conducted 
+      without reliance on AI outputs. Confirm receipt of their request within 24 hours and explain the 
+      alternative process you'll use. This demonstrates good faith compliance.
+      </p>
+
+      <h3>Scenario 3: Hiring Manager Resistance</h3>
+      <p className="font-semibold">
+        Situation: A hiring manager says, "I don't have time to manually review resumes. Can't I just 
+        trust the AI rankings?"
+      </p>
+      <p><strong>Question:</strong> How do you respond?</p>
+      <p><strong>Answer:</strong> Explain that regulations require meaningful human oversight—AI serves 
+      as a tool to assist, not replace, human judgment. The hiring manager doesn't need to review every 
+      application, but they must apply independent judgment to candidates they consider advancing. Suggest 
+      reviewing the top AI-ranked candidates plus a sample of lower-ranked candidates to verify the AI 
+      isn't missing qualified people. Document that human review occurred and the basis for decisions 
+      beyond AI recommendations. Escalate to HR leadership if the manager refuses—this is a compliance 
+      and discrimination risk issue.
+      </p>
+
+      <h3>Scenario 4: Incomplete Disclosure</h3>
+      <p className="font-semibold">
+        Situation: You discover that candidates who applied through a third-party job board did not 
+        receive AI disclosure notices. 50 candidates from this source are in your pipeline.
+      </p>
+      <p><strong>Question:</strong> What should you do?</p>
+      <p><strong>Answer:</strong> Immediately pause any AI-assisted evaluation of these candidates. 
+      Send disclosure notices retroactively to all 50 candidates via email. Wait the required notice 
+      period (10 business days for NYC) before resuming AI-assisted evaluation. Document the gap, 
+      corrective action taken, and steps to prevent recurrence. Investigate why the integration failed 
+      and fix the technical issue. Report the incident to your compliance owner. This is exactly the 
+      type of "discover and cure" behavior that supports affirmative defense claims under laws like 
+      Colorado's AI Act.
+      </p>
+
+      <h3>Scenario 5: Vendor Algorithm Change</h3>
+      <p className="font-semibold">
+        Situation: Your video interview vendor emails that they're releasing a new version of their 
+        AI analysis algorithm next month with "improved accuracy."
+      </p>
+      <p><strong>Question:</strong> What compliance steps are needed?</p>
+      <p><strong>Answer:</strong> Treat this as deployment of a new AI tool. If you're subject to NYC 
+      Local Law 144, the new algorithm requires a new bias audit before use (audits are specific to 
+      algorithm versions). For Colorado, update your impact assessment to reflect the new algorithm. 
+      Review whether disclosure language needs updates to reflect any new functionality. Ask the vendor 
+      for documentation about what changed and why. Schedule post-deployment monitoring to verify the 
+      new algorithm doesn't produce adverse impact. Consider staggered rollout (test with non-regulated 
+      positions first) if vendor cannot provide advance bias audit.
+      </p>
+
+      <h2>Advanced Training Topics (Tier 3)</h2>
+      <p>
+        For compliance officers and HR leadership, provide deeper technical and legal training:
+      </p>
+
+      <h3>Statistical Literacy for Bias Detection</h3>
+      <ul>
+        <li>Understanding selection rates and impact ratios</li>
+        <li>Statistical significance testing (Fisher's Exact Test, Chi-square)</li>
+        <li>Reading and interpreting bias audit reports</li>
+        <li>When sample sizes are too small for reliable analysis</li>
+        <li>Intersectional analysis (e.g., race + gender combined)</li>
+      </ul>
+
+      <h3>Regulatory Interpretation</h3>
+      <ul>
+        <li>How to read agency guidance (EEOC, state attorneys general)</li>
+        <li>Tracking regulatory updates and enforcement actions</li>
+        <li>Understanding enforcement priorities and settlement patterns</li>
+        <li>When to seek legal counsel vs. handle internally</li>
+        <li>Engaging with regulators (responding to inquiries, voluntary disclosures)</li>
+      </ul>
+
+      <h3>Vendor Negotiations</h3>
+      <ul>
+        <li>Compliance requirements to include in RFPs and contracts</li>
+        <li>Red flags in vendor responses about AI transparency</li>
+        <li>Negotiating audit cooperation and data access</li>
+        <li>Liability allocation for vendor-caused compliance failures</li>
+        <li>Exit planning (what happens if you need to switch vendors mid-year)</li>
+      </ul>
+
+      <h3>Incident Response</h3>
+      <ul>
+        <li>Identifying potential compliance violations</li>
+        <li>Internal investigation procedures</li>
+        <li>When and how to self-report to regulators</li>
+        <li>Remediation planning and implementation</li>
+        <li>Communication strategies (internal and external)</li>
+      </ul>
+
+      <h2>Training Platform Recommendations</h2>
+      <p>
+        Choose delivery platforms based on your organization's size and existing systems:
+      </p>
+
+      <h3>Enterprise Organizations</h3>
+      <ul>
+        <li><strong>Cornerstone OnDemand:</strong> Full-featured LMS with compliance tracking, certification, and automated reminders</li>
+        <li><strong>Workday Learning:</strong> Integrated with HRIS for seamless employee data</li>
+        <li><strong>SAP SuccessFactors:</strong> Robust reporting and multi-language support</li>
+        <li>Cost: $10-30 per user annually</li>
+      </ul>
+
+      <h3>Mid-Size Organizations</h3>
+      <ul>
+        <li><strong>TalentLMS:</strong> User-friendly, quick setup, good reporting</li>
+        <li><strong>Lessonly (by Seismic):</strong> Engaging content creation tools</li>
+        <li><strong>360Learning:</strong> Collaborative learning features</li>
+        <li>Cost: $3-10 per user annually</li>
+      </ul>
+
+      <h3>Small Organizations</h3>
+      <ul>
+        <li><strong>Google Classroom:</strong> Free, simple for small teams</li>
+        <li><strong>Thinkific:</strong> Affordable with basic compliance features</li>
+        <li><strong>Custom solution:</strong> Video + Google Forms for quizzes + Google Sheets for tracking</li>
+        <li>Cost: Free to $1-3 per user annually</li>
+      </ul>
+
+      <h3>Key LMS Features for Compliance Training</h3>
+      <ul>
+        <li>Automated enrollment based on role/department</li>
+        <li>Completion tracking and reporting</li>
+        <li>Quiz/assessment functionality with scoring</li>
+        <li>Certificate generation</li>
+        <li>Reminder emails for incomplete training</li>
+        <li>Version control (important when regulations change)</li>
+        <li>Mobile accessibility</li>
+        <li>SCORM compliance for content portability</li>
+      </ul>
+
+      <h2>Accessibility and Inclusion</h2>
+      <p>
+        Ensure training is accessible to all employees:
+      </p>
+
+      <h3>Language Considerations</h3>
+      <ul>
+        <li>Translate core training materials into languages spoken by your hiring team</li>
+        <li>Use plain language—avoid legal jargon where possible</li>
+        <li>Provide glossary of key terms (AEDT, ADMT, bias audit, impact ratio, etc.)</li>
+        <li>Consider cultural context when using examples</li>
+      </ul>
+
+      <h3>Format Accessibility</h3>
+      <ul>
+        <li><strong>Visual:</strong> Captions for all videos, alt text for images, high-contrast visuals</li>
+        <li><strong>Auditory:</strong> Transcripts for audio content, visual representations of key concepts</li>
+        <li><strong>Cognitive:</strong> Break complex topics into short modules, provide job aids for reference</li>
+        <li><strong>Technical:</strong> Ensure LMS works with screen readers, keyboard navigation</li>
+      </ul>
+
+      <h3>Learning Style Diversity</h3>
+      <ul>
+        <li>Offer multiple formats: video, text, interactive exercises, live sessions</li>
+        <li>Include visual aids: flowcharts, checklists, decision trees</li>
+        <li>Provide downloadable quick reference guides</li>
+        <li>Offer both self-paced and instructor-led options</li>
+      </ul>
+
+      <h2>Training Timeline</h2>
+      <p>
+        Implement training strategically:
+      </p>
+
+      <h3>Phase 1: Immediate (Weeks 1-2)</h3>
+      <ul>
+        <li>Brief all HR staff on urgent compliance requirements</li>
+        <li>Provide quick reference guide for immediate use</li>
+        <li>Schedule comprehensive training sessions</li>
+      </ul>
+
+      <h3>Phase 2: Comprehensive Training (Weeks 3-6)</h3>
+      <ul>
+        <li>Deliver full curriculum to Tier 1 audiences</li>
+        <li>Conduct enhanced training for Tier 2</li>
+        <li>Complete expert training for Tier 3</li>
+        <li>Achieve 100% completion for core HR/recruiting staff</li>
+      </ul>
+
+      <h3>Phase 3: Verification (Weeks 7-8)</h3>
+      <ul>
+        <li>Administer assessments to all trainees</li>
+        <li>Provide remedial training for those who don't pass</li>
+        <li>Collect training acknowledgment signatures</li>
+        <li>Generate compliance report for leadership</li>
+      </ul>
+
+      <h3>Ongoing: Maintenance</h3>
+      <ul>
+        <li>Train all new hires within 30 days of starting</li>
+        <li>Provide quarterly updates on regulatory changes</li>
+        <li>Conduct annual refresher training for all staff</li>
+        <li>Update materials within 60 days of any major regulatory change</li>
+      </ul>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>How often should HR staff be retrained on AI hiring compliance?</h3>
+      <p>
+        Conduct comprehensive annual refresher training for all HR and recruiting staff. Additionally, 
+        provide brief updates (15-30 minutes) whenever significant regulatory changes occur—for example, 
+        when a new state law takes effect or when federal agencies like the EEOC issue new guidance. 
+        New hires involved in hiring should complete full training within their first 30 days. Track 
+        "days since last training" as a compliance metric and aim to keep all staff current within 
+        12 months maximum.
+      </p>
+
+      <h3>What if an employee fails the training assessment?</h3>
+      <p>
+        First, review their quiz responses to identify knowledge gaps. Provide targeted remedial 
+        training on the topics they missed. Allow them to retake the assessment after completing 
+        remediation. If they fail twice, consider one-on-one coaching with the compliance owner or 
+        HR leader. Do not allow employees who haven't passed training to participate in AI-assisted 
+        hiring decisions. For persistent failure, this may indicate the employee isn't suited for 
+        hiring responsibilities—escalate to HR leadership for performance management discussion.
+      </p>
+
+      <h3>Should we train hiring managers who don't use AI tools directly?</h3>
+      <p>
+        Yes, if they make hiring decisions based on information generated by AI tools. For example, 
+        if your ATS uses AI to rank resumes and hiring managers review those rankings, they need 
+        training on human oversight requirements. They should understand that AI rankings are 
+        recommendations requiring independent judgment. Tier 2 training is appropriate for most 
+        hiring managers. Document their training in case of audits or complaints—"I didn't know we 
+        used AI" is not a viable defense.
+      </p>
+
+      <h3>How do we keep training current as regulations evolve?</h3>
+      <p>
+        Assign someone (typically the compliance owner) to monitor regulatory developments. Subscribe 
+        to updates from relevant agencies (EEOC, state attorneys general, industry groups like SHRM). 
+        Use modular training design so individual sections can be updated without rebuilding the 
+        entire curriculum. Version control all training materials with effective dates. When material 
+        changes occur, send update notifications to all trained staff with brief explanation of what 
+        changed and why. Consider quarterly "What's New in AI Hiring Compliance" webinars rather than 
+        waiting for annual refreshers.
+      </p>
+
+      <h3>Can we use AI to deliver AI compliance training?</h3>
+      <p>
+        Yes, with caution. AI-powered LMS features (adaptive learning, automated quiz generation, 
+        chatbot Q&A) can enhance training efficiency. However, don't rely entirely on AI for assessment—
+        human review of trainee responses, especially in scenario exercises, provides better evaluation 
+        of true comprehension. Be aware of the irony: if your training AI has bias, you could be 
+        perpetuating the problem you're training to prevent. For critical compliance training, human 
+        oversight of the training process itself is advisable.
+      </p>
+
+      <h3>What should we do if a trained employee violates compliance procedures?</h3>
+      <p>
+        First, address the immediate violation: stop any non-compliant process, provide correct 
+        disclosure to affected candidates, document the incident. Second, investigate why it happened: 
+        was it lack of knowledge (training failure), negligence (knew but didn't follow), or systemic 
+        issue (procedure was unclear or impractical)? Third, take corrective action: retrain the 
+        individual if needed, modify procedures if they're causing problems, implement additional 
+        oversight if negligence was involved. Fourth, document everything including the violation, 
+        investigation, and corrective action—this demonstrates good faith compliance efforts if 
+        regulators later inquire. Repeated violations may warrant performance management action.
+      </p>
+
+      <h3>Do we need separate training for union employees or is this just management?</h3>
+      <p>
+        This depends on your hiring process. If union employees participate in hiring (e.g., peer 
+        interviews, hiring committees), they need training. If only management makes hiring decisions, 
+        train management. However, consider brief awareness training for all employees about the 
+        company's use of AI in hiring—it demonstrates transparency, prepares employees who might 
+        become hiring managers, and can improve internal candidate experience. If AI hiring compliance 
+        is a topic in collective bargaining (some unions have raised concerns), training may be a 
+        negotiated requirement.
+      </p>
 
       <h2>Related Resources</h2>
       <ul>

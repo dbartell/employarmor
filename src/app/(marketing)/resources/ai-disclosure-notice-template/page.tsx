@@ -319,6 +319,81 @@ export default function AIDisclosureNoticeTemplatePage() {
         <li>☐ Review with legal counsel</li>
       </ul>
 
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>Can I use one disclosure template for all jurisdictions, or do I need separate notices?</h3>
+      <p>
+        You can create one comprehensive disclosure that meets the requirements of all applicable jurisdictions (the 
+        "highest common denominator" approach). Include all elements required by the strictest laws (Colorado's opt-out 
+        rights, NYC's 10-day notice, Illinois consent, California ADMT details) and deliver to all candidates nationally. 
+        This simplifies operations. However, some employers prefer jurisdiction-specific notices to avoid over-disclosure 
+        in states with minimal requirements. Trade-off: simplicity vs. precision. For most employers, one comprehensive 
+        notice is easier to maintain and reduces the risk of sending the wrong template to the wrong candidate.
+      </p>
+
+      <h3>How should we deliver AI disclosure notices—email, job posting, application page, or all three?</h3>
+      <p>
+        <strong>Best practice: multi-channel delivery.</strong> Include basic disclosure in job postings ("This employer 
+        uses AI in hiring. Learn more at [link]"), send dedicated notice via email when candidate applies, and repeat 
+        before AI assessment stages. This ensures notice regardless of how candidates found your job (direct apply, job 
+        board, referral). For NYC's 10-day advance notice requirement, the job posting or application confirmation email 
+        provides the earliest timestamp. For Illinois consent requirements, in-app disclosure with checkbox before AI 
+        assessment works best. Document delivery across all channels—if a candidate claims they never received notice, 
+        you want multiple proof points.
+      </p>
+
+      <h3>Do we need separate disclosures for each AI tool, or can one notice cover multiple tools?</h3>
+      <p>
+        One notice can cover multiple AI tools if it describes each one specifically. Example: "We use the following 
+        AI tools in our hiring process: (1) Workday Recruiting for resume screening and candidate matching, (2) HireVue 
+        for video interview analysis, and (3) Codility for technical skills assessment." However, don't use overly broad 
+        language like "we may use various AI tools"—this lacks the specificity required by laws like Colorado and Illinois. 
+        If you add new AI tools mid-hiring cycle, send supplemental disclosure before using them. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance 
+        Program Guide</Link> for managing multi-tool disclosure workflows.
+      </p>
+
+      <h3>What's the difference between disclosure and consent? Do we need both?</h3>
+      <p>
+        <strong>Disclosure</strong> means informing candidates that AI will be used and how it works. <strong>Consent</strong> 
+        means obtaining their affirmative permission to use AI on their application. Illinois explicitly requires both 
+        disclosure <em>and</em> consent. NYC and Colorado require disclosure but don't mandate affirmative consent 
+        (though they require opt-out options, which is related). California CCPA ADMT requires disclosure and opt-out 
+        ability. Best practice: obtain explicit consent everywhere via checkbox or signature, even where not strictly 
+        required—this demonstrates good faith and reduces argument that candidates didn't understand their rights. 
+        Document consent with timestamps and retain for statute of limitations period (typically 2-4 years).
+      </p>
+
+      <h3>Can candidates opt out after we've already used AI on their application?</h3>
+      <p>
+        Yes, and you should honor retroactive opt-outs. If a candidate learns you used AI (perhaps they didn't see the 
+        disclosure, or didn't understand it) and requests human-only review, conduct fresh evaluation without relying 
+        on AI outputs. This is both legally safer and better candidate experience. Colorado's AI Act requires employers 
+        to "provide a mechanism" for candidates to appeal AI-influenced decisions—retroactive opt-out and fresh review 
+        satisfies this. Document the alternative evaluation process and ensure the candidate isn't penalized for requesting it.
+      </p>
+
+      <h3>How often should we update our disclosure templates?</h3>
+      <p>
+        Review and update quarterly or whenever: (1) you add new AI tools, (2) AI vendors update their algorithms 
+        (material changes), (3) applicable laws change, or (4) you expand hiring to new jurisdictions with different 
+        requirements. Many employers set calendar reminders for quarterly compliance reviews. Use version control—date 
+        each template version and track which candidates received which version. This is critical if you're audited or 
+        sued: you need to prove what candidates were told at the time of their application. Store historical template 
+        versions for at least 4 years (NYC bias audit retention requirement).
+      </p>
+
+      <h3>What if our AI vendor won't provide enough information for us to create a detailed disclosure?</h3>
+      <p>
+        That's a major red flag. If your vendor can't or won't explain how their AI works, what it analyzes, and how 
+        outputs are generated, you can't meet disclosure requirements in states like Colorado and California. More 
+        fundamentally, you can't validate the tool for bias or ensure it's not discriminatory—which creates enormous 
+        legal exposure under federal and state anti-discrimination laws. Options: (1) Demand transparency from vendor 
+        with threat to switch, (2) Conduct independent analysis/reverse engineering (expensive and difficult), or (3) 
+        Switch to a vendor that provides adequate documentation. See our <Link href="/resources/vendor-assessment-guide" className="text-blue-600 hover:underline">Vendor Assessment Guide</Link> for 
+        compliance support requirements to include in AI vendor contracts. The EEOC has made clear: "I didn't know how 
+        my vendor's AI worked" is not a defense for discrimination.
+      </p>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-disclosure-decision-tree" className="text-blue-600 hover:underline">Do I Need to Disclose AI? Decision Tree</Link></li>

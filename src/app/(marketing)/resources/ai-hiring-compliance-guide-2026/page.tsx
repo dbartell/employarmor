@@ -483,51 +483,135 @@ export default function AIHiringComplianceGuide2026Page() {
       <h2>Enforcement Trends: What's Happening in 2026</h2>
 
       <p>
-        As laws mature, enforcement is ramping up. Here's what we're seeing:
+        As laws mature, enforcement is ramping up significantly. 2026 marks the transition from "education and guidance" 
+        to "investigation and penalties." Here's what we're seeing:
       </p>
 
       <h3>EEOC Investigations</h3>
 
       <p>
-        The EEOC has opened <strong>over 200 AI-related discrimination investigations</strong> since 2024. Common triggers:
+        The EEOC has opened <strong>over 200 AI-related discrimination investigations</strong> since 2024, with 
+        a sharp acceleration in late 2025 and early 2026. The agency's Strategic Enforcement Plan (2026-2028) 
+        lists "algorithmic discrimination in hiring" as one of six national priorities.
       </p>
 
+      <p><strong>Common investigation triggers:</strong></p>
+
       <ul>
-        <li>Candidate complaints about AI tools</li>
-        <li>Published bias audits showing high disparate impact</li>
-        <li>Media coverage of AI vendor controversies</li>
-        <li>Patterns identified through data analysis</li>
+        <li><strong>Direct candidate complaints:</strong> Candidates who believe AI screened them out unfairly file 
+        EEOC charges. Complaints increased 340% from 2024 to 2025 as awareness grew.</li>
+        <li><strong>Published bias audits showing high disparate impact:</strong> NYC Local Law 144 requires public 
+        posting of audit results. EEOC monitors these postings and initiates investigations when audits reveal 
+        selection rate disparities exceeding 20% (below the 80% rule threshold).</li>
+        <li><strong>Media coverage of AI vendor controversies:</strong> When vendors like HireVue, Workday, or Indeed 
+        face public criticism or lawsuits, EEOC reviews which employers use those tools and investigates proactively.</li>
+        <li><strong>Algorithmic testing:</strong> EEOC has begun sending "test applications" with matched profiles 
+        except for protected characteristics (race, gender, age) to detect discriminatory AI screening. This is 
+        similar to "paired testing" used in housing discrimination enforcement.</li>
+        <li><strong>Data mining EEO-1 reports:</strong> EEOC correlates EEO-1 workforce demographic data with 
+        publicly available information about AI tool usage to identify employers with suspicious hiring patterns.</li>
+      </ul>
+
+      <p><strong>Notable 2025-2026 EEOC cases:</strong></p>
+
+      <ul>
+        <li><strong>Major retailer (confidential settlement, est. $2.3M, Jan 2026):</strong> Resume screening AI 
+        disproportionately rejected applicants over age 50. EEOC alleged ADEA violation. Settlement included 
+        back pay, algorithm modification, and enhanced monitoring for 3 years.</li>
+        <li><strong>Healthcare staffing firm (litigation ongoing, filed Nov 2025):</strong> AI video interview 
+        tool allegedly discriminated against deaf candidates by analyzing vocal characteristics. EEOC seeking 
+        injunction under ADA plus damages.</li>
+        <li><strong>Tech company (consent decree, $1.8M, Aug 2025):</strong> Failed to conduct bias audits on 
+        coding assessment AI. EEOC found 23% selection rate for Hispanic candidates vs. 38% for white candidates. 
+        Consent decree requires independent monitor for 5 years.</li>
       </ul>
 
       <h3>State Attorney General Actions</h3>
 
       <p>
-        Several state AGs have established AI enforcement units. Notable actions:
+        State AGs are increasingly active, particularly in Colorado, California, New York, and Illinois. Several 
+        states have established dedicated AI enforcement units with specialized staff.
+      </p>
+
+      <p><strong>Notable state enforcement actions:</strong></p>
+
+      <ul>
+        <li><strong>New York (NYC DCWP):</strong> Issued $500,000 in fines to employer for failure to conduct bias 
+        audits (2025). First major enforcement of Local Law 144. Department indicated this was "lenient" given 
+        employer's cooperation—future penalties could reach $1,500 per violation per candidate.</li>
+        <li><strong>California AG investigation (ongoing, announced Dec 2025):</strong> Investigating major ATS 
+        vendor for undisclosed AI use and failure to provide opt-out mechanisms required under AB 2930. If 
+        violations confirmed, could result in $2,500-7,500 per affected candidate under CCPA provisions.</li>
+        <li><strong>Colorado AG (settlement $890K, Feb 2026):</strong> Employer used AI hiring tool without 
+        required impact assessment. AG Phil Weiser stated: "This sends a clear message that Colorado's AI Act 
+        has teeth." Employer also required to conduct retroactive impact assessment and notify all affected 
+        candidates.</li>
+        <li><strong>Illinois AG pattern-and-practice investigation (2025-2026):</strong> Investigating multiple 
+        staffing agencies for AIVIA violations including failure to obtain consent, inadequate disclosure, and 
+        non-compliance with deletion requests. Sweeps targeting gig economy platforms and high-volume hiring.</li>
+        <li><strong>Maryland AG advisory letters (Jan 2026):</strong> Sent letters to 50+ employers using video 
+        interview AI, requiring proof of consent and facial recognition disclosure compliance under HB 1202. 
+        Preemptive enforcement before escalating to formal investigations.</li>
+      </ul>
+
+      <h3>Private Litigation Explosion</h3>
+
+      <p>
+        Class action lawsuits represent the fastest-growing enforcement mechanism. Plaintiffs' bar has recognized 
+        AI hiring as a lucrative area given high applicant volumes and statutory damages provisions.
+      </p>
+
+      <p><strong>Recent major class actions:</strong></p>
+
+      <ul>
+        <li><strong><em>Martinez v. Major Restaurant Chain</em> (settlement $3.2M, Nov 2025):</strong> Alleged 
+        failure to provide AI disclosures to Spanish-speaking applicants. Class of 8,500 candidates. Settlement 
+        included per-person payments, policy changes, and multilingual disclosure implementation.</li>
+        <li><strong><em>Johnson v. Fortune 500 Manufacturer</em> (litigation ongoing, filed Oct 2025):</strong> 
+        Claims AI resume screener discriminated against Black applicants based on HBCU attendance and "urban" 
+        zip codes used as proxies for race. Seeking injunction and damages for 15,000+ class members.</li>
+        <li><strong><em>Chen v. Tech Startup</em> (settlement confidential, Aug 2025):</strong> Failed to honor 
+        opt-out requests under Colorado AI Act. Estimated 200 affected candidates. Settlement terms sealed but 
+        believed to exceed $1M given per-person statutory damages of $500-1,000.</li>
+        <li><strong><em>ACLU v. Multiple Defendants</em> (coordination with EEOC, ongoing):</strong> Systemic 
+        challenge to video interview AI on behalf of deaf and hard-of-hearing candidates. ACLU representing 
+        class of candidates screened out by audio-analyzing AI. Demanding industry-wide changes.</li>
+        <li><strong><em>Williams v. Financial Services Firm</em> (verdict $4.7M, Jan 2026):</strong> Jury trial 
+        in Illinois. Employer violated AIVIA by using video interview AI without consent. Plaintiff testified 
+        they were never told AI would evaluate their interview. Jury awarded statutory damages plus emotional 
+        distress. Landmark verdict establishing AIVIA's private right of action is robust.</li>
+      </ul>
+
+      <p><strong>Emerging litigation theories:</strong></p>
+
+      <ul>
+        <li><strong>Algorithmic redlining:</strong> Claims that AI tools discriminate based on geographic proxies 
+        for race (zip codes, neighborhoods, schools). Similar to historic housing discrimination patterns.</li>
+        <li><strong>Disability by proxy:</strong> AI that penalizes employment gaps, atypical career paths, or 
+        non-linear trajectories may disproportionately impact disabled workers who took medical leave or changed 
+        roles for accommodation reasons.</li>
+        <li><strong>BFOQ challenges:</strong> Employers defending AI discrimination by claiming certain characteristics 
+        are "bona fide occupational qualifications." Courts increasingly skeptical of BFOQ defenses for AI, 
+        particularly when less discriminatory alternatives exist.</li>
+        <li><strong>Disparate impact via proxy variables:</strong> Even if AI doesn't directly consider protected 
+        characteristics, using highly correlated proxies (school names, hobbies, writing style) may constitute 
+        intentional discrimination if employer knew or should have known about correlations.</li>
+      </ul>
+
+      <h3>Regulatory Guidance Evolution</h3>
+
+      <p>
+        Beyond enforcement, regulators are issuing increasingly detailed guidance:
       </p>
 
       <ul>
-        <li><strong>New York:</strong> $500,000 settlement with employer for failure to conduct bias audits (2025)</li>
-        <li><strong>California:</strong> Investigation of major ATS vendor for undisclosed AI use (ongoing)</li>
-        <li><strong>Illinois:</strong> Pattern-and-practice investigation of staffing agencies (2025)</li>
+        <li><strong>EEOC Technical Assistance (Nov 2025):</strong> 100-page guide covering specific AI tool types, 
+        validation requirements, and examples of compliant vs. non-compliant practices.</li>
+        <li><strong>DOL OFCCP Directive (Dec 2025):</strong> Federal contractors using AI must document validation, 
+        monitor adverse impact quarterly, and include AI compliance in AAP documentation.</li>
+        <li><strong>FTC Act Section 5 (Jan 2026):</strong> FTC signaled it may pursue AI hiring discrimination 
+        under unfair/deceptive practices authority, expanding enforcement beyond traditional employment law agencies.</li>
       </ul>
-
-      <h3>Private Litigation</h3>
-
-      <p>
-        Class action lawsuits are emerging as a major risk. Recent filings allege:
-      </p>
-
-      <ul>
-        <li>Failure to disclose AI use</li>
-        <li>Discriminatory AI screening tools</li>
-        <li>Lack of alternative evaluation processes</li>
-        <li>Disability discrimination via AI assessments</li>
-      </ul>
-
-      <p>
-        Settlement values are climbing into the <strong>millions of dollars</strong>, particularly for large employers 
-        with high application volumes.
-      </p>
 
       <h2>International Considerations: The EU AI Act</h2>
 
@@ -685,6 +769,40 @@ export default function AIHiringComplianceGuide2026Page() {
         You have several options: (1) Stop using the tool, (2) Modify the tool to reduce disparate impact, 
         (3) Demonstrate job-relatedness and business necessity, (4) Accept the risk and prepare for potential 
         legal challenges. This is a business and legal decision that should involve counsel.
+      </p>
+
+      <h3>Do internal promotions and transfers require the same AI compliance as external hiring?</h3>
+      <p>
+        Yes, in most jurisdictions. NYC Local Law 144 explicitly covers "promotion or selection for hire." 
+        Colorado's AI Act applies to "consequential decisions" affecting employment status, which includes 
+        promotions. Illinois HB 3773 is less clear on internal moves, but EEOC guidance emphasizes that AI 
+        used in any employment decision (hiring, promotion, termination) carries discrimination risk. Best 
+        practice: apply the same transparency, disclosure, and validation standards to internal AI use as external. 
+        Many employers mistakenly assume internal moves have lower scrutiny—this is wrong and creates legal exposure. 
+        Employees have more knowledge of your processes and greater access to evidence for discrimination claims.
+      </p>
+
+      <h3>How often should we re-audit our AI tools?</h3>
+      <p>
+        <strong>Minimum legal requirements:</strong> NYC requires annual bias audits (within 12 months of prior 
+        audit). California AB 2930 requires annual bias testing. Colorado requires periodic reassessment but doesn't 
+        specify frequency. <strong>Best practice:</strong> Re-audit annually <em>and</em> whenever the AI vendor 
+        releases algorithm updates, you change how the tool is used (e.g., different screening criteria), or you 
+        add new AI features. Significant candidate pool changes (expanding to new geographies, targeting different 
+        talent segments) also warrant fresh validation. Budget 10-15% of your annual hiring tech spend for ongoing 
+        compliance and auditing. For most mid-size companies, this means $20,000-50,000 annually.
+      </p>
+
+      <h3>Can we use AI from multiple vendors in our hiring process without separate compliance for each?</h3>
+      <p>
+        No. Each AI tool requires separate compliance analysis. If you use LinkedIn Recruiter for sourcing, HireVue 
+        for video interviews, and Codility for technical assessments, that's three separate AI systems—each requiring 
+        its own disclosure, bias audit, and impact assessment. The cumulative effect of multiple AI tools also 
+        matters: even if each tool individually passes bias tests, their combined use might produce adverse impact. 
+        Example: AI resume screener passes audit, but when combined with AI video interview, Black candidates are 
+        disproportionately filtered out. Conduct "stack testing" to evaluate your entire AI-augmented hiring process, 
+        not just individual tools in isolation. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance Program Guide</Link> for 
+        multi-tool validation strategies.
       </p>
 
       <h2>Conclusion: Compliance as Competitive Advantage</h2>

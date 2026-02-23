@@ -344,6 +344,32 @@ export default function EmployArmorVsConsultantsPage() {
         lawyer only when interpretation is genuinely unclear.
       </p>
 
+      <h3>Do consultants offer better "insurance" against lawsuits than EmployArmor?</h3>
+      <p>
+        Neither consultants nor EmployArmor can prevent lawsuits entirely—compliance reduces risk but doesn't eliminate 
+        it. However, EmployArmor provides better documentation and audit trails than consultant engagements, which is 
+        critical for defense. If you're sued, having automated logs showing "we delivered disclosure on X date, candidate 
+        acknowledged on Y date" is more defensible than relying on consultant memos or email trails. Some consultants 
+        carry E&O insurance that might provide financial protection if their advice was negligent, but this is rare and 
+        limited. EmployArmor's value in litigation is robust documentation demonstrating good-faith compliance efforts. 
+        Combined approach: use EmployArmor for documentation + compliance execution, and have consultant or legal counsel 
+        on call for high-stakes decisions and litigation defense strategy.
+      </p>
+
+      <h3>How do we choose between EmployArmor and a consultant for bias audit support?</h3>
+      <p>
+        <strong>Consultant approach:</strong> They coordinate with independent auditors, negotiate pricing, manage vendor 
+        relationships, and interpret audit results for you. Best for first-time audits or complex multi-tool audits requiring 
+        extensive vendor negotiation. <strong>EmployArmor approach:</strong> The platform connects you with pre-vetted 
+        audit providers, auto-generates audit data packets (saving auditor time and your costs), and provides audit 
+        result dashboards with actionable recommendations. Best for ongoing annual audits and employers comfortable with 
+        some self-service. <strong>Hybrid:</strong> Use EmployArmor for routine annual audits; engage consultant when 
+        audit reveals adverse impact and you need remediation strategy. This balances cost and expertise. Budget guidance: 
+        Consultant-managed bias audits cost $25,000-50,000+ per tool. EmployArmor-facilitated audits typically run 
+        $10,000-20,000 per tool due to automation efficiencies. See our <Link href="/resources/ai-bias-audit-guide" className="text-blue-600 hover:underline">Bias Audit Guide</Link> for 
+        detailed comparison of audit vendors and processes.
+      </p>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/employarmor-vs-manual-compliance" className="text-blue-600 hover:underline">EmployArmor vs. Manual Compliance</Link></li>

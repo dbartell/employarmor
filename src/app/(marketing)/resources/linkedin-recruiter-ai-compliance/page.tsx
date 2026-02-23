@@ -555,6 +555,87 @@ export default function LinkedInRecruiterAICompliancePage() {
         but once they apply or respond to outreach, they're consenting to your evaluation process (with proper disclosure).
       </p>
 
+      <h3>Does LinkedIn's "Open to Work" feature involve AI that requires disclosure?</h3>
+      <p>
+        Yes. When candidates enable "Open to Work," LinkedIn's AI uses that signal along with profile data to 
+        prioritize them in recruiter searches and recommendations. If you rely on LinkedIn's AI-boosted visibility 
+        of "Open to Work" candidates, you're using AI to identify and pre-screen your candidate pool. This constitutes 
+        automated decision-making under most AI hiring laws. Include in your LinkedIn sourcing disclosure: "We use 
+        LinkedIn's AI-powered search and recommendation features, including matching based on 'Open to Work' signals 
+        and profile analysis." Additionally, the "Open to Work" feature itself may create ADA complications if AI 
+        interprets career gaps or profile patterns as negative signals. See our <Link href="/resources/eeoc-ai-hiring-guidance" className="text-blue-600 hover:underline">EEOC guidance resource</Link> for more on disability discrimination risks.
+      </p>
+
+      <h3>What if we use LinkedIn Recruiter but make all decisions manually—do we still need compliance?</h3>
+      <p>
+        Yes, if LinkedIn's AI influenced <em>who</em> you saw and considered. The key question isn't who made the 
+        final decision, but whether AI substantially assisted by determining the candidate pool. If LinkedIn's AI 
+        ranked candidates and you reviewed the top 20, the AI filtered out everyone else—that's a substantial 
+        assistance requiring disclosure. Even manual review of AI-surfaced candidates requires compliance because 
+        the AI made the initial gate-keeping decision about who deserved human attention. Document your human 
+        decision-making process to show meaningful oversight, but don't assume manual final selection exempts you 
+        from AI disclosure requirements.
+      </p>
+
+      <h2>2026 LinkedIn Compliance Developments</h2>
+
+      <h3>LinkedIn Platform Changes Affecting Compliance</h3>
+      <ul>
+        <li><strong>LinkedIn Skills Graph 2.0 (2025):</strong> Enhanced AI that infers skills not explicitly listed 
+        on profiles based on job titles, companies, endorsements, and content activity. This "skills inference" 
+        raises accuracy and bias concerns. If LinkedIn infers skills incorrectly and you rely on those inferences 
+        for screening, you could be making decisions based on flawed AI predictions. Request from LinkedIn: 
+        documentation on inference accuracy rates and validation studies.</li>
+        <li><strong>Recruiter 2026 AI Copilot (beta):</strong> New generative AI assistant that drafts InMail 
+        messages, suggests search strategies, and summarizes candidate profiles. While the AI doesn't make hiring 
+        decisions directly, it shapes recruiter perceptions and actions. Monitor for bias: is the AI disproportionately 
+        highlighting or downplaying candidates from certain groups?</li>
+        <li><strong>LinkedIn Talent Insights AI Analytics (2026):</strong> Expanded competitor intelligence and 
+        talent pool analytics using AI. While focused on market data rather than individual candidates, using this 
+        data to inform hiring strategies (e.g., targeting employees from specific companies) could produce adverse 
+        impact if those targets skew demographically.</li>
+        <li><strong>Privacy Changes (GDPR/CCPA):</strong> LinkedIn updated its privacy policy in January 2026 to 
+        give users more control over AI training data. European and California users can now opt out of having 
+        their profiles used to train LinkedIn's AI models. This may affect AI accuracy and create compliance 
+        complexity—different candidate pools may have different AI training bases.</li>
+      </ul>
+
+      <h3>Regulatory Enforcement Targeting LinkedIn</h3>
+      <p>
+        LinkedIn and its parent company Microsoft face increasing scrutiny:
+      </p>
+
+      <ul>
+        <li><strong>EU AI Act High-Risk Classification:</strong> LinkedIn Recruiter likely qualifies as a "high-risk 
+        AI system" under the EU AI Act (effective in phases 2026-2027). EU-based LinkedIn users or those recruiting 
+        in the EU must comply with conformity assessment, transparency, and human oversight requirements.</li>
+        <li><strong>EEOC Focus on Sourcing AI:</strong> In its 2026-2028 Strategic Enforcement Plan, the EEOC 
+        specifically mentioned "AI-powered candidate sourcing and matching tools" as priorities. LinkedIn Recruiter 
+        is the dominant tool in this category, making it a likely enforcement focus.</li>
+        <li><strong>California AG Advisory (Dec 2025):</strong> California's AG issued an advisory warning that 
+        professional networking platforms using AI for recruitment must ensure employers using their tools comply 
+        with California's AI hiring laws. This signals potential joint liability—LinkedIn may face pressure to 
+        build more compliance features into Recruiter.</li>
+      </ul>
+
+      <h3>Best Practices for LinkedIn Recruiter in 2026</h3>
+      <ol>
+        <li><strong>Document AI reliance level:</strong> Create clear policies about when and how recruiters use 
+        LinkedIn's AI features vs. manual search. "We use AI recommendations as starting points but conduct 
+        independent profile review" is defensible; "we only contact top 10 AI-ranked matches" is riskier.</li>
+        <li><strong>Regular bias testing:</strong> Quarterly (not just annually), analyze who you sourced, contacted, 
+        and hired from LinkedIn by demographic group. Compare LinkedIn-sourced candidates to other channels—if 
+        LinkedIn produces worse outcomes for certain groups, investigate why.</li>
+        <li><strong>Recruiter training:</strong> Train your team to recognize and counter AI bias. Example: "The AI 
+        ranked this candidate low, but I see relevant skills it missed—I'm advancing them anyway." Document override 
+        instances as evidence of human judgment.</li>
+        <li><strong>Diversify sourcing:</strong> Don't rely exclusively on LinkedIn. Use it alongside Indeed, 
+        employee referrals, diversity job boards, and direct sourcing to reduce AI dependency and create comparison data.</li>
+        <li><strong>Transparency with candidates:</strong> When reaching out via InMail, mention: "I identified 
+        you using LinkedIn's AI-powered search and recommendation tools." This preemptive disclosure builds trust 
+        and reduces complaint risk.</li>
+      </ol>
+
       <h2>Conclusion: LinkedIn AI is Powerful—And Regulated</h2>
 
       <p>

@@ -593,6 +593,48 @@ export default function AIHiringLawsByStatePage() {
         a system for tracking changes, not a one-time compliance checklist.
       </p>
 
+      <h3>If our company is headquartered in one state but hires remotely nationwide, which law applies?</h3>
+      <p>
+        Generally, the law of the candidate's location applies, not your headquarters location. If you're based in Texas 
+        (no AI hiring law) but hire a candidate in Colorado, Colorado AI Act requirements apply to that hire. For remote 
+        positions, you must comply with the laws of every state where candidates may work. This is why many employers 
+        adopt "highest common denominator" compliance—build to the strictest requirements (Colorado + California + NYC + 
+        Illinois combined) and apply nationally. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance Program Guide</Link> for 
+        multi-state implementation strategies.
+      </p>
+
+      <h3>Are there any states considering but not yet enforcing AI hiring laws that we should prepare for?</h3>
+      <p>
+        Yes. As of February 2026, pending legislation includes: <strong>Massachusetts</strong> (HB 2127, likely effective 
+        2027), <strong>Washington</strong> (SB 5116, under committee review), <strong>Michigan</strong> (AI Workforce 
+        Fairness Act, introduced), <strong>Pennsylvania</strong> (HB 892, passed House, awaiting Senate), <strong>New Jersey</strong> (A3908, 
+        hearing scheduled), and <strong>Minnesota</strong> (AI Employment Act, expected 2027). Additionally, <strong>Oregon, 
+        Connecticut, Rhode Island, and Vermont</strong> have task forces studying AI hiring regulation with recommendations 
+        expected in 2026. If you hire in these states, monitor legislative developments and consider implementing compliance 
+        measures proactively—being ahead of the law reduces scrambling when it passes.
+      </p>
+
+      <h2>2026 Legislative Updates</h2>
+
+      <h3>States Strengthening Existing Laws</h3>
+      <ul>
+        <li><strong>Illinois (HB 4211, effective July 2026):</strong> Expands AIVIA to cover internal promotions explicitly, 
+        adds requirement for employers to maintain audit trail of AI decisions, and increases penalties to $2,000 per violation.</li>
+        <li><strong>California (AB 3104, effective Jan 2027):</strong> Creates private right of action for ADMT violations, 
+        allowing candidates to sue directly rather than relying on AG enforcement. Expected to trigger litigation wave similar 
+        to CCPA/CPRA enforcement patterns.</li>
+        <li><strong>NYC (proposed Local Law amendment, pending):</strong> Would require employers to provide candidates with 
+        their individual AEDT scores upon request, not just aggregate audit results. Highly controversial among employers due 
+        to transparency concerns.</li>
+      </ul>
+
+      <h3>New State Entrants</h3>
+      <ul>
+        <li><strong>Massachusetts:</strong> Comprehensive AI hiring law modeled after Colorado's approach, expected passage Q2 2026.</li>
+        <li><strong>Washington:</strong> Focused on public sector AI hiring initially, with private sector provisions likely in 2027.</li>
+        <li><strong>Pennsylvania:</strong> Would be first Midwest state outside Illinois with AI hiring regulation, signals regional trend.</li>
+      </ul>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">Complete AI Hiring Compliance Guide 2026</Link></li>

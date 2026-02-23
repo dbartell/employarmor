@@ -319,9 +319,247 @@ export default function ComplianceProgramGuidePage() {
         <li><strong>Request response time:</strong> Days to respond to opt-out/access requests</li>
         <li><strong>Audit currency:</strong> Days since last bias audit (target: &lt;365)</li>
         <li><strong>Training completion:</strong> % of hiring staff trained</li>
-        <li><strong>Impact ratios:</strong> Tracking toward 0.8+ for all groups</li>
+        <li><strong>Impact ratios:</strong> Tracking toward 0.8+ (80% rule) for all protected groups per EEOC guidelines</li>
         <li><strong>Incident count:</strong> Number of compliance issues identified</li>
+        <li><strong>Documentation completeness:</strong> % of AI tools with current assessments</li>
+        <li><strong>Vendor compliance rate:</strong> % of AI vendors meeting contractual obligations</li>
       </ul>
+
+      <h2>Advanced Implementation: Technical Configuration</h2>
+      <p>
+        Once policies are established, technical implementation requires coordination with IT teams 
+        and ATS administrators. Here are specific configuration steps for common scenarios:
+      </p>
+
+      <h3>Applicant Tracking System (ATS) Configuration</h3>
+      <p>
+        Most modern ATS platforms (Greenhouse, Workday, Lever, iCIMS) support compliance workflows 
+        through custom fields and workflow automation:
+      </p>
+      <ul>
+        <li><strong>Custom candidate fields:</strong> Add "AI Disclosure Sent" (boolean), "Disclosure Date" (timestamp), "Opt-Out Requested" (boolean) fields to candidate records</li>
+        <li><strong>Email templates:</strong> Create geo-specific email templates that auto-populate based on candidate location (NYC, Colorado, California, Illinois, Maryland)</li>
+        <li><strong>Workflow triggers:</strong> Set up automated disclosure emails when candidate completes application or before AI assessment stage</li>
+        <li><strong>Reporting dashboards:</strong> Configure compliance reports showing disclosure delivery rates, opt-out frequency, and selection rates by demographic group</li>
+        <li><strong>Location detection:</strong> Use IP geolocation or address fields to auto-determine which disclosure requirements apply</li>
+      </ul>
+
+      <h3>Integration with Assessment Platforms</h3>
+      <p>
+        If using third-party assessment tools (HireVue, Pymetrics, HackerRank, Codility):
+      </p>
+      <ul>
+        <li>Configure assessment invitation emails to include AI disclosure notices before candidates begin</li>
+        <li>Add disclosure language to assessment landing pages</li>
+        <li>Implement candidate acknowledgment checkboxes ("I have read and understand the AI disclosure notice")</li>
+        <li>Create alternative assessment workflows for opt-out candidates (e.g., structured interview scorecard instead of video AI analysis)</li>
+        <li>Set up data pipelines to pull selection rate data back into your ATS for impact ratio calculations</li>
+      </ul>
+
+      <h3>Impact Ratio Monitoring Systems</h3>
+      <p>
+        The EEOC's 80% rule (also called the four-fifths rule) requires employers to monitor whether 
+        AI tools produce adverse impact. Here's how to implement monitoring:
+      </p>
+      <ul>
+        <li><strong>Data collection:</strong> Capture voluntary EEO demographic data (race, ethnicity, gender) at application stage</li>
+        <li><strong>Selection tracking:</strong> Tag candidates at each decision point (application reviewed, phone screen, assessment passed, interview, offer)</li>
+        <li><strong>Ratio calculations:</strong> For each decision point, calculate selection rate by group. Compare lowest-performing group to highest: if ratio &lt; 0.80, you have potential adverse impact</li>
+        <li><strong>Statistical significance:</strong> For smaller candidate pools (&lt;30 per group), use Fisher's Exact Test instead of simple ratios</li>
+        <li><strong>Alerting:</strong> Set up automated alerts when impact ratios fall below 0.80 for any stage/group combination</li>
+      </ul>
+
+      <div className="bg-gray-50 border rounded-lg p-6 my-6">
+        <p className="font-semibold mb-3">Example Impact Ratio Calculation</p>
+        <p className="text-sm mb-3">Q1 2026 - Resume Screening Stage (AI-powered ATS filtering)</p>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="py-2 text-left">Group</th>
+              <th className="py-2 text-right">Applied</th>
+              <th className="py-2 text-right">Passed Screen</th>
+              <th className="py-2 text-right">Selection Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              <td className="py-2">White</td>
+              <td className="py-2 text-right">500</td>
+              <td className="py-2 text-right">150</td>
+              <td className="py-2 text-right">30.0%</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-2">Black/African American</td>
+              <td className="py-2 text-right">200</td>
+              <td className="py-2 text-right">45</td>
+              <td className="py-2 text-right">22.5%</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-2">Hispanic/Latino</td>
+              <td className="py-2 text-right">180</td>
+              <td className="py-2 text-right">50</td>
+              <td className="py-2 text-right">27.8%</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-2">Asian</td>
+              <td className="py-2 text-right">120</td>
+              <td className="py-2 text-right">38</td>
+              <td className="py-2 text-right">31.7%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className="text-sm mt-3"><strong>Analysis:</strong> Highest rate = 31.7% (Asian). Black/African American ratio = 22.5%/31.7% = 0.71 &lt; 0.80 → <span className="text-red-600 font-semibold">Adverse impact detected</span></p>
+        <p className="text-sm mt-2"><strong>Action required:</strong> Investigate AI screening algorithm, conduct bias audit, document investigation, implement corrective measures.</p>
+      </div>
+
+      <h2>Compliance Program Maturity Model</h2>
+      <p>
+        Evaluate where your program stands and identify next steps:
+      </p>
+
+      <h3>Level 1: Reactive (Most organizations today)</h3>
+      <ul>
+        <li>No formal AI inventory</li>
+        <li>Disclosures sent inconsistently or not at all</li>
+        <li>No impact monitoring</li>
+        <li>Compliance addressed only when issues arise</li>
+      </ul>
+
+      <h3>Level 2: Basic Compliance (Minimum viable program)</h3>
+      <ul>
+        <li>AI tools inventoried</li>
+        <li>Required disclosures integrated into hiring flow</li>
+        <li>Annual bias audits completed (where required)</li>
+        <li>Designated compliance owner</li>
+        <li>Basic documentation maintained</li>
+      </ul>
+
+      <h3>Level 3: Managed Program (Target for most organizations)</h3>
+      <ul>
+        <li>Comprehensive policy framework</li>
+        <li>Automated disclosure delivery and tracking</li>
+        <li>Quarterly impact ratio monitoring</li>
+        <li>Regular training for hiring staff</li>
+        <li>Vendor contracts include compliance obligations</li>
+        <li>Documented procedures for candidate requests</li>
+        <li>Proactive regulatory monitoring</li>
+      </ul>
+
+      <h3>Level 4: Optimized (Leading practice)</h3>
+      <ul>
+        <li>Real-time impact monitoring with automated alerts</li>
+        <li>AI ethics committee oversight</li>
+        <li>Continuous bias testing (not just annual audits)</li>
+        <li>Integration with broader DEI initiatives</li>
+        <li>Regular third-party assessments</li>
+        <li>Transparent public reporting on AI use</li>
+        <li>Proactive engagement with regulators</li>
+      </ul>
+
+      <h2>Common Implementation Challenges</h2>
+
+      <h3>Challenge 1: Multi-State Operations</h3>
+      <p>
+        <strong>Problem:</strong> Different disclosure requirements for candidates in different states create operational complexity.
+      </p>
+      <p>
+        <strong>Solution:</strong> Implement "highest common denominator" approach—provide the most comprehensive disclosure to all candidates nationally. This simplifies operations and provides defensibility. For example, use Colorado-style pre-use disclosure plus NYC-style alternative process information for all candidates, regardless of location.
+      </p>
+
+      <h3>Challenge 2: Decentralized Hiring</h3>
+      <p>
+        <strong>Problem:</strong> Hiring managers across departments use different tools, making consistent compliance difficult.
+      </p>
+      <p>
+        <strong>Solution:</strong> Centralize AI tool procurement through HR/compliance. Create an approved vendor list. Require impact assessments before any new AI tool is deployed. Implement quarterly audits to detect shadow AI tool usage.
+      </p>
+
+      <h3>Challenge 3: Legacy Systems</h3>
+      <p>
+        <strong>Problem:</strong> Older ATS platforms lack automation features needed for efficient compliance.
+      </p>
+      <p>
+        <strong>Solution:</strong> Short-term: Manual compliance checklists for recruiters. Mid-term: Implement middleware (like EmployArmor) to automate disclosure delivery and tracking. Long-term: Plan ATS migration as part of broader HR tech stack modernization. Budget 12-18 months for full migration.
+      </p>
+
+      <h3>Challenge 4: Vendor Resistance</h3>
+      <p>
+        <strong>Problem:</strong> AI vendors reluctant to provide transparency about algorithms or support bias audits.
+      </p>
+      <p>
+        <strong>Solution:</strong> Make compliance support a contract requirement. For existing vendors, negotiate addendums requiring audit cooperation. For new procurements, include compliance requirements in RFP. Be prepared to switch vendors if they cannot meet legal obligations—your liability doesn't disappear because your vendor is uncooperative.
+      </p>
+
+      <h2>Budget Planning</h2>
+      <p>
+        Expect these costs when building a compliance program:
+      </p>
+
+      <h3>Year 1 (Setup)</h3>
+      <ul>
+        <li><strong>Legal review:</strong> $10,000-$25,000 for policy development and contract review</li>
+        <li><strong>Bias audits:</strong> $15,000-$50,000 per tool (NYC requirement)</li>
+        <li><strong>Impact assessments:</strong> $5,000-$15,000 per tool (Colorado requirement)</li>
+        <li><strong>Compliance software:</strong> $5,000-$20,000 annual subscription for automated tracking</li>
+        <li><strong>Training development:</strong> $5,000-$10,000 for curriculum and materials</li>
+        <li><strong>Staff time:</strong> 0.5-1.0 FTE for initial program setup</li>
+      </ul>
+
+      <h3>Ongoing (Annual)</h3>
+      <ul>
+        <li><strong>Bias audit renewals:</strong> $10,000-$30,000 (required annually in NYC)</li>
+        <li><strong>Compliance software:</strong> $5,000-$20,000 annual subscription</li>
+        <li><strong>Legal updates:</strong> $3,000-$8,000 for regulatory monitoring and policy updates</li>
+        <li><strong>Training refreshers:</strong> $2,000-$5,000 annually</li>
+        <li><strong>Staff time:</strong> 0.25-0.5 FTE for ongoing administration</li>
+      </ul>
+
+      <p className="text-sm text-gray-600 mt-4">
+        Note: Costs vary significantly based on organization size, number of AI tools, geographic footprint, and whether you handle compliance in-house vs. outsource. The alternative—non-compliance—risks penalties of $500-$1,500 per violation in NYC, $5,000-$10,000 per violation in Colorado, plus potential class action liability.
+      </p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>Who should own AI hiring compliance—HR, Legal, or IT?</h3>
+      <p>
+        Ideally, a cross-functional team with HR in the lead. HR understands hiring operations and can implement day-to-day processes. Legal provides regulatory guidance and risk assessment. IT handles technical integration and data systems. For most organizations, the VP of HR or HR Operations should be the primary owner with regular check-ins with Legal and IT stakeholders. Smaller organizations may assign ownership to the HR Director or even the COO.
+      </p>
+
+      <h3>How long does it take to build a compliance program from scratch?</h3>
+      <p>
+        Plan for 10-14 weeks for initial setup (foundation, policy development, implementation, documentation systems, vendor management). However, you can implement "quick wins" in parallel: send basic AI disclosures within 2 weeks, complete tool inventory within 4 weeks, begin impact monitoring within 6 weeks. Treat this as an iterative process—launch with minimum viable compliance, then enhance over time.
+      </p>
+
+      <h3>What if we use AI tools but only in an advisory capacity—do we still need to comply?</h3>
+      <p>
+        Yes, in most cases. NYC Local Law 144 applies if an AI tool "substantially assists or replaces" decision-making. Colorado and Illinois laws use similar "consequential decision" language. If your AI tool influences who advances to the next stage, that's typically covered. Safe harbor: purely administrative tools (calendar scheduling, email routing) generally don't trigger requirements, but resume screening, candidate ranking, and assessment scoring almost always do. When in doubt, treat it as covered—over-compliance is safer than under-compliance.
+      </p>
+
+      <h3>Can we just stop using AI to avoid compliance requirements?</h3>
+      <p>
+        Technically yes, but impractical for most organizations. Even "non-AI" ATS platforms often use machine learning for search, matching, and ranking. You'd need to verify every feature with your vendor. More importantly, AI tools provide legitimate efficiency and consistency benefits. The better approach: embrace compliance as part of responsible AI adoption. Done well, compliance processes also improve hiring quality and reduce discrimination risk beyond just checking regulatory boxes.
+      </p>
+
+      <h3>What's the difference between a bias audit and an impact assessment?</h3>
+      <p>
+        <strong>Bias audit</strong> (required by NYC): Independent statistical analysis of historical hiring outcomes, testing whether the AI tool produces adverse impact by race, ethnicity, or gender. Must be conducted by independent auditor within 12 months before use, and annually thereafter. Results must be published publicly.
+      </p>
+      <p>
+        <strong>Impact assessment</strong> (required by Colorado): Broader evaluation including purpose of AI, data sources, potential harms, bias mitigation measures, transparency mechanisms, and human oversight. Conducted by the employer (can be internal), not required to be public, but must be made available to Attorney General upon request.
+      </p>
+      <p>
+        Both are required in their respective jurisdictions, and they serve complementary purposes. A bias audit provides statistical validation; an impact assessment provides comprehensive risk evaluation.
+      </p>
+
+      <h3>How do we handle candidate opt-out requests when AI is integrated into our ATS?</h3>
+      <p>
+        Create a parallel "manual review" workflow. When a candidate opts out (typically via email or form submission), flag their record in your ATS with "Manual Review Required" or similar. Route their application directly to a recruiter for human-only evaluation. Document the alternative process used. Train recruiters on structured evaluation methods (scoring rubrics, standardized interview questions) to ensure consistency without AI. Track opt-out rates—if &gt;20% of candidates opt out, this may signal concerns about your AI disclosure or tool fairness.
+      </p>
+
+      <h3>What should we do if we discover our AI tool has adverse impact?</h3>
+      <p>
+        First, document the finding immediately. Second, investigate root causes: is the issue with the AI algorithm, the training data, how the tool is configured, or how humans use its outputs? Third, implement corrective action: adjust screening criteria, retrain the model, modify human oversight processes, or in severe cases, discontinue the tool. Fourth, consider retrospective review: evaluate whether past candidates were disadvantaged. Fifth, consult legal counsel about whether proactive disclosure to affected candidates or regulators is appropriate. Colorado's affirmative defense provisions reward employers who discover and cure violations quickly.
+      </p>
 
       <h2>Related Resources</h2>
       <ul>

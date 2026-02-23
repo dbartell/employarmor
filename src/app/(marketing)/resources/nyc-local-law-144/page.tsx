@@ -245,6 +245,35 @@ export default function NYCLocalLaw144Page() {
         calendar reminder to commission a new audit before your current one expires.
       </p>
 
+      <h3>What's the penalty for not providing the required 10-day notice?</h3>
+      <p>
+        The NYC Department of Consumer and Worker Protection (DCWP) can impose civil penalties of $500 for first 
+        violations and up to $1,500 for subsequent violations, assessed per affected candidate. For high-volume 
+        hiring, this adds up fast: if you screen 1,000 NYC candidates without proper notice, you're looking at 
+        $500,000 minimum exposure. In addition to fines, DCWP can require corrective action (retroactive notices, 
+        process changes) and publish enforcement actions, creating reputational risk. Private lawsuits are also 
+        possible under general employment discrimination statutes if the AEDT produces discriminatory outcomes and 
+        you failed to follow LL144's bias audit requirements.
+      </p>
+
+      <h3>If our AEDT is only used by one person in our HR team, do we still need to comply?</h3>
+      <p>
+        Yes. LL144 applies to any use of AEDTs in hiring, regardless of how many employees use the tool. Even if 
+        only your TA Director uses an AI resume screening tool, full compliance (bias audit, disclosure, 
+        public posting) is required. The law focuses on the impact on candidates, not your internal staffing. 
+        A common misconception is that "limited use" exempts employers—it doesn't.
+      </p>
+
+      <h3>Can we satisfy the disclosure requirement by including LL144 language in our general privacy policy?</h3>
+      <p>
+        No. The law requires that candidates be notified "at least ten business days before use of the AEDT." 
+        Burying this in a privacy policy that candidates might read months before (or after) the AEDT is used 
+        doesn't meet the timing requirement. You must provide specific, timely notice tied to when the AEDT 
+        will actually be applied to their candidacy. Best practice: send a dedicated disclosure email when 
+        scheduling AI-powered assessments or before applying AI screening tools to their application. Document 
+        the delivery date to prove 10-day compliance. See our <Link href="/resources/ai-disclosure-notice-template" className="text-blue-600 hover:underline">disclosure templates</Link> for compliant notice examples.
+      </p>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/compliance/nyc" className="text-blue-600 hover:underline">NYC Compliance Page</Link></li>

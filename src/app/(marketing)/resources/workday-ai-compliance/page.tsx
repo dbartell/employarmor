@@ -583,6 +583,87 @@ export default function WorkdayAICompliancePage() {
         deployment produces discriminatory outcomes. Document your validation efforts and bias mitigation measures.
       </p>
 
+      <h3>How do Workday's AI features interact with internal promotions and career development?</h3>
+      <p>
+        Workday Talent Marketplace uses AI to match employees with internal opportunities based on skills, experience, 
+        and career goals. This falls under AI hiring regulations in many jurisdictions (NYC Local Law 144 explicitly 
+        covers promotions). You must provide the same disclosures to internal candidates as external ones. Document 
+        how AI recommendations are used—are they purely informational, or do they substantially influence promotion 
+        decisions? If the latter, full compliance requirements apply including bias audits and alternative processes.
+      </p>
+
+      <h3>Can we use Workday AI for recruiting but not for final hiring decisions?</h3>
+      <p>
+        Yes, but compliance still applies. Even if AI only creates a shortlist that humans review, it "substantially 
+        assists" decisions under most regulations. The AI determines who humans see and who gets filtered out—that's 
+        a consequential decision requiring disclosure. You can reduce risk by emphasizing human oversight: ensure 
+        recruiters can override AI rankings, review a sample of AI-rejected candidates periodically, and document 
+        independent human judgment at each stage. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance Program Guide</Link> for 
+        human oversight best practices.
+      </p>
+
+      <h2>2026 Compliance Updates for Workday</h2>
+
+      <h3>Recent Regulatory Developments</h3>
+      <p>
+        Several 2026 changes directly impact Workday deployments:
+      </p>
+
+      <ul>
+        <li><strong>Colorado AI Act (effective Feb 1, 2026):</strong> Workday AI qualifies as a "high-risk AI system" 
+        requiring algorithmic impact assessments. Employers using Workday in Colorado must document purpose, data 
+        sources, potential harms, mitigation measures, and human oversight procedures. Deadline: before deploying 
+        or by Feb 1, 2026 for existing deployments. Non-compliance: $5,000-10,000 per violation.</li>
+        <li><strong>California AB 2930 (effective Jan 1, 2026):</strong> Expands on CCPA ADMT rules with annual 
+        bias testing requirements and enhanced candidate rights. Workday users in California must conduct or commission 
+        annual audits and publish summary results. No private right of action yet, but AG enforcement is active.</li>
+        <li><strong>Illinois HB 3773 expansion (effective Jan 1, 2026):</strong> Adds requirement for employers to 
+        explain data inputs and outputs in AI disclosures. Generic "we use AI matching" is no longer sufficient—you 
+        must explain that Workday analyzes skills data, experience, and historical hiring patterns to generate match scores.</li>
+        <li><strong>EEOC Strategic Enforcement Plan:</strong> The EEOC announced in December 2025 that AI hiring tools 
+        (specifically mentioning enterprise HCM systems like Workday) are a priority for 2026-2028 enforcement. Expect 
+        increased audits and investigations of employers using Workday AI features.</li>
+      </ul>
+
+      <h3>Workday Product Updates Affecting Compliance</h3>
+      <p>
+        Workday released several AI enhancements in 2025-2026 that may change your compliance posture:
+      </p>
+
+      <ul>
+        <li><strong>Workday Illuminate (2025):</strong> Enhanced ML models for skills inference and career pathing. 
+        If you upgraded to Illuminate, review your disclosure language—the AI now makes broader inferences about 
+        candidate capabilities than earlier versions.</li>
+        <li><strong>Recruiter Skills Cloud (2026):</strong> New feature using external labor market data to augment 
+        candidate profiles. This data enrichment counts as "automated decision-making" under GDPR and California law. 
+        Ensure candidates consent to external data usage.</li>
+        <li><strong>SmartMatch 2.0 (2026):</strong> Improved matching algorithm with "explainability" features. Good 
+        news for compliance: you can now show candidates and regulators why the AI made certain matches. Bad news: 
+        this is a new algorithm version requiring fresh bias audits under NYC law.</li>
+      </ul>
+
+      <h3>Action Items for Existing Workday Customers</h3>
+      <p>
+        If you're already using Workday AI features, take these steps before Q2 2026:
+      </p>
+
+      <ol>
+        <li><strong>Conduct compliance gap analysis:</strong> Compare your current practices against Colorado, California, 
+        Illinois, and NYC requirements. Identify where you fall short. Use our <Link href="/scorecard" className="text-blue-600 hover:underline">free compliance scorecard</Link> for a structured assessment.</li>
+        <li><strong>Update disclosure language:</strong> Refresh your AI notices to meet 2026 specificity requirements. 
+        Mention "Workday" by name, explain Skills Match and other features you use, and describe how AI outputs 
+        influence decisions.</li>
+        <li><strong>Commission or conduct bias audit:</strong> If you haven't audited Workday AI in the past 12 months, 
+        you're out of compliance in NYC and California. Budget $15,000-25,000 for independent auditing services. 
+        See our <Link href="/resources/ai-bias-audit-guide" className="text-blue-600 hover:underline">Bias Audit Guide</Link> for vendor recommendations.</li>
+        <li><strong>Document human oversight:</strong> Create written procedures showing how recruiters review and 
+        override Workday AI recommendations. Train staff on these procedures. Maintain audit trail of instances where 
+        humans overrode AI suggestions.</li>
+        <li><strong>Review vendor contract:</strong> Ensure your Workday contract includes compliance support provisions: 
+        access to data for auditing, notification of algorithm changes, technical documentation for regulators, and 
+        indemnification for vendor-caused compliance failures.</li>
+      </ol>
+
       <h2>Conclusion: Workday AI is Powerful—But Not Autopilot</h2>
 
       <p>

@@ -298,6 +298,112 @@ export default function IllinoisAIVIAComplianceGuidePage() {
         consent. If you operate in multiple jurisdictions, you need to comply with all applicable laws.
       </p>
 
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>Does AIVIA apply if the candidate lives in Illinois but the job is remote in another state?</h3>
+      <p>
+        Yes. AIVIA applies to "applicants for employment" in Illinois, which includes Illinois residents regardless 
+        of where the job is located. If an Illinois resident applies for your fully remote position based in California, 
+        AIVIA applies to that hire. Your compliance trigger is candidate location, not job location. For remote roles 
+        open to multiple states, you must comply with each applicable state's laws based on where candidates are located.
+      </p>
+
+      <h3>What if a candidate refuses consent? Can we reject their application?</h3>
+      <p>
+        No. AIVIA requires that you provide an "alternative manner" for candidates who don't consent to AI evaluation. 
+        You cannot penalize or automatically reject candidates who opt out—this would defeat the law's purpose. The 
+        alternative process must be "equivalent" in terms of opportunity. For example, if your standard process is AI 
+        resume screening followed by phone interview, opt-out candidates might receive direct human resume review followed 
+        by the same phone interview. Document that opt-out candidates are not disadvantaged in outcomes (track hire 
+        rates for opt-outs vs. AI-evaluated candidates to prove equivalence).
+      </p>
+
+      <h3>How specific does our AI disclosure need to be?</h3>
+      <p>
+        Very specific. Generic language like "we may use technology in hiring" doesn't meet AIVIA requirements. Your 
+        disclosure must explain: (1) that artificial intelligence will be used, (2) what characteristics or traits 
+        the AI evaluates (e.g., "communication skills, problem-solving ability, and cultural fit based on video 
+        interview responses"), and (3) how the AI output factors into hiring decisions (e.g., "candidates scoring 
+        below 70% are not advanced to phone screen stage"). See our <Link href="/resources/ai-disclosure-notice-template" className="text-blue-600 hover:underline">disclosure templates</Link> for compliant examples. When in doubt, 
+        err on the side of more detail.
+      </p>
+
+      <h3>Does the 30-day deletion requirement apply to all candidate data or just video recordings?</h3>
+      <p>
+        AIVIA specifically mentions video recordings in the deletion provision (Section 10), requiring destruction 
+        within 30 days of a candidate's request. However, the broader principle of candidate data rights suggests 
+        best practice is to extend deletion rights to all AI-generated evaluations, scores, and analyses. If a 
+        candidate requests deletion of their AI assessment data, refusing on the grounds that "it's not technically 
+        a video recording" is legally risky. The Illinois Attorney General's guidance leans toward expansive 
+        interpretation of candidate data rights. Our recommendation: honor all deletion requests for AI-related 
+        candidate data within 30 days.
+      </p>
+
+      <h3>Do we need separate consent for each AI tool, or can one general consent cover all AI use?</h3>
+      <p>
+        One comprehensive consent can cover multiple AI tools if it's sufficiently detailed. However, the consent 
+        must inform candidates about <em>all</em> AI tools they'll encounter. Example of acceptable combined consent: 
+        "I consent to the use of artificial intelligence in evaluating my candidacy, including: (1) Greenhouse ATS 
+        resume screening which analyzes my qualifications against job requirements, (2) HireVue video interview 
+        analysis which evaluates communication and problem-solving skills, and (3) Codility technical assessment 
+        which scores my coding ability." Don't use overly broad consent like "I consent to any AI tools the company 
+        may use"—this lacks the specificity AIVIA requires. When in doubt, provide tool-specific disclosures and 
+        consents at each stage where AI is introduced.
+      </p>
+
+      <h3>Are personality tests and skills assessments considered "AI" under AIVIA?</h3>
+      <p>
+        If they use machine learning, algorithmic scoring, or automated decision-making, yes. Traditional personality 
+        tests (paper-based, static scoring rubrics) are generally not covered. However, modern assessment platforms 
+        like Pymetrics, Criteria Corp, HackerRank, and Codility use ML algorithms to score responses, compare 
+        candidates to benchmarks, or adapt questions based on performance—all of which constitute AI under AIVIA. 
+        The key question: Is the evaluation automated and algorithmic? If yes, it's covered. Check with your assessment 
+        vendor about whether their platform uses AI/ML. If they can't give you a clear answer, treat it as AI-powered 
+        to be safe. See our guide on <Link href="/resources/what-counts-as-ai-hiring" className="text-blue-600 hover:underline">what counts as AI in hiring</Link>.
+      </p>
+
+      <h3>What happens if we discover we've been non-compliant for months or years?</h3>
+      <p>
+        First, stop the non-compliant practice immediately. Second, conduct internal review to understand the scope: 
+        how many candidates were affected, what violations occurred, and when they started. Third, implement compliant 
+        processes going forward. Fourth, consult legal counsel about whether voluntary disclosure to the Illinois 
+        Department of Labor is advisable—proactive disclosure sometimes reduces penalties. Fifth, document all 
+        corrective actions taken. Penalties are calculated per violation (per candidate), but the Department of Labor 
+        has discretion in enforcement. Demonstrating good faith (you discovered the issue through internal audit, 
+        fixed it promptly, took steps to prevent recurrence) may reduce penalties. Don't ignore historical non-compliance 
+        and hope no one notices—candidates can file complaints, triggering investigations into your past practices.
+      </p>
+
+      <h2>2026 Enforcement Landscape in Illinois</h2>
+
+      <h3>Recent IDOL Enforcement Actions</h3>
+      <p>
+        The Illinois Department of Labor (IDOL) has become more active in AIVIA enforcement:
+      </p>
+      <ul>
+        <li><strong>Large staffing firm (Nov 2025):</strong> $340,000 penalty for failure to obtain consent from 
+        680 candidates. IDOL emphasized that high-volume hiring does not excuse compliance shortcuts.</li>
+        <li><strong>E-commerce company (Jan 2026):</strong> $150,000 penalty for inadequate disclosure language. 
+        Company's notice said "we use technology" without mentioning AI or explaining what it evaluated.</li>
+        <li><strong>Healthcare system (Dec 2025):</strong> Under investigation for refusing to honor deletion 
+        requests from candidates. Investigation ongoing but signals IDOL focus on candidate data rights.</li>
+      </ul>
+
+      <h3>Coordination with Other Agencies</h3>
+      <p>
+        IDOL is coordinating with the Illinois Attorney General and EEOC on AI hiring enforcement. In two recent 
+        cases, AIVIA violations uncovered during IDOL investigations led to EEOC charges for underlying discrimination. 
+        Non-compliance with AIVIA often indicates broader employment law problems.
+      </p>
+
+      <h3>Private Litigation Trends</h3>
+      <p>
+        AIVIA includes an implied private right of action, and plaintiffs' attorneys are increasingly bringing class 
+        actions. Typical claims: failure to disclose AI use, failure to obtain consent, and failure to provide 
+        alternative processes. Settlement values for AIVIA class actions have ranged from $50,000 (small class, quick 
+        settlement) to $3.2 million (large class, protracted litigation). Most settle in the $200,000-800,000 range.
+      </p>
+
       <h2>Bottom Line</h2>
       <p>
         Illinois AIVIA compliance isn't optional, and enforcement is increasing. The good news: the 

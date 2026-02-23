@@ -542,6 +542,76 @@ export default function IndeedAICompliancePage() {
         a legal defense under Title VII or state AI hiring laws.
       </p>
 
+      <h3>Do Indeed Sponsored Jobs use AI targeting that requires disclosure?</h3>
+      <p>
+        Yes. Indeed's Sponsored Jobs use machine learning to target candidates based on job fit, search behavior, 
+        and profile matching. This algorithmic targeting constitutes "automated decision-making" under most AI hiring 
+        laws because it determines which candidates see your job posting—essentially pre-screening your candidate pool. 
+        Even if you're not actively screening resumes with AI, the targeting itself requires disclosure in jurisdictions 
+        like NYC, Colorado, and California. Best practice: include a statement in your Indeed job postings: "This 
+        position was targeted to you using AI-powered job matching based on your profile and search history."
+      </p>
+
+      <h3>How do we audit Indeed's AI if we don't have access to the algorithm?</h3>
+      <p>
+        You can't audit Indeed's internal algorithms, but you can (and must) audit your outcomes. Track selection 
+        rates by demographic group for candidates who applied through Indeed versus other sources. Calculate impact 
+        ratios using the EEOC's 80% rule. If Indeed-sourced candidates show adverse impact patterns, investigate 
+        further—is it the targeting AI, your screening process, or both? Request data from Indeed about demographic 
+        composition of candidates shown your jobs. Document your validation efforts. If Indeed cannot provide adequate 
+        transparency or support for your compliance needs, consider whether continued use is defensible. See our 
+        <Link href="/resources/vendor-assessment-guide" className="text-blue-600 hover:underline">Vendor Assessment Guide</Link> for evaluating third-party AI providers.
+      </p>
+
+      <h2>2026 Compliance Landscape for Indeed</h2>
+
+      <h3>Recent Regulatory Focus on Job Board AI</h3>
+      <p>
+        Job boards like Indeed have come under increased regulatory scrutiny in 2025-2026:
+      </p>
+
+      <ul>
+        <li><strong>EEOC Commissioner Statement (Oct 2025):</strong> EEOC Commissioner Keith Sonderling issued guidance 
+        emphasizing that algorithmic job targeting can violate Title VII if it produces discriminatory outcomes. 
+        The statement specifically mentioned "job board matching algorithms" as enforcement priorities.</li>
+        <li><strong>Colorado AG Investigation (Nov 2025):</strong> Colorado's Attorney General opened investigations 
+        into several unnamed job platforms for potential violations of the Colorado AI Act. While targets haven't been 
+        confirmed, industry speculation points to major job boards including Indeed.</li>
+        <li><strong>California Privacy Protection Agency Guidance (Dec 2025):</strong> CPPA issued detailed guidance 
+        on ADMT compliance for job boards, clarifying that both employers <em>and</em> platforms share responsibility 
+        for transparency and bias mitigation.</li>
+      </ul>
+
+      <h3>Indeed Platform Updates Affecting Compliance</h3>
+      <ul>
+        <li><strong>Smart Apply (launched Q4 2025):</strong> New feature allowing candidates to apply to multiple 
+        jobs with one click. Uses AI to pre-fill applications and route to "best fit" jobs. Raises questions about 
+        candidate consent—are they consenting to AI evaluation for all jobs or just one? Update your disclosures to 
+        cover Smart Apply if you enable it.</li>
+        <li><strong>Indeed AI Screen (beta 2026):</strong> Automated initial screening tool that asks candidates 
+        knockout questions and uses AI to evaluate responses. This is an AEDT under NYC law and requires full 
+        compliance including bias audits. Currently in beta but expect wide rollout mid-2026.</li>
+        <li><strong>Salary Insights AI (2026):</strong> Uses ML to suggest competitive salary ranges. While not directly 
+        a hiring decision tool, salary determinations can have discriminatory impact and may trigger pay equity law 
+        requirements in states like California, New York, and Colorado.</li>
+      </ul>
+
+      <h3>Action Items for Indeed Users in 2026</h3>
+      <ol>
+        <li><strong>Update job posting disclosures:</strong> Add AI notice to all Indeed postings: "Applications 
+        for this position are managed using AI-powered tools for candidate matching and screening."</li>
+        <li><strong>Track Indeed-specific outcomes:</strong> In your ATS or applicant tracking spreadsheets, tag 
+        source as "Indeed-AI" vs "Indeed-organic" vs other sources. Calculate selection rates by source and demographic 
+        group quarterly.</li>
+        <li><strong>Review Smart Sourcing usage:</strong> If using Smart Sourcing, document your targeting criteria. 
+        Ensure you're not inadvertently excluding protected groups through location, school, or company filters.</li>
+        <li><strong>Request Indeed compliance documentation:</strong> Ask your Indeed account rep for their bias 
+        audit reports, data privacy documentation, and technical specs on AI features. Indeed has published some 
+        transparency reports—request the latest versions.</li>
+        <li><strong>Build alternative sourcing:</strong> Don't rely exclusively on Indeed's AI. Diversify sourcing 
+        channels to reduce dependency and create control groups for bias testing.</li>
+      </ol>
+
       <h2>Conclusion: Indeed AI is Everywhere—So is Compliance Risk</h2>
 
       <p>
