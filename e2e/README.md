@@ -1,167 +1,179 @@
-# HireShield E2E Test Suite
+# EmployArmor E2E Test Suite
 
-This directory contains comprehensive Playwright E2E tests for the HireShield application.
+Comprehensive end-to-end testing covering the full workflow of a real company doing maximum compliance.
 
-## Test Structure
+## Test Accounts
 
-```
-e2e/
-├── fixtures/           # Test data and auth helpers
-│   ├── auth.ts        # Authentication helpers
-│   └── test-data.ts   # Test data generators
-├── helpers/           # Utility helpers
-│   ├── api.ts         # API mocking helpers
-│   ├── forms.ts       # Form interaction helpers
-│   └── navigation.ts  # Navigation helpers
-├── .auth/             # Stored auth state (gitignored)
-├── marketing-to-signup.spec.ts    # Marketing → Signup flow
-├── onboarding-flow.spec.ts        # Onboarding wizard tests
-├── document-generation.spec.ts    # Document generation tests
-├── ats-integration.spec.ts        # ATS integration tests
-├── disclosure-page.spec.ts        # Disclosure page editor tests
-├── team-invites.spec.ts           # Team management tests
-├── training-flow.spec.ts          # Training module tests
-├── compliance-documents.spec.ts   # Compliance documents tests
-├── full-journey.spec.ts           # Complete E2E journey test
-└── global.setup.ts               # Global test setup
-```
+### Admin Account
+- **Email:** test-e2e@employarmor.com
+- **Password:** TestE2E!2026
+- **Role:** Owner/Admin
+- **Access:** Full admin dashboard, compliance management, approvals, settings
 
-## Running Tests
+### Employee Account
+- **Email:** test-employee@employarmor.com
+- **Password:** TestEmployee!2026
+- **Role:** Employee
+- **Access:** Employee portal, disclosures, training, tool requests
 
+## Scenarios
+
+### 1. Admin Onboarding & Setup
+Journey: New admin logs in and explores core admin pages
+- Dashboard (compliance score overview)
+- Employee management
+- AI tool catalog
+- Approval queue
+- Organization settings
+
+### 2. Compliance Management
+Journey: Admin manages all compliance aspects
+- Bias impact audit
+- Candidate notice management
+- Employee disclosure management
+- Complete compliance packet
+- AI policy handbook
+- Training module management
+
+### 3. Employee Portal
+Journey: Employee logs in and uses self-service features
+- Employee dashboard
+- Pending disclosure acknowledgments
+- Assigned training courses
+- AI tool request form
+
+### 4. Candidate/Public Flow
+Journey: Public visitor explores site and runs compliance scan
+- Marketing homepage
+- Compliance scan flow (states → employees → tools → results)
+- Resource hub
+- Compliance information hub
+
+### 5. Tool Governance Cycle
+Journey: Complete tool governance workflow
+- Employee requests AI tool
+- Admin reviews pending approvals
+- Approval/denial workflow
+
+## Usage
+
+### Run All Scenarios
 ```bash
-# Run all tests
-npm run test:e2e
-
-# Run tests with UI mode (visual debugging)
-npm run test:e2e:ui
-
-# Run tests in headed browser
-npm run test:e2e:headed
-
-# Run tests in debug mode
-npm run test:e2e:debug
-
-# View test report
-npm run test:e2e:report
+cd /Users/henry/projects/hireshield
+source .env.local
+node e2e/run-e2e.mjs --scenarios all
 ```
 
-## Running Specific Tests
-
+### Run Specific Scenarios
 ```bash
-# Run a specific test file
-npx playwright test marketing-to-signup
+# Single scenario
+node e2e/run-e2e.mjs --scenarios portal
 
-# Run tests matching a pattern
-npx playwright test --grep "signup"
-
-# Run a specific test by line number
-npx playwright test e2e/marketing-to-signup.spec.ts:15
+# Multiple scenarios
+node e2e/run-e2e.mjs --scenarios onboarding,compliance,portal
 ```
 
-## Test Configuration
+### Options
+- `--cdp-port <port>` - CDP port for Chrome connection (default: 18800)
+- `--base-url <url>` - Base URL to test (default: https://employarmor.vercel.app)
+- `--scenarios <list>` - Scenarios to run: all|onboarding|compliance|portal|candidate|governance
+- `--visual-board` - Create Confluence visual flow board (default: true)
+- `--no-visual-board` - Skip visual flow board, create standard report
 
-The test configuration is in `playwright.config.ts`. Key settings:
+### Environment Variables
+- `E2E_BASE_URL` - Override base URL
+- `CDP_PORT` - Override CDP port
+- `SCREENSHOT_DIR` - Screenshot output directory (default: e2e-screenshots)
+- `CONFLUENCE_UPLOAD` - Set to 'false' to skip Confluence upload
 
-- **Base URL**: `http://localhost:3000` (configurable via `PLAYWRIGHT_BASE_URL`)
-- **Workers**: 1 (sequential execution for auth state)
-- **Retries**: 2 on CI, 0 locally
-- **Screenshots**: On failure only
-- **Video**: On first retry
-- **HTML Report**: Generated after each run
+## Outputs
 
-## Writing Tests
+### Screenshots
+All screenshots saved to `e2e-screenshots/` with naming pattern:
+```
+<step>-<scenario>-<name>.png
+```
+Example: `001-onboarding-dashboard.png`
 
-### Using Test Fixtures
+### Report
+JSON report saved to `e2e-screenshots/report.json` with:
+- Timestamp and configuration
+- Scenarios run
+- All screenshot metadata
+- Bugs found
+- Errors encountered
 
-```typescript
-import { test, expect } from '@playwright/test'
-import { testData, generateTestUser } from './fixtures/test-data'
-import { createNavigationHelper } from './helpers/navigation'
-import { createFormHelper } from './helpers/forms'
+### Confluence
+Automatically uploads to Confluence (SD space):
+- **Visual Flow Board Mode** (default): Screenshots grouped by scenario with flow arrows
+- **Standard Mode**: Linear timeline of all screenshots
 
-test('example test', async ({ page }) => {
-  const nav = createNavigationHelper(page)
-  const form = createFormHelper(page)
-  
-  await nav.goToDashboard()
-  await form.fillInput('Email', 'test@example.com')
-})
+## Creating Test Accounts
+
+### Recreate Employee Account
+```bash
+node e2e/create-test-employee.mjs
 ```
 
-### Mocking APIs
+The script will:
+1. Find the admin's organization
+2. Create auth user (if doesn't exist)
+3. Create employee_profile record
+4. Link to the same organization as admin
 
-```typescript
-import { mockStripeCheckout, mockMergeIntegration } from './helpers/api'
+## Automated Testing
 
-test.beforeEach(async ({ page }) => {
-  await mockStripeCheckout(page)
-  await mockMergeIntegration(page)
-})
-```
+The E2E suite runs automatically via cron:
+- **Schedule:** 9 AM and 5 PM MST daily
+- **Cron ID:** 28b42e70-f92d-43a8-98c7-7414074acdc0
+- **Command:** `openclaw cron runs --id 28b42e70-f92d-43a8-98c7-7414074acdc0`
 
-### Data Test IDs
-
-For reliable element selection, add `data-testid` attributes to components:
-
-```tsx
-<button data-testid="submit-btn">Submit</button>
-```
-
-Then select in tests:
-
-```typescript
-await page.locator('[data-testid="submit-btn"]').click()
-```
-
-## Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PLAYWRIGHT_BASE_URL` | Base URL for tests | `http://localhost:3000` |
-| `TEST_USER_EMAIL` | Pre-seeded test user email | - |
-| `TEST_USER_PASSWORD` | Pre-seeded test user password | - |
-
-## CI Integration
-
-For CI environments, tests expect:
-1. The app running at `PLAYWRIGHT_BASE_URL`
-2. A test database with seeded users (optional)
-3. Email confirmation disabled or test user pre-confirmed
-
-Example GitHub Actions workflow:
-
-```yaml
-- name: Run E2E tests
-  run: npm run test:e2e
-  env:
-    PLAYWRIGHT_BASE_URL: http://localhost:3000
+View recent runs:
+```bash
+openclaw cron runs --id 28b42e70-f92d-43a8-98c7-7414074acdc0 --limit 5
 ```
 
 ## Troubleshooting
 
-### Tests failing to find elements
+### Chrome Connection Issues
+If CDP connection fails (port 18800), the script will fallback to launching headless Chrome. To use CDP:
+```bash
+# Start OpenClaw browser
+openclaw browser start --profile openclaw
 
-1. Check if the element has loaded: use `await expect().toBeVisible()`
-2. Check for dynamic content: use `waitForSelector` or `waitForLoadState`
-3. Add `data-testid` for more reliable selection
+# Check it's running on port 18800
+lsof -i :18800
+```
 
-### Auth issues
+### Authentication Issues
+If login fails, verify:
+1. Test accounts exist in Supabase
+2. `.env.local` has correct SUPABASE_URL and keys
+3. Auth cookies are being set correctly
 
-1. Clear auth state: `rm -rf e2e/.auth/*`
-2. Check if test user exists in database
-3. Verify email confirmation is handled
+### Screenshot Failures
+If screenshots fail:
+- Check page load timeouts (default: 12s)
+- Verify pages are accessible and rendering
+- Check browser memory (may need to increase if running many scenarios)
 
-### Timeouts
+## Development
 
-1. Increase timeout in test: `test.setTimeout(60000)`
-2. Increase action timeout: `page.setDefaultTimeout(10000)`
-3. Check for slow API responses
+### Adding New Scenarios
+1. Create new scenario function in `run-e2e.mjs`
+2. Add to `scenariosToRun` array in main()
+3. Update README with scenario details
+4. Update cron job message if needed
 
-## Best Practices
+### Modifying Confluence Upload
+Visual flow board HTML/CSS is in `buildVisualFlowBoard()` function.
+Standard report format is in `buildStandardReport()` function.
 
-1. **Keep tests independent**: Each test should be able to run alone
-2. **Use meaningful assertions**: Verify both UI state and data
-3. **Mock external services**: Stripe, email, OAuth should be mocked
-4. **Clean up test data**: Tests should be idempotent
-5. **Use page objects**: For complex pages, create helper classes
-6. **Wait properly**: Use Playwright's built-in waiting, not `sleep`
+## Architecture
+
+- **CDP Connection:** Connects to existing Chrome on port 18800 (avoids OOM on 8GB machines)
+- **Supabase Auth:** Direct API authentication with cookie injection
+- **Playwright:** Browser automation via playwright-core
+- **Confluence API:** REST API upload with form-data for attachments
+- **Screenshots:** Full-page disabled (faster, consistent viewport)
+- **Session Management:** Proper logout between scenarios to avoid auth bleed
