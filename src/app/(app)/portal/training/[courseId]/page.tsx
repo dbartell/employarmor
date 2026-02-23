@@ -1,11 +1,14 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { getEmployeeProfile, ensureOwnerProfile } from "@/lib/auth/roles"
-import { getEmployeeTraining, ensureStandardTraining } from "@/lib/actions/portal-training"
-import { getCourseContent } from "@/lib/actions/training"
-import TrainingClient from "./training-client"
+import { getCourseWithProgress } from "@/lib/actions/portal-training"
+import CourseClient from "./course-client"
 
-export default async function PortalTrainingPage() {
+interface CoursePageProps {
+  params: { courseId: string }
+}
+
+export default async function CoursePage({ params }: CoursePageProps) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -37,22 +40,11 @@ export default async function PortalTrainingPage() {
     redirect('/dashboard')
   }
 
-  // Ensure standard training is assigned
-  await ensureStandardTraining(profile.id, profile.organization_id)
-  
-  // Fetch training assignments
-  const { assignments } = await getEmployeeTraining(profile.id, profile.organization_id)
+  const { course, assignment } = await getCourseWithProgress(params.courseId, profile.id)
 
-  // Enrich with course data
-  const enrichedAssignments = await Promise.all(
-    assignments.map(async (assignment) => {
-      const course = await getCourseContent(assignment.training_module_id || '')
-      return {
-        ...assignment,
-        course: course || null
-      }
-    })
-  )
+  if (!course) {
+    redirect('/portal/training')
+  }
 
-  return <TrainingClient assignments={enrichedAssignments} />
+  return <CourseClient course={course} assignment={assignment} />
 }
