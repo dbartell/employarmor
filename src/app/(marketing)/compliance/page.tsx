@@ -4,7 +4,7 @@ import { AI_TOOLS, STATES_WITH_LAWS } from '@/lib/seo-data'
 
 export const metadata: Metadata = {
   title: 'AI Hiring Compliance by Tool & State | EmployArmor',
-  description: 'Find compliance requirements for AI hiring tools like HireVue, Workday, Pymetrics in every state. Illinois, Colorado, NYC, Maryland and more.',
+  description: 'Find compliance requirements for AI hiring tools like HireVue, Workday, Pymetrics in every state. Illinois, Colorado, Texas, NYC, Maryland and more.',
 }
 
 export default function CompliancePage() {

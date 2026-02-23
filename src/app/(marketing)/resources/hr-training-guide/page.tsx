@@ -74,7 +74,7 @@ export default function HRTrainingGuidePage() {
       <ul>
         <li>Types of AI in hiring (screening, scoring, video analysis, chatbots)</li>
         <li>Your company's specific AI tool inventory</li>
-        <li>Overview of major regulations (NYC LL144, Illinois, Colorado, California)</li>
+        <li>Overview of major regulations (NYC LL144, Illinois, Colorado, California, Texas TRAIGA)</li>
         <li>Timeline of requirements</li>
       </ul>
 

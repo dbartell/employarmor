@@ -31,7 +31,7 @@ export default function AboutPage() {
             <p>
               EmployArmor was founded to help companies navigate the rapidly
               evolving landscape of AI hiring regulations. As states like
-              Illinois, Colorado, California, and New York City introduce new
+              Illinois, Colorado, California, Texas, and New York City introduce new
               compliance requirements, employers need a simple, affordable way to
               stay compliant without hiring expensive consultants.
             </p>

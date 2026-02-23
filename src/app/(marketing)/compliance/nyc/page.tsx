@@ -258,7 +258,7 @@ export default function NYCCompliancePage() {
                 <span className="text-gray-500">/mo</span>
               </div>
               <ul className="space-y-3 text-sm text-gray-600 mb-8 flex-1">
-                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Up to 5 states</li>
+                <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Up to 6 states</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Up to 500 employees</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>All compliance documents</li>
                 <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span>Training modules</li>

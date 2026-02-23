@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!tool) return {}
 
   const title = `${tool.name} AI Hiring Compliance | All States`
-  const description = `Is ${tool.name} compliant? Learn AI hiring compliance requirements for ${tool.name} (${tool.category}) across all states including Illinois, Colorado, NYC, and Maryland.`
+  const description = `Is ${tool.name} compliant? Learn AI hiring compliance requirements for ${tool.name} (${tool.category}) across all states including Illinois, Colorado, Texas, NYC, and Maryland.`
 
   return { title, description, openGraph: { title, description } }
 }

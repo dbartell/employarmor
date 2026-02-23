@@ -55,12 +55,13 @@ export default function HomePage() {
               <div className="text-xs text-gray-500 mt-1">Extended from Feb 1</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-red-600">$7,500</div>
-              <div className="text-gray-600">Per violation (CA)</div>
+              <div className="text-3xl font-bold text-red-600">Jan 1, 2026</div>
+              <div className="text-gray-600">Texas TRAIGA</div>
+              <div className="text-xs text-gray-500 mt-1">$100K per violation</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-red-600">500K+</div>
-              <div className="text-gray-600">Companies affected</div>
+              <div className="text-3xl font-bold text-red-600">6+ States</div>
+              <div className="text-gray-600">Active AI hiring laws</div>
             </div>
           </div>
         </div>

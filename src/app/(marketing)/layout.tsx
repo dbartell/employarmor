@@ -11,7 +11,7 @@ const stateAILaws = [
   { name: "California", href: "/compliance/california", law: "CCPA ADMT" },
   { name: "New York City", href: "/compliance/nyc", law: "Local Law 144" },
   { name: "Maryland", href: "/compliance/maryland", law: "HB 1202" },
-  { name: "Texas", href: "/compliance/state/texas", law: "CUBI" },
+  { name: "Texas", href: "/compliance/state/texas", law: "TRAIGA, CUBI" },
   { name: "Washington", href: "/compliance/state/washington", law: "My Health My Data" },
   { name: "New Jersey", href: "/compliance/state/new-jersey", law: "Proposed S-1943" },
 ]
