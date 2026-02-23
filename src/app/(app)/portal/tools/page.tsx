@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Wrench, Plus, CheckCircle2, Clock, XCircle, X, Send, AlertCircle } from 'lucide-react'
-import { getEmployeeToolRequests, submitToolRequest } from '@/lib/actions/portal-tool-requests'
+import { getEmployeeToolRequests, createToolRequest } from '@/lib/actions/portal-tool-requests'
 
 interface ToolRequest {
   id: string
@@ -67,7 +67,7 @@ export default function PortalToolsPage() {
     if (!toolName.trim() || !useCase.trim()) return
     setSubmitting(true)
 
-    const result = await submitToolRequest({
+    const result = await createToolRequest({
       toolName: toolName.trim(),
       toolUrl: toolUrl.trim() || undefined,
       useCase: useCase.trim(),
