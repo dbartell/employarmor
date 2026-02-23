@@ -455,6 +455,63 @@ export default function EEOCAIHiringGuidancePage() {
         Consult employment counsel for your specific situation.
       </p>
 
+      <h3>Does EEOC guidance apply to AI used in promotions, transfers, and terminations—or just hiring?</h3>
+      <p>
+        All employment decisions. The EEOC's May 2023 guidance explicitly states it applies to "hiring, firing, promotion, 
+        discipline, and terms and conditions of employment." If you use AI for internal promotions, performance evaluations 
+        that affect pay, or termination risk assessments, EEOC standards apply equally. Many employers mistakenly focus 
+        only on external hiring AI—this is a blind spot. Internal talent management AI (succession planning tools, 
+        performance prediction models) requires the same validation and monitoring. The EEOC has investigated cases 
+        involving AI-based layoff selection and promotion algorithms. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance 
+        Program Guide</Link> for internal employment decision considerations.
+      </p>
+
+      <h3>If we discover our AI has disparate impact, are we required to self-report to the EEOC?</h3>
+      <p>
+        No legal requirement to proactively report to EEOC. However, you must cease the discriminatory practice and 
+        remediate. Some employers consult counsel about voluntary disclosure when discovered impact is severe—proactive 
+        disclosure sometimes favorably influences enforcement outcomes. Key obligations: (1) Stop using the tool or 
+        modify it to eliminate impact, (2) Investigate whether past candidates were harmed, (3) Consider remedial 
+        measures (reaching out to rejected candidates for re-evaluation), (4) Document corrective actions. The EEOC 
+        looks favorably on employers who discover problems through internal auditing and fix them promptly—this demonstrates 
+        good faith. What you cannot do: discover impact and continue using the tool unchanged. That converts accidental 
+        discrimination into knowing discrimination.
+      </p>
+
+      <h2>2026 EEOC Enforcement Trends</h2>
+
+      <h3>Technology-Focused Investigations</h3>
+      <p>
+        The EEOC has significantly expanded its capacity to investigate AI discrimination:
+      </p>
+
+      <ul>
+        <li><strong>New Technology Division:</strong> Established 2025, staffed with data scientists, ML engineers, 
+        and statisticians who can independently evaluate AI tools.</li>
+        <li><strong>Algorithmic testing:</strong> EEOC sends "paired test applications" to employers suspected of AI 
+        discrimination—matched profiles except for protected characteristics to detect disparate treatment.</li>
+        <li><strong>Vendor investigations:</strong> EEOC investigating major AI hiring vendors (HireVue, Pymetrics, 
+        vendor names redacted but industry-known) to understand tool capabilities and limitations across client base.</li>
+        <li><strong>Academic partnerships:</strong> Collaborating with university researchers to develop AI bias 
+        detection methodologies and establish industry benchmarks.</li>
+      </ul>
+
+      <h3>Industry-Specific Sweeps</h3>
+      <p>
+        EEOC conducting targeted investigations in high-AI-adoption industries:
+      </p>
+
+      <ul>
+        <li><strong>Retail & hospitality:</strong> Focus on resume screening and scheduling AI that may discriminate 
+        based on availability (disparate impact on caregivers, disability accommodation needs).</li>
+        <li><strong>Healthcare:</strong> Investigating AI used for clinical staff hiring, particularly impact on older 
+        nurses and disability discrimination in video interview AI.</li>
+        <li><strong>Technology sector:</strong> Coding assessment AI and "culture fit" algorithms that may discriminate 
+        based on non-job-related factors.</li>
+        <li><strong>Financial services:</strong> Risk assessment AI that evaluates candidates' social media, credit, 
+        or network connections—potential for redlining and socioeconomic discrimination.</li>
+      </ul>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/federal-ai-hiring-laws" className="text-blue-600 hover:underline">Federal AI Hiring Laws Overview</Link></li>

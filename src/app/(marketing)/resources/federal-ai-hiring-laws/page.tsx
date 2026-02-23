@@ -574,6 +574,75 @@ export default function FederalAIHiringLawsPage() {
       </ul>
       <p>If litigation is filed or an EEOC charge is pending, preserve all relevant records until resolution.</p>
 
+      <h3>Do federal contractors have additional AI hiring compliance obligations?</h3>
+      <p>
+        Yes. Federal contractors and subcontractors subject to Executive Order 11246 and administered by the Office 
+        of Federal Contract Compliance Programs (OFCCP) face heightened scrutiny. OFCCP's December 2025 directive 
+        requires federal contractors using AI in hiring to: (1) Document AI tool validation for job-relatedness, 
+        (2) Conduct quarterly adverse impact monitoring (more frequent than most employers), (3) Include AI compliance 
+        in Affirmative Action Plans (AAPs), and (4) Provide AI documentation during OFCCP compliance evaluations. 
+        Non-compliance can result in contract suspension or debarment. If you're a federal contractor, your AI hiring 
+        compliance bar is higher than commercial employers. Budget additional resources for enhanced validation and 
+        documentation. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance Program Guide</Link> for 
+        federal contractor-specific considerations.
+      </p>
+
+      <h3>Can AI hiring tools that comply with state laws still violate federal law?</h3>
+      <p>
+        Absolutely. State AI hiring laws focus primarily on transparency and disclosure (tell candidates you're using AI). 
+        Federal anti-discrimination law focuses on outcomes (don't discriminate, regardless of tools used). You can fully 
+        comply with NYC Local Law 144 (bias audit, disclosure, public posting) and still violate Title VII if your AI 
+        produces discriminatory results. State compliance is necessary but not sufficient—you must also validate that your 
+        AI doesn't produce disparate impact under federal standards. This is why the EEOC's 80% rule and validation requirements 
+        remain critical even in states with robust AI hiring laws. Employers sometimes mistakenly assume state compliance 
+        equals federal compliance—it doesn't.
+      </p>
+
+      <h2>2026 Federal Enforcement Priorities</h2>
+
+      <h3>EEOC Strategic Plan Emphasis</h3>
+      <p>
+        The EEOC's 2026-2028 Strategic Enforcement Plan identifies "algorithmic discrimination" as a national priority. 
+        What this means in practice:
+      </p>
+
+      <ul>
+        <li><strong>Increased investigation resources:</strong> EEOC hired 35 technology specialists in 2025-2026 to 
+        evaluate AI tool discrimination claims. These specialists have data science and ML backgrounds, not just legal training.</li>
+        <li><strong>Systemic investigation approach:</strong> Rather than individual complaints only, EEOC is conducting 
+        industry sweeps (retail, healthcare, financial services) to identify patterns of AI discrimination.</li>
+        <li><strong>Commissioner-initiated charges:</strong> EEOC commissioners can initiate investigations without 
+        individual complaints when they identify systemic issues. AI hiring is a focus area.</li>
+        <li><strong>Coordination with FTC and DOL:</strong> Multi-agency approach where AI hiring violations may trigger 
+        FTC unfair practices investigations or DOL wage/hour scrutiny.</li>
+      </ul>
+
+      <h3>Recent Federal Enforcement Actions</h3>
+      <ul>
+        <li><strong>Retail chain (settlement $2.1M, Dec 2025):</strong> AI resume screener filtered out applicants over 
+        age 55 based on education dates and career length. ADEA violation. Settlement included back pay for 300+ 
+        class members, algorithm replacement, and 3-year monitoring.</li>
+        <li><strong>Financial services firm (litigation ongoing, filed Sep 2025):</strong> Video interview AI allegedly 
+        discriminated against candidates with speech disabilities. ADA violation. EEOC seeking injunction and class damages.</li>
+        <li><strong>Tech company (consent decree $900K, Nov 2025):</strong> Failed to validate AI coding assessment, 
+        which produced adverse impact against women. Title VII violation. Consent decree requires independent validation, 
+        annual reporting, and diversity hiring goals.</li>
+      </ul>
+
+      <h3>Department of Labor OFCCP Actions</h3>
+      <p>
+        Federal contractors face parallel enforcement from OFCCP:
+      </p>
+
+      <ul>
+        <li><strong>Defense contractor (compliance agreement, Oct 2025):</strong> OFCCP compliance evaluation revealed 
+        AI hiring tool lacked validation. Company agreed to conduct retrospective impact analysis, modify tool, and 
+        implement enhanced monitoring. No financial penalties but significant remediation costs.</li>
+        <li><strong>Healthcare contractor (under investigation, announced Jan 2026):</strong> OFCCP investigating whether 
+        AI-powered nurse hiring system produces disparate impact by race. Investigation prompted by EEO-1 data analysis 
+        showing declining minority representation after AI implementation.</li>
+      </ul>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/eeoc-ai-hiring-guidance" className="text-blue-600 hover:underline">EEOC AI Hiring Guidance Explained</Link></li>

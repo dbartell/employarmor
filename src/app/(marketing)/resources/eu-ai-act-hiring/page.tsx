@@ -521,6 +521,98 @@ export default function EUAIActHiringPage() {
         obligations. Work with vendor to ensure they can meet provider requirements; you handle deployer requirements.
       </p>
 
+      <h3>Do US-based companies with no EU operations but occasional EU remote hires really need to comply?</h3>
+      <p>
+        Yes, if you're using AI to evaluate candidates located in the EU. The EU AI Act has extraterritorial reach—it 
+        applies based on where the AI's outputs are used or affect individuals, not where your company is headquartered. 
+        Even one EU-based remote hire evaluated with AI triggers compliance obligations. Penalties can reach €30 million 
+        or 6% of global turnover, whichever is higher. The EU takes extraterritorial enforcement seriously (see GDPR 
+        enforcement against US companies). You cannot ignore EU AI Act just because you're US-based. Alternative: explicitly 
+        exclude EU candidates from roles if you're unwilling to invest in compliance, but this limits your talent pool 
+        significantly. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance Program Guide</Link> for 
+        multi-jurisdictional implementation strategies.
+      </p>
+
+      <h3>How does the EU AI Act's conformity assessment process work for high-risk hiring AI?</h3>
+      <p>
+        Conformity assessment is required before deploying high-risk AI (employment/HR AI is explicitly high-risk under 
+        Annex III). Process involves: (1) Provider (AI vendor) conducts internal testing against EU requirements, 
+        (2) Provider prepares technical documentation and Declaration of Conformity, (3) For some high-risk systems, 
+        third-party Notified Body conducts independent assessment, (4) CE marking applied to compliant systems. As 
+        deployer (employer), you must verify your vendor completed conformity assessment and obtain Declaration of 
+        Conformity before use. US vendors may struggle with this—many aren't set up for EU conformity assessment. 
+        Budget expectation: Conformity assessment adds $50,000-150,000 to vendor's product development costs, which 
+        they may pass through to customers. Timeline: 6-12 months for initial assessment. Deployment without conformity 
+        assessment is a serious violation—don't deploy AI in EU without verification.
+      </p>
+
+      <h2>Practical EU AI Act Implementation for US Employers</h2>
+
+      <h3>Phase 1: Scope Assessment (Months 1-2)</h3>
+      <ul>
+        <li>☐ Identify all positions that may hire EU-located candidates</li>
+        <li>☐ Document current AI tools used in hiring process</li>
+        <li>☐ Determine which AI systems qualify as "high-risk" under EU AI Act</li>
+        <li>☐ Map which EU member states you hire in (different data protection authorities)</li>
+        <li>☐ Estimate annual EU hiring volume to assess compliance cost-benefit</li>
+      </ul>
+
+      <h3>Phase 2: Vendor Due Diligence (Months 3-4)</h3>
+      <ul>
+        <li>☐ Request EU AI Act compliance documentation from all AI vendors</li>
+        <li>☐ Verify conformity assessments and CE marking where required</li>
+        <li>☐ Review vendor technical documentation for transparency obligations</li>
+        <li>☐ Confirm vendor has EU representative (required for non-EU providers)</li>
+        <li>☐ Negotiate contract addendums for EU AI Act compliance support</li>
+      </ul>
+
+      <h3>Phase 3: Deployer Obligations (Months 5-7)</h3>
+      <ul>
+        <li>☐ Conduct Fundamental Rights Impact Assessment (FRIA)</li>
+        <li>☐ Implement human oversight procedures for EU AI decisions</li>
+        <li>☐ Create transparency notices for EU candidates (what AI evaluates, their rights)</li>
+        <li>☐ Establish logging and monitoring systems (EU requires extensive recordkeeping)</li>
+        <li>☐ Designate responsible person for EU AI Act compliance</li>
+        <li>☐ Register high-risk AI systems in EU database (when operational, expected 2027)</li>
+      </ul>
+
+      <h3>Phase 4: Ongoing Compliance (Continuous)</h3>
+      <ul>
+        <li>☐ Monitor AI system performance and outcomes (quarterly minimum)</li>
+        <li>☐ Update FRIAs annually or when material changes occur</li>
+        <li>☐ Maintain logs of AI decisions for required retention period</li>
+        <li>☐ Report serious incidents to relevant authorities within 15 days</li>
+        <li>☐ Cooperate with market surveillance authorities during inspections</li>
+      </ul>
+
+      <h2>Enforcement Timeline and Expectations</h2>
+
+      <h3>Phased Implementation (2024-2027)</h3>
+      <ul>
+        <li><strong>August 2024:</strong> EU AI Act entered into force</li>
+        <li><strong>February 2025:</strong> Prohibited AI practices banned (doesn't significantly affect hiring)</li>
+        <li><strong>August 2025:</strong> Governance and notified body framework operational</li>
+        <li><strong>August 2026:</strong> Obligations for high-risk AI systems (including hiring AI) begin</li>
+        <li><strong>August 2027:</strong> Full enforcement including high-risk AI system registration database</li>
+      </ul>
+
+      <h3>Current Enforcement Posture</h3>
+      <p>
+        As of February 2026, EU member states are still building enforcement capacity. However, early signals suggest 
+        aggressive enforcement:
+      </p>
+
+      <ul>
+        <li><strong>Germany:</strong> BfDI (data protection authority) issued guidance that hiring AI enforcement is a 
+        priority, coordinating with labor authorities.</li>
+        <li><strong>France:</strong> CNIL announced hiring AI as focus area for 2026 inspections, particularly in tech 
+        and financial services sectors.</li>
+        <li><strong>Netherlands:</strong> Dutch DPA investigating several unnamed employers for non-compliant hiring AI, 
+        outcomes expected Q2 2026.</li>
+        <li><strong>Ireland:</strong> DPC (relevant for many US tech companies with EU HQs in Ireland) issued preliminary 
+        warning letters to multinationals about AI hiring compliance.</li>
+      </ul>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">AI Hiring Compliance Guide 2026</Link></li>

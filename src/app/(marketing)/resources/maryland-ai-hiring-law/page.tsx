@@ -514,6 +514,64 @@ export default function MarylandAIHiringLawPage() {
         aims to protect Maryland residents regardless of where the employer is based.
       </p>
 
+      <h3>If we use HireVue or similar platforms that discontinued facial recognition, do we still need compliance?</h3>
+      <p>
+        If facial recognition features are disabled and the vendor provides written confirmation, you likely don't 
+        need HB 1202 consent. However, document that facial recognition is disabled in your records. If you used 
+        these platforms before facial analysis was discontinued (pre-2021 for HireVue), review whether historical 
+        candidate data requires retroactive compliance measures. Some employers have sent retroactive notices or 
+        deleted old facial analysis data as a precaution. See our <Link href="/resources/hirevue-compliance" className="text-blue-600 hover:underline">HireVue 
+        Compliance Guide</Link> for platform-specific considerations.
+      </p>
+
+      <h3>Does Maryland's law apply to background check facial recognition (e.g., identity verification)?</h3>
+      <p>
+        Potentially yes. If background check providers use facial recognition to verify candidate identity (comparing 
+        selfie to ID document), this could constitute a "facial recognition service" under HB 1202. However, the law's 
+        applicability to identity verification (as opposed to evaluative facial analysis) is unclear. Conservative approach: 
+        obtain consent for any facial recognition use in hiring, including identity verification. Some background check 
+        vendors now offer non-facial-recognition identity verification options specifically to avoid this ambiguity.
+      </p>
+
+      <h2>2026 Maryland Enforcement and Expansion</h2>
+
+      <h3>Attorney General Enforcement Posture</h3>
+      <p>
+        Maryland Attorney General has been relatively quiet on HB 1202 enforcement compared to states like New York 
+        and Colorado. However, this changed in January 2026 when the AG sent advisory letters to 50+ employers known 
+        to use video interview AI, requesting proof of compliance. Key takeaway: enforcement is ramping up even in 
+        states with limited initial activity.
+      </p>
+
+      <h3>Proposed Expansions (2026 Legislative Session)</h3>
+      <p>
+        Maryland legislators introduced bills to expand AI hiring regulation beyond just facial recognition:
+      </p>
+
+      <ul>
+        <li><strong>HB 1405 (pending):</strong> Would extend consent requirements to <em>any</em> AI-based interview 
+        analysis, not just facial recognition. Includes voice analysis, word choice evaluation, and body language AI.</li>
+        <li><strong>SB 892 (pending):</strong> Would require bias audits for AI hiring tools similar to NYC Local Law 144, 
+        with Maryland-specific reporting requirements to state Labor Department.</li>
+        <li><strong>Task force recommendation (Dec 2025):</strong> Maryland AI Accountability Task Force recommended 
+        comprehensive AI hiring regulation including disclosure requirements, opt-out rights, and adverse decision 
+        explanations. Legislation expected 2027.</li>
+      </ul>
+
+      <h3>Private Litigation Trends</h3>
+      <p>
+        While HB 1202 doesn't create an explicit private right of action, Maryland courts have allowed claims under 
+        general consumer protection and privacy statutes:
+      </p>
+
+      <ul>
+        <li><strong><em>Doe v. Tech Startup</em> (MD Circuit Court, settled confidentially 2025):</strong> Candidate 
+        alleged video interview platform used facial recognition without consent. Settled before trial, terms undisclosed 
+        but believed to include per-person payment and policy changes.</li>
+        <li><strong>Class action risk:</strong> If you conducted Maryland interviews without proper consent, class 
+        exposure exists. Statute of limitations varies but typically 3-4 years for privacy claims.</li>
+      </ul>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">Complete AI Hiring Compliance Guide 2026</Link></li>

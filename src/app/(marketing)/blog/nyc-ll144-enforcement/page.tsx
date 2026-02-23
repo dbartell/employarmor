@@ -477,6 +477,24 @@ export default function NYCLL144EnforcementPage() {
         a NYC-based role must comply.
       </p>
 
+      <h3>Can we just stop hiring NYC candidates to avoid LL144 compliance?</h3>
+      <p>
+        Technically yes, but impractical for most employers. NYC represents 8+ million people and is a major talent market. 
+        Excluding all NYC candidates (or all New York State—some employers can't easily distinguish) significantly limits 
+        your pool. More pragmatic: invest in compliance so you can access NYC talent legally. LL144 compliance also 
+        prepares you for similar laws in other jurisdictions (California, Colorado, Illinois all have related requirements). 
+        See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance Program Guide</Link> for implementation roadmap.
+      </p>
+
+      <h3>What happens if DCWP finds us non-compliant—can we fix it and avoid penalties?</h3>
+      <p>
+        Possibly. DCWP has discretion in enforcement. If you cooperate during investigation, promptly remediate violations, 
+        and demonstrate good faith (you didn't know, immediately fixed it upon discovery), penalties may be reduced. However, 
+        don't count on leniency—DCWP has issued $500,000+ penalties even for "first offenses." Better strategy: proactive 
+        compliance before investigation. If you discover non-compliance internally, fix it immediately and document corrective 
+        actions. If DCWP later investigates historical violations, your documented remediation efforts may reduce penalties.
+      </p>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">Complete AI Hiring Compliance Guide 2026</Link></li>

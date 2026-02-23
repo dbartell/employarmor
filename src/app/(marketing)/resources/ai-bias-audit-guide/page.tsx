@@ -492,6 +492,69 @@ export default function AIBiasAuditGuidePage() {
         or (4) Accept the litigation risk. Consult employment counsel.
       </p>
 
+      <h3>Can we conduct internal bias audits instead of hiring external auditors?</h3>
+      <p>
+        Not for NYC Local Law 144—it explicitly requires an "independent auditor" (someone not employed by you or your AI 
+        vendor). However, internal audits are valuable supplements. Many employers conduct quarterly internal impact monitoring 
+        and commission external audits annually to satisfy legal requirements. Internal audits let you catch problems early 
+        before external auditors find them. Best practice: internal monitoring quarterly, external audit annually. Budget 
+        roughly $5,000-10,000 for internal staff time per audit cycle, plus $15,000-30,000 for annual external audit.
+      </p>
+
+      <h3>Do we need separate audits for each AI tool, or can one audit cover multiple tools?</h3>
+      <p>
+        Separate audits for each tool, especially if they serve different functions (resume screening vs. video interview 
+        vs. skills assessment). Each AI model has unique bias characteristics. However, you can often negotiate package 
+        pricing with auditors when auditing multiple tools simultaneously. Some auditors offer 20-30% discounts for multi-tool 
+        engagements. Additionally, consider "stack testing"—evaluating the cumulative impact of multiple AI tools used 
+        sequentially (e.g., AI resume screen → AI video interview). Individual tools may pass bias tests, but combined use 
+        might produce adverse impact. See our <Link href="/resources/compliance-program-guide" className="text-blue-600 hover:underline">Compliance Program Guide</Link> for 
+        multi-tool validation strategies.
+      </p>
+
+      <h2>Practical Audit Preparation Steps</h2>
+
+      <h3>3 Months Before Audit</h3>
+      <ul>
+        <li>☐ Request RFPs from 3-5 potential auditors</li>
+        <li>☐ Review vendor contracts to ensure audit cooperation clauses</li>
+        <li>☐ Begin collecting candidate demographic data (voluntary EEO form completions)</li>
+        <li>☐ Document current AI tool configurations and usage</li>
+      </ul>
+
+      <h3>2 Months Before Audit</h3>
+      <ul>
+        <li>☐ Select auditor and sign engagement letter</li>
+        <li>☐ Schedule kickoff call with auditor and AI vendor</li>
+        <li>☐ Prepare data export specifications (auditor will provide requirements)</li>
+        <li>☐ Identify internal stakeholders (HR, legal, IT) for auditor coordination</li>
+      </ul>
+
+      <h3>1 Month Before Audit</h3>
+      <ul>
+        <li>☐ Extract and clean candidate data (applications, outcomes, demographics)</li>
+        <li>☐ Provide data to auditor in required format</li>
+        <li>☐ Coordinate vendor technical documentation delivery</li>
+        <li>☐ Prepare for auditor questions about hiring process</li>
+      </ul>
+
+      <h3>During Audit (2-4 weeks)</h3>
+      <ul>
+        <li>☐ Respond promptly to auditor data requests</li>
+        <li>☐ Facilitate vendor cooperation for technical questions</li>
+        <li>☐ Review preliminary findings for data errors</li>
+        <li>☐ Prepare leadership for results briefing</li>
+      </ul>
+
+      <h3>After Audit</h3>
+      <ul>
+        <li>☐ Review final audit report with legal counsel</li>
+        <li>☐ Publish audit summary (NYC requirement) on publicly accessible website</li>
+        <li>☐ Develop remediation plan if adverse impact found</li>
+        <li>☐ Update AI disclosures with audit results</li>
+        <li>☐ Schedule next audit (set calendar reminder 10 months out)</li>
+      </ul>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">AI Hiring Compliance Guide 2026</Link></li>

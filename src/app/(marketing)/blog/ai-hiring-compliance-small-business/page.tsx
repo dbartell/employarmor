@@ -494,6 +494,22 @@ export default function AIHiringComplianceSmallBusinessPage() {
         provide tools to help, but liability doesn't transfer to them.
       </p>
 
+      <h3>What's the biggest compliance mistake small businesses make?</h3>
+      <p>
+        Not realizing they're using AI. Many small businesses use ATS platforms, job boards, or assessment tools 
+        without understanding these include AI features. "I thought it was just software" doesn't protect you from 
+        penalties. First step: audit your hiring tech stack to identify all AI use. See our <Link href="/resources/what-counts-as-ai-hiring" className="text-blue-600 hover:underline">guide 
+        on what counts as AI</Link>.
+      </p>
+
+      <h3>Can we grandfather in AI tools we started using before the laws existed?</h3>
+      <p>
+        No. The laws apply to current AI use regardless of when you started. If you implemented an AI screening tool 
+        in 2022 (before most laws), you still need to comply with 2026 requirements (disclosure, audits, etc.). Some 
+        employers mistakenly think "we were using this before the law" exempts them—it doesn't. You need to retrofit 
+        compliance onto legacy AI deployments.
+      </p>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">Complete AI Hiring Compliance Guide 2026</Link></li>

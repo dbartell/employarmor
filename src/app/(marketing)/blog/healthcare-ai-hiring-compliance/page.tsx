@@ -427,6 +427,15 @@ export default function HealthcareAIHiringCompliancePage() {
         clinical competency and patient care skills, not subjective "fit."
       </p>
 
+      <h3>How do we handle AI compliance for travel nurses and per-diem staff?</h3>
+      <p>
+        Same requirements apply. Even though travel nurses and per-diem staff are often W-2 employees of staffing agencies 
+        (not your organization), if you use AI to evaluate them for placement/credentialing at your facility, compliance 
+        obligations apply. Coordinate with your staffing partners—clarify in contracts who handles AI disclosures, audits, 
+        and documentation. Don't assume the agency handles everything. See our <Link href="/blog/staffing-agency-ai-compliance" className="text-blue-600 hover:underline">staffing 
+        agency compliance guide</Link>.
+      </p>
+
       <h2>Related Resources</h2>
       <ul>
         <li><Link href="/resources/ai-hiring-compliance-guide-2026" className="text-blue-600 hover:underline">Complete AI Hiring Compliance Guide 2026</Link></li>
