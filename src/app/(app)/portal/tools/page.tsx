@@ -51,9 +51,12 @@ export default function PortalToolsPage() {
 
   async function loadRequests() {
     const result = await getEmployeeToolRequests()
+    if ('error' in result && result.error) {
+      console.error(result.error)
+    }
     setRequests(result.requests || [])
-    setEmployeeId(result.employeeId || '')
-    setOrganizationId(result.organizationId || '')
+    setEmployeeId((result as { employeeId?: string }).employeeId || '')
+    setOrganizationId((result as { organizationId?: string }).organizationId || '')
     setLoading(false)
   }
 
@@ -67,16 +70,14 @@ export default function PortalToolsPage() {
     if (!toolName.trim() || !useCase.trim()) return
     setSubmitting(true)
 
-    const result = await createToolRequest({
-      toolName: toolName.trim(),
-      toolUrl: toolUrl.trim() || undefined,
-      useCase: useCase.trim(),
-      dataTypes: selectedDataTypes,
-      employeeId,
-      organizationId,
+    const result = await createToolRequest(employeeId, organizationId, {
+      tool_name: toolName.trim(),
+      tool_url: toolUrl.trim() || null,
+      use_case: useCase.trim(),
+      data_types: selectedDataTypes,
     })
 
-    if (result.success) {
+    if (result.request) {
       setShowForm(false)
       setToolName('')
       setToolUrl('')

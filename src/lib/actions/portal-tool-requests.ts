@@ -22,25 +22,37 @@ export interface ToolRequest {
   updated_at: string
 }
 
-export async function getEmployeeToolRequests(employeeId: string, organizationId: string) {
+export async function getEmployeeToolRequests() {
   const supabase = await createClient()
   
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { requests: [], employeeId: '', organizationId: '', error: 'Not authenticated' }
+
+  // Get employee profile
+  const { data: profile } = await supabase
+    .from('employee_profiles')
+    .select('id, organization_id')
+    .eq('user_id', user.id)
+    .single()
+
+  if (!profile) return { requests: [], employeeId: '', organizationId: '', error: 'No employee profile' }
+
   const { data: requests, error } = await supabase
     .from('tool_requests')
     .select(`
       *,
       reviewer:reviewed_by(email)
     `)
-    .eq('employee_id', employeeId)
-    .eq('organization_id', organizationId)
+    .eq('employee_id', profile.id)
+    .eq('organization_id', profile.organization_id)
     .order('created_at', { ascending: false })
   
   if (error) {
     console.error('Error fetching tool requests:', error)
-    return { requests: [], error: error.message }
+    return { requests: [], employeeId: profile.id, organizationId: profile.organization_id, error: error.message }
   }
   
-  return { requests: requests || [], error: null }
+  return { requests: requests || [], employeeId: profile.id, organizationId: profile.organization_id, error: null }
 }
 
 export async function createToolRequest(
