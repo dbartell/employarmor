@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-23T00:01:04.761Z",
+  "timestamp": "2026-02-23T16:01:10.035Z",
   "baseUrl": "https://employarmor.vercel.app",
   "scenario": "all",
   "totalScreenshots": 24,
@@ -108,7 +108,7 @@
       "filename": "13-post-login.png",
       "description": "After login — landed on https://employarmor.vercel.app/dashboard",
       "url": "https://employarmor.vercel.app/dashboard",
-      "size": 334098
+      "size": 366124
     },
     {
       "step": 14,
@@ -116,7 +116,7 @@
       "filename": "14-page-dashboard.png",
       "description": "Dashboard — compliance agent overview",
       "url": "https://employarmor.vercel.app/dashboard",
-      "size": 333417
+      "size": 366153
     },
     {
       "step": 15,
@@ -132,7 +132,7 @@
       "filename": "16-page-tools.png",
       "description": "Tool Registry — tracked AI tools",
       "url": "https://employarmor.vercel.app/tools",
-      "size": 110069
+      "size": 113091
     },
     {
       "step": 17,
@@ -140,7 +140,7 @@
       "filename": "17-page-approvals.png",
       "description": "Approvals — tool request workflow",
       "url": "https://employarmor.vercel.app/approvals",
-      "size": 167257
+      "size": 86790
     },
     {
       "step": 18,
@@ -188,7 +188,7 @@
       "filename": "23-page-compliance-packet.png",
       "description": "Audit Packet",
       "url": "https://employarmor.vercel.app/compliance-packet",
-      "size": 145531
+      "size": 136185
     },
     {
       "step": 24,
