@@ -70,6 +70,21 @@ export const stateRequirements: StateRequirement[] = [
       "Covers any technology that creates a facial geometry template"
     ],
     penalties: "Enforced under Maryland employment law. Applicants may file complaints with the Maryland Commissioner of Labor."
+  },
+  {
+    code: "TX",
+    name: "Texas",
+    law: "TRAIGA (Texas Responsible AI Governance Act) - HB 149",
+    effective: "September 1, 2025",
+    requirements: [
+      "Deployers must implement a risk management policy for high-risk AI systems",
+      "Complete impact assessments before deploying high-risk AI systems",
+      "Provide clear notice to individuals subject to high-risk AI decisions",
+      "Maintain human oversight capabilities for high-risk AI systems",
+      "Document AI system purpose, intended use, and known limitations",
+      "Applies to AI systems making consequential decisions in employment, education, housing, healthcare, insurance, and legal services"
+    ],
+    penalties: "Enforced by Texas Attorney General. Civil penalties up to $100,000 per violation. 90-day cure period before enforcement action."
   }
 ]
 
@@ -128,7 +143,7 @@ export const allStates = [
   { code: "WY", name: "Wyoming" },
 ]
 
-export const regulatedStates = ["IL", "CO", "CA", "NYC", "MD"]
+export const regulatedStates = ["IL", "CO", "CA", "NYC", "MD", "TX"]
 
 // Law categories by state - maps which compliance categories apply to each jurisdiction
 export const lawCategoriesByState: Record<string, string[]> = {
