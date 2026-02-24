@@ -1,11 +1,9 @@
-import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
-import { getEmployeeProfile, ensureOwnerProfile } from "@/lib/auth/roles"
-import { getEmployeeTraining, ensureStandardTraining } from "@/lib/actions/portal-training"
-import { getCourseContent } from "@/lib/actions/training"
-import TrainingClient from "./training-client"
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import { getMyEnrollments } from '@/lib/actions/training-modules'
+import PersonalTrainingClient from './personal-training-client'
 
-export default async function PortalTrainingPage() {
+export default async function PersonalTrainingPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -13,46 +11,8 @@ export default async function PortalTrainingPage() {
     redirect('/login')
   }
 
-  // Get employee profile
-  let profile = await getEmployeeProfile(user.id, user.id)
-  
-  if (!profile) {
-    const { data: profiles } = await supabase
-      .from('employee_profiles')
-      .select('*')
-      .eq('user_id', user.id)
-      .limit(1)
-    
-    if (profiles && profiles.length > 0) {
-      profile = profiles[0]
-    } else {
-      const { data: { user: authUser } } = await supabase.auth.getUser()
-      if (authUser?.email) {
-        profile = await ensureOwnerProfile(user.id, user.id, authUser.email)
-      }
-    }
-  }
+  // Fetch user's training enrollments
+  const { enrollments } = await getMyEnrollments(user.id)
 
-  if (!profile) {
-    redirect('/dashboard')
-  }
-
-  // Ensure standard training is assigned
-  await ensureStandardTraining(profile.id, profile.organization_id)
-  
-  // Fetch training assignments
-  const { assignments } = await getEmployeeTraining(profile.id, profile.organization_id)
-
-  // Enrich with course data
-  const enrichedAssignments = await Promise.all(
-    assignments.map(async (assignment) => {
-      const course = await getCourseContent(assignment.training_module_id || '')
-      return {
-        ...assignment,
-        course: course || null
-      }
-    })
-  )
-
-  return <TrainingClient assignments={enrichedAssignments} />
+  return <PersonalTrainingClient enrollments={enrollments} />
 }
