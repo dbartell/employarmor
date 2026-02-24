@@ -211,11 +211,9 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         <span className="font-medium text-gray-900 pr-4">{question}</span>
         <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
-      {isOpen && (
-        <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+      <div className={`px-6 pb-5 text-gray-600 leading-relaxed ${isOpen ? '' : 'hidden'}`}>
           {answer}
         </div>
-      )}
     </div>
   )
 }
@@ -270,6 +268,19 @@ export default function FAQPage() {
         </div>
 
         <AuthorByline publishDate="2026-02-23" />
+
+        {/* Overview Section - Always Visible for SEO/NLP */}
+        <div className="prose prose-lg max-w-none mb-12">
+          <p>
+            As artificial intelligence transforms how companies recruit and evaluate talent, a complex web of federal, state, and local regulations has emerged to protect candidates and employees from algorithmic discrimination. From New York City&apos;s Local Law 144 requiring annual bias audits to Illinois HB 3773&apos;s comprehensive disclosure mandates, employers using AI in hiring face significant compliance obligations — and steep penalties for getting it wrong.
+          </p>
+          <p>
+            This FAQ covers the most critical questions HR leaders, compliance officers, and in-house counsel ask about AI hiring compliance. We address state-specific requirements across Illinois, Colorado, California, New York City, Maryland, and Texas (TRAIGA), explain bias audit procedures and vendor responsibilities, clarify data privacy and retention obligations, and outline the penalties and enforcement mechanisms that make compliance non-optional.
+          </p>
+          <p>
+            Whether you use tools like HireVue, Greenhouse, Workday, LinkedIn Recruiter, or any automated employment decision tool (AEDT), understanding your compliance obligations is essential. The regulatory landscape is evolving rapidly — multiple states enacted new AI employment laws effective January and February 2026, and enforcement actions are accelerating. Below you&apos;ll find {allFaqs.length} answers organized across {faqCategories.length} categories, each reflecting the latest regulatory guidance and enforcement trends.
+          </p>
+        </div>
 
         {/* Quick Navigation */}
         <div className="bg-blue-50 rounded-lg p-6 mb-12">

@@ -1,0 +1,1985 @@
+{
+  "slug": "resources/faq",
+  "shortSlug": "faq",
+  "section": "resources",
+  "analyzedAt": "2026-02-24T03:08:12.889Z",
+  "wordCount": 233,
+  "entities": {
+    "entities": [
+      {
+        "name": "Hiring Compliance FAQ Comprehensive",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.26092115,
+        "mentions": [
+          {
+            "text": {
+              "content": "Hiring Compliance FAQ Comprehensive",
+              "beginOffset": 330
+            },
+            "type": "PROPER"
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 327
+            },
+            "type": "COMMON"
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 409
+            },
+            "type": "COMMON"
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 869
+            },
+            "type": "COMMON"
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 1049
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "use client",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.09741856,
+        "mentions": [
+          {
+            "text": {
+              "content": "use client",
+              "beginOffset": 1
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "faqCategories",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.066135585,
+        "mentions": [
+          {
+            "text": {
+              "content": "faqCategories",
+              "beginOffset": 19
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "faqCategories.flatMap",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.056494445,
+        "mentions": [
+          {
+            "text": {
+              "content": "faqCategories.flatMap",
+              "beginOffset": 202
+            },
+            "type": "PROPER"
+          },
+          {
+            "text": {
+              "content": "cat",
+              "beginOffset": 224
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "questions",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0343324,
+        "mentions": [
+          {
+            "text": {
+              "content": "questions",
+              "beginOffset": 393
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Resources",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.029194694,
+        "mentions": [
+          {
+            "text": {
+              "content": "Resources",
+              "beginOffset": 314
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "compliance laws",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.029194694,
+        "mentions": [
+          {
+            "text": {
+              "content": "compliance laws",
+              "beginOffset": 419
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "bias audits",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.029194694,
+        "mentions": [
+          {
+            "text": {
+              "content": "bias audits",
+              "beginOffset": 436
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "return",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.02566575,
+        "mentions": [
+          {
+            "text": {
+              "content": "return",
+              "beginOffset": 291
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "vendor responsibilities",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.02566575,
+        "mentions": [
+          {
+            "text": {
+              "content": "vendor responsibilities",
+              "beginOffset": 449
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "penalties",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.02566575,
+        "mentions": [
+          {
+            "text": {
+              "content": "penalties",
+              "beginOffset": 474
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "map",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.025353841,
+        "mentions": [
+          {
+            "text": {
+              "content": "map",
+              "beginOffset": 245
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "best practices",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.023559857,
+        "mentions": [
+          {
+            "text": {
+              "content": "best practices",
+              "beginOffset": 489
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "FAQItem",
+        "type": "CONSUMER_GOOD",
+        "metadata": {},
+        "salience": 0.0222331,
+        "mentions": [
+          {
+            "text": {
+              "content": "FAQItem",
+              "beginOffset": 165
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "allFaqs",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.015021769,
+        "mentions": [
+          {
+            "text": {
+              "content": "allFaqs",
+              "beginOffset": 192
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "faqSchemaData",
+        "type": "ORGANIZATION",
+        "metadata": {},
+        "salience": 0.015021769,
+        "mentions": [
+          {
+            "text": {
+              "content": "faqSchemaData",
+              "beginOffset": 266
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "Illinois",
+        "type": "LOCATION",
+        "metadata": {
+          "mid": "/m/03v0t",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Illinois"
+        },
+        "salience": 0.0130839255,
+        "mentions": [
+          {
+            "text": {
+              "content": "Illinois",
+              "beginOffset": 531
+            },
+            "type": "PROPER"
+          },
+          {
+            "text": {
+              "content": "Illinois",
+              "beginOffset": 915
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "FAQ",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.012899607,
+        "mentions": [
+          {
+            "text": {
+              "content": "FAQ",
+              "beginOffset": 631
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "assessment",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.012294247,
+        "mentions": [
+          {
+            "text": {
+              "content": "assessment",
+              "beginOffset": 1030
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "guidance",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011590446,
+        "mentions": [
+          {
+            "text": {
+              "content": "guidance",
+              "beginOffset": 648
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Hiring",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011392168,
+        "mentions": [
+          {
+            "text": {
+              "content": "Hiring",
+              "beginOffset": 875
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Vendor Assessment Guide",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.011352002,
+        "mentions": [
+          {
+            "text": {
+              "content": "Vendor Assessment Guide",
+              "beginOffset": 887
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "regulations",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011333839,
+        "mentions": [
+          {
+            "text": {
+              "content": "regulations",
+              "beginOffset": 613
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "questions",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011213475,
+        "mentions": [
+          {
+            "text": {
+              "content": "questions",
+              "beginOffset": 962
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "compliance scorecard",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011008215,
+        "mentions": [
+          {
+            "text": {
+              "content": "compliance scorecard",
+              "beginOffset": 987
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Counts",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.00850202,
+        "mentions": [
+          {
+            "text": {
+              "content": "Counts",
+              "beginOffset": 859
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "NYC Local Law 144",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.007631538,
+        "mentions": [
+          {
+            "text": {
+              "content": "NYC Local Law 144",
+              "beginOffset": 549
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "laws",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0071447883,
+        "mentions": [
+          {
+            "text": {
+              "content": "laws",
+              "beginOffset": 1126
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Compliance Score",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0067061232,
+        "mentions": [
+          {
+            "text": {
+              "content": "Compliance Score",
+              "beginOffset": 1196
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "AI Act",
+        "type": "WORK_OF_ART",
+        "metadata": {
+          "mid": "/g/11qh3d3r2w",
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Artificial_Intelligence_Act"
+        },
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "AI Act",
+              "beginOffset": 579
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "California",
+        "type": "LOCATION",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "California",
+              "beginOffset": 590
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "HB 3773",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "HB 3773",
+              "beginOffset": 540
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "CCPA ADMT",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "CCPA ADMT",
+              "beginOffset": 603
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "Colorado",
+        "type": "LOCATION",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "Colorado",
+              "beginOffset": 568
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "compliance situation",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.005915266,
+        "mentions": [
+          {
+            "text": {
+              "content": "compliance situation",
+              "beginOffset": 1059
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "organization",
+        "type": "ORGANIZATION",
+        "metadata": {},
+        "salience": 0.005902019,
+        "mentions": [
+          {
+            "text": {
+              "content": "organization",
+              "beginOffset": 1145
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "steps",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.005902019,
+        "mentions": [
+          {
+            "text": {
+              "content": "steps",
+              "beginOffset": 1167
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "AI Hiring Compliance Guide",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.005000147,
+        "mentions": [
+          {
+            "text": {
+              "content": "AI Hiring Compliance Guide",
+              "beginOffset": 748
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Bias Audit Implementation Guide",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.005000147,
+        "mentions": [
+          {
+            "text": {
+              "content": "Bias Audit Implementation Guide",
+              "beginOffset": 818
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "questions",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.005000147,
+        "mentions": [
+          {
+            "text": {
+              "content": "questions",
+              "beginOffset": 689
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "AI Hiring Law Deep Dive",
+        "type": "ORGANIZATION",
+        "metadata": {},
+        "salience": 0.0048280116,
+        "mentions": [
+          {
+            "text": {
+              "content": "AI Hiring Law Deep Dive",
+              "beginOffset": 924
+            },
+            "type": "PROPER"
+          }
+        ]
+      },
+      {
+        "name": "Resources",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0042464496,
+        "mentions": [
+          {
+            "text": {
+              "content": "Resources",
+              "beginOffset": 725
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Compliance Checklist",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0037298738,
+        "mentions": [
+          {
+            "text": {
+              "content": "Compliance Checklist",
+              "beginOffset": 784
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "Navigation",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0037298738,
+        "mentions": [
+          {
+            "text": {
+              "content": "Navigation",
+              "beginOffset": 676
+            },
+            "type": "COMMON"
+          }
+        ]
+      },
+      {
+        "name": "2026",
+        "type": "DATE",
+        "metadata": {
+          "year": "2026"
+        },
+        "salience": 0,
+        "mentions": [
+          {
+            "text": {
+              "content": "2026",
+              "beginOffset": 775
+            },
+            "type": "TYPE_UNKNOWN"
+          }
+        ]
+      },
+      {
+        "name": "2026",
+        "type": "DATE",
+        "metadata": {
+          "year": "2026"
+        },
+        "salience": 0,
+        "mentions": [
+          {
+            "text": {
+              "content": "2026",
+              "beginOffset": 809
+            },
+            "type": "TYPE_UNKNOWN"
+          }
+        ]
+      },
+      {
+        "name": "2026",
+        "type": "NUMBER",
+        "metadata": {
+          "value": "2026"
+        },
+        "salience": 0,
+        "mentions": [
+          {
+            "text": {
+              "content": "2026",
+              "beginOffset": 809
+            },
+            "type": "TYPE_UNKNOWN"
+          }
+        ]
+      },
+      {
+        "name": "144",
+        "type": "NUMBER",
+        "metadata": {
+          "value": "144"
+        },
+        "salience": 0,
+        "mentions": [
+          {
+            "text": {
+              "content": "144",
+              "beginOffset": 563
+            },
+            "type": "TYPE_UNKNOWN"
+          }
+        ]
+      },
+      {
+        "name": "3773",
+        "type": "NUMBER",
+        "metadata": {
+          "value": "3773"
+        },
+        "salience": 0,
+        "mentions": [
+          {
+            "text": {
+              "content": "3773",
+              "beginOffset": 543
+            },
+            "type": "TYPE_UNKNOWN"
+          }
+        ]
+      },
+      {
+        "name": "2026",
+        "type": "NUMBER",
+        "metadata": {
+          "value": "2026"
+        },
+        "salience": 0,
+        "mentions": [
+          {
+            "text": {
+              "content": "2026",
+              "beginOffset": 775
+            },
+            "type": "TYPE_UNKNOWN"
+          }
+        ]
+      },
+      {
+        "name": "5",
+        "type": "NUMBER",
+        "metadata": {
+          "value": "5"
+        },
+        "salience": 0,
+        "mentions": [
+          {
+            "text": {
+              "content": "5",
+              "beginOffset": 1090
+            },
+            "type": "TYPE_UNKNOWN"
+          }
+        ]
+      }
+    ],
+    "language": "en"
+  },
+  "entitySentiment": {
+    "entities": [
+      {
+        "name": "Hiring Compliance FAQ Comprehensive",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.26092115,
+        "mentions": [
+          {
+            "text": {
+              "content": "Hiring Compliance FAQ Comprehensive",
+              "beginOffset": 330
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 327
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 409
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 869
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          },
+          {
+            "text": {
+              "content": "AI",
+              "beginOffset": 1049
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "use client",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.09741856,
+        "mentions": [
+          {
+            "text": {
+              "content": "use client",
+              "beginOffset": 1
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "faqCategories",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.066135585,
+        "mentions": [
+          {
+            "text": {
+              "content": "faqCategories",
+              "beginOffset": 19
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "faqCategories.flatMap",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.056494445,
+        "mentions": [
+          {
+            "text": {
+              "content": "faqCategories.flatMap",
+              "beginOffset": 202
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          },
+          {
+            "text": {
+              "content": "cat",
+              "beginOffset": 224
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "questions",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0343324,
+        "mentions": [
+          {
+            "text": {
+              "content": "questions",
+              "beginOffset": 393
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Resources",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.029194694,
+        "mentions": [
+          {
+            "text": {
+              "content": "Resources",
+              "beginOffset": 314
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "compliance laws",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.029194694,
+        "mentions": [
+          {
+            "text": {
+              "content": "compliance laws",
+              "beginOffset": 419
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "bias audits",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.029194694,
+        "mentions": [
+          {
+            "text": {
+              "content": "bias audits",
+              "beginOffset": 436
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "return",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.02566575,
+        "mentions": [
+          {
+            "text": {
+              "content": "return",
+              "beginOffset": 291
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "vendor responsibilities",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.02566575,
+        "mentions": [
+          {
+            "text": {
+              "content": "vendor responsibilities",
+              "beginOffset": 449
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "penalties",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.02566575,
+        "mentions": [
+          {
+            "text": {
+              "content": "penalties",
+              "beginOffset": 474
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "map",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.025353841,
+        "mentions": [
+          {
+            "text": {
+              "content": "map",
+              "beginOffset": 245
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "best practices",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.023559857,
+        "mentions": [
+          {
+            "text": {
+              "content": "best practices",
+              "beginOffset": 489
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "FAQItem",
+        "type": "CONSUMER_GOOD",
+        "metadata": {},
+        "salience": 0.0222331,
+        "mentions": [
+          {
+            "text": {
+              "content": "FAQItem",
+              "beginOffset": 165
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "allFaqs",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.015021769,
+        "mentions": [
+          {
+            "text": {
+              "content": "allFaqs",
+              "beginOffset": 192
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "faqSchemaData",
+        "type": "ORGANIZATION",
+        "metadata": {},
+        "salience": 0.015021769,
+        "mentions": [
+          {
+            "text": {
+              "content": "faqSchemaData",
+              "beginOffset": 266
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Illinois",
+        "type": "LOCATION",
+        "metadata": {
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Illinois",
+          "mid": "/m/03v0t"
+        },
+        "salience": 0.0130839255,
+        "mentions": [
+          {
+            "text": {
+              "content": "Illinois",
+              "beginOffset": 531
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0.2,
+              "score": 0.2
+            }
+          },
+          {
+            "text": {
+              "content": "Illinois",
+              "beginOffset": 915
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.2,
+          "score": 0.1
+        }
+      },
+      {
+        "name": "FAQ",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.012899607,
+        "mentions": [
+          {
+            "text": {
+              "content": "FAQ",
+              "beginOffset": 631
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0.2,
+              "score": 0.2
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.2,
+          "score": 0.2
+        }
+      },
+      {
+        "name": "assessment",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.012294247,
+        "mentions": [
+          {
+            "text": {
+              "content": "assessment",
+              "beginOffset": 1030
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "guidance",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011590446,
+        "mentions": [
+          {
+            "text": {
+              "content": "guidance",
+              "beginOffset": 648
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0.1,
+              "score": 0.1
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.1,
+          "score": 0.1
+        }
+      },
+      {
+        "name": "Hiring",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011392168,
+        "mentions": [
+          {
+            "text": {
+              "content": "Hiring",
+              "beginOffset": 875
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Vendor Assessment Guide",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.011352002,
+        "mentions": [
+          {
+            "text": {
+              "content": "Vendor Assessment Guide",
+              "beginOffset": 887
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "regulations",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011333839,
+        "mentions": [
+          {
+            "text": {
+              "content": "regulations",
+              "beginOffset": 613
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0.2,
+              "score": 0.2
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.2,
+          "score": 0.2
+        }
+      },
+      {
+        "name": "questions",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011213475,
+        "mentions": [
+          {
+            "text": {
+              "content": "questions",
+              "beginOffset": 962
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "compliance scorecard",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.011008215,
+        "mentions": [
+          {
+            "text": {
+              "content": "compliance scorecard",
+              "beginOffset": 987
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Counts",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.00850202,
+        "mentions": [
+          {
+            "text": {
+              "content": "Counts",
+              "beginOffset": 859
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "NYC Local Law 144",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.007631538,
+        "mentions": [
+          {
+            "text": {
+              "content": "NYC Local Law 144",
+              "beginOffset": 549
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "laws",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0071447883,
+        "mentions": [
+          {
+            "text": {
+              "content": "laws",
+              "beginOffset": 1126
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Compliance Score",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0067061232,
+        "mentions": [
+          {
+            "text": {
+              "content": "Compliance Score",
+              "beginOffset": 1196
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0.2,
+              "score": 0.2
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.2,
+          "score": 0.2
+        }
+      },
+      {
+        "name": "CCPA ADMT",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "CCPA ADMT",
+              "beginOffset": 603
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0.2,
+              "score": 0.2
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.2,
+          "score": 0.2
+        }
+      },
+      {
+        "name": "California",
+        "type": "LOCATION",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "California",
+              "beginOffset": 590
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0.2,
+              "score": 0.2
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.2,
+          "score": 0.2
+        }
+      },
+      {
+        "name": "Colorado",
+        "type": "LOCATION",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "Colorado",
+              "beginOffset": 568
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0.1,
+              "score": 0.1
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.1,
+          "score": 0.1
+        }
+      },
+      {
+        "name": "AI Act",
+        "type": "WORK_OF_ART",
+        "metadata": {
+          "wikipedia_url": "https://en.wikipedia.org/wiki/Artificial_Intelligence_Act",
+          "mid": "/g/11qh3d3r2w"
+        },
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "AI Act",
+              "beginOffset": 579
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0.2,
+              "score": 0.2
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.2,
+          "score": 0.2
+        }
+      },
+      {
+        "name": "HB 3773",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.006703969,
+        "mentions": [
+          {
+            "text": {
+              "content": "HB 3773",
+              "beginOffset": 540
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0.1,
+              "score": 0.1
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0.1,
+          "score": 0.1
+        }
+      },
+      {
+        "name": "compliance situation",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.005915266,
+        "mentions": [
+          {
+            "text": {
+              "content": "compliance situation",
+              "beginOffset": 1059
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "organization",
+        "type": "ORGANIZATION",
+        "metadata": {},
+        "salience": 0.005902019,
+        "mentions": [
+          {
+            "text": {
+              "content": "organization",
+              "beginOffset": 1145
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "steps",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.005902019,
+        "mentions": [
+          {
+            "text": {
+              "content": "steps",
+              "beginOffset": 1167
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "questions",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.005000147,
+        "mentions": [
+          {
+            "text": {
+              "content": "questions",
+              "beginOffset": 689
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "AI Hiring Compliance Guide",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.005000147,
+        "mentions": [
+          {
+            "text": {
+              "content": "AI Hiring Compliance Guide",
+              "beginOffset": 748
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Bias Audit Implementation Guide",
+        "type": "WORK_OF_ART",
+        "metadata": {},
+        "salience": 0.005000147,
+        "mentions": [
+          {
+            "text": {
+              "content": "Bias Audit Implementation Guide",
+              "beginOffset": 818
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "AI Hiring Law Deep Dive",
+        "type": "ORGANIZATION",
+        "metadata": {},
+        "salience": 0.0048280116,
+        "mentions": [
+          {
+            "text": {
+              "content": "AI Hiring Law Deep Dive",
+              "beginOffset": 924
+            },
+            "type": "PROPER",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Resources",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0042464496,
+        "mentions": [
+          {
+            "text": {
+              "content": "Resources",
+              "beginOffset": 725
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Navigation",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0037298738,
+        "mentions": [
+          {
+            "text": {
+              "content": "Navigation",
+              "beginOffset": 676
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      },
+      {
+        "name": "Compliance Checklist",
+        "type": "OTHER",
+        "metadata": {},
+        "salience": 0.0037298738,
+        "mentions": [
+          {
+            "text": {
+              "content": "Compliance Checklist",
+              "beginOffset": 784
+            },
+            "type": "COMMON",
+            "sentiment": {
+              "magnitude": 0,
+              "score": 0
+            }
+          }
+        ],
+        "sentiment": {
+          "magnitude": 0,
+          "score": 0
+        }
+      }
+    ],
+    "language": "en"
+  },
+  "categories": {
+    "categories": []
+  },
+  "topEntities": [
+    {
+      "name": "Hiring Compliance FAQ Comprehensive",
+      "type": "OTHER",
+      "salience": "0.261"
+    },
+    {
+      "name": "use client",
+      "type": "OTHER",
+      "salience": "0.097"
+    },
+    {
+      "name": "faqCategories",
+      "type": "OTHER",
+      "salience": "0.066"
+    },
+    {
+      "name": "faqCategories.flatMap",
+      "type": "OTHER",
+      "salience": "0.056"
+    },
+    {
+      "name": "questions",
+      "type": "OTHER",
+      "salience": "0.034"
+    },
+    {
+      "name": "Resources",
+      "type": "OTHER",
+      "salience": "0.029"
+    },
+    {
+      "name": "compliance laws",
+      "type": "OTHER",
+      "salience": "0.029"
+    },
+    {
+      "name": "bias audits",
+      "type": "OTHER",
+      "salience": "0.029"
+    },
+    {
+      "name": "return",
+      "type": "OTHER",
+      "salience": "0.026"
+    },
+    {
+      "name": "vendor responsibilities",
+      "type": "OTHER",
+      "salience": "0.026"
+    }
+  ],
+  "topCategories": [],
+  "score": 40
+}
