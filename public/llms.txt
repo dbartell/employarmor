@@ -1,43 +1,64 @@
-# AI Hire Law
+# EmployArmor
 
-> AI hiring compliance platform helping employers navigate AEDT bias audits, impact assessments, and state AI employment laws including NYC Local Law 144, Illinois AIVI Act, Colorado SB 205, and California CCPA/ADMT.
+> AI hiring compliance platform helping employers navigate AI employment laws across 6+ states. Covers bias audits, impact assessments, disclosure requirements, training, and tool governance for companies using AI in hiring decisions.
 
-AI Hire Law provides compliance tools, training, and documentation for companies using AI in hiring decisions. Key features include automated compliance tracking, bias audit management, disclosure generation, and state-by-state regulatory guidance.
+EmployArmor provides compliance tools for employers using AI hiring tools like HireVue, Workday, Greenhouse, LinkedIn Recruiter, and Indeed. Key features include automated compliance tracking, bias audit management, disclosure generation, employee training, tool governance workflows, and state-by-state regulatory guidance.
 
-## Compliance Guides
+## Core Product
 
-- [NYC Local Law 144 Guide](https://aihirelaw.com/resources/nyc-local-law-144): AEDT requirements, bias audit timelines, candidate notification templates
-- [Illinois AIVI Act Guide](https://aihirelaw.com/resources/illinois-ai-hiring-law): Video interview AI disclosure requirements and consent rules
-- [Colorado AI Act for Employers](https://aihirelaw.com/resources/colorado-ai-act-employers): High-risk AI system requirements, impact assessments, adverse action notices
-- [California CCPA/ADMT Guide](https://aihirelaw.com/resources/california-ccpa-admt): Automated decision-making technology requirements under CPRA
-- [2026 Compliance Checklist](https://aihirelaw.com/resources/compliance-checklist-2026): Comprehensive checklist for all US AI hiring laws
+- [Free Compliance Score](https://employarmor.com/scan): 2-minute assessment — select your states, employees, and tools to get a compliance score
+- [Dashboard](https://employarmor.com/dashboard): Compliance score, action items, and regulatory alerts
+- [Tool Governance](https://employarmor.com/tools): Track which AI tools your company uses and their compliance status
+- [Employee Portal](https://employarmor.com/portal): Employees sign disclosures, complete training, request tools
+- [Compliance Packet](https://employarmor.com/compliance-packet): Export compliance documentation for auditors
+
+## State Law Guides
+
+- [Illinois AI Hiring Law (HB 3773)](https://employarmor.com/compliance/illinois): AIVI Act, BIPA, disclosure requirements, consent rules
+- [Colorado AI Act (SB24-205)](https://employarmor.com/compliance/colorado): High-risk AI system requirements, impact assessments, effective June 2026
+- [NYC Local Law 144](https://employarmor.com/compliance/nyc): AEDT bias audit requirements, candidate notifications
+- [California CCPA ADMT](https://employarmor.com/compliance/california): Automated decision-making regulations under CPRA, $7,500 per violation
+- [Maryland HB 1202](https://employarmor.com/compliance/maryland): Facial recognition consent requirements in hiring
+- [Texas TRAIGA (HB 149)](https://employarmor.com/resources/texas-ai-hiring-law): Responsible AI Governance Act, effective Jan 1 2026, $100K per violation
+- [State-by-State Comparison](https://employarmor.com/resources/ai-hiring-laws-by-state): Side-by-side requirements across all states
+
+## Compliance Resources
+
+- [AI Hiring Compliance Guide 2026](https://employarmor.com/resources/ai-hiring-compliance-guide-2026): Comprehensive pillar guide covering all US AI hiring laws
+- [Federal AI Hiring Landscape](https://employarmor.com/resources/federal-ai-hiring-laws): EEOC guidance, executive orders, proposed federal bills
+- [EEOC AI Guidance](https://employarmor.com/resources/eeoc-ai-hiring-guidance): What employers must know about EEOC's AI enforcement priorities
+- [2026 Compliance Checklist](https://employarmor.com/resources/compliance-checklist-2026): Step-by-step checklist for all US AI hiring laws
+- [AI Bias Audit Guide](https://employarmor.com/resources/ai-bias-audit-guide): Do you need one? Complete guide to conducting AI bias audits
+- [AI Disclosure Notice Template](https://employarmor.com/resources/ai-disclosure-notice-template): Compliant candidate notification language
+- [Vendor Assessment Guide](https://employarmor.com/resources/vendor-assessment-guide): Evaluating AI hiring vendors for compliance
+- [HR Training Guide](https://employarmor.com/resources/hr-training-guide): Training requirements and curriculum for AI compliance
+- [Building a Compliance Program](https://employarmor.com/resources/compliance-program-guide): How to build an AI hiring compliance program from scratch
+- [What Counts as AI in Hiring?](https://employarmor.com/resources/what-counts-as-ai-hiring): Decision tree for identifying AI tools that trigger compliance
+- [EU AI Act Impact on US Employers](https://employarmor.com/resources/eu-ai-act-hiring): What US companies with EU operations need to know
+- [FAQ](https://employarmor.com/resources/faq): 39 common questions about AI hiring compliance
+
+## Tool Compliance Guides
+
+- [HireVue Compliance](https://employarmor.com/resources/hirevue-compliance): AI video interview regulations, bias audit history
+- [Workday AI Compliance](https://employarmor.com/resources/workday-ai-compliance): ML features, Mobley v. Workday lawsuit implications
+- [Indeed AI Compliance](https://employarmor.com/resources/indeed-ai-compliance): Smart Sourcing, AI matching compliance requirements
+- [LinkedIn Recruiter AI](https://employarmor.com/resources/linkedin-recruiter-ai-compliance): AI-powered recruiting compliance guide
+- [Greenhouse ATS](https://employarmor.com/resources/greenhouse-ats-compliance): Structured hiring and AI compliance
+- [Full Tool Directory](https://employarmor.com/tools/directory): 78+ AI hiring tools with compliance profiles
+- [Tool Comparisons](https://employarmor.com/compare): Side-by-side compliance comparison of AI hiring tools
 
 ## Glossary
 
-- [AEDT](https://aihirelaw.com/glossary/aedt): Automated Employment Decision Tool - the legal definition and what qualifies
-- [Bias Audit](https://aihirelaw.com/glossary/bias-audit): Independent testing for disparate impact, required annually under NYC law
-- [Disparate Impact](https://aihirelaw.com/glossary/disparate-impact): Unintentional discrimination through neutral policies, measured by 4/5ths rule
-- [Impact Assessment](https://aihirelaw.com/glossary/impact-assessment): Required documentation under Colorado AI Act for high-risk systems
-- [High-Risk AI System](https://aihirelaw.com/glossary/high-risk-ai-system): Colorado's classification for AI making consequential employment decisions
-- [BIPA](https://aihirelaw.com/glossary/bipa): Illinois Biometric Information Privacy Act - relevant for video interview AI
-- [AIVI](https://aihirelaw.com/glossary/aivi): Illinois AI Video Interview Act disclosure requirements
-- [Four-Fifths Rule](https://aihirelaw.com/glossary/four-fifths-rule): 80% threshold for measuring adverse impact in selection rates
+- [AEDT](https://employarmor.com/glossary/aedt): Automated Employment Decision Tool
+- [Bias Audit](https://employarmor.com/glossary/bias-audit): Independent testing for disparate impact
+- [Disparate Impact](https://employarmor.com/glossary/disparate-impact): Unintentional discrimination through neutral policies
+- [CCPA ADMT](https://employarmor.com/glossary/ccpa-admt): California automated decision-making regulations
+- [Human Oversight](https://employarmor.com/glossary/human-oversight): Human control requirements over AI systems
+- [Algorithmic Accountability](https://employarmor.com/glossary/algorithmic-accountability): Organizational AI responsibility frameworks
+- [Full Glossary](https://employarmor.com/glossary): 31 terms defined
 
-## State Compliance Pages
+## About
 
-- [NYC Compliance](https://aihirelaw.com/compliance/nyc): Local Law 144 requirements and deadlines
-- [Illinois Compliance](https://aihirelaw.com/compliance/illinois): AIVI Act and BIPA requirements
-- [Colorado Compliance](https://aihirelaw.com/compliance/colorado): SB 205 requirements effective February 2026
-- [California Compliance](https://aihirelaw.com/compliance/california): CCPA/CPRA ADMT requirements
-
-## Templates & Tools
-
-- [AI Disclosure Notice Template](https://aihirelaw.com/resources/ai-disclosure-notice-template): Compliant notice language for candidates
-- [Vendor Assessment Guide](https://aihirelaw.com/resources/vendor-assessment-guide): Evaluating AI hiring vendors for compliance
-- [HR Training Guide](https://aihirelaw.com/resources/hr-training-guide): Training requirements under Colorado AI Act
-- [Compliance Scorecard](https://aihirelaw.com/scorecard): Free assessment of your AI hiring compliance status
-
-## Optional
-
-- [Pricing](https://aihirelaw.com/pricing): Subscription plans for compliance management
-- [FAQ](https://aihirelaw.com/resources/faq): Common questions about AI hiring compliance
+- [About EmployArmor](https://employarmor.com/about): Our mission and team
+- [Privacy Policy](https://employarmor.com/privacy)
+- [Terms of Service](https://employarmor.com/terms)
