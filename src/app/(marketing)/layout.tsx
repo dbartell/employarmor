@@ -276,6 +276,51 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'Organization',
+                '@id': 'https://employarmor.com/#organization',
+                name: 'EmployArmor',
+                url: 'https://employarmor.com',
+                description: 'AI hiring compliance platform',
+                founder: {
+                  '@type': 'Person',
+                  name: 'Devyn Bartell',
+                },
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://employarmor.com/logo.png',
+                },
+              },
+              {
+                '@type': 'WebSite',
+                '@id': 'https://employarmor.com/#website',
+                url: 'https://employarmor.com',
+                name: 'EmployArmor',
+                description: 'AI hiring compliance platform',
+                publisher: {
+                  '@id': 'https://employarmor.com/#organization',
+                },
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: {
+                    '@type': 'EntryPoint',
+                    urlTemplate: 'https://employarmor.com/search?q={search_term_string}',
+                  },
+                  'query-input': 'required name=search_term_string',
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      
       {/* Navigation */}
       <nav className="bg-white sticky top-0 z-50 shadow-sm relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,0 +1,1659 @@
+{
+  "slug": "templates",
+  "analyzed_at": "2026-02-23 19:45:52",
+  "text_length": 2249,
+  "entities": [
+    {
+      "name": "PDF",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.10335701,
+      "mentions": [
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 181
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 378
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 590
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 1179
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Candidate notification template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.09996505,
+      "mentions": [
+        {
+          "text": {
+            "content": "Candidate notification template",
+            "beginOffset": 76
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI Disclosure Notice - Multi-State",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.08727514,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 18
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI Disclosure Notice - Multi-State",
+            "beginOffset": 26
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.08219694,
+      "mentions": [
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 369
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 581
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 1170
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "const templates",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.050151736,
+      "mentions": [
+        {
+          "text": {
+            "content": "const templates",
+            "beginOffset": 0
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.041186757,
+      "mentions": [
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 796
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 979
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 1373
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 1555
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.039818875,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 62
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "downloadSlug",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.035892036,
+      "mentions": [
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 197
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 394
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 606
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 822
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 1005
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 1195
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 1399
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "downloadSlug",
+            "beginOffset": 1581
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "PDF",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.02503614,
+      "mentions": [
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 805
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 988
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 1382
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.020828802,
+      "mentions": [
+        {
+          "text": {
+            "content": "format",
+            "beginOffset": 172
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.019296188,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 234
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.019296188,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 266
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "NYC",
+      "type": "LOCATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/New_York_City",
+        "mid": "/m/02_286"
+      },
+      "salience": 0.017216817,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC",
+            "beginOffset": 153
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Employee Handbook AI Policy Section",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.016340831,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 433
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "Employee Handbook AI Policy Section",
+            "beginOffset": 441
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "requirements",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.014459799,
+      "mentions": [
+        {
+          "text": {
+            "content": "requirements",
+            "beginOffset": 157
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Colorado",
+      "type": "LOCATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Colorado",
+        "mid": "/m/01n4w"
+      },
+      "salience": 0.014315202,
+      "mentions": [
+        {
+          "text": {
+            "content": "Colorado",
+            "beginOffset": 129
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "Colorado",
+            "beginOffset": 776
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "ai-disclosure-notice",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.013995151,
+      "mentions": [
+        {
+          "text": {
+            "content": "ai-disclosure-notice",
+            "beginOffset": 212
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "California",
+      "type": "LOCATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/California",
+        "mid": "/m/01n7q"
+      },
+      "salience": 0.013813985,
+      "mentions": [
+        {
+          "text": {
+            "content": "California",
+            "beginOffset": 138
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Illinois",
+      "type": "LOCATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Illinois",
+        "mid": "/m/03v0t"
+      },
+      "salience": 0.013813985,
+      "mentions": [
+        {
+          "text": {
+            "content": "Illinois",
+            "beginOffset": 120
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Candidate Consent Form",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0123586655,
+      "mentions": [
+        {
+          "text": {
+            "content": "Candidate Consent Form",
+            "beginOffset": 242
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Colorado Impact Assessment Template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.011009353,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 641
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "Colorado Impact Assessment Template",
+            "beginOffset": 649
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "consent form",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.007924737,
+      "mentions": [
+        {
+          "text": {
+            "content": "consent form",
+            "beginOffset": 296
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate-consent-form",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.007885418,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate-consent-form",
+            "beginOffset": 409
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00730153,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 478
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0062757856,
+      "mentions": [
+        {
+          "text": {
+            "content": "Template",
+            "beginOffset": 896
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0062757856,
+      "mentions": [
+        {
+          "text": {
+            "content": "Template",
+            "beginOffset": 872
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0062162103,
+      "mentions": [
+        {
+          "text": {
+            "content": "template",
+            "beginOffset": 715
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "company info",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.005955255,
+      "mentions": [
+        {
+          "text": {
+            "content": "company info",
+            "beginOffset": 1729
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "company info",
+            "beginOffset": 2139
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "inventory template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0057459967,
+      "mentions": [
+        {
+          "text": {
+            "content": "inventory template",
+            "beginOffset": 1149
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidates",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.005705293,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidates",
+            "beginOffset": 313
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI use",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0053128763,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI use",
+            "beginOffset": 338
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "employee handbook",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00528648,
+      "mentions": [
+        {
+          "text": {
+            "content": "employee handbook",
+            "beginOffset": 533
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004958764,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 841
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004958764,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 882
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004947669,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 1061
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004947669,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 1024
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0049116593,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 686
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "hiring process",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004846425,
+      "mentions": [
+        {
+          "text": {
+            "content": "hiring process",
+            "beginOffset": 352
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004770757,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 560
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0045312997,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 1273
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0045312997,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 1229
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.004310025,
+      "mentions": [
+        {
+          "text": {
+            "content": "Templates",
+            "beginOffset": 1655
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.0042994083,
+      "mentions": [
+        {
+          "text": {
+            "content": "Templates",
+            "beginOffset": 1762
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.0042994083,
+      "mentions": [
+        {
+          "text": {
+            "content": "Templates",
+            "beginOffset": 1932
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0042994083,
+      "mentions": [
+        {
+          "text": {
+            "content": "Template",
+            "beginOffset": 1916
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "map template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0042994083,
+      "mentions": [
+        {
+          "text": {
+            "content": "map template",
+            "beginOffset": 1825
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.0042994083,
+      "mentions": [
+        {
+          "text": {
+            "content": "Templates",
+            "beginOffset": 1785
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "policy language",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0042363717,
+      "mentions": [
+        {
+          "text": {
+            "content": "policy language",
+            "beginOffset": 508
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0040928707,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 1352
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "tools",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003581011,
+      "mentions": [
+        {
+          "text": {
+            "content": "tools",
+            "beginOffset": 1096
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "impact assessment",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0035777425,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact assessment",
+            "beginOffset": 743
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "handbook-ai-policy",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0035549297,
+      "mentions": [
+        {
+          "text": {
+            "content": "handbook-ai-policy",
+            "beginOffset": 621
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Download",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003496307,
+      "mentions": [
+        {
+          "text": {
+            "content": "Download",
+            "beginOffset": 1700
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Download",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0034922122,
+      "mentions": [
+        {
+          "text": {
+            "content": "Download",
+            "beginOffset": 1862
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0033964077,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 1895
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0033964077,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 1880
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "ai-tool-inventory",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003279455,
+      "mentions": [
+        {
+          "text": {
+            "content": "ai-tool-inventory",
+            "beginOffset": 1210
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI use",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003279455,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI use",
+            "beginOffset": 1341
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "templates",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0030099596,
+      "mentions": [
+        {
+          "text": {
+            "content": "templates",
+            "beginOffset": 2104
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "map template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0030099596,
+      "mentions": [
+        {
+          "text": {
+            "content": "map template",
+            "beginOffset": 1994
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.0030099596,
+      "mentions": [
+        {
+          "text": {
+            "content": "Templates",
+            "beginOffset": 1953
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "hiring process",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0029969278,
+      "mentions": [
+        {
+          "text": {
+            "content": "hiring process",
+            "beginOffset": 1110
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "hiring technology vendors",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0029912514,
+      "mentions": [
+        {
+          "text": {
+            "content": "hiring technology vendors",
+            "beginOffset": 1309
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Questions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0029912514,
+      "mentions": [
+        {
+          "text": {
+            "content": "Questions",
+            "beginOffset": 1287
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor Due Diligence Questionnaire",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.0029912514,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor Due Diligence Questionnaire",
+            "beginOffset": 1237
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias audit results",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0028756107,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias audit results",
+            "beginOffset": 925
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "HR decisions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002858361,
+      "mentions": [
+        {
+          "text": {
+            "content": "HR decisions",
+            "beginOffset": 566
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "support",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0026274752,
+      "mentions": [
+        {
+          "text": {
+            "content": "support",
+            "beginOffset": 1363
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance documents",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0024637673,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance documents",
+            "beginOffset": 1678
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002377444,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 2059
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002377444,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 2044
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "filter t",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002241622,
+      "mentions": [
+        {
+          "text": {
+            "content": "filter t",
+            "beginOffset": 1805
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Pro Plan template.",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0017791464,
+      "mentions": [
+        {
+          "text": {
+            "content": "Pro Plan template.",
+            "beginOffset": 2026
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "compliance documents",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0017182607,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance documents",
+            "beginOffset": 2205
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "NYC Bias Audit Summary",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.0016996858,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC Bias Audit Summary",
+            "beginOffset": 849
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "NYC Local Law 144",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0016996858,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC Local Law 144",
+            "beginOffset": 959
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "AI Tool Inventory Worksheet",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0016958762,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI Tool Inventory Worksheet",
+            "beginOffset": 1032
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "AI Act",
+      "type": "WORK_OF_ART",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Artificial_Intelligence_Act",
+        "mid": "/g/11qh3d3r2w"
+      },
+      "salience": 0.0016835127,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI Act",
+            "beginOffset": 787
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "filter t",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0015688242,
+      "mentions": [
+        {
+          "text": {
+            "content": "filter t",
+            "beginOffset": 1973
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014952925,
+      "mentions": [
+        {
+          "text": {
+            "content": "description",
+            "beginOffset": 1462
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014952925,
+      "mentions": [
+        {
+          "text": {
+            "content": "title",
+            "beginOffset": 1418
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "PDF",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014002514,
+      "mentions": [
+        {
+          "text": {
+            "content": "PDF",
+            "beginOffset": 1564
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Upgrade",
+      "type": "EVENT",
+      "metadata": {},
+      "salience": 0.0013779096,
+      "mentions": [
+        {
+          "text": {
+            "content": "Upgrade",
+            "beginOffset": 2071
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "auto-fill",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0013779096,
+      "mentions": [
+        {
+          "text": {
+            "content": "auto-fill",
+            "beginOffset": 2119
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "document generator",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0013764346,
+      "mentions": [
+        {
+          "text": {
+            "content": "document generator",
+            "beginOffset": 2167
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0013504073,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 1511
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "EmployArmor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0010153605,
+      "mentions": [
+        {
+          "text": {
+            "content": "EmployArmor",
+            "beginOffset": 2153
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "checklist",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0009865568,
+      "mentions": [
+        {
+          "text": {
+            "content": "checklist",
+            "beginOffset": 1483
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI hiring regulations",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.00086646795,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI hiring regulations",
+            "beginOffset": 1531
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Header",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008652123,
+      "mentions": [
+        {
+          "text": {
+            "content": "Header",
+            "beginOffset": 1645
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008652123,
+      "mentions": [
+        {
+          "text": {
+            "content": "Resources",
+            "beginOffset": 1632
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "return",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008652123,
+      "mentions": [
+        {
+          "text": {
+            "content": "return",
+            "beginOffset": 1600
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Breadcrumb",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.0008652123,
+      "mentions": [
+        {
+          "text": {
+            "content": "Breadcrumb",
+            "beginOffset": 1610
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Want",
+      "type": "LOCATION",
+      "metadata": {},
+      "salience": 0.0008141799,
+      "mentions": [
+        {
+          "text": {
+            "content": "Want",
+            "beginOffset": 2099
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "CTA",
+      "type": "ORGANIZATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Chicago_Transit_Authority",
+        "mid": "/m/025vyr"
+      },
+      "salience": 0.0008141799,
+      "mentions": [
+        {
+          "text": {
+            "content": "CTA",
+            "beginOffset": 2092
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Access",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008141799,
+      "mentions": [
+        {
+          "text": {
+            "content": "Access",
+            "beginOffset": 2082
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Annual Compliance Review Checklist",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00058288843,
+      "mentions": [
+        {
+          "text": {
+            "content": "Annual Compliance Review Checklist",
+            "beginOffset": 1426
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "144",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "144"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "144",
+            "beginOffset": 973
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    }
+  ],
+  "entity_count": 98,
+  "categories": [
+    {
+      "name": "/Computers & Electronics/Software",
+      "confidence": 0.57
+    }
+  ],
+  "language": "en"
+}

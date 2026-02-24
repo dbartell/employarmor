@@ -1,0 +1,4396 @@
+{
+  "slug": "vendor-assessment-guide",
+  "analyzed_at": "2026-02-23 19:46:04",
+  "text_length": 6778,
+  "entities": [
+    {
+      "name": "documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.32124186,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 12
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 934
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 1355
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 2598
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 3109
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 3167
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 3284
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 3316
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 5370
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 6092
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 6705
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "hiring vendors",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.080770895,
+      "mentions": [
+        {
+          "text": {
+            "content": "hiring vendors",
+            "beginOffset": 15
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "partners",
+            "beginOffset": 34
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.07268683,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 46
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 344
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 698
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendors",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.03596123,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendors",
+            "beginOffset": 862
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.01537593,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 1641
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 1676
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 2949
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendors",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.013921115,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendors",
+            "beginOffset": 379
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "impact",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.011497482,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact",
+            "beginOffset": 1711
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "impact",
+            "beginOffset": 1925
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendors",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.011403478,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendors",
+            "beginOffset": 196
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.009558981,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor",
+            "beginOffset": 363
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.009525342,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor",
+            "beginOffset": 743
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.009525342,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor",
+            "beginOffset": 639
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "audit data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.008094112,
+      "mentions": [
+        {
+          "text": {
+            "content": "audit data",
+            "beginOffset": 458
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.008094112,
+      "mentions": [
+        {
+          "text": {
+            "content": "Data",
+            "beginOffset": 515
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "liabilities",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.008020056,
+      "mentions": [
+        {
+          "text": {
+            "content": "liabilities",
+            "beginOffset": 64
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "employer",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.007706342,
+      "mentions": [
+        {
+          "text": {
+            "content": "employer",
+            "beginOffset": 305
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.0075666425,
+      "mentions": [
+        {
+          "text": {
+            "content": "Documentation",
+            "beginOffset": 481
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Transparency",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.007564289,
+      "mentions": [
+        {
+          "text": {
+            "content": "Transparency",
+            "beginOffset": 894
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate disclosure requirements",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0061769276,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate disclosure requirements",
+            "beginOffset": 555
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "contracts",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0057494505,
+      "mentions": [
+        {
+          "text": {
+            "content": "contracts",
+            "beginOffset": 145
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI functionality",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.005700721,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI functionality",
+            "beginOffset": 498
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "contracts",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0056851218,
+      "mentions": [
+        {
+          "text": {
+            "content": "contracts",
+            "beginOffset": 811
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "information",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0054269237,
+      "mentions": [
+        {
+          "text": {
+            "content": "information",
+            "beginOffset": 404
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "impact assessments Support",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0054269237,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact assessments Support",
+            "beginOffset": 524
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "opt-outs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0054269237,
+      "mentions": [
+        {
+          "text": {
+            "content": "opt-outs",
+            "beginOffset": 610
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "capabilities",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.005119967,
+      "mentions": [
+        {
+          "text": {
+            "content": "capabilities",
+            "beginOffset": 420
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Access",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.005119967,
+      "mentions": [
+        {
+          "text": {
+            "content": "Access",
+            "beginOffset": 443
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "risk",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.005119967,
+      "mentions": [
+        {
+          "text": {
+            "content": "risk",
+            "beginOffset": 778
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "type": "ORGANIZATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Artificial_intelligence",
+        "mid": "/m/0mkz"
+      },
+      "salience": 0.005086224,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 1409
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 2702
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "AI",
+            "beginOffset": 5261
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "compliance obligations",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004808523,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance obligations",
+            "beginOffset": 221
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor Assessment Matters",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0046102433,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor Assessment Matters",
+            "beginOffset": 249
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI tools",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0043862937,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI tools",
+            "beginOffset": 115
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI hiring laws",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0043644924,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI hiring laws",
+            "beginOffset": 286
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "information",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.004141576,
+      "mentions": [
+        {
+          "text": {
+            "content": "information",
+            "beginOffset": 673
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Flags",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003918665,
+      "mentions": [
+        {
+          "text": {
+            "content": "Flags",
+            "beginOffset": 3068
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "due diligence",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0038532508,
+      "mentions": [
+        {
+          "text": {
+            "content": "due diligence",
+            "beginOffset": 172
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Insight",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003820559,
+      "mentions": [
+        {
+          "text": {
+            "content": "Insight",
+            "beginOffset": 623
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Ability",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003820559,
+      "mentions": [
+        {
+          "text": {
+            "content": "Ability",
+            "beginOffset": 589
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "dimensions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003801564,
+      "mentions": [
+        {
+          "text": {
+            "content": "dimensions",
+            "beginOffset": 882
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Assessment Framework",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.003801564,
+      "mentions": [
+        {
+          "text": {
+            "content": "Assessment Framework",
+            "beginOffset": 832
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "choices",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0037738818,
+      "mentions": [
+        {
+          "text": {
+            "content": "choices",
+            "beginOffset": 722
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "employer",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0037639486,
+      "mentions": [
+        {
+          "text": {
+            "content": "employer",
+            "beginOffset": 5051
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "employer",
+            "beginOffset": 5407
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0033547673,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate",
+            "beginOffset": 2607
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Warranties Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0032154403,
+      "mentions": [
+        {
+          "text": {
+            "content": "Warranties Vendor",
+            "beginOffset": 5232
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias audit results",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0031968814,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias audit results",
+            "beginOffset": 4978
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "bias audit results",
+            "beginOffset": 5517
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0030917793,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 999
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0030461322,
+      "mentions": [
+        {
+          "text": {
+            "content": "data",
+            "beginOffset": 990
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.003026008,
+      "mentions": [
+        {
+          "text": {
+            "content": "data",
+            "beginOffset": 1341
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor scorecard Trigger",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0028074172,
+      "mentions": [
+        {
+          "text": {
+            "content": "Review",
+            "beginOffset": 5704
+          },
+          "type": "COMMON"
+        },
+        {
+          "text": {
+            "content": "vendor scorecard Trigger",
+            "beginOffset": 5673
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0027309177,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias",
+            "beginOffset": 1041
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0027057156,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias",
+            "beginOffset": 1695
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0026381453,
+      "mentions": [
+        {
+          "text": {
+            "content": "data",
+            "beginOffset": 2804
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Audits",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0025846793,
+      "mentions": [
+        {
+          "text": {
+            "content": "Audits",
+            "beginOffset": 1660
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.002516363,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor",
+            "beginOffset": 3091
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0024489001,
+      "mentions": [
+        {
+          "text": {
+            "content": "data",
+            "beginOffset": 2914
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0023978546,
+      "mentions": [
+        {
+          "text": {
+            "content": "data",
+            "beginOffset": 2368
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "opt-out",
+      "type": "EVENT",
+      "metadata": {},
+      "salience": 0.0023329353,
+      "mentions": [
+        {
+          "text": {
+            "content": "opt-out",
+            "beginOffset": 2510
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate requests",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0023159292,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate requests",
+            "beginOffset": 1112
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "training data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002303523,
+      "mentions": [
+        {
+          "text": {
+            "content": "training data",
+            "beginOffset": 2850
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidates",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0022054322,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidates",
+            "beginOffset": 6224
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0021960486,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor",
+            "beginOffset": 3862
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "documentation",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.0021517863,
+      "mentions": [
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 1537
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendors",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.002143842,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendors",
+            "beginOffset": 3718
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "discrimination",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0021401353,
+      "mentions": [
+        {
+          "text": {
+            "content": "discrimination",
+            "beginOffset": 1050
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendors AI Functionality",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0021342677,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendors AI Functionality",
+            "beginOffset": 1149
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "outputs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0021294854,
+      "mentions": [
+        {
+          "text": {
+            "content": "outputs",
+            "beginOffset": 1378
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "outputs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0021273892,
+      "mentions": [
+        {
+          "text": {
+            "content": "outputs",
+            "beginOffset": 1392
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "outputs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0021254504,
+      "mentions": [
+        {
+          "text": {
+            "content": "outputs",
+            "beginOffset": 1512
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate disclosures",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002123647,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate disclosures",
+            "beginOffset": 1579
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidates",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.002077221,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidates",
+            "beginOffset": 2569
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002048025,
+      "mentions": [
+        {
+          "text": {
+            "content": "data",
+            "beginOffset": 2058
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Compliance Support",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0020405073,
+      "mentions": [
+        {
+          "text": {
+            "content": "Compliance Support",
+            "beginOffset": 944
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0020375007,
+      "mentions": [
+        {
+          "text": {
+            "content": "Data",
+            "beginOffset": 2783
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0020355966,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate data",
+            "beginOffset": 2964
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "opt-outs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.002034207,
+      "mentions": [
+        {
+          "text": {
+            "content": "opt-outs",
+            "beginOffset": 1099
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vague",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0019763648,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vague",
+            "beginOffset": 3504
+          },
+          "type": "PROPER"
+        },
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 3493
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Support Obligations Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0019658455,
+      "mentions": [
+        {
+          "text": {
+            "content": "Support Obligations Vendor",
+            "beginOffset": 5011
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Testing",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0019217306,
+      "mentions": [
+        {
+          "text": {
+            "content": "Testing",
+            "beginOffset": 1011
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Questions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0019164612,
+      "mentions": [
+        {
+          "text": {
+            "content": "Questions",
+            "beginOffset": 1132
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Bias Testing",
+      "type": "EVENT",
+      "metadata": {},
+      "salience": 0.0019039883,
+      "mentions": [
+        {
+          "text": {
+            "content": "Bias Testing",
+            "beginOffset": 1645
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Compliance Documentation",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.0018898261,
+      "mentions": [
+        {
+          "text": {
+            "content": "Compliance Documentation",
+            "beginOffset": 2064
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0018665052,
+      "mentions": [
+        {
+          "text": {
+            "content": "data",
+            "beginOffset": 3549
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI techniques",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0018488471,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI techniques",
+            "beginOffset": 1275
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Transparency",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0017844068,
+      "mentions": [
+        {
+          "text": {
+            "content": "Transparency",
+            "beginOffset": 1176
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "produce scores rankings classifications recommendations",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0017786549,
+      "mentions": [
+        {
+          "text": {
+            "content": "produce scores rankings classifications recommendations",
+            "beginOffset": 1412
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidates",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0017714693,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidates",
+            "beginOffset": 2460
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0017444831,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance documentation",
+            "beginOffset": 3658
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "audit",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0017410922,
+      "mentions": [
+        {
+          "text": {
+            "content": "audit",
+            "beginOffset": 1806
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias audits",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0017360938,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias audits",
+            "beginOffset": 2001
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "audits",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0017352218,
+      "mentions": [
+        {
+          "text": {
+            "content": "audits",
+            "beginOffset": 2030
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate access requests Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0016547315,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate access requests Vendor",
+            "beginOffset": 5077
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0016547315,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor",
+            "beginOffset": 4939
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "opt-outs Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0016547315,
+      "mentions": [
+        {
+          "text": {
+            "content": "opt-outs Vendor",
+            "beginOffset": 5157
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendors",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0016542936,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendors",
+            "beginOffset": 5720
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0016542936,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor",
+            "beginOffset": 5385
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0016542936,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor",
+            "beginOffset": 5450
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0016542936,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor",
+            "beginOffset": 5323
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "impact assessments",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0016441103,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact assessments",
+            "beginOffset": 2138
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "risk assessments",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0016433469,
+      "mentions": [
+        {
+          "text": {
+            "content": "risk assessments",
+            "beginOffset": 2207
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Responsiveness",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0016295962,
+      "mentions": [
+        {
+          "text": {
+            "content": "Responsiveness",
+            "beginOffset": 1066
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "audit",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0016009856,
+      "mentions": [
+        {
+          "text": {
+            "content": "audit",
+            "beginOffset": 3455
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "impact assessments",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0015176492,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact assessments",
+            "beginOffset": 3349
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "scoring",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014939308,
+      "mentions": [
+        {
+          "text": {
+            "content": "scoring",
+            "beginOffset": 3147
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias testing",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014898893,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias testing",
+            "beginOffset": 3182
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "effect Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0014808346,
+      "mentions": [
+        {
+          "text": {
+            "content": "effect Vendor",
+            "beginOffset": 5755
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014415678,
+      "mentions": [
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 2104
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014408983,
+      "mentions": [
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 2173
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "works",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.0014384593,
+      "mentions": [
+        {
+          "text": {
+            "content": "works",
+            "beginOffset": 937
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "decision-making",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014294434,
+      "mentions": [
+        {
+          "text": {
+            "content": "decision-making",
+            "beginOffset": 1244
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "product use AI machine learning",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014294434,
+      "mentions": [
+        {
+          "text": {
+            "content": "product use AI machine learning",
+            "beginOffset": 1199
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "computer vision",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014277674,
+      "mentions": [
+        {
+          "text": {
+            "content": "computer vision",
+            "beginOffset": 1307
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Candidate complaints",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014258887,
+      "mentions": [
+        {
+          "text": {
+            "content": "Candidate complaints",
+            "beginOffset": 5819
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "humans",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0014235356,
+      "mentions": [
+        {
+          "text": {
+            "content": "humans",
+            "beginOffset": 1481
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI logic",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014223272,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI logic",
+            "beginOffset": 1566
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate disclosures",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0014214116,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate disclosures",
+            "beginOffset": 2273
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "limitations",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0013866388,
+      "mentions": [
+        {
+          "text": {
+            "content": "limitations",
+            "beginOffset": 1621
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "results",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0013625342,
+      "mentions": [
+        {
+          "text": {
+            "content": "results",
+            "beginOffset": 3226
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Candidate Rights Support",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0013507693,
+      "mentions": [
+        {
+          "text": {
+            "content": "Candidate Rights Support",
+            "beginOffset": 2431
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "outputs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0013132651,
+      "mentions": [
+        {
+          "text": {
+            "content": "outputs",
+            "beginOffset": 3263
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "impact assessment documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.001312957,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact assessment documentation",
+            "beginOffset": 5592
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "human override capabilities",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0012876852,
+      "mentions": [
+        {
+          "text": {
+            "content": "human override capabilities",
+            "beginOffset": 2748
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "records",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0012757517,
+      "mentions": [
+        {
+          "text": {
+            "content": "records",
+            "beginOffset": 2301
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance records",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0012747048,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance records",
+            "beginOffset": 2411
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0012617361,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias",
+            "beginOffset": 5284
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Support",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0012500469,
+      "mentions": [
+        {
+          "text": {
+            "content": "Support",
+            "beginOffset": 3600
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "opt-outs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0012500469,
+      "mentions": [
+        {
+          "text": {
+            "content": "opt-outs",
+            "beginOffset": 3382
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "tools",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0012468728,
+      "mentions": [
+        {
+          "text": {
+            "content": "tools",
+            "beginOffset": 980
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI use",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.001199749,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI use",
+            "beginOffset": 2644
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Training",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0011985351,
+      "mentions": [
+        {
+          "text": {
+            "content": "Training",
+            "beginOffset": 2790
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "hiring process",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0011974145,
+      "mentions": [
+        {
+          "text": {
+            "content": "hiring process",
+            "beginOffset": 3007
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI processing",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0011863785,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI processing",
+            "beginOffset": 2482
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance questions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0011791897,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance questions",
+            "beginOffset": 3578
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance risk",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0011791897,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance risk",
+            "beginOffset": 3292
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Bias testing",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0011782112,
+      "mentions": [
+        {
+          "text": {
+            "content": "Bias testing",
+            "beginOffset": 4019
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "laws",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.001175111,
+      "mentions": [
+        {
+          "text": {
+            "content": "laws",
+            "beginOffset": 3431
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "commitments",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0011243426,
+      "mentions": [
+        {
+          "text": {
+            "content": "commitments",
+            "beginOffset": 3776
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "regulations",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.001117424,
+      "mentions": [
+        {
+          "text": {
+            "content": "regulations",
+            "beginOffset": 5738
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "employer",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0011081743,
+      "mentions": [
+        {
+          "text": {
+            "content": "employer",
+            "beginOffset": 5314
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "employer",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0011081743,
+      "mentions": [
+        {
+          "text": {
+            "content": "employer",
+            "beginOffset": 4958
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data use",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.001097907,
+      "mentions": [
+        {
+          "text": {
+            "content": "data use",
+            "beginOffset": 3516
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "sales process",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0010975963,
+      "mentions": [
+        {
+          "text": {
+            "content": "sales process",
+            "beginOffset": 3757
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI functionality transparency",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0010969958,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI functionality transparency",
+            "beginOffset": 3941
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "decision",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.001093832,
+      "mentions": [
+        {
+          "text": {
+            "content": "decision",
+            "beginOffset": 2705
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "representativeness",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0010927547,
+      "mentions": [
+        {
+          "text": {
+            "content": "representativeness",
+            "beginOffset": 2887
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "purposes",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.001092082,
+      "mentions": [
+        {
+          "text": {
+            "content": "purposes",
+            "beginOffset": 2983
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "training data quality",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0010917581,
+      "mentions": [
+        {
+          "text": {
+            "content": "training data quality",
+            "beginOffset": 3041
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "ML NLP",
+      "type": "CONSUMER_GOOD",
+      "metadata": {},
+      "salience": 0.001091442,
+      "mentions": [
+        {
+          "text": {
+            "content": "ML NLP",
+            "beginOffset": 3125
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "groups",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.0010876417,
+      "mentions": [
+        {
+          "text": {
+            "content": "groups",
+            "beginOffset": 1850
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "group",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.001087019,
+      "mentions": [
+        {
+          "text": {
+            "content": "group",
+            "beginOffset": 1907
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "language",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0010837965,
+      "mentions": [
+        {
+          "text": {
+            "content": "language",
+            "beginOffset": 2247
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias audit results",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0010376249,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias audit results",
+            "beginOffset": 1735
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0010017199,
+      "mentions": [
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 4907
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0009978064,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance",
+            "beginOffset": 6449
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "application",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00096102775,
+      "mentions": [
+        {
+          "text": {
+            "content": "application",
+            "beginOffset": 2660
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "NLP",
+      "type": "CONSUMER_GOOD",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Natural_language_processing",
+        "mid": "/m/05flf"
+      },
+      "salience": 0.00096058706,
+      "mentions": [
+        {
+          "text": {
+            "content": "NLP",
+            "beginOffset": 1303
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "AI model",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0009600552,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI model",
+            "beginOffset": 2832
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "mitigation steps",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000954188,
+      "mentions": [
+        {
+          "text": {
+            "content": "mitigation steps",
+            "beginOffset": 1947
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "results",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000941014,
+      "mentions": [
+        {
+          "text": {
+            "content": "results",
+            "beginOffset": 5294
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "outputs Documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00091876223,
+      "mentions": [
+        {
+          "text": {
+            "content": "outputs Documentation",
+            "beginOffset": 6288
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI Hiring Compliance Documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00091876223,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI Hiring Compliance Documentation",
+            "beginOffset": 5905
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "changes",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00088766543,
+      "mentions": [
+        {
+          "text": {
+            "content": "changes",
+            "beginOffset": 4931
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI functionality changes",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008874304,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI functionality changes",
+            "beginOffset": 5551
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "contract signing",
+      "type": "EVENT",
+      "metadata": {},
+      "salience": 0.00087944005,
+      "mentions": [
+        {
+          "text": {
+            "content": "contract signing",
+            "beginOffset": 3690
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "writing",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00087894796,
+      "mentions": [
+        {
+          "text": {
+            "content": "writing",
+            "beginOffset": 3791
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "audit availability",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008787101,
+      "mentions": [
+        {
+          "text": {
+            "content": "audit availability",
+            "beginOffset": 3988
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor Assessment Scorecard Rate",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008787101,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor Assessment Scorecard Rate",
+            "beginOffset": 3824
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias audit",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008431556,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias audit",
+            "beginOffset": 6166
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Best Practice Request",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0008409919,
+      "mentions": [
+        {
+          "text": {
+            "content": "Best Practice Request",
+            "beginOffset": 3636
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.00082624983,
+      "mentions": [
+        {
+          "text": {
+            "content": "Review",
+            "beginOffset": 5490
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data retention practices",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00082624983,
+      "mentions": [
+        {
+          "text": {
+            "content": "data retention practices",
+            "beginOffset": 5635
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.00082624983,
+      "mentions": [
+        {
+          "text": {
+            "content": "Review",
+            "beginOffset": 5540
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Criterion Weight Score",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00080920005,
+      "mentions": [
+        {
+          "text": {
+            "content": "Criterion Weight Score",
+            "beginOffset": 3905
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "impact",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00077523105,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact",
+            "beginOffset": 6314
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "NYC Local Law 144",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0007582491,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC Local Law 144",
+            "beginOffset": 1769
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "issues",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00075781473,
+      "mentions": [
+        {
+          "text": {
+            "content": "issues",
+            "beginOffset": 5797
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Representations",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00075375364,
+      "mentions": [
+        {
+          "text": {
+            "content": "Representations",
+            "beginOffset": 5214
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "regulations",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00075355405,
+      "mentions": [
+        {
+          "text": {
+            "content": "regulations",
+            "beginOffset": 5373
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "requirements",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00074951875,
+      "mentions": [
+        {
+          "text": {
+            "content": "requirements",
+            "beginOffset": 6541
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Bias",
+      "type": "OTHER",
+      "metadata": {
+        "mid": "/m/0b56z",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bias"
+      },
+      "salience": 0.00074532826,
+      "mentions": [
+        {
+          "text": {
+            "content": "Bias",
+            "beginOffset": 5792
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "NYC",
+      "type": "LOCATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/New_York_City",
+        "mid": "/m/02_286"
+      },
+      "salience": 0.00073861686,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC",
+            "beginOffset": 3489
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "explanations",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0007260102,
+      "mentions": [
+        {
+          "text": {
+            "content": "explanations",
+            "beginOffset": 2256
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Changes Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0007253024,
+      "mentions": [
+        {
+          "text": {
+            "content": "Changes Vendor",
+            "beginOffset": 4791
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "disclosure obligations Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0007253024,
+      "mentions": [
+        {
+          "text": {
+            "content": "disclosure obligations Vendor",
+            "beginOffset": 4496
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Audit Rights Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0007253024,
+      "mentions": [
+        {
+          "text": {
+            "content": "Audit Rights Vendor",
+            "beginOffset": 4423
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI functionality Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0007253024,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI functionality Vendor",
+            "beginOffset": 4862
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data exports",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00072510086,
+      "mentions": [
+        {
+          "text": {
+            "content": "data exports",
+            "beginOffset": 2390
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Colorado AI Act",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00070278166,
+      "mentions": [
+        {
+          "text": {
+            "content": "Colorado AI Act",
+            "beginOffset": 2122
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0007005663,
+      "mentions": [
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 6584
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Colorado",
+      "type": "LOCATION",
+      "metadata": {
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Colorado",
+        "mid": "/m/01n4w"
+      },
+      "salience": 0.00069673837,
+      "mentions": [
+        {
+          "text": {
+            "content": "Colorado",
+            "beginOffset": 3422
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "outputs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00069157686,
+      "mentions": [
+        {
+          "text": {
+            "content": "outputs",
+            "beginOffset": 6120
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "functionality",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00069157686,
+      "mentions": [
+        {
+          "text": {
+            "content": "functionality",
+            "beginOffset": 6098
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor Contact",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00069157686,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor Contact",
+            "beginOffset": 5953
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "capability",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0006770274,
+      "mentions": [
+        {
+          "text": {
+            "content": "capability",
+            "beginOffset": 5133
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "information",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0006688543,
+      "mentions": [
+        {
+          "text": {
+            "content": "information",
+            "beginOffset": 2626
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "inquiries",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0006619944,
+      "mentions": [
+        {
+          "text": {
+            "content": "inquiries",
+            "beginOffset": 5204
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "compliance failures",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0006618191,
+      "mentions": [
+        {
+          "text": {
+            "content": "compliance failures",
+            "beginOffset": 5420
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor Management",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0006618191,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor Management",
+            "beginOffset": 5465
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Contract renewal",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0006618191,
+      "mentions": [
+        {
+          "text": {
+            "content": "Contract renewal",
+            "beginOffset": 5846
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "updates",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0006618191,
+      "mentions": [
+        {
+          "text": {
+            "content": "updates",
+            "beginOffset": 5784
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "information",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00065827486,
+      "mentions": [
+        {
+          "text": {
+            "content": "information",
+            "beginOffset": 6412
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "candidate opt-outs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00065827486,
+      "mentions": [
+        {
+          "text": {
+            "content": "candidate opt-outs",
+            "beginOffset": 6388
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Information",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00065827486,
+      "mentions": [
+        {
+          "text": {
+            "content": "Information",
+            "beginOffset": 6235
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0006572609,
+      "mentions": [
+        {
+          "text": {
+            "content": "Vendor",
+            "beginOffset": 4668
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "California",
+      "type": "LOCATION",
+      "metadata": {
+        "mid": "/m/01n7q",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/California"
+      },
+      "salience": 0.0006486997,
+      "mentions": [
+        {
+          "text": {
+            "content": "California",
+            "beginOffset": 3407
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "California CCPA",
+      "type": "ORGANIZATION",
+      "metadata": {
+        "mid": "/g/11fhr0_x97",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act"
+      },
+      "salience": 0.00064064737,
+      "mentions": [
+        {
+          "text": {
+            "content": "California CCPA",
+            "beginOffset": 2191
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Hiring",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00062047713,
+      "mentions": [
+        {
+          "text": {
+            "content": "Hiring",
+            "beginOffset": 6711
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "questions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000613036,
+      "mentions": [
+        {
+          "text": {
+            "content": "questions",
+            "beginOffset": 6631
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.00057558785,
+      "mentions": [
+        {
+          "text": {
+            "content": "Documentation",
+            "beginOffset": 4407
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Employer",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.0005699711,
+      "mentions": [
+        {
+          "text": {
+            "content": "Employer",
+            "beginOffset": 4730
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "bias",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00055297796,
+      "mentions": [
+        {
+          "text": {
+            "content": "bias",
+            "beginOffset": 4557
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "risk assessment purposes",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000527263,
+      "mentions": [
+        {
+          "text": {
+            "content": "risk assessment purposes",
+            "beginOffset": 6321
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "part",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000527263,
+      "mentions": [
+        {
+          "text": {
+            "content": "part",
+            "beginOffset": 5971
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "AI hiring compliance program",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000527263,
+      "mentions": [
+        {
+          "text": {
+            "content": "AI hiring compliance program",
+            "beginOffset": 5983
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Black box",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000519593,
+      "mentions": [
+        {
+          "text": {
+            "content": "Black box",
+            "beginOffset": 3273
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Unresponsive",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000519593,
+      "mentions": [
+        {
+          "text": {
+            "content": "Unresponsive",
+            "beginOffset": 3562
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "impact assessments",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00050070306,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact assessments",
+            "beginOffset": 4649
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "employer",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.000485654,
+      "mentions": [
+        {
+          "text": {
+            "content": "employer",
+            "beginOffset": 4638
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "employer",
+      "type": "PERSON",
+      "metadata": {},
+      "salience": 0.000485654,
+      "mentions": [
+        {
+          "text": {
+            "content": "employer",
+            "beginOffset": 4485
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Sample Request Letter Subject",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00047461592,
+      "mentions": [
+        {
+          "text": {
+            "content": "Sample Request Letter Subject",
+            "beginOffset": 5874
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data inputs",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00046306898,
+      "mentions": [
+        {
+          "text": {
+            "content": "data inputs",
+            "beginOffset": 6253
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "specifications",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00046306898,
+      "mentions": [
+        {
+          "text": {
+            "content": "specifications",
+            "beginOffset": 6356
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "disclosure template",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00046306898,
+      "mentions": [
+        {
+          "text": {
+            "content": "disclosure template",
+            "beginOffset": 6200
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Product Name",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00046306898,
+      "mentions": [
+        {
+          "text": {
+            "content": "Product Name",
+            "beginOffset": 6062
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Description",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00046306898,
+      "mentions": [
+        {
+          "text": {
+            "content": "Description",
+            "beginOffset": 6077
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00044981382,
+      "mentions": [
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 6044
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "documentation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00043898638,
+      "mentions": [
+        {
+          "text": {
+            "content": "documentation",
+            "beginOffset": 4456
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "NYC Local Law 144 Vendor",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.00042851025,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC Local Law 144 Vendor",
+            "beginOffset": 4584
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "impact ratios",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00042356353,
+      "mentions": [
+        {
+          "text": {
+            "content": "impact ratios",
+            "beginOffset": 1884
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "capability",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0003889904,
+      "mentions": [
+        {
+          "text": {
+            "content": "capability",
+            "beginOffset": 4094
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Data access",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0003889904,
+      "mentions": [
+        {
+          "text": {
+            "content": "Data access",
+            "beginOffset": 4117
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "questions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0003889904,
+      "mentions": [
+        {
+          "text": {
+            "content": "questions",
+            "beginOffset": 4174
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "changes",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.0003889904,
+      "mentions": [
+        {
+          "text": {
+            "content": "changes",
+            "beginOffset": 4851
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Contract Provisions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00038289957,
+      "mentions": [
+        {
+          "text": {
+            "content": "Contract Provisions",
+            "beginOffset": 4340
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "NYC Local Law 144 Guide Colorado AI Act Guide Free Compliance Scorecard",
+      "type": "WORK_OF_ART",
+      "metadata": {},
+      "salience": 0.0003664813,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC Local Law 144 Guide Colorado AI Act Guide Free Compliance Scorecard",
+            "beginOffset": 6719
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Data privacy practices",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00036216612,
+      "mentions": [
+        {
+          "text": {
+            "content": "Data privacy practices",
+            "beginOffset": 4196
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "NYC Local Law 144 Illinois HB 3773 Colorado AI Act",
+      "type": "ORGANIZATION",
+      "metadata": {},
+      "salience": 0.00034155234,
+      "mentions": [
+        {
+          "text": {
+            "content": "NYC Local Law 144 Illinois HB 3773 Colorado AI Act",
+            "beginOffset": 6465
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Documentation quality",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00033029437,
+      "mentions": [
+        {
+          "text": {
+            "content": "Documentation quality",
+            "beginOffset": 4052
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Responsiveness",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00033029437,
+      "mentions": [
+        {
+          "text": {
+            "content": "Responsiveness",
+            "beginOffset": 4156
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "provisions",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00033029437,
+      "mentions": [
+        {
+          "text": {
+            "content": "provisions",
+            "beginOffset": 4374
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "records",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000296666,
+      "mentions": [
+        {
+          "text": {
+            "content": "records",
+            "beginOffset": 4701
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "data access",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.000296666,
+      "mentions": [
+        {
+          "text": {
+            "content": "data access",
+            "beginOffset": 4622
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "Score interpretation",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00029007738,
+      "mentions": [
+        {
+          "text": {
+            "content": "Score interpretation",
+            "beginOffset": 4245
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor agreements",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00029007738,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor agreements",
+            "beginOffset": 4388
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "vendor compliance Notification",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00029007738,
+      "mentions": [
+        {
+          "text": {
+            "content": "vendor compliance Notification",
+            "beginOffset": 4758
+          },
+          "type": "COMMON"
+        }
+      ]
+    },
+    {
+      "name": "California CCPA ADMT",
+      "type": "OTHER",
+      "metadata": {},
+      "salience": 0.00027356617,
+      "mentions": [
+        {
+          "text": {
+            "content": "California CCPA ADMT",
+            "beginOffset": 6520
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "Related Resources Building a Compliance Program What Counts",
+      "type": "LOCATION",
+      "metadata": {},
+      "salience": 0.00027335776,
+      "mentions": [
+        {
+          "text": {
+            "content": "Related Resources Building a Compliance Program What Counts",
+            "beginOffset": 6642
+          },
+          "type": "PROPER"
+        }
+      ]
+    },
+    {
+      "name": "2.0",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "2.000000"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "2.0",
+            "beginOffset": 4305
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "2.0",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "2.000000"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "2.0",
+            "beginOffset": 4330
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "5"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "5",
+            "beginOffset": 3876
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "5"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "5",
+            "beginOffset": 4219
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "5"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "5",
+            "beginOffset": 3930
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "5"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "5",
+            "beginOffset": 3891
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "3.0",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "3.000000"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "3.0",
+            "beginOffset": 4284
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "10",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "10"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "10",
+            "beginOffset": 4144
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "144",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "144"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "144",
+            "beginOffset": 4598
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "10",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "10"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "10",
+            "beginOffset": 4105
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "15",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "15"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "15",
+            "beginOffset": 4074
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "1",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "1"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "1",
+            "beginOffset": 3874
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "2.9",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "2.900000"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "2.9",
+            "beginOffset": 4309
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "100",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "100"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "100",
+            "beginOffset": 4236
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "4"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "4",
+            "beginOffset": 4722
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "20",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "20"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "20",
+            "beginOffset": 4007
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "5"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "5",
+            "beginOffset": 5004
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "4.0",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "4.000000"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "4.0",
+            "beginOffset": 4267
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "3773",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "3773"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "3773",
+            "beginOffset": 6495
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "1",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "1"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "1",
+            "beginOffset": 3928
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "60",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "60"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "60",
+            "beginOffset": 4827
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "two",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "2"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "two",
+            "beginOffset": 718
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "10",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "10"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "10",
+            "beginOffset": 4184
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "144",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "144"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "144",
+            "beginOffset": 6479
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "15",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "15"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "15",
+            "beginOffset": 4040
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "15",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "15"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "15",
+            "beginOffset": 3971
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "3.9",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "3.900000"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "3.9",
+            "beginOffset": 4288
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "144",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "144"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "144",
+            "beginOffset": 1783
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "1",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "1"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "1",
+            "beginOffset": 3884
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "144",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "144"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "144",
+            "beginOffset": 6733
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "name": "four",
+      "type": "NUMBER",
+      "metadata": {
+        "value": "4"
+      },
+      "salience": 0,
+      "mentions": [
+        {
+          "text": {
+            "content": "four",
+            "beginOffset": 877
+          },
+          "type": "TYPE_UNKNOWN"
+        }
+      ]
+    }
+  ],
+  "entity_count": 276,
+  "categories": [
+    {
+      "name": "/Computers & Electronics",
+      "confidence": 0.68
+    },
+    {
+      "name": "/Business & Industrial/Business Operations",
+      "confidence": 0.63
+    }
+  ],
+  "language": "en"
+}

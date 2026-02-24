@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react"
+import { ArticleSchema } from "@/components/article-schema"
 
 interface ArticleLayoutProps {
   title: string
@@ -21,6 +22,13 @@ export function ArticleLayout({
 }: ArticleLayoutProps) {
   return (
     <div className="py-16">
+      <ArticleSchema
+        title={title}
+        description={description}
+        datePublished={publishedDate}
+        authorName="Devyn Bartell"
+        category={category}
+      />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <div className="mb-8">
