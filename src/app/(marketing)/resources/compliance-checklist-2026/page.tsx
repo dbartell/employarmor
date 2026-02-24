@@ -1,7 +1,35 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
 import { AuthorByline } from "@/components/author-byline"
 import { LegalDisclaimer } from "@/components/legal-disclaimer"
+import { FAQSchema } from "@/components/faq-schema"
 import Link from "next/link"
+
+const faqs = [
+  {
+    question: "How long does full implementation take?",
+    answer: "Minimum 8-12 weeks if starting from scratch. Bias audits (NYC) alone can take 4-6 weeks. Vendor coordination, training development, and system integration add time. Start immediately to meet January/February 2026 effective dates.",
+  },
+  {
+    question: "What if we can't get bias audits from our vendors in time?",
+    answer: "Commission independent audits from third-party firms. Several audit providers serve multiple employers using the same tools. Alternatively, discontinue using unaudited tools for NYC positions until audits are available.",
+  },
+  {
+    question: "Do we need separate processes for each state, or can we use one universal approach?",
+    answer: "<strong>Recommended: Universal baseline + state-specific addenda.</strong> Create compliant notices and processes that satisfy the most stringent requirements (NYC, Colorado), then add state-specific elements where needed. This approach is simpler to manage than maintaining separate processes.",
+  },
+  {
+    question: "What happens if we miss a compliance deadline?",
+    answer: "Penalties vary by jurisdiction: <ul><li><strong>NYC:</strong> $500 first violation, up to $1,500 per subsequent violation</li><li><strong>Illinois:</strong> Civil rights violations under IHRA (compensatory + punitive damages)</li><li><strong>Texas:</strong> AG enforcement (penalties TBD), plus Chapter 21/CUBI liability</li><li><strong>Colorado:</strong> AG enforcement beginning 2026, private action from 2029</li><li><strong>California:</strong> CPRA penalties up to $7,500 per intentional violation</li></ul><p>Beyond penalties, non-compliance creates discrimination liability, reputational risk, and candidate trust issues. Prioritize compliance to avoid enforcement actions.</p>",
+  },
+  {
+    question: "Can we continue using AI tools while working toward compliance?",
+    answer: "<strong>Depends on the tool and jurisdiction:</strong><ul><li><strong>NYC:</strong> Cannot use AEDTs without current bias audit and proper notice</li><li><strong>Other jurisdictions:</strong> Can continue with proper disclosure while completing assessments</li><li><strong>High-risk tools:</strong> Consider pausing tools with known bias until compliant</li></ul><p>Document good-faith compliance efforts to demonstrate intent to comply if questioned.</p>",
+  },
+  {
+    question: "Who should own AI hiring compliance in our organization?",
+    answer: "<strong>Cross-functional ownership works best:</strong><ul><li><strong>HR/Talent Acquisition:</strong> Day-to-day implementation and training</li><li><strong>Legal/Compliance:</strong> Regulatory interpretation and risk management</li><li><strong>IT/Security:</strong> Technical implementation and data protection</li><li><strong>Executive sponsor:</strong> CHRO or VP HR for leadership support and budget</li></ul><p>Designate a compliance project manager to coordinate across teams and track progress.</p>",
+  },
+]
 
 export default function ComplianceChecklist2026Page() {
   return (
@@ -12,6 +40,7 @@ export default function ComplianceChecklist2026Page() {
       readTime="22 min read"
       publishedDate="February 23, 2026"
     >
+      <FAQSchema faqs={faqs} />
       <AuthorByline publishDate="2026-02-23" />
 
       <p>

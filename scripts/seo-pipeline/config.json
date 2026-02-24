@@ -1,0 +1,35 @@
+{
+  "domain": "employarmor.com",
+  "seedKeywords": [
+    "AI hiring compliance",
+    "AI bias audit",
+    "AEDT compliance",
+    "automated employment decision tool",
+    "AI hiring law",
+    "NYC Local Law 144",
+    "Illinois HB 3773",
+    "Colorado AI Act hiring",
+    "AI hiring disclosure",
+    "bias audit software"
+  ],
+  "competitors": [
+    "clio.com",
+    "smokeball.com",
+    "littler.com",
+    "jacksonlewis.com",
+    "shrm.org"
+  ],
+  "rateLimits": {
+    "keywordsEverywhere": {
+      "requestsPerMinute": 60,
+      "delayMs": 1000
+    },
+    "dataForSEO": {
+      "requestsPerMinute": 20,
+      "delayMs": 3000
+    }
+  },
+  "outputDir": "/Users/henry/projects/hireshield/seo-analysis",
+  "projectDir": "/Users/henry/projects/hireshield",
+  "marketingPagesDir": "/Users/henry/projects/hireshield/src/app/(marketing)"
+}

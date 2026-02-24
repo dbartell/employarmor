@@ -3,12 +3,48 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
 import { AuthorByline } from "@/components/author-byline"
 import { LegalDisclaimer } from "@/components/legal-disclaimer"
+import { FAQSchema } from "@/components/faq-schema"
 import Link from "next/link"
 
 export const metadata = {
   title: "AI Hiring Compliance Guide 2026: Complete Employer Handbook | EmployArmor",
   description: "The definitive guide to AI hiring compliance in 2026. Navigate federal regulations, state laws, bias audits, and disclosure requirements across all 50 states.",
 }
+
+const faqs = [
+  {
+    question: "If we're a small company, do we really need to worry about this?",
+    answer: "Yes. Most AI hiring laws apply regardless of company size. If you have even one employee in a regulated jurisdiction and use AI in hiring, you're covered. Small companies are not exempt.",
+  },
+  {
+    question: "What if we only use AI for initial resume screening?",
+    answer: "Resume screening AI is explicitly covered by most laws. In fact, it's one of the highest-risk applications because it makes binary \"in or out\" decisions that can produce severe disparate impact.",
+  },
+  {
+    question: "Can we just turn off our AI tools to avoid compliance?",
+    answer: "You can, but you'd be giving up significant efficiency gains. A better approach: invest in compliance so you can use AI responsibly and legally. The companies winning the talent war are using AI—compliantly.",
+  },
+  {
+    question: "How do we know if our current AI vendor is compliant?",
+    answer: "Ask them directly. Request bias audit results, validation studies, and a written compliance representation. If they can't provide documentation, that's a red flag. Consider switching vendors or conducting your own independent audit.",
+  },
+  {
+    question: "What happens if a bias audit reveals our tool is discriminatory?",
+    answer: "You have several options: (1) Stop using the tool, (2) Modify the tool to reduce disparate impact, (3) Demonstrate job-relatedness and business necessity, (4) Accept the risk and prepare for potential legal challenges. This is a business and legal decision that should involve counsel.",
+  },
+  {
+    question: "Do internal promotions and transfers require the same AI compliance as external hiring?",
+    answer: "Yes, in most jurisdictions. NYC Local Law 144 explicitly covers \"promotion or selection for hire.\" Colorado's AI Act applies to \"consequential decisions\" affecting employment status, which includes promotions. Illinois HB 3773 is less clear on internal moves, but EEOC guidance emphasizes that AI used in any employment decision (hiring, promotion, termination) carries discrimination risk. Best practice: apply the same transparency, disclosure, and validation standards to internal AI use as external. Many employers mistakenly assume internal moves have lower scrutiny—this is wrong and creates legal exposure. Employees have more knowledge of your processes and greater access to evidence for discrimination claims.",
+  },
+  {
+    question: "How often should we re-audit our AI tools?",
+    answer: "<strong>Minimum legal requirements:</strong> NYC requires annual bias audits (within 12 months of prior audit). California AB 2930 requires annual bias testing. Colorado requires periodic reassessment but doesn't specify frequency. <strong>Best practice:</strong> Re-audit annually <em>and</em> whenever the AI vendor releases algorithm updates, you change how the tool is used (e.g., different screening criteria), or you add new AI features. Significant candidate pool changes (expanding to new geographies, targeting different talent segments) also warrant fresh validation. Budget 10-15% of your annual hiring tech spend for ongoing compliance and auditing. For most mid-size companies, this means $20,000-50,000 annually.",
+  },
+  {
+    question: "Can we use AI from multiple vendors in our hiring process without separate compliance for each?",
+    answer: "No. Each AI tool requires separate compliance analysis. If you use LinkedIn Recruiter for sourcing, HireVue for video interviews, and Codility for technical assessments, that's three separate AI systems—each requiring its own disclosure, bias audit, and impact assessment. The cumulative effect of multiple AI tools also matters: even if each tool individually passes bias tests, their combined use might produce adverse impact. Example: AI resume screener passes audit, but when combined with AI video interview, Black candidates are disproportionately filtered out. Conduct \"stack testing\" to evaluate your entire AI-augmented hiring process, not just individual tools in isolation.",
+  },
+]
 
 export default function AIHiringComplianceGuide2026Page() {
   return (
@@ -19,6 +55,7 @@ export default function AIHiringComplianceGuide2026Page() {
       readTime="18 min read"
       publishedDate="February 23, 2026"
     >
+      <FAQSchema faqs={faqs} />
       <AuthorByline publishDate="2026-02-23" />
 
       <p>

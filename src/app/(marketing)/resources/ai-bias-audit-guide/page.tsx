@@ -3,12 +3,44 @@
 import { ArticleLayout } from "@/components/marketing/ArticleLayout"
 import { AuthorByline } from "@/components/author-byline"
 import { LegalDisclaimer } from "@/components/legal-disclaimer"
+import { FAQSchema } from "@/components/faq-schema"
 import Link from "next/link"
 
 export const metadata = {
   title: "Do I Need an AI Bias Audit? Complete Guide 2026 | EmployArmor",
   description: "Comprehensive guide to AI bias audits for hiring. Learn requirements, costs, process, and when audits are mandatory vs. recommended.",
 }
+
+const faqs = [
+  {
+    question: "How often do bias audits need to be conducted?",
+    answer: "NYC Local Law 144 requires annual audits. California AB 2930 requires annual testing. Even if not legally required, annual audits are best practice—AI models change, and candidate demographics shift.",
+  },
+  {
+    question: "Can the same auditor be used year after year?",
+    answer: "Yes, as long as they remain independent (not employed by you or your AI vendor). Using the same auditor provides continuity but consider rotating auditors every 3-5 years for fresh perspective.",
+  },
+  {
+    question: "What if we don't have enough candidates to produce statistically valid results?",
+    answer: "Small sample sizes (under 30-50 per demographic group) make statistical analysis difficult. Options: (1) Accumulate data over longer time period, (2) Combine similar job categories, (3) Use vendor audit data if available and relevant.",
+  },
+  {
+    question: "Do bias audits cover disability status?",
+    answer: "Most audits focus on race, ethnicity, sex, and sometimes age because employers collect this data via EEO forms. Disability data is harder to collect (can't ask pre-offer). However, ADA compliance may require separate accessibility testing of AI tools.",
+  },
+  {
+    question: "What happens if we fail an audit?",
+    answer: "\"Failing\" means the audit revealed adverse impact. You're not legally required to stop using the tool, but you should either: (1) Discontinue it, (2) Modify it to reduce bias, (3) Conduct validation study to demonstrate job-relatedness, or (4) Accept the litigation risk. Consult employment counsel.",
+  },
+  {
+    question: "Can we conduct internal bias audits instead of hiring external auditors?",
+    answer: "Not for NYC Local Law 144—it explicitly requires an \"independent auditor\" (someone not employed by you or your AI vendor). However, internal audits are valuable supplements. Many employers conduct quarterly internal impact monitoring and commission external audits annually to satisfy legal requirements. Internal audits let you catch problems early before external auditors find them. Best practice: internal monitoring quarterly, external audit annually. Budget roughly $5,000-10,000 for internal staff time per audit cycle, plus $15,000-30,000 for annual external audit.",
+  },
+  {
+    question: "Do we need separate audits for each AI tool, or can one audit cover multiple tools?",
+    answer: "Separate audits for each tool, especially if they serve different functions (resume screening vs. video interview vs. skills assessment). Each AI model has unique bias characteristics. However, you can often negotiate package pricing with auditors when auditing multiple tools simultaneously. Some auditors offer 20-30% discounts for multi-tool engagements. Additionally, consider \"stack testing\"—evaluating the cumulative impact of multiple AI tools used sequentially (e.g., AI resume screen → AI video interview). Individual tools may pass bias tests, but combined use might produce adverse impact.",
+  },
+]
 
 export default function AIBiasAuditGuidePage() {
   return (
@@ -19,6 +51,7 @@ export default function AIBiasAuditGuidePage() {
       readTime="11 min read"
       publishedDate="February 23, 2026"
     >
+      <FAQSchema faqs={faqs} />
       <AuthorByline publishDate="2026-02-23" />
 
       <p>
