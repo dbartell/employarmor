@@ -4,7 +4,6 @@ import { getMyEnrollments } from '@/lib/actions/training-modules'
 import { getRecommendedModules } from '@/lib/actions/training-triggers'
 import PersonalTrainingClient from './personal-training-client'
 import { checkSubscription } from '@/lib/subscription'
-import { Paywall } from '@/components/paywall'
 
 export default async function PersonalTrainingPage() {
   const supabase = await createClient()
@@ -34,17 +33,14 @@ export default async function PersonalTrainingPage() {
     recommended = recs || []
   }
 
-  const content = (
+  // Employees get soft lock — they see assignments but can't start lessons
+  // This creates internal pressure for the admin to subscribe
+  return (
     <PersonalTrainingClient 
       enrollments={enrollments} 
       userId={user.id}
       recommendedModules={recommended}
+      subscriptionActive={subscription.active}
     />
-  )
-
-  return (
-    <Paywall hasSubscription={subscription.active} plan={subscription.plan}>
-      {content}
-    </Paywall>
   )
 }

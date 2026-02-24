@@ -62,6 +62,7 @@ interface Props {
   enrollments: Enrollment[]
   userId: string
   recommendedModules: RecommendedModule[]
+  subscriptionActive?: boolean
 }
 
 const iconMap: { [key: string]: any } = {
@@ -73,7 +74,7 @@ const iconMap: { [key: string]: any } = {
   'GraduationCap': GraduationCap,
 }
 
-export default function PersonalTrainingClient({ enrollments, userId, recommendedModules }: Props) {
+export default function PersonalTrainingClient({ enrollments, userId, recommendedModules, subscriptionActive = true }: Props) {
   const router = useRouter()
   const [expandedModule, setExpandedModule] = useState<string | null>(null)
   const [acknowledgmentModal, setAcknowledgmentModal] = useState(false)
@@ -94,7 +95,15 @@ export default function PersonalTrainingClient({ enrollments, userId, recommende
     trackEvent('training_personal_view', 'training', 'personal_dashboard')
   }, [])
 
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
+
   const handleStartContinue = async (enrollment: Enrollment) => {
+    // Soft lock: employees can see assignments but can't start without active subscription
+    if (!subscriptionActive) {
+      setShowSubscriptionModal(true)
+      trackEvent('training_subscription_gate', 'training', enrollment.module?.title || 'unknown')
+      return
+    }
     if (enrollment.status === 'not_started') {
       await updateProgress(enrollment.id, 1)
       // Track module start
@@ -182,6 +191,42 @@ export default function PersonalTrainingClient({ enrollments, userId, recommende
 
   return (
     <div className="p-6 md:p-8 max-w-4xl mx-auto">
+      {/* Subscription Soft Lock Modal */}
+      <Dialog open={showSubscriptionModal} onOpenChange={setShowSubscriptionModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Clock className="w-6 h-6 text-blue-600" />
+            </div>
+            <DialogTitle className="text-center">Training Not Yet Available</DialogTitle>
+            <DialogDescription className="text-center text-base pt-2">
+              Your organization&apos;s subscription is being set up. Once activated, you&apos;ll be able to complete this training and earn your compliance certification.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="bg-gray-50 rounded-lg p-4 mt-2">
+            <p className="text-sm text-gray-600 text-center">
+              Contact your administrator to activate your organization&apos;s EmployArmor subscription.
+            </p>
+          </div>
+          <div className="flex justify-center mt-4">
+            <Button variant="outline" onClick={() => setShowSubscriptionModal(false)}>
+              Got it
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Subscription Notice Banner */}
+      {!subscriptionActive && (
+        <div className="mb-6 bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-center gap-3">
+          <Clock className="w-5 h-5 text-amber-600 flex-shrink-0" />
+          <div>
+            <p className="text-sm font-medium text-amber-900">Subscription Required</p>
+            <p className="text-sm text-amber-700">Your training modules are ready — ask your admin to activate your organization&apos;s subscription to begin.</p>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="mb-8 text-center">
         <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
