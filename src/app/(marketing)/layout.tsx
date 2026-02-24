@@ -196,6 +196,12 @@ function MobileMenu() {
   const [showStates, setShowStates] = useState(false)
   const [showResources, setShowResources] = useState(false)
 
+  const closeMenu = () => {
+    setIsOpen(false)
+    setShowStates(false)
+    setShowResources(false)
+  }
+
   return (
     <div className="md:hidden">
       <button
@@ -225,11 +231,11 @@ function MobileMenu() {
             {showStates && (
               <div className="pl-4 space-y-1">
                 {stateAILaws.map((state) => (
-                  <Link key={state.href} href={state.href} className="block py-1.5 text-sm text-gray-600 hover:text-gray-900">
+                  <Link key={state.href} href={state.href} onClick={closeMenu} className="block py-1.5 text-sm text-gray-600 hover:text-gray-900">
                     {state.name} <span className="text-gray-400">— {state.law}</span>
                   </Link>
                 ))}
-                <Link href="/compliance" className="block py-1.5 text-sm text-blue-600 font-medium">
+                <Link href="/compliance" onClick={closeMenu} className="block py-1.5 text-sm text-blue-600 font-medium">
                   View All →
                 </Link>
               </div>
@@ -245,7 +251,7 @@ function MobileMenu() {
             {showResources && (
               <div className="pl-4 space-y-1">
                 {resources.map((item) => (
-                  <Link key={item.href} href={item.href} className="block py-1.5 text-sm text-gray-600 hover:text-gray-900">
+                  <Link key={item.href} href={item.href} onClick={closeMenu} className="block py-1.5 text-sm text-gray-600 hover:text-gray-900">
                     {item.name}
                   </Link>
                 ))}
@@ -253,8 +259,8 @@ function MobileMenu() {
             )}
 
             <div className="pt-2 border-t space-y-2">
-              <Link href="/login" className="block py-2 text-gray-700">Log in</Link>
-              <Link href="/scan" className="block py-2 text-blue-600 font-semibold">Free Compliance Score</Link>
+              <Link href="/login" onClick={closeMenu} className="block py-2 text-gray-700">Log in</Link>
+              <Link href="/scan" onClick={closeMenu} className="block py-2 text-blue-600 font-semibold">Free Compliance Score</Link>
             </div>
           </div>
         </div>

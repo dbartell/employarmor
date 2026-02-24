@@ -1,202 +1,268 @@
 {
-  "timestamp": "2026-02-23T16:01:10.035Z",
+  "timestamp": "2026-02-24T00:01:16.821Z",
   "baseUrl": "https://employarmor.vercel.app",
-  "scenario": "all",
-  "totalScreenshots": 24,
+  "scenariosRun": [
+    "onboarding",
+    "compliance",
+    "portal",
+    "candidate",
+    "governance"
+  ],
+  "totalScreenshots": 28,
   "bugs": [],
   "errors": [],
   "results": [
     {
       "step": 1,
-      "name": "homepage",
-      "filename": "01-homepage.png",
-      "description": "Marketing homepage",
-      "url": "https://employarmor.vercel.app/",
-      "size": 113407
-    },
-    {
-      "step": 2,
-      "name": "scan-states",
-      "filename": "02-scan-states.png",
-      "description": "Scan step 1: State selection",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 275969
-    },
-    {
-      "step": 3,
-      "name": "scan-states-selected",
-      "filename": "03-scan-states-selected.png",
-      "description": "States selected: IL, CA, CO",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 278068
-    },
-    {
-      "step": 4,
-      "name": "scan-employees",
-      "filename": "04-scan-employees.png",
-      "description": "Scan step 2: Employee count",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 268550
-    },
-    {
-      "step": 5,
-      "name": "scan-employees-selected",
-      "filename": "05-scan-employees-selected.png",
-      "description": "Selected 51-100 employees",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 268743
-    },
-    {
-      "step": 6,
-      "name": "scan-tools",
-      "filename": "06-scan-tools.png",
-      "description": "Scan step 3: Tool selection",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 270785
-    },
-    {
-      "step": 7,
-      "name": "scan-tools-selected",
-      "filename": "07-scan-tools-selected.png",
-      "description": "Selected tools: LinkedIn Recruiter, HireVue, Greenhouse",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 270713
-    },
-    {
-      "step": 8,
-      "name": "scan-email",
-      "filename": "08-scan-email.png",
-      "description": "Scan step 4: Email capture",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 281153
-    },
-    {
-      "step": 9,
-      "name": "scan-email-filled",
-      "filename": "09-scan-email-filled.png",
-      "description": "Email entered",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 281912
-    },
-    {
-      "step": 10,
-      "name": "scan-results",
-      "filename": "10-scan-results.png",
-      "description": "Scan results",
-      "url": "https://employarmor.vercel.app/scan",
-      "size": 255415
-    },
-    {
-      "step": 11,
-      "name": "login-page",
-      "filename": "11-login-page.png",
-      "description": "Login page",
-      "url": "https://employarmor.vercel.app/login",
-      "size": 47026
-    },
-    {
-      "step": 12,
-      "name": "login-filled",
-      "filename": "12-login-filled.png",
-      "description": "Login credentials entered",
-      "url": "https://employarmor.vercel.app/login",
-      "size": 49132
-    },
-    {
-      "step": 13,
-      "name": "post-login",
-      "filename": "13-post-login.png",
-      "description": "After login — landed on https://employarmor.vercel.app/dashboard",
-      "url": "https://employarmor.vercel.app/dashboard",
-      "size": 366124
-    },
-    {
-      "step": 14,
-      "name": "page-dashboard",
-      "filename": "14-page-dashboard.png",
-      "description": "Dashboard — compliance agent overview",
+      "name": "dashboard",
+      "filename": "001-onboarding-dashboard.png",
+      "description": "Admin dashboard with compliance score",
+      "scenario": "onboarding",
       "url": "https://employarmor.vercel.app/dashboard",
       "size": 366153
     },
     {
-      "step": 15,
-      "name": "page-employees",
-      "filename": "15-page-employees.png",
-      "description": "Team — employee management",
+      "step": 2,
+      "name": "employees",
+      "filename": "002-onboarding-employees.png",
+      "description": "Employee management page",
+      "scenario": "onboarding",
       "url": "https://employarmor.vercel.app/employees",
-      "size": 106635
+      "size": 119317
     },
     {
-      "step": 16,
-      "name": "page-tools",
-      "filename": "16-page-tools.png",
-      "description": "Tool Registry — tracked AI tools",
+      "step": 3,
+      "name": "tools",
+      "filename": "003-onboarding-tools.png",
+      "description": "AI tool catalog",
+      "scenario": "onboarding",
       "url": "https://employarmor.vercel.app/tools",
       "size": 113091
     },
     {
-      "step": 17,
-      "name": "page-approvals",
-      "filename": "17-page-approvals.png",
-      "description": "Approvals — tool request workflow",
+      "step": 4,
+      "name": "approvals",
+      "filename": "004-onboarding-approvals.png",
+      "description": "Tool approval queue",
+      "scenario": "onboarding",
       "url": "https://employarmor.vercel.app/approvals",
       "size": 86790
     },
     {
-      "step": 18,
-      "name": "page-audit",
-      "filename": "18-page-audit.png",
-      "description": "Risk Assessment",
+      "step": 5,
+      "name": "settings",
+      "filename": "005-onboarding-settings.png",
+      "description": "Organization settings",
+      "scenario": "onboarding",
+      "url": "https://employarmor.vercel.app/settings",
+      "size": 115532
+    },
+    {
+      "step": 6,
+      "name": "audit",
+      "filename": "006-compliance-audit.png",
+      "description": "Bias impact audit page",
+      "scenario": "compliance",
       "url": "https://employarmor.vercel.app/audit",
       "size": 129303
     },
     {
-      "step": 19,
-      "name": "page-candidate-notices",
-      "filename": "19-page-candidate-notices.png",
-      "description": "Candidate Disclosure Notices",
+      "step": 7,
+      "name": "candidate-notices",
+      "filename": "007-compliance-candidate-notices.png",
+      "description": "Candidate notice management",
+      "scenario": "compliance",
       "url": "https://employarmor.vercel.app/candidate-notices",
       "size": 142539
     },
     {
-      "step": 20,
-      "name": "page-employee-disclosures",
-      "filename": "20-page-employee-disclosures.png",
-      "description": "Employee Disclosures",
+      "step": 8,
+      "name": "employee-disclosures",
+      "filename": "008-compliance-employee-disclosures.png",
+      "description": "Employee disclosure management",
+      "scenario": "compliance",
       "url": "https://employarmor.vercel.app/employee-disclosures",
       "size": 142764
     },
     {
-      "step": 21,
-      "name": "page-handbook",
-      "filename": "21-page-handbook.png",
-      "description": "Handbook Policy",
-      "url": "https://employarmor.vercel.app/handbook",
-      "size": 143903
-    },
-    {
-      "step": 22,
-      "name": "page-training",
-      "filename": "22-page-training.png",
-      "description": "Team Training",
-      "url": "https://employarmor.vercel.app/training",
-      "size": 114727
-    },
-    {
-      "step": 23,
-      "name": "page-compliance-packet",
-      "filename": "23-page-compliance-packet.png",
-      "description": "Audit Packet",
+      "step": 9,
+      "name": "compliance-packet",
+      "filename": "009-compliance-compliance-packet.png",
+      "description": "Complete compliance packet",
+      "scenario": "compliance",
       "url": "https://employarmor.vercel.app/compliance-packet",
       "size": 136185
     },
     {
+      "step": 10,
+      "name": "handbook",
+      "filename": "010-compliance-handbook.png",
+      "description": "AI policy handbook",
+      "scenario": "compliance",
+      "url": "https://employarmor.vercel.app/handbook",
+      "size": 143903
+    },
+    {
+      "step": 11,
+      "name": "training",
+      "filename": "011-compliance-training.png",
+      "description": "Training module management",
+      "scenario": "compliance",
+      "url": "https://employarmor.vercel.app/training",
+      "size": 114727
+    },
+    {
+      "step": 12,
+      "name": "dashboard",
+      "filename": "012-portal-dashboard.png",
+      "description": "Employee portal dashboard",
+      "scenario": "portal",
+      "url": "https://employarmor.vercel.app/portal",
+      "size": 93454
+    },
+    {
+      "step": 13,
+      "name": "disclosures",
+      "filename": "013-portal-disclosures.png",
+      "description": "Pending disclosure acknowledgments",
+      "scenario": "portal",
+      "url": "https://employarmor.vercel.app/portal/disclosures",
+      "size": 57891
+    },
+    {
+      "step": 14,
+      "name": "training",
+      "filename": "014-portal-training.png",
+      "description": "Assigned training courses",
+      "scenario": "portal",
+      "url": "https://employarmor.vercel.app/portal/training",
+      "size": 66901
+    },
+    {
+      "step": 15,
+      "name": "tool-request",
+      "filename": "015-portal-tool-request.png",
+      "description": "AI tool request form",
+      "scenario": "portal",
+      "url": "https://employarmor.vercel.app/portal/tools",
+      "size": 68541
+    },
+    {
+      "step": 16,
+      "name": "homepage",
+      "filename": "016-candidate-homepage.png",
+      "description": "Marketing homepage",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/",
+      "size": 114686
+    },
+    {
+      "step": 17,
+      "name": "scan-states",
+      "filename": "017-candidate-scan-states.png",
+      "description": "Compliance scan: state selection",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 275969
+    },
+    {
+      "step": 18,
+      "name": "scan-states-selected",
+      "filename": "018-candidate-scan-states-selected.png",
+      "description": "States selected: IL, CA, CO",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 278068
+    },
+    {
+      "step": 19,
+      "name": "scan-employees",
+      "filename": "019-candidate-scan-employees.png",
+      "description": "Compliance scan: employee count",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 268550
+    },
+    {
+      "step": 20,
+      "name": "scan-employees-selected",
+      "filename": "020-candidate-scan-employees-selected.png",
+      "description": "Selected 51-100 employees",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 268743
+    },
+    {
+      "step": 21,
+      "name": "scan-tools",
+      "filename": "021-candidate-scan-tools.png",
+      "description": "Compliance scan: AI tool selection",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 270785
+    },
+    {
+      "step": 22,
+      "name": "scan-tools-selected",
+      "filename": "022-candidate-scan-tools-selected.png",
+      "description": "Selected tools: LinkedIn Recruiter, HireVue, Greenhouse",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 270713
+    },
+    {
+      "step": 23,
+      "name": "scan-results",
+      "filename": "023-candidate-scan-results.png",
+      "description": "Compliance scan results",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/scan",
+      "size": 270713
+    },
+    {
       "step": 24,
-      "name": "page-settings",
-      "filename": "24-page-settings.png",
-      "description": "Organization Settings",
-      "url": "https://employarmor.vercel.app/settings",
-      "size": 115532
+      "name": "resources",
+      "filename": "024-candidate-resources.png",
+      "description": "Resource hub for compliance education",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/resources",
+      "size": 197766
+    },
+    {
+      "step": 25,
+      "name": "compliance-hub",
+      "filename": "025-candidate-compliance-hub.png",
+      "description": "Compliance information hub",
+      "scenario": "candidate",
+      "url": "https://employarmor.vercel.app/compliance",
+      "size": 111704
+    },
+    {
+      "step": 26,
+      "name": "employee-tool-form",
+      "filename": "026-governance-employee-tool-form.png",
+      "description": "Employee: AI tool request form",
+      "scenario": "governance",
+      "url": "https://employarmor.vercel.app/portal/tools",
+      "size": 68541
+    },
+    {
+      "step": 27,
+      "name": "admin-tools-catalog",
+      "filename": "027-governance-admin-tools-catalog.png",
+      "description": "Admin: Full tool catalog",
+      "scenario": "governance",
+      "url": "https://employarmor.vercel.app/tools",
+      "size": 113091
+    },
+    {
+      "step": 28,
+      "name": "admin-approvals-queue",
+      "filename": "028-governance-admin-approvals-queue.png",
+      "description": "Admin: Pending approval queue",
+      "scenario": "governance",
+      "url": "https://employarmor.vercel.app/approvals",
+      "size": 86790
     }
   ]
 }
