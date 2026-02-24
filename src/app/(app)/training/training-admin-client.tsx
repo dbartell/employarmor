@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { 
   GraduationCap, Clock, Users, CheckCircle, AlertTriangle, 
@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dialog"
 import { Checkbox } from '@/components/ui/checkbox'
 import { bulkAssignModules, exportComplianceReport } from '@/lib/actions/training-modules'
+import { trackEvent } from '@/components/GoogleAnalytics'
 
 interface TrainingModule {
   id: string
@@ -129,6 +130,11 @@ export default function TrainingAdminClient({
   const [assigning, setAssigning] = useState(false)
   const [exportingReport, setExportingReport] = useState(false)
 
+  // Track page view
+  useEffect(() => {
+    trackEvent('training_admin_view', 'training', 'admin_dashboard')
+  }, [])
+
   // Calculate enrollment and completion rates per module
   const moduleStats = modules.map(module => {
     const moduleEnrollments = enrollments.filter(e => e.module_id === module.id)
@@ -177,6 +183,10 @@ export default function TrainingAdminClient({
       
       await bulkAssignModules(assignments, orgId, userId)
       
+      // Track module assignment
+      const moduleName = modules.find(m => m.id === selectedModule)?.title || 'unknown'
+      trackEvent('training_module_assigned', 'training', moduleName, selectedUsers.length)
+      
       setAssignModalOpen(false)
       setSelectedModule(null)
       setSelectedUsers([])
@@ -198,6 +208,9 @@ export default function TrainingAdminClient({
         alert('Failed to export report')
         return
       }
+      
+      // Track report export
+      trackEvent('training_report_exported', 'training', 'compliance_audit')
       
       // Download as text file
       const blob = new Blob([textReport], { type: 'text/plain' })

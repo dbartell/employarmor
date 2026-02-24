@@ -8,6 +8,8 @@ import {
 } from '@/lib/actions/training-modules'
 import { getRecommendedModules } from '@/lib/actions/training-triggers'
 import TrainingAdminClient from './training-admin-client'
+import { checkSubscription } from '@/lib/subscription'
+import { Paywall } from '@/components/paywall'
 
 export default async function TrainingAdminPage() {
   const supabase = await createClient()
@@ -36,6 +38,9 @@ export default async function TrainingAdminPage() {
     redirect('/portal/training')
   }
 
+  // Check subscription status
+  const subscription = await checkSubscription(user.id)
+
   // Fetch all data for admin dashboard
   const [
     { modules },
@@ -51,7 +56,7 @@ export default async function TrainingAdminPage() {
 
   const stats = await getEnrollmentStats(profile.organization_id)
 
-  return (
+  const content = (
     <TrainingAdminClient
       modules={modules}
       enrollments={enrollments}
@@ -61,5 +66,12 @@ export default async function TrainingAdminPage() {
       orgId={profile.organization_id}
       userId={user.id}
     />
+  )
+
+  // Wrap in paywall if no subscription
+  return (
+    <Paywall hasSubscription={subscription.active} plan={subscription.plan}>
+      {content}
+    </Paywall>
   )
 }

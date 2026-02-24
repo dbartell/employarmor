@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { getMyEnrollments } from '@/lib/actions/training-modules'
 import { getRecommendedModules } from '@/lib/actions/training-triggers'
 import PersonalTrainingClient from './personal-training-client'
+import { checkSubscription } from '@/lib/subscription'
+import { Paywall } from '@/components/paywall'
 
 export default async function PersonalTrainingPage() {
   const supabase = await createClient()
@@ -19,6 +21,9 @@ export default async function PersonalTrainingPage() {
     .eq('user_id', user.id)
     .single()
 
+  // Check subscription status (using user.id as org ID)
+  const subscription = await checkSubscription(user.id)
+
   // Fetch user's training enrollments
   const { enrollments } = await getMyEnrollments(user.id)
 
@@ -29,11 +34,17 @@ export default async function PersonalTrainingPage() {
     recommended = recs || []
   }
 
-  return (
+  const content = (
     <PersonalTrainingClient 
       enrollments={enrollments} 
       userId={user.id}
       recommendedModules={recommended}
     />
+  )
+
+  return (
+    <Paywall hasSubscription={subscription.active} plan={subscription.plan}>
+      {content}
+    </Paywall>
   )
 }

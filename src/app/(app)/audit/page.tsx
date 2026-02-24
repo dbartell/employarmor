@@ -11,6 +11,7 @@ import Link from "next/link"
 import { CalendlyCTA, ContextualHelp } from "@/components/calendly-cta"
 import { AuditResultsHelp, RiskScoreHelp, StateLawsHelp } from "@/components/help-content"
 import { useStateContext } from "@/lib/state-context"
+import { trackEvent } from "@/components/GoogleAnalytics"
 
 type AuditStep = 'states' | 'tools' | 'usage' | 'results'
 type ViewMode = 'loading' | 'wizard' | 'results'
@@ -103,7 +104,23 @@ export default function AuditPage() {
     }
   }, [showHistory])
 
+  // Track audit started when wizard mode is first entered
+  useEffect(() => {
+    if (viewMode === 'wizard' && step === 'states') {
+      trackEvent('audit_started', 'audit', 'compliance_scan')
+    }
+  }, [viewMode])
+
   const goToStep = (newStep: AuditStep) => {
+    // Track step completion
+    const stepNames: Record<AuditStep, string> = {
+      'states': 'states_selection',
+      'tools': 'tools_selection',
+      'usage': 'usage_selection',
+      'results': 'results_view'
+    }
+    trackEvent('audit_step_completed', 'audit', stepNames[step])
+    
     setStep(newStep)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -186,6 +203,8 @@ export default function AuditPage() {
     setSaving(false)
     if (!result.error) {
       setSaved(true)
+      // Track audit completion
+      trackEvent('audit_completed', 'audit', `risk_score_${riskScore}`, riskScore)
     }
   }
 

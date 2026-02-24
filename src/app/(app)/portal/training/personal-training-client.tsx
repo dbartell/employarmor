@@ -19,6 +19,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { updateProgress, completeModule, recordAcknowledgment, getAcknowledgmentForEnrollment } from '@/lib/actions/training-modules'
+import { trackEvent } from '@/components/GoogleAnalytics'
 
 interface TrainingModule {
   id: string
@@ -88,9 +89,16 @@ export default function PersonalTrainingClient({ enrollments, userId, recommende
     e.status === 'completed' || e.status === 'expired'
   )
 
+  // Track page view
+  useEffect(() => {
+    trackEvent('training_personal_view', 'training', 'personal_dashboard')
+  }, [])
+
   const handleStartContinue = async (enrollment: Enrollment) => {
     if (enrollment.status === 'not_started') {
       await updateProgress(enrollment.id, 1)
+      // Track module start
+      trackEvent('training_module_started', 'training', enrollment.module?.title || 'unknown')
     }
     setExpandedModule(enrollment.module_id)
   }
@@ -98,6 +106,10 @@ export default function PersonalTrainingClient({ enrollments, userId, recommende
   const handleCompleteLesson = async (enrollment: Enrollment, lessonIndex: number, totalLessons: number) => {
     const newProgress = Math.round(((lessonIndex + 1) / totalLessons) * 100)
     await updateProgress(enrollment.id, newProgress)
+    
+    // Track lesson completion
+    const lessonTitle = enrollment.module?.content?.[lessonIndex]?.title || `Lesson ${lessonIndex + 1}`
+    trackEvent('training_lesson_completed', 'training', lessonTitle)
     
     if (lessonIndex + 1 === totalLessons) {
       // Check if module requires acknowledgment
@@ -112,6 +124,8 @@ export default function PersonalTrainingClient({ enrollments, userId, recommende
       } else {
         // Complete without acknowledgment
         await completeModule(enrollment.id)
+        // Track module completion
+        trackEvent('training_module_completed', 'training', module.title)
         router.refresh()
       }
     }
@@ -131,6 +145,10 @@ export default function PersonalTrainingClient({ enrollments, userId, recommende
       )
       
       await completeModule(pendingAcknowledgment.enrollmentId)
+      
+      // Track acknowledgment signing and module completion
+      trackEvent('training_acknowledgment_signed', 'training', pendingAcknowledgment.moduleTitle)
+      trackEvent('training_module_completed', 'training', pendingAcknowledgment.moduleTitle)
       
       setAcknowledgmentModal(false)
       setPendingAcknowledgment(null)
