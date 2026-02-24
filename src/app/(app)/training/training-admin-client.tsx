@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { 
   GraduationCap, Clock, Users, CheckCircle, AlertTriangle, 
-  Mail, Download, Plus, TrendingUp, BookOpen, Shield
+  Mail, Download, Plus, TrendingUp, BookOpen, Shield, Zap, FileText
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -27,7 +27,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Checkbox } from '@/components/ui/checkbox'
-import { bulkAssignModules } from '@/lib/actions/training-modules'
+import { bulkAssignModules, exportComplianceReport } from '@/lib/actions/training-modules'
 
 interface TrainingModule {
   id: string
@@ -39,6 +39,19 @@ interface TrainingModule {
   lesson_count: number
   content: any[]
   sort_order: number
+  tier?: number
+  trigger_type?: string
+  trigger_value?: string | null
+}
+
+interface RecommendedModule {
+  id: string
+  title: string
+  description: string
+  trigger_type: string
+  trigger_value: string | null
+  tier: number
+  reason: string
 }
 
 interface EnrollmentWithDetails {
@@ -76,6 +89,7 @@ interface Props {
     completionRate: number
     teamSize: number
   }
+  recommendedModules: RecommendedModule[]
   orgId: string
   userId: string
 }
@@ -105,6 +119,7 @@ export default function TrainingAdminClient({
   enrollments, 
   teamMembers, 
   stats,
+  recommendedModules,
   orgId,
   userId 
 }: Props) {
@@ -112,19 +127,43 @@ export default function TrainingAdminClient({
   const [selectedModule, setSelectedModule] = useState<string | null>(null)
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
   const [assigning, setAssigning] = useState(false)
+  const [exportingReport, setExportingReport] = useState(false)
 
   // Calculate enrollment and completion rates per module
   const moduleStats = modules.map(module => {
     const moduleEnrollments = enrollments.filter(e => e.module_id === module.id)
     const completed = moduleEnrollments.filter(e => e.status === 'completed').length
+    const isRecommended = recommendedModules.some(r => r.id === module.id)
+    const recommendation = recommendedModules.find(r => r.id === module.id)
+    
     return {
       ...module,
       enrollmentCount: moduleEnrollments.length,
       completionRate: moduleEnrollments.length > 0 
         ? Math.round((completed / moduleEnrollments.length) * 100) 
-        : 0
+        : 0,
+      isRecommended,
+      recommendationReason: recommendation?.reason
     }
   })
+
+  // Group modules by tier
+  const tierNames: { [key: number]: string } = {
+    1: 'Core Training',
+    2: 'State-Specific Compliance',
+    3: 'Tool-Specific Training',
+    4: 'Industry & Size Requirements',
+    5: 'Advanced Certification'
+  }
+
+  const modulesByTier = moduleStats.reduce((acc, module) => {
+    const tier = module.tier || 1
+    if (!acc[tier]) {
+      acc[tier] = []
+    }
+    acc[tier].push(module)
+    return acc
+  }, {} as { [key: number]: typeof moduleStats })
 
   const handleAssignModule = async () => {
     if (!selectedModule || selectedUsers.length === 0) return
@@ -146,6 +185,35 @@ export default function TrainingAdminClient({
       console.error('Error assigning module:', error)
     } finally {
       setAssigning(false)
+    }
+  }
+
+  const handleExportReport = async () => {
+    setExportingReport(true)
+    try {
+      const { report, textReport, error } = await exportComplianceReport(orgId)
+      
+      if (error || !textReport) {
+        console.error('Error exporting report:', error)
+        alert('Failed to export report')
+        return
+      }
+      
+      // Download as text file
+      const blob = new Blob([textReport], { type: 'text/plain' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `training-compliance-report-${new Date().toISOString().split('T')[0]}.txt`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Error exporting report:', error)
+      alert('Failed to export report')
+    } finally {
+      setExportingReport(false)
     }
   }
 
@@ -204,13 +272,64 @@ export default function TrainingAdminClient({
           <h1 className="text-3xl font-bold text-gray-900">Training Management</h1>
           <p className="text-gray-600 mt-1">Manage team compliance training and certifications</p>
         </div>
-        <Link href="/portal/training">
-          <Button variant="outline">
-            <GraduationCap className="w-4 h-4 mr-2" />
-            View My Training
+        <div className="flex gap-2">
+          <Button 
+            variant="outline"
+            onClick={handleExportReport}
+            disabled={exportingReport}
+          >
+            <FileText className="w-4 h-4 mr-2" />
+            {exportingReport ? 'Exporting...' : 'Export Audit Report'}
           </Button>
-        </Link>
+          <Link href="/portal/training">
+            <Button variant="outline">
+              <GraduationCap className="w-4 h-4 mr-2" />
+              View My Training
+            </Button>
+          </Link>
+        </div>
       </div>
+
+      {/* Recommended Modules Banner */}
+      {recommendedModules.length > 0 && (
+        <Card className="mb-6 border-blue-300 bg-blue-50">
+          <CardContent className="pt-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <Zap className="w-6 h-6 text-blue-600" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  Recommended Training Available
+                </h3>
+                <p className="text-sm text-gray-700 mb-3">
+                  Based on your organization's profile, we recommend the following training modules:
+                </p>
+                <div className="space-y-2 mb-4">
+                  {recommendedModules.slice(0, 3).map(rec => (
+                    <div key={rec.id} className="flex items-center gap-2 text-sm">
+                      <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                        {tierNames[rec.tier] || `Tier ${rec.tier}`}
+                      </Badge>
+                      <span className="font-medium">{rec.title}</span>
+                      <span className="text-gray-600">— {rec.reason}</span>
+                    </div>
+                  ))}
+                  {recommendedModules.length > 3 && (
+                    <p className="text-sm text-gray-600">
+                      +{recommendedModules.length - 3} more recommended modules
+                    </p>
+                  )}
+                </div>
+                <Button size="sm">
+                  <Plus className="w-4 h-4 mr-1" />
+                  Assign Recommended Modules
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Stats Bar */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -279,22 +398,52 @@ export default function TrainingAdminClient({
       <Card className="mb-6">
         <CardHeader>
           <CardTitle>Training Modules</CardTitle>
-          <CardDescription>Assign courses to team members</CardDescription>
+          <CardDescription>Assign courses to team members — organized by compliance tier</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {moduleStats.map(module => {
-              const IconComponent = iconMap[module.icon] || GraduationCap
-              return (
-                <Card key={module.id} className="hover:shadow-md transition-shadow">
-                  <CardContent className="pt-6">
+          {[1, 2, 3, 4, 5].map(tier => {
+            const tiersModules = modulesByTier[tier] || []
+            if (tiersModules.length === 0) return null
+            
+            return (
+              <div key={tier} className="mb-8 last:mb-0">
+                <div className="flex items-center gap-2 mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {tierNames[tier] || `Tier ${tier}`}
+                  </h3>
+                  <Badge variant="outline" className="text-xs">
+                    {tiersModules.length} module{tiersModules.length !== 1 ? 's' : ''}
+                  </Badge>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {tiersModules.map(module => {
+                    const IconComponent = iconMap[module.icon] || GraduationCap
+                    return (
+                      <Card key={module.id} className={`hover:shadow-md transition-shadow ${
+                        module.isRecommended ? 'border-blue-300 bg-blue-50' : ''
+                      }`}>
+                        <CardContent className="pt-6">
                     <div className="flex items-start gap-3 mb-3">
                       <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <IconComponent className="w-5 h-5 text-blue-600" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-sm mb-1 line-clamp-2">{module.title}</h3>
+                        <div className="flex items-start gap-2 mb-1">
+                          <h3 className="font-semibold text-sm line-clamp-2 flex-1">{module.title}</h3>
+                          {module.isRecommended && (
+                            <Badge variant="secondary" className="bg-blue-600 text-white text-xs flex-shrink-0">
+                              <Zap className="w-3 h-3 mr-0.5" />
+                              Recommended
+                            </Badge>
+                          )}
+                        </div>
                         <p className="text-xs text-gray-500 line-clamp-2">{module.description}</p>
+                        {module.isRecommended && module.recommendationReason && (
+                          <p className="text-xs text-blue-700 mt-1">
+                            ⚡ {module.recommendationReason}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -409,11 +558,14 @@ export default function TrainingAdminClient({
                         </div>
                       </DialogContent>
                     </Dialog>
-                  </CardContent>
-                </Card>
-              )
-            })}
-          </div>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </div>
+          )
+        })}
         </CardContent>
       </Card>
 

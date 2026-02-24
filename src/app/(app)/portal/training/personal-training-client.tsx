@@ -1,16 +1,24 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   GraduationCap, Clock, CheckCircle, Award, BookOpen, 
-  PlayCircle, ArrowRight, Download, RotateCcw
+  PlayCircle, ArrowRight, Download, RotateCcw, Zap, FileCheck
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
-import { updateProgress, completeModule } from '@/lib/actions/training-modules'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { updateProgress, completeModule, recordAcknowledgment, getAcknowledgmentForEnrollment } from '@/lib/actions/training-modules'
 
 interface TrainingModule {
   id: string
@@ -22,6 +30,19 @@ interface TrainingModule {
   lesson_count: number
   content: any[]
   sort_order: number
+  tier?: number
+  trigger_type?: string
+  requires_acknowledgment?: boolean
+}
+
+interface RecommendedModule {
+  id: string
+  title: string
+  description: string
+  trigger_type: string
+  trigger_value: string | null
+  tier: number
+  reason: string
 }
 
 interface Enrollment {
@@ -38,6 +59,8 @@ interface Enrollment {
 
 interface Props {
   enrollments: Enrollment[]
+  userId: string
+  recommendedModules: RecommendedModule[]
 }
 
 const iconMap: { [key: string]: any } = {
@@ -49,9 +72,13 @@ const iconMap: { [key: string]: any } = {
   'GraduationCap': GraduationCap,
 }
 
-export default function PersonalTrainingClient({ enrollments }: Props) {
+export default function PersonalTrainingClient({ enrollments, userId, recommendedModules }: Props) {
   const router = useRouter()
   const [expandedModule, setExpandedModule] = useState<string | null>(null)
+  const [acknowledgmentModal, setAcknowledgmentModal] = useState(false)
+  const [pendingAcknowledgment, setPendingAcknowledgment] = useState<{ enrollmentId: string; moduleTitle: string } | null>(null)
+  const [acknowledgedCheckbox, setAcknowledgedCheckbox] = useState(false)
+  const [submittingAcknowledgment, setSubmittingAcknowledgment] = useState(false)
 
   const activeEnrollments = enrollments.filter(e => 
     e.status === 'not_started' || e.status === 'in_progress'
@@ -68,13 +95,52 @@ export default function PersonalTrainingClient({ enrollments }: Props) {
     setExpandedModule(enrollment.module_id)
   }
 
-  const handleCompleteLesson = async (enrollmentId: string, lessonIndex: number, totalLessons: number) => {
+  const handleCompleteLesson = async (enrollment: Enrollment, lessonIndex: number, totalLessons: number) => {
     const newProgress = Math.round(((lessonIndex + 1) / totalLessons) * 100)
-    await updateProgress(enrollmentId, newProgress)
+    await updateProgress(enrollment.id, newProgress)
     
     if (lessonIndex + 1 === totalLessons) {
-      await completeModule(enrollmentId)
+      // Check if module requires acknowledgment
+      const module = enrollment.module!
+      if (module.requires_acknowledgment) {
+        // Show acknowledgment modal before completing
+        setPendingAcknowledgment({
+          enrollmentId: enrollment.id,
+          moduleTitle: module.title
+        })
+        setAcknowledgmentModal(true)
+      } else {
+        // Complete without acknowledgment
+        await completeModule(enrollment.id)
+        router.refresh()
+      }
+    }
+  }
+
+  const handleAcknowledgment = async () => {
+    if (!pendingAcknowledgment || !acknowledgedCheckbox) return
+    
+    setSubmittingAcknowledgment(true)
+    try {
+      const acknowledgmentText = `I acknowledge that I have completed the training module "${pendingAcknowledgment.moduleTitle}" and understand my obligations and responsibilities as outlined in this training. I agree to comply with all applicable policies and legal requirements.`
+      
+      await recordAcknowledgment(
+        pendingAcknowledgment.enrollmentId,
+        userId,
+        acknowledgmentText
+      )
+      
+      await completeModule(pendingAcknowledgment.enrollmentId)
+      
+      setAcknowledgmentModal(false)
+      setPendingAcknowledgment(null)
+      setAcknowledgedCheckbox(false)
       router.refresh()
+    } catch (error) {
+      console.error('Error recording acknowledgment:', error)
+      alert('Failed to record acknowledgment')
+    } finally {
+      setSubmittingAcknowledgment(false)
     }
   }
 
@@ -237,7 +303,7 @@ export default function PersonalTrainingClient({ enrollments }: Props) {
                                   {isCurrent && (
                                     <Button 
                                       size="sm"
-                                      onClick={() => handleCompleteLesson(enrollment.id, idx, module.content.length)}
+                                      onClick={() => handleCompleteLesson(enrollment, idx, module.content.length)}
                                     >
                                       Complete
                                     </Button>
@@ -334,6 +400,128 @@ export default function PersonalTrainingClient({ enrollments }: Props) {
           </CardContent>
         </Card>
       )}
+
+      {/* New For You - Recommended Modules */}
+      {recommendedModules.length > 0 && (
+        <Card className="mt-8 border-blue-300 bg-gradient-to-br from-blue-50 to-purple-50">
+          <CardContent className="pt-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <Zap className="w-6 h-6 text-blue-600" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  New Training Available
+                </h3>
+                <p className="text-sm text-gray-700 mb-4">
+                  Based on your company's profile, new training modules are recommended:
+                </p>
+                <div className="space-y-3">
+                  {recommendedModules.slice(0, 3).map(rec => (
+                    <div key={rec.id} className="bg-white p-3 rounded-lg border border-blue-200">
+                      <div className="font-medium text-sm text-gray-900 mb-1">
+                        {rec.title}
+                      </div>
+                      <div className="text-xs text-gray-600">
+                        {rec.reason}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {recommendedModules.length > 3 && (
+                  <p className="text-sm text-gray-600 mt-3">
+                    And {recommendedModules.length - 3} more modules tailored to your organization.
+                  </p>
+                )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Acknowledgment Modal */}
+      <Dialog open={acknowledgmentModal} onOpenChange={(open) => {
+        if (!open && !submittingAcknowledgment) {
+          setAcknowledgmentModal(false)
+          setPendingAcknowledgment(null)
+          setAcknowledgedCheckbox(false)
+        }
+      }}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <FileCheck className="w-5 h-5 text-blue-600" />
+              Training Acknowledgment Required
+            </DialogTitle>
+            <DialogDescription>
+              Please review and acknowledge your completion of this training module
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 className="font-semibold text-sm text-gray-900 mb-2">
+                {pendingAcknowledgment?.moduleTitle}
+              </h4>
+              <p className="text-sm text-gray-700">
+                This training covers important compliance obligations and legal requirements. 
+                Your acknowledgment serves as documented proof of training completion, which may be 
+                required for regulatory audits and legal defense (Faragher/Ellerth doctrine).
+              </p>
+            </div>
+
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <p className="text-sm text-gray-900 leading-relaxed">
+                <strong>I acknowledge that:</strong>
+              </p>
+              <ul className="mt-2 space-y-2 text-sm text-gray-700 ml-4">
+                <li>• I have completed all lessons in this training module</li>
+                <li>• I understand my obligations and responsibilities as outlined in this training</li>
+                <li>• I agree to comply with all applicable policies and legal requirements</li>
+                <li>• I understand that failure to comply may result in disciplinary action</li>
+                <li>• This acknowledgment will be recorded with a timestamp and may be used for compliance audits</li>
+              </ul>
+            </div>
+
+            <div className="flex items-start gap-3 p-4 bg-white border border-gray-200 rounded-lg">
+              <Checkbox
+                id="acknowledge"
+                checked={acknowledgedCheckbox}
+                onCheckedChange={(checked) => setAcknowledgedCheckbox(checked === true)}
+              />
+              <label 
+                htmlFor="acknowledge" 
+                className="text-sm text-gray-900 cursor-pointer leading-relaxed"
+              >
+                I understand my obligations and agree to the acknowledgment statement above. 
+                I certify that I have completed this training and will comply with all requirements.
+              </label>
+            </div>
+
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setAcknowledgmentModal(false)
+                  setPendingAcknowledgment(null)
+                  setAcknowledgedCheckbox(false)
+                }}
+                disabled={submittingAcknowledgment}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleAcknowledgment}
+                disabled={!acknowledgedCheckbox || submittingAcknowledgment}
+                className="flex-1"
+              >
+                {submittingAcknowledgment ? 'Recording...' : 'Sign & Complete Training'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

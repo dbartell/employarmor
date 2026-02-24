@@ -6,6 +6,7 @@ import {
   getOrgTeamMembers,
   getEnrollmentStats
 } from '@/lib/actions/training-modules'
+import { getRecommendedModules } from '@/lib/actions/training-triggers'
 import TrainingAdminClient from './training-admin-client'
 
 export default async function TrainingAdminPage() {
@@ -40,10 +41,12 @@ export default async function TrainingAdminPage() {
     { modules },
     { enrollments },
     { members },
+    { recommended }
   ] = await Promise.all([
     getTrainingModules(),
     getOrgEnrollments(profile.organization_id),
     getOrgTeamMembers(profile.organization_id),
+    getRecommendedModules(profile.organization_id)
   ])
 
   const stats = await getEnrollmentStats(profile.organization_id)
@@ -54,6 +57,7 @@ export default async function TrainingAdminPage() {
       enrollments={enrollments}
       teamMembers={members}
       stats={stats}
+      recommendedModules={recommended || []}
       orgId={profile.organization_id}
       userId={user.id}
     />

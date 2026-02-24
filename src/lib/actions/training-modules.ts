@@ -348,3 +348,238 @@ export async function getEnrollmentStats(orgId: string) {
     teamSize: team?.length || 0
   }
 }
+
+// Acknowledgment System
+
+/**
+ * Record a legal acknowledgment for a training enrollment
+ */
+export async function recordAcknowledgment(
+  enrollmentId: string,
+  userId: string,
+  acknowledgmentText: string,
+  ipAddress?: string
+) {
+  const supabase = await createClient()
+  
+  const { data, error } = await supabase
+    .from('training_acknowledgments')
+    .insert({
+      enrollment_id: enrollmentId,
+      user_id: userId,
+      acknowledgment_text: acknowledgmentText,
+      ip_address: ipAddress || null,
+      acknowledged_at: new Date().toISOString()
+    })
+    .select()
+    .single()
+  
+  if (error) {
+    console.error('Error recording acknowledgment:', error)
+    return { acknowledgment: null, error: error.message }
+  }
+  
+  revalidatePath('/portal/training')
+  revalidatePath('/training')
+  
+  return { acknowledgment: data, error: null }
+}
+
+/**
+ * Get acknowledgment record for an enrollment
+ */
+export async function getAcknowledgmentForEnrollment(enrollmentId: string) {
+  const supabase = await createClient()
+  
+  const { data, error } = await supabase
+    .from('training_acknowledgments')
+    .select('*')
+    .eq('enrollment_id', enrollmentId)
+    .single()
+  
+  if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+    console.error('Error fetching acknowledgment:', error)
+    return { acknowledgment: null, error: error.message }
+  }
+  
+  return { acknowledgment: data, error: null }
+}
+
+/**
+ * Export compliance report for audit purposes (Faragher/Ellerth defense)
+ */
+export async function exportComplianceReport(orgId: string) {
+  const supabase = await createClient()
+  
+  // Get organization name
+  const { data: org } = await supabase
+    .from('organizations')
+    .select('name')
+    .eq('id', orgId)
+    .single()
+  
+  // Get all enrollments with module and user details
+  const { data: enrollments } = await supabase
+    .from('training_enrollments')
+    .select(`
+      *,
+      module:training_modules(id, title, requires_acknowledgment, certification_valid_days),
+      user:profiles!training_enrollments_user_id_fkey(id, full_name, email)
+    `)
+    .eq('org_id', orgId)
+    .order('created_at', { ascending: false })
+  
+  if (!enrollments) {
+    return { report: null, error: 'Failed to fetch enrollment data' }
+  }
+  
+  // Get all acknowledgments for these enrollments
+  const enrollmentIds = enrollments.map(e => e.id)
+  const { data: acknowledgments } = await supabase
+    .from('training_acknowledgments')
+    .select('*')
+    .in('enrollment_id', enrollmentIds)
+  
+  const acknowledgmentMap = new Map(
+    acknowledgments?.map(ack => [ack.enrollment_id, ack]) || []
+  )
+  
+  // Build report
+  const reportDate = new Date().toISOString()
+  const reportData = {
+    header: {
+      title: 'Training Compliance Report',
+      subtitle: 'Prepared for audit purposes per Faragher/Ellerth defense requirements',
+      organization: org?.name || 'Unknown Organization',
+      generatedAt: reportDate,
+      generatedBy: 'EmployArmor Training Management System'
+    },
+    summary: {
+      totalEnrollments: enrollments.length,
+      completedEnrollments: enrollments.filter(e => e.status === 'completed').length,
+      pendingEnrollments: enrollments.filter(e => e.status === 'in_progress' || e.status === 'not_started').length,
+      expiredEnrollments: enrollments.filter(e => e.status === 'expired' || (e.expires_at && new Date(e.expires_at) < new Date())).length,
+      acknowledgedEnrollments: enrollments.filter(e => acknowledgmentMap.has(e.id)).length
+    },
+    enrollments: enrollments.map(enrollment => {
+      const acknowledgment = acknowledgmentMap.get(enrollment.id)
+      const module = enrollment.module as any
+      const user = enrollment.user as any
+      
+      return {
+        employee: {
+          name: user?.full_name || 'Unknown',
+          email: user?.email || 'Unknown'
+        },
+        module: {
+          title: module?.title || 'Unknown Module',
+          requiresAcknowledgment: module?.requires_acknowledgment || false,
+          certificationValidDays: module?.certification_valid_days || 365
+        },
+        enrollment: {
+          status: enrollment.status,
+          progress: enrollment.progress,
+          startedAt: enrollment.started_at,
+          completedAt: enrollment.completed_at,
+          expiresAt: enrollment.expires_at,
+          assignedAt: enrollment.created_at
+        },
+        acknowledgment: acknowledgment ? {
+          acknowledgedAt: acknowledgment.acknowledged_at,
+          ipAddress: acknowledgment.ip_address,
+          text: acknowledgment.acknowledgment_text
+        } : null,
+        complianceStatus: getComplianceStatus(enrollment, acknowledgment, module)
+      }
+    })
+  }
+  
+  // Generate text report
+  const textReport = generateTextReport(reportData)
+  
+  return { 
+    report: reportData, 
+    textReport,
+    error: null 
+  }
+}
+
+/**
+ * Helper: determine compliance status for an enrollment
+ */
+function getComplianceStatus(enrollment: any, acknowledgment: any, module: any): string {
+  if (enrollment.status !== 'completed') {
+    return 'PENDING'
+  }
+  
+  if (module?.requires_acknowledgment && !acknowledgment) {
+    return 'INCOMPLETE - Missing Acknowledgment'
+  }
+  
+  if (enrollment.expires_at && new Date(enrollment.expires_at) < new Date()) {
+    return 'EXPIRED - Recertification Required'
+  }
+  
+  return 'COMPLIANT'
+}
+
+/**
+ * Helper: generate text version of compliance report
+ */
+function generateTextReport(data: any): string {
+  let report = ''
+  
+  report += '═'.repeat(80) + '\n'
+  report += data.header.title.toUpperCase() + '\n'
+  report += data.header.subtitle + '\n'
+  report += '═'.repeat(80) + '\n\n'
+  
+  report += `Organization: ${data.header.organization}\n`
+  report += `Generated: ${new Date(data.header.generatedAt).toLocaleString()}\n`
+  report += `System: ${data.header.generatedBy}\n\n`
+  
+  report += '─'.repeat(80) + '\n'
+  report += 'SUMMARY\n'
+  report += '─'.repeat(80) + '\n\n'
+  
+  report += `Total Enrollments: ${data.summary.totalEnrollments}\n`
+  report += `Completed: ${data.summary.completedEnrollments}\n`
+  report += `Pending: ${data.summary.pendingEnrollments}\n`
+  report += `Expired: ${data.summary.expiredEnrollments}\n`
+  report += `Acknowledged: ${data.summary.acknowledgedEnrollments}\n\n`
+  
+  report += '─'.repeat(80) + '\n'
+  report += 'DETAILED RECORDS\n'
+  report += '─'.repeat(80) + '\n\n'
+  
+  for (const enrollment of data.enrollments) {
+    report += `Employee: ${enrollment.employee.name} (${enrollment.employee.email})\n`
+    report += `Module: ${enrollment.module.title}\n`
+    report += `Status: ${enrollment.enrollment.status.toUpperCase()} - ${enrollment.complianceStatus}\n`
+    report += `Assigned: ${enrollment.enrollment.assignedAt ? new Date(enrollment.enrollment.assignedAt).toLocaleDateString() : 'N/A'}\n`
+    
+    if (enrollment.enrollment.completedAt) {
+      report += `Completed: ${new Date(enrollment.enrollment.completedAt).toLocaleDateString()}\n`
+    }
+    
+    if (enrollment.enrollment.expiresAt) {
+      report += `Expires: ${new Date(enrollment.enrollment.expiresAt).toLocaleDateString()}\n`
+    }
+    
+    if (enrollment.acknowledgment) {
+      report += `Acknowledged: ${new Date(enrollment.acknowledgment.acknowledgedAt).toLocaleString()}\n`
+      report += `IP Address: ${enrollment.acknowledgment.ipAddress || 'Not recorded'}\n`
+      report += `Agreement Text: "${enrollment.acknowledgment.text}"\n`
+    } else if (enrollment.module.requiresAcknowledgment) {
+      report += `⚠️  ACKNOWLEDGMENT REQUIRED BUT NOT RECORDED\n`
+    }
+    
+    report += '\n' + '·'.repeat(80) + '\n\n'
+  }
+  
+  report += '═'.repeat(80) + '\n'
+  report += 'END OF REPORT\n'
+  report += '═'.repeat(80) + '\n'
+  
+  return report
+}
