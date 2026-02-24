@@ -63,8 +63,24 @@ function extractTextFromTSX(tsxContent) {
   // Remove closing tags
   text = text.replace(/<\/\w+>/g, ' ');
   
+  // Extract string values from JS data objects (FAQ answers, descriptions, etc.)
+  // before removing curly brace expressions
+  const stringValues = [];
+  const stringPattern = /(?:q|a|question|answer|title|description|content|text|name|label):\s*["'`]([\s\S]*?)["'`]/g;
+  let match;
+  while ((match = stringPattern.exec(tsxContent)) !== null) {
+    if (match[1].length > 20) { // Only meaningful text
+      stringValues.push(match[1]);
+    }
+  }
+  
   // Remove remaining curly brace expressions
   text = text.replace(/\{[^}]+\}/g, '');
+  
+  // Append extracted string values
+  if (stringValues.length > 0) {
+    text += ' ' + stringValues.join(' ');
+  }
   
   // Clean up whitespace
   text = text.replace(/\s+/g, ' ').trim();

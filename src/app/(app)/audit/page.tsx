@@ -472,10 +472,10 @@ export default function AuditPage() {
 
       {/* Progress */}
       <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center mb-4">
           {['states', 'tools', 'usage', 'results'].map((s, i) => (
-            <div key={s} className="flex items-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium ${
+            <div key={s} className="flex items-center flex-1 last:flex-none">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium flex-shrink-0 ${
                 ['states', 'tools', 'usage', 'results'].indexOf(step) >= i
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-600'
@@ -483,7 +483,7 @@ export default function AuditPage() {
                 {i + 1}
               </div>
               {i < 3 && (
-                <div className={`w-16 md:w-24 h-1 mx-2 ${
+                <div className={`flex-1 h-1 mx-2 ${
                   ['states', 'tools', 'usage', 'results'].indexOf(step) > i
                     ? 'bg-blue-600'
                     : 'bg-gray-200'
