@@ -68,12 +68,18 @@ export default function ScanPage() {
     }))
   }
 
+  const scrollToTop = () => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 50)
+  }
+
   const nextStep = () => {
     const steps: Step[] = ['states', 'employees', 'tools', 'email', 'results']
     const currentIndex = steps.indexOf(step)
     if (currentIndex < steps.length - 1) {
       setStep(steps[currentIndex + 1])
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      scrollToTop()
     }
   }
 
@@ -82,7 +88,7 @@ export default function ScanPage() {
     const currentIndex = steps.indexOf(step)
     if (currentIndex > 0) {
       setStep(steps[currentIndex - 1])
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      scrollToTop()
     }
   }
 
@@ -138,7 +144,7 @@ export default function ScanPage() {
       })
 
       setStep('results')
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      scrollToTop()
     } catch (err) {
       console.error('Scan submission error:', err)
       setError('Something went wrong. Please try again.')
