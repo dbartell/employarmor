@@ -1,0 +1,184 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "EmployArmor Compliance Scan API",
+    "version": "1.0.0",
+    "description": "Scan your AI hiring tool stack for compliance risks across US states. Provide your states, tools, and employee count to get a compliance score, risk assessment, applicable laws, and specific gaps. Covers IL, CO, CA, NYC, MD, TX and 50+ AI hiring tools including HireVue, Workday, Greenhouse, LinkedIn Recruiter, Indeed, and more.",
+    "contact": {
+      "name": "EmployArmor",
+      "url": "https://employarmor.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://employarmor.com",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/api/v1/scan": {
+      "post": {
+        "operationId": "scanCompliance",
+        "summary": "Scan AI hiring tools for compliance risks",
+        "description": "Analyzes your AI hiring tool stack against state-specific employment laws. Returns a compliance score (0-100), risk level, compliance gaps, applicable laws with requirements and penalties, and per-tool risk analysis. No authentication required.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanRequest"
+              },
+              "example": {
+                "states": ["IL", "CA", "NYC"],
+                "tools": ["hirevue", "greenhouse", "linkedin-recruiter"],
+                "employeeCount": 500
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Compliance scan results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded (30 requests per minute)"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ScanRequest": {
+        "type": "object",
+        "required": ["states", "tools", "employeeCount"],
+        "properties": {
+          "states": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "US state codes where you have employees. Regulated states with AI hiring laws: IL, CO, CA, NYC, MD, TX. Other state codes are accepted too.",
+            "example": ["IL", "CA", "NYC"]
+          },
+          "tools": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "AI hiring tool IDs. Common IDs: hirevue, greenhouse, lever, workday, linkedin-recruiter, indeed, pymetrics, eightfold, textio, paradox-olivia, spark-hire, criteria, checkr, chatgpt, claude, copilot, bamboohr, rippling, adp, hubstaff, time-doctor, activtrak, pave, salary-com, payscale, ziprecruiter, dice",
+            "example": ["hirevue", "greenhouse"]
+          },
+          "employeeCount": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Total number of employees in your organization"
+          }
+        }
+      },
+      "ScanResponse": {
+        "type": "object",
+        "properties": {
+          "complianceScore": {
+            "type": "integer",
+            "description": "Compliance score from 0-100 (higher is better)"
+          },
+          "riskLevel": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Overall risk level"
+          },
+          "riskScore": {
+            "type": "integer",
+            "description": "Risk score from 0-100 (higher is worse)"
+          },
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": { "type": "string" },
+                "severity": { "type": "string", "enum": ["medium", "high", "critical"] },
+                "applicableStates": { "type": "array", "items": { "type": "string" } },
+                "description": { "type": "string" }
+              }
+            },
+            "description": "Compliance gaps identified"
+          },
+          "applicableLaws": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "state": { "type": "string" },
+                "stateName": { "type": "string" },
+                "law": { "type": "string" },
+                "effective": { "type": "string" },
+                "requirements": { "type": "array", "items": { "type": "string" } },
+                "penalties": { "type": "string" }
+              }
+            }
+          },
+          "toolAnalysis": {
+            "type": "object",
+            "properties": {
+              "total": { "type": "integer" },
+              "high": { "type": "array", "items": { "$ref": "#/components/schemas/ToolAnalysisItem" } },
+              "medium": { "type": "array", "items": { "$ref": "#/components/schemas/ToolAnalysisItem" } },
+              "low": { "type": "array", "items": { "$ref": "#/components/schemas/ToolAnalysisItem" } }
+            }
+          },
+          "stateRiskMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "tier": { "type": "string" },
+                "categories": { "type": "array", "items": { "type": "string" } },
+                "lawCount": { "type": "integer" }
+              }
+            }
+          },
+          "resultsUrl": {
+            "type": "string",
+            "description": "URL to view visual results on EmployArmor"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "availableStates": { "type": "array", "items": { "type": "string" } },
+              "toolCount": { "type": "integer" },
+              "toolsReference": { "type": "string" }
+            }
+          }
+        }
+      },
+      "ToolAnalysisItem": {
+        "type": "object",
+        "properties": {
+          "toolId": { "type": "string" },
+          "toolName": { "type": "string" },
+          "category": { "type": "string" },
+          "laws": { "type": "array", "items": { "type": "string" } },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}

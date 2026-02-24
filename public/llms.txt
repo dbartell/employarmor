@@ -1,5 +1,8 @@
 # EmployArmor
 
+API: https://employarmor.com/openapi.json
+MCP Server: https://www.npmjs.com/package/@employarmor/mcp-server
+
 > AI hiring compliance platform helping employers navigate AI employment laws across 6+ states. Covers bias audits, impact assessments, disclosure requirements, training, and tool governance for companies using AI in hiring decisions.
 
 EmployArmor provides compliance tools for employers using AI hiring tools like HireVue, Workday, Greenhouse, LinkedIn Recruiter, and Indeed. Key features include automated compliance tracking, bias audit management, disclosure generation, employee training, tool governance workflows, and state-by-state regulatory guidance.
