@@ -69,14 +69,33 @@ export async function getEmployeeProfileClient(userId: string, orgId: string): P
 
 /**
  * Create owner profile for existing org admin (auto-provision)
+ * The user who creates the org (user.id === org.id) should ALWAYS get owner role.
  */
 export async function ensureOwnerProfile(userId: string, orgId: string, userEmail: string): Promise<EmployeeProfile | null> {
   const supabase = await createServerClient()
-  
+
   // Check if profile already exists
   const existing = await getEmployeeProfile(userId, orgId)
-  if (existing) return existing
-  
+  if (existing) {
+    // If the org creator has a non-owner role, upgrade to owner
+    if (userId === orgId && existing.role !== 'owner') {
+      const { data: updated, error: updateError } = await supabase
+        .from('employee_profiles')
+        .update({ role: 'owner' })
+        .eq('user_id', userId)
+        .eq('organization_id', orgId)
+        .select()
+        .single()
+
+      if (updateError) {
+        console.error('Error upgrading to owner:', updateError)
+        return existing
+      }
+      return updated as EmployeeProfile
+    }
+    return existing
+  }
+
   // Create owner profile
   const { data, error } = await supabase
     .from('employee_profiles')
@@ -89,12 +108,12 @@ export async function ensureOwnerProfile(userId: string, orgId: string, userEmai
     })
     .select()
     .single()
-  
+
   if (error) {
     console.error('Error creating owner profile:', error)
     return null
   }
-  
+
   return data as EmployeeProfile
 }
 

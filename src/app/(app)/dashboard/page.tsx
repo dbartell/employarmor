@@ -336,21 +336,8 @@ export default function DashboardPage() {
 
   const handleTaskClick = (href: string) => {
     if (!data) return
-    
-    const status = checkPaywallStatus({
-      trialStartedAt: data.trialStartedAt,
-      documentsGenerated: data.documentsGenerated,
-      subscriptionStatus: data.subscriptionStatus,
-    })
-    
-    if (status.isSubscribed) {
-      router.push(href)
-      return
-    }
-    
-    setPaywallStatus(status)
-    setPendingNavigation(href)
-    setShowPaywall(true)
+    // Free users can VIEW all pages — paywall triggers on actions within those pages
+    router.push(href)
   }
 
   // Only trigger confetti at 100%

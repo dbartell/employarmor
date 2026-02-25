@@ -242,3 +242,52 @@ export function complianceScoreAlertEmail(params: {
     html: emailWrapper(content, `<p>You're receiving this because your compliance score needs attention.</p>`),
   }
 }
+
+// ── Welcome Email (After Scan Signup) ────────────────────
+
+export function scanWelcomeEmail(params: {
+  company: string
+  riskScore: number
+  gapCount: number
+  states: string[]
+}): { subject: string; html: string } {
+  const complianceScore = 100 - params.riskScore
+  const level = complianceScore >= 70 ? 'Good' : complianceScore >= 40 ? 'Fair' : 'At Risk'
+  const levelColor = complianceScore >= 70 ? '#16a34a' : complianceScore >= 40 ? '#d97706' : '#dc2626'
+
+  const content = `
+    <div class="header">
+      <h1>Welcome to EmployArmor</h1>
+    </div>
+    <div class="content">
+      <p>Hi there,</p>
+
+      <p>Thanks for running a compliance scan for <strong>${params.company}</strong>. Here's a summary of what we found:</p>
+
+      <div class="stat-box">
+        <strong>Compliance Score:</strong> <span style="color: ${levelColor}; font-weight: 700;">${complianceScore}% (${level})</span><br>
+        <strong>Risk Score:</strong> ${params.riskScore}/100<br>
+        <strong>Compliance Gaps Found:</strong> ${params.gapCount}<br>
+        <strong>States Covered:</strong> ${params.states.join(', ') || 'None selected'}
+      </div>
+
+      ${params.gapCount > 0 ? `
+      <p>We found <strong>${params.gapCount} compliance gap${params.gapCount !== 1 ? 's' : ''}</strong> that need attention. Your dashboard has the full breakdown with step-by-step guidance to fix each one.</p>
+      ` : `
+      <p>Looking good! Your dashboard is ready with tools to maintain compliance as laws change.</p>
+      `}
+
+      <a href="${APP_URL}/dashboard" class="cta">Open Your Dashboard →</a>
+
+      <p style="margin-top: 24px;">Want help getting set up? Book a free call with our compliance team:</p>
+
+      <a href="https://calendly.com/employarmor/setup" class="cta" style="background: #059669;">Book a Setup Call →</a>
+
+      <p>— The EmployArmor Team</p>
+    </div>`
+
+  return {
+    subject: `Your compliance score: ${complianceScore}% — ${params.gapCount} gap${params.gapCount !== 1 ? 's' : ''} found`,
+    html: emailWrapper(content),
+  }
+}

@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { 
-  BookOpen, TrendingUp, Download, Copy, CheckCircle2, 
+import {
+  BookOpen, TrendingUp, Download, Copy, CheckCircle2,
   Clock, RefreshCw, FileText, Edit3
 } from 'lucide-react'
+import { usePaywall } from '@/hooks/use-paywall'
+import { ActionPaywallModal } from '@/components/paywall-modal'
 
 interface HandbookPolicy {
   id?: string
@@ -26,6 +28,7 @@ export default function HandbookPolicyPage() {
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   const [toggling, setToggling] = useState(false)
+  const { gateAction, paywallOpen, dismissPaywall } = usePaywall()
 
   useEffect(() => {
     fetchPolicy()
@@ -142,6 +145,7 @@ export default function HandbookPolicyPage() {
 
   return (
     <div className="p-8">
+      <ActionPaywallModal open={paywallOpen} onClose={dismissPaywall} />
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Hero Section */}
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-8">
@@ -194,7 +198,7 @@ export default function HandbookPolicyPage() {
               <p className="text-gray-500 mb-6 max-w-md mx-auto">
                 Generate a customized AI use policy based on your organization&apos;s tools, states, and industry.
               </p>
-              <Button size="lg" onClick={generatePolicy} disabled={generating}>
+              <Button size="lg" onClick={() => gateAction(generatePolicy)} disabled={generating}>
                 {generating ? (
                   <>
                     <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
@@ -225,7 +229,7 @@ export default function HandbookPolicyPage() {
                     <Edit3 className="w-4 h-4 mr-1" /> Edit
                   </Button>
                 )}
-                <Button variant="outline" size="sm" onClick={generatePolicy} disabled={generating}>
+                <Button variant="outline" size="sm" onClick={() => gateAction(generatePolicy)} disabled={generating}>
                   <RefreshCw className={`w-4 h-4 mr-1 ${generating ? 'animate-spin' : ''}`} /> Regenerate
                 </Button>
               </div>

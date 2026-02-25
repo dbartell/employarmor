@@ -242,8 +242,8 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
   )
 }
 
-// Hook to manage paywall state
-export function usePaywall() {
+// Legacy hook to manage paywall state (for existing usage)
+export function usePaywallModal() {
   const [showPaywall, setShowPaywall] = useState(false)
   const [paywallStatus, setPaywallStatus] = useState<PaywallStatus | null>(null)
 
@@ -262,4 +262,82 @@ export function usePaywall() {
     triggerPaywall,
     dismissPaywall,
   }
+}
+
+/**
+ * Standalone action-gated paywall modal.
+ * Free users can VIEW everything, but when they click an action button
+ * this modal appears with "Subscribe to take action" messaging.
+ */
+export function ActionPaywallModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+
+  if (!open) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+      <div className="bg-white rounded-2xl shadow-xl max-w-md w-full overflow-hidden">
+        <div className="px-6 py-8 text-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white relative">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-1 rounded-full hover:bg-white/20 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Shield className="w-8 h-8" />
+          </div>
+          <h2 className="text-2xl font-bold mb-2">Subscribe to Take Action</h2>
+          <p className="text-white/90">Upgrade to generate documents, run audits, assign training, and invite team members.</p>
+        </div>
+
+        <div className="px-6 pt-6 pb-2 text-center border-b">
+          <div className="text-4xl font-bold text-gray-900">
+            $199<span className="text-lg font-normal text-gray-500 ml-1">/month</span>
+          </div>
+          <p className="text-sm text-gray-500 mt-1">AI hiring compliance with ongoing support</p>
+        </div>
+
+        <div className="px-6 py-4">
+          <p className="text-sm font-medium text-gray-700 mb-3">What you can do:</p>
+          <ul className="space-y-2">
+            {FEATURES.map((feature, i) => (
+              <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="px-6 pb-6 space-y-3">
+          <Button
+            onClick={() => {
+              setLoading(true)
+              router.push('/settings/billing?upgrade=true')
+            }}
+            disabled={loading}
+            className="w-full h-12 text-base"
+            variant="cta"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              'Start Now — $199/month'
+            )}
+          </Button>
+          <button
+            onClick={onClose}
+            className="w-full text-sm text-gray-500 hover:text-gray-700"
+          >
+            Maybe later
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 }

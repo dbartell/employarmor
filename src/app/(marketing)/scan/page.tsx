@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle, Shield, Building2, Users, Briefcase, FileText, Bell, Zap } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle, Shield, Building2, Users, Briefcase, FileText, Bell, Zap, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { allStates } from '@/data/states'
 import { aiHiringTools, toolCategories } from '@/data/tools'
 import { analyzeToolStack } from '@/lib/tool-analysis'
+import { createClient } from '@/lib/supabase/client'
 
 type Step = 'states' | 'employees' | 'tools' | 'results'
 
@@ -25,8 +26,12 @@ const employeeTiers = [
 ]
 
 export default function ScanPage() {
+  const router = useRouter()
   const [step, setStep] = useState<Step>('states')
   const [analysis, setAnalysis] = useState<any>(null)
+  const [signupLoading, setSignupLoading] = useState(false)
+  const [signupError, setSignupError] = useState<string | null>(null)
+  const [signupForm, setSignupForm] = useState({ email: '', password: '', company: '' })
 
   // Scroll to top on mount (fixes issue when navigating from state pages)
   useEffect(() => {
@@ -402,36 +407,140 @@ export default function ScanPage() {
               </Card>
             )}
 
-            {/* CTA Cards */}
-            <div className="grid md:grid-cols-3 gap-4">
-              <Link href="/signup" className="block">
-                <Card className="p-6 text-center hover:shadow-lg transition-shadow h-full">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <FileText className="w-6 h-6 text-blue-600" />
+            {/* Inline Signup Form */}
+            <Card className="p-8 border-2 border-blue-200 shadow-lg">
+              <div className="text-center mb-6">
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Full Compliance Dashboard</h3>
+                <p className="text-gray-600">Create your free account to track compliance, generate documents, and fix these gaps.</p>
+              </div>
+
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault()
+                  setSignupLoading(true)
+                  setSignupError(null)
+
+                  try {
+                    const res = await fetch('/api/onboard/signup', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        email: signupForm.email,
+                        password: signupForm.password,
+                        company: signupForm.company,
+                        states: data.states,
+                        tools: data.tools,
+                        employeeCount: data.employeeCount,
+                        riskScore: analysis.riskScore,
+                      }),
+                    })
+
+                    const result = await res.json()
+
+                    if (!res.ok) {
+                      setSignupError(result.error || 'Failed to create account')
+                      setSignupLoading(false)
+                      return
+                    }
+
+                    if (result.existingUser) {
+                      setSignupError(result.magicLinkSent
+                        ? 'Account already exists. Check your email for a sign-in link.'
+                        : 'Account already exists. Please sign in.')
+                      setSignupLoading(false)
+                      return
+                    }
+
+                    // Auto sign-in with temp password
+                    const supabase = createClient()
+                    const { error: signInError } = await supabase.auth.signInWithPassword({
+                      email: result.email,
+                      password: result.tempPassword,
+                    })
+
+                    if (signInError) {
+                      setSignupError('Account created but sign-in failed. Please sign in manually.')
+                      setSignupLoading(false)
+                      return
+                    }
+
+                    router.push('/dashboard')
+                  } catch {
+                    setSignupError('Something went wrong. Please try again.')
+                    setSignupLoading(false)
+                  }
+                }}
+                className="space-y-4 max-w-md mx-auto"
+              >
+                <div>
+                  <label htmlFor="signup-email" className="block text-sm font-medium text-gray-700 mb-1">Work Email</label>
+                  <input
+                    id="signup-email"
+                    type="email"
+                    required
+                    value={signupForm.email}
+                    onChange={(e) => setSignupForm(prev => ({ ...prev, email: e.target.value }))}
+                    placeholder="you@company.com"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    disabled={signupLoading}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="signup-password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                  <input
+                    id="signup-password"
+                    type="password"
+                    required
+                    minLength={6}
+                    value={signupForm.password}
+                    onChange={(e) => setSignupForm(prev => ({ ...prev, password: e.target.value }))}
+                    placeholder="Create a password"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    disabled={signupLoading}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="signup-company" className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                  <input
+                    id="signup-company"
+                    type="text"
+                    required
+                    value={signupForm.company}
+                    onChange={(e) => setSignupForm(prev => ({ ...prev, company: e.target.value }))}
+                    placeholder="Your company name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    disabled={signupLoading}
+                  />
+                </div>
+
+                {signupError && (
+                  <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                    <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                    {signupError}
                   </div>
-                  <h4 className="font-bold text-gray-900 mb-1">Get Detailed Report</h4>
-                  <p className="text-sm text-gray-500">Full compliance breakdown with action items</p>
-                </Card>
-              </Link>
-              <Link href="/signup" className="block">
-                <Card className="p-6 text-center hover:shadow-lg transition-shadow h-full">
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Bell className="w-6 h-6 text-amber-600" />
-                  </div>
-                  <h4 className="font-bold text-gray-900 mb-1">Set Up Monitoring</h4>
-                  <p className="text-sm text-gray-500">Get alerts when new laws affect you</p>
-                </Card>
-              </Link>
-              <Link href="/signup" className="block">
-                <Card className="p-6 text-center hover:shadow-lg transition-shadow h-full">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Zap className="w-6 h-6 text-green-600" />
-                  </div>
-                  <h4 className="font-bold text-gray-900 mb-1">Fix These Gaps Now</h4>
-                  <p className="text-sm text-gray-500">Guided compliance workflow to get compliant fast</p>
-                </Card>
-              </Link>
-            </div>
+                )}
+
+                <Button type="submit" size="lg" className="w-full h-14 text-lg" disabled={signupLoading}>
+                  {signupLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Creating your account...
+                    </>
+                  ) : (
+                    <>
+                      Get Started Free <ArrowRight className="w-5 h-5 ml-2" />
+                    </>
+                  )}
+                </Button>
+
+                <p className="text-xs text-center text-gray-500">
+                  Free account includes full dashboard access. No credit card required.
+                </p>
+              </form>
+            </Card>
           </div>
         )}
       </div>

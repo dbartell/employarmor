@@ -29,6 +29,8 @@ import {
 import { Checkbox } from '@/components/ui/checkbox'
 import { bulkAssignModules, exportComplianceReport } from '@/lib/actions/training-modules'
 import { trackEvent } from '@/components/GoogleAnalytics'
+import { usePaywall } from '@/hooks/use-paywall'
+import { ActionPaywallModal } from '@/components/paywall-modal'
 
 interface TrainingModule {
   id: string
@@ -129,6 +131,7 @@ export default function TrainingAdminClient({
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
   const [assigning, setAssigning] = useState(false)
   const [exportingReport, setExportingReport] = useState(false)
+  const { gateAction, paywallOpen, dismissPaywall } = usePaywall()
 
   // Track page view
   useEffect(() => {
@@ -279,6 +282,7 @@ export default function TrainingAdminClient({
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto">
+      <ActionPaywallModal open={paywallOpen} onClose={dismissPaywall} />
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
@@ -286,9 +290,9 @@ export default function TrainingAdminClient({
           <p className="text-gray-600 mt-1">Manage team compliance training and certifications</p>
         </div>
         <div className="flex gap-2">
-          <Button 
+          <Button
             variant="outline"
-            onClick={handleExportReport}
+            onClick={() => gateAction(handleExportReport)}
             disabled={exportingReport}
           >
             <FileText className="w-4 h-4 mr-2" />
@@ -334,7 +338,13 @@ export default function TrainingAdminClient({
                     </p>
                   )}
                 </div>
-                <Button size="sm">
+                <Button size="sm" onClick={() => gateAction(() => {
+                  // Select first recommended module
+                  if (recommendedModules.length > 0) {
+                    setSelectedModule(recommendedModules[0].id)
+                    setAssignModalOpen(true)
+                  }
+                })}>
                   <Plus className="w-4 h-4 mr-1" />
                   Assign Recommended Modules
                 </Button>
@@ -497,20 +507,21 @@ export default function TrainingAdminClient({
                       <Progress value={module.completionRate} className="h-1.5" />
                     </div>
 
+                    <Button
+                      size="sm"
+                      className="w-full"
+                      onClick={() => gateAction(() => {
+                        setSelectedModule(module.id)
+                        setAssignModalOpen(true)
+                      })}
+                    >
+                      <Plus className="w-3 h-3 mr-1" />
+                      Assign
+                    </Button>
                     <Dialog open={assignModalOpen && selectedModule === module.id} onOpenChange={(open) => {
                       setAssignModalOpen(open)
                       if (!open) setSelectedModule(null)
                     }}>
-                      <DialogTrigger asChild>
-                        <Button 
-                          size="sm" 
-                          className="w-full"
-                          onClick={() => setSelectedModule(module.id)}
-                        >
-                          <Plus className="w-3 h-3 mr-1" />
-                          Assign
-                        </Button>
-                      </DialogTrigger>
                       <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
                         <DialogHeader>
                           <DialogTitle>Assign {module.title}</DialogTitle>

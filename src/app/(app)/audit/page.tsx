@@ -12,6 +12,8 @@ import { CalendlyCTA, ContextualHelp } from "@/components/calendly-cta"
 import { AuditResultsHelp, RiskScoreHelp, StateLawsHelp } from "@/components/help-content"
 import { useStateContext } from "@/lib/state-context"
 import { trackEvent } from "@/components/GoogleAnalytics"
+import { usePaywall } from "@/hooks/use-paywall"
+import { ActionPaywallModal } from "@/components/paywall-modal"
 
 type AuditStep = 'states' | 'tools' | 'usage' | 'results'
 type ViewMode = 'loading' | 'wizard' | 'results'
@@ -56,7 +58,8 @@ export default function AuditPage() {
   const [showHistory, setShowHistory] = useState(false)
   const [auditHistory, setAuditHistory] = useState<AuditRecord[]>([])
   const [loadingHistory, setLoadingHistory] = useState(false)
-  
+  const { gateAction, paywallOpen, dismissPaywall } = usePaywall()
+
   // Get current state from context (state-as-product architecture)
   const { currentState, stateName } = useStateContext()
 
@@ -297,9 +300,10 @@ export default function AuditPage() {
   // Results view (auto-populated or after wizard)
   if (viewMode === 'results') {
     const regulatedStateCount = data.states.filter(s => regulatedStates.includes(s)).length
-    
+
     return (
       <div className="p-6 md:p-8 max-w-4xl mx-auto">
+        <ActionPaywallModal open={paywallOpen} onClose={dismissPaywall} />
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -438,9 +442,9 @@ export default function AuditPage() {
             ) : (
               <>
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  <Button 
-                    className="h-auto py-4" 
-                    onClick={handleSaveAudit}
+                  <Button
+                    className="h-auto py-4"
+                    onClick={() => gateAction(handleSaveAudit)}
                     disabled={saving}
                   >
                     <div className="flex items-center gap-3">

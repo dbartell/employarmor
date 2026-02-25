@@ -22,6 +22,8 @@ import {
 } from "@/lib/actions/documents"
 import { trackEvent } from "@/components/GoogleAnalytics"
 import { useStateContext } from "@/lib/state-context"
+import { usePaywall } from "@/hooks/use-paywall"
+import { ActionPaywallModal } from "@/components/paywall-modal"
 
 // Document type configuration with behaviors
 type DocumentBehavior = 'singleton' | 'versioned' | 'multiple'
@@ -711,7 +713,8 @@ export default function DocumentsPage() {
   
   // Get current state from context (state-as-product architecture)
   const { currentState, stateName } = useStateContext()
-  
+  const { gateAction, paywallOpen, dismissPaywall } = usePaywall()
+
   // Modal state
   const [modalOpen, setModalOpen] = useState(false)
   const [modalDocType, setModalDocType] = useState<DocumentTypeConfig | null>(null)
@@ -750,10 +753,12 @@ export default function DocumentsPage() {
 
   // Handlers
   const handleGenerate = (docType: DocumentTypeConfig) => {
-    setModalDocType(docType)
-    setModalExistingDoc(null)
-    setModalIsVersioned(false)
-    setModalOpen(true)
+    gateAction(() => {
+      setModalDocType(docType)
+      setModalExistingDoc(null)
+      setModalIsVersioned(false)
+      setModalOpen(true)
+    })
   }
 
   const handleEdit = (docType: DocumentTypeConfig, doc: Doc) => {
@@ -810,6 +815,7 @@ export default function DocumentsPage() {
 
   return (
     <div className="p-6 md:p-8 max-w-4xl mx-auto">
+      <ActionPaywallModal open={paywallOpen} onClose={dismissPaywall} />
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">

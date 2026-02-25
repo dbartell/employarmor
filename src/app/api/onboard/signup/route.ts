@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { trackServerEvent } from '@/lib/analytics'
+import { sendEmail } from '@/lib/emails/send'
+import { scanWelcomeEmail } from '@/lib/emails/notification-templates'
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -108,12 +110,26 @@ export async function POST(req: NextRequest) {
       .eq('email', email)
 
     // Track signup
-    trackServerEvent('signup_completed', { 
+    trackServerEvent('signup_completed', {
       source: 'onboard',
       riskScore,
       statesCount: states?.length || 0,
       toolsCount: tools?.length || 0,
     }, userId, userId)
+
+    // Send welcome email with scan results
+    try {
+      const { subject, html } = scanWelcomeEmail({
+        company: company,
+        riskScore: riskScore || 0,
+        gapCount: tools?.length || 0,
+        states: states || [],
+      })
+      await sendEmail({ to: email, subject, html })
+    } catch (emailError) {
+      console.error('Welcome email error:', emailError)
+      // Don't block signup if email fails
+    }
 
     // Return email and temp password for client-side auto-login
     return NextResponse.json({ 

@@ -14,6 +14,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { usePaywall } from "@/hooks/use-paywall"
+import { ActionPaywallModal } from "@/components/paywall-modal"
 
 interface InviteEmployeeDialogProps {
   orgId: string
@@ -22,6 +24,7 @@ interface InviteEmployeeDialogProps {
 export function InviteEmployeeDialog({ orgId }: InviteEmployeeDialogProps) {
   const router = useRouter()
   const [open, setOpen] = useState(false)
+  const { gateAction, paywallOpen, dismissPaywall } = usePaywall()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [inviteUrl, setInviteUrl] = useState<string | null>(null)
@@ -81,13 +84,13 @@ export function InviteEmployeeDialog({ orgId }: InviteEmployeeDialogProps) {
   }
 
   return (
+    <>
+    <ActionPaywallModal open={paywallOpen} onClose={dismissPaywall} />
+    <Button className="gap-2" onClick={() => gateAction(() => setOpen(true))}>
+      <UserPlus className="w-4 h-4" />
+      Invite Employee
+    </Button>
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="gap-2">
-          <UserPlus className="w-4 h-4" />
-          Invite Employee
-        </Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Invite Team Member</DialogTitle>
@@ -213,5 +216,6 @@ export function InviteEmployeeDialog({ orgId }: InviteEmployeeDialogProps) {
         )}
       </DialogContent>
     </Dialog>
+    </>
   )
 }
