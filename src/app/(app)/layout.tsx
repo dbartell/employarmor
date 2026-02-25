@@ -25,7 +25,7 @@ export default async function AppLayout({
   // Get organization info including state-as-product fields
   const { data: org } = await supabase
     .from('organizations')
-    .select('name, primary_state, active_states')
+    .select('name, primary_state, active_states, owner_id')
     .eq('id', user.id)
     .single()
 
@@ -37,10 +37,22 @@ export default async function AppLayout({
   let profile = null
   let userRole: UserRole | null = null
   
-  // If user owns an organization, auto-create owner profile
-  if (org) {
+  // If user owns an organization (created it or is designated owner), auto-create owner profile
+  const isOrgOwner = org && (org.owner_id === user.id || !org.owner_id)
+  if (org && isOrgOwner) {
     profile = await ensureOwnerProfile(user.id, user.id, userEmail)
     userRole = profile?.role || null
+  } else if (org) {
+    // User has an org record matching their ID but isn't the owner (shouldn't happen, but handle it)
+    const { data: employeeProfiles } = await supabase
+      .from('employee_profiles')
+      .select('*')
+      .eq('user_id', user.id)
+      .limit(1)
+    if (employeeProfiles && employeeProfiles.length > 0) {
+      profile = employeeProfiles[0]
+      userRole = profile.role as UserRole
+    }
   } else {
     // User is an employee, not org owner - find their profile
     const { data: employeeProfiles } = await supabase

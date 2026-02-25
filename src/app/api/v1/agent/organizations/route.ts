@@ -95,6 +95,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       .from('organizations')
       .insert({
         id: userId,
+        owner_id: userId,
         name: body.company_name,
         states: [body.state],
         quiz_tools: body.ai_tools_used || [],

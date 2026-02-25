@@ -53,6 +53,7 @@ export default function SignupPage() {
         .from('organizations')
         .insert({
           id: data.user.id,
+          owner_id: data.user.id,
           name: companyName,
           size: 'medium',
           industry: 'other',

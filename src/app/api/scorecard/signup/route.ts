@@ -57,6 +57,7 @@ export async function POST(req: NextRequest) {
       .from('organizations')
       .insert({
         id: userId,
+        owner_id: userId,
         name: company,
         states: states || [],
         quiz_tools: tools || [], // Store selected tools from quiz

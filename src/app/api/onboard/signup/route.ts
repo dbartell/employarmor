@@ -78,6 +78,7 @@ export async function POST(req: NextRequest) {
       .insert({
         id: userId,
         name: company,
+        owner_id: userId,
         states: states || [],
         quiz_tools: tools || [],
         quiz_usages: usages || [],

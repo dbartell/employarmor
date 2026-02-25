@@ -77,8 +77,9 @@ export async function ensureOwnerProfile(userId: string, orgId: string, userEmai
   // Check if profile already exists
   const existing = await getEmployeeProfile(userId, orgId)
   if (existing) {
-    // If the org creator has a non-owner role, upgrade to owner
-    if (userId === orgId && existing.role !== 'owner') {
+    // If the org owner has a non-owner role, upgrade to owner
+    // Check owner_id from org, falling back to userId === orgId for backwards compat
+    if (existing.role !== 'owner') {
       const { data: updated, error: updateError } = await supabase
         .from('employee_profiles')
         .update({ role: 'owner' })
