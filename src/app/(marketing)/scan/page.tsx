@@ -103,9 +103,13 @@ export default function ScanPage() {
       ...toolAnalysis.medium.flatMap(t => t.laws),
     ]))
 
+    const complianceScore = 100 - riskScore
+    const complianceLevel = complianceScore >= 70 ? 'Good' : complianceScore >= 40 ? 'Fair' : 'Poor'
+
     setAnalysis({
       riskScore,
-      riskLevel: riskScore > 70 ? 'High' : riskScore > 40 ? 'Medium' : 'Low',
+      complianceScore,
+      complianceLevel,
       gaps,
       applicableLaws,
       toolAnalysis,
@@ -152,7 +156,7 @@ export default function ScanPage() {
           <p className="text-xl text-gray-600">
             {step === 'results'
               ? 'See where you stand with AI hiring laws'
-              : 'Answer 3 quick questions to see your risk level'
+              : 'Answer 3 quick questions to see your compliance score'
             }
           </p>
         </div>
@@ -321,27 +325,29 @@ export default function ScanPage() {
         {/* Results */}
         {step === 'results' && analysis && (
           <div className="space-y-6">
-            {/* Risk Score */}
+            {/* Compliance Score */}
             <Card className="p-8">
               <div className="text-center">
                 <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4 ${
-                  analysis.riskLevel === 'High' ? 'bg-red-100 text-red-700' :
-                  analysis.riskLevel === 'Medium' ? 'bg-amber-100 text-amber-700' :
-                  'bg-green-100 text-green-700'
+                  analysis.complianceLevel === 'Good' ? 'bg-green-100 text-green-700' :
+                  analysis.complianceLevel === 'Fair' ? 'bg-amber-100 text-amber-700' :
+                  'bg-red-100 text-red-700'
                 }`}>
-                  {analysis.riskLevel === 'High' && <AlertTriangle className="w-4 h-4" />}
-                  {analysis.riskLevel} Risk
+                  {analysis.complianceLevel === 'Poor' && <AlertTriangle className="w-4 h-4" />}
+                  {analysis.complianceLevel}
                 </div>
 
                 <div className="text-6xl font-bold text-gray-900 mb-2">
-                  {analysis.riskScore}
-                  <span className="text-2xl text-gray-400">/100</span>
+                  {analysis.complianceScore}
+                  <span className="text-2xl text-gray-400">%</span>
                 </div>
 
+                <p className="text-lg text-gray-500 mb-1">Compliance Score</p>
+
                 <p className="text-gray-600">
-                  {analysis.riskLevel === 'High'
+                  {analysis.complianceLevel === 'Poor'
                     ? 'You have significant compliance gaps that need immediate attention'
-                    : analysis.riskLevel === 'Medium'
+                    : analysis.complianceLevel === 'Fair'
                     ? 'You have some compliance gaps to address'
                     : 'You\'re in good shape, but stay vigilant'
                   }

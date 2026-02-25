@@ -88,10 +88,10 @@ function CircularProgress({
         </defs>
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className={`text-4xl font-bold ${isComplete ? 'text-green-600' : 'text-white'}`}>
+        <span className={`text-2xl font-bold ${isComplete ? 'text-green-600' : 'text-white'}`}>
           {animatedPercentage}%
         </span>
-        <span className="text-sm text-white/80 mt-1">{label}</span>
+        <span className="text-xs text-white/80 mt-0.5">{label}</span>
       </div>
     </div>
   )
@@ -409,17 +409,17 @@ export default function DashboardPage() {
         }`}>
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
           
-          <div className="relative py-10 px-6 md:px-8 flex flex-col items-center text-center">
-            <div className="flex items-center gap-2 mb-4 text-white/70 text-sm">
+          <div className="relative py-6 px-6 md:px-8 flex flex-col items-center text-center">
+            <div className="flex items-center gap-2 mb-2 text-white/70 text-sm">
               <Building2 className="w-4 h-4" />
               <span>{data.orgName}</span>
             </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-full p-4 mb-5">
-              <CircularProgress 
-                percentage={progress} 
-                size={180} 
-                strokeWidth={14}
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 mb-3">
+              <CircularProgress
+                percentage={progress}
+                size={120}
+                strokeWidth={10}
                 isComplete={allComplete}
                 label="Compliance"
                 color={scoreColor}
@@ -428,21 +428,21 @@ export default function DashboardPage() {
 
             {allComplete ? (
               <>
-                <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+                <h1 className="text-2xl font-bold text-white flex items-center gap-3">
                   <span>🎉</span> You're Compliant!
                 </h1>
-                <p className="text-white/80 mt-2">All {totalReqs} requirements complete.</p>
-                <div className="mt-4 inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                  <Award className="w-5 h-5 text-yellow-300" />
-                  <span className="text-white font-medium">Compliance Champion</span>
+                <p className="text-white/80 mt-1">All {totalReqs} requirements complete.</p>
+                <div className="mt-2 inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5">
+                  <Award className="w-4 h-4 text-yellow-300" />
+                  <span className="text-white text-sm font-medium">Compliance Champion</span>
                 </div>
               </>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-white">
+                <h1 className="text-xl font-bold text-white">
                   {completedReqs} of {totalReqs} tasks complete
                 </h1>
-                <div className="flex items-center gap-3 mt-3">
+                <div className="flex items-center gap-3 mt-2">
                   <div className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium ${
                     progress >= 70 
                       ? 'bg-green-500/80 text-white' 
