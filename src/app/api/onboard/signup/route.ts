@@ -24,18 +24,52 @@ export async function POST(req: NextRequest) {
     console.log('Checking for existing user:', email, 'Found:', existingUser?.id || 'none', 'Total users:', existingUserData?.users?.length)
 
     if (existingUser) {
-      // Send magic link for passwordless sign-in
-      const { error: otpError } = await supabaseAdmin.auth.signInWithOtp({
-        email: email,
-        options: {
-          shouldCreateUser: false,
-          emailRedirectTo: `${req.nextUrl.origin}/auth/callback?redirect=/dashboard`,
-        },
+      const userId = existingUser.id
+
+      // Check if they have an org — if not, create one
+      const { data: existingOrg } = await supabaseAdmin
+        .from('organizations')
+        .select('id')
+        .eq('id', userId)
+        .single()
+
+      if (!existingOrg) {
+        // Create org for existing user (they signed up without going through onboard)
+        await supabaseAdmin
+          .from('organizations')
+          .insert({
+            id: userId,
+            owner_id: userId,
+            name: company,
+            states: states || [],
+            quiz_tools: tools || [],
+            quiz_usages: usages || [],
+            quiz_risk_score: riskScore,
+            employee_count: employeeCount || null,
+            plan: 'trial',
+            trial_started_at: new Date().toISOString(),
+            documents_generated: 0,
+          })
+
+        // Create user record if missing
+        await supabaseAdmin
+          .from('users')
+          .upsert({
+            id: userId,
+            org_id: userId,
+            email: email,
+            role: 'admin',
+          }, { onConflict: 'id' })
+      }
+
+      // Update their password so we can auto-login them
+      const tempPassword = crypto.randomUUID()
+      const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+        password: tempPassword,
       })
 
-      if (otpError) {
-        console.error('Magic link error:', otpError)
-        // Fall back to asking them to sign in
+      if (updateError) {
+        console.error('Password update error:', updateError)
         return NextResponse.json({ 
           existingUser: true,
           email: email,
@@ -44,10 +78,11 @@ export async function POST(req: NextRequest) {
       }
 
       return NextResponse.json({ 
-        existingUser: true,
+        success: true,
         email: email,
-        magicLinkSent: true,
-      }, { status: 200 })
+        tempPassword: tempPassword,
+        userId: userId,
+      })
     }
 
     // Create user with a temp password (we'll return it for auto-login)
