@@ -60,6 +60,17 @@ export async function POST(req: NextRequest) {
             email: email,
             role: 'admin',
           }, { onConflict: 'id' })
+
+        // Create employee_profiles row as owner (bypass RLS with admin client)
+        await supabaseAdmin
+          .from('employee_profiles')
+          .upsert({
+            user_id: userId,
+            organization_id: userId,
+            email: email,
+            role: 'owner',
+            joined_at: new Date().toISOString(),
+          }, { onConflict: 'user_id,organization_id' })
       }
 
       // Update their password so we can auto-login them
@@ -137,6 +148,18 @@ export async function POST(req: NextRequest) {
         org_id: userId,
         email: email,
         role: 'admin',
+      })
+
+    // Create employee_profiles row as owner (bypass RLS with admin client)
+    // This is what the layout checks for role — without it, user gets employee nav
+    await supabaseAdmin
+      .from('employee_profiles')
+      .insert({
+        user_id: userId,
+        organization_id: userId,
+        email: email,
+        role: 'owner',
+        joined_at: new Date().toISOString(),
       })
 
     // Convert lead if exists
