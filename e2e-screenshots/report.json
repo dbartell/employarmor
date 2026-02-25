@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-24T00:01:16.821Z",
+  "timestamp": "2026-02-25T16:01:36.554Z",
   "baseUrl": "https://employarmor.vercel.app",
   "scenariosRun": [
     "onboarding",
@@ -19,7 +19,7 @@
       "description": "Admin dashboard with compliance score",
       "scenario": "onboarding",
       "url": "https://employarmor.vercel.app/dashboard",
-      "size": 366153
+      "size": 344129
     },
     {
       "step": 2,
@@ -91,7 +91,7 @@
       "description": "Complete compliance packet",
       "scenario": "compliance",
       "url": "https://employarmor.vercel.app/compliance-packet",
-      "size": 136185
+      "size": 136189
     },
     {
       "step": 10,
@@ -108,8 +108,8 @@
       "filename": "011-compliance-training.png",
       "description": "Training module management",
       "scenario": "compliance",
-      "url": "https://employarmor.vercel.app/training",
-      "size": 114727
+      "url": "https://employarmor.vercel.app/dashboard",
+      "size": 344129
     },
     {
       "step": 12,
@@ -136,7 +136,7 @@
       "description": "Assigned training courses",
       "scenario": "portal",
       "url": "https://employarmor.vercel.app/portal/training",
-      "size": 66901
+      "size": 71250
     },
     {
       "step": 15,
@@ -163,7 +163,7 @@
       "description": "Compliance scan: state selection",
       "scenario": "candidate",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 275969
+      "size": 278314
     },
     {
       "step": 18,
@@ -172,7 +172,7 @@
       "description": "States selected: IL, CA, CO",
       "scenario": "candidate",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 278068
+      "size": 280473
     },
     {
       "step": 19,
@@ -181,7 +181,7 @@
       "description": "Compliance scan: employee count",
       "scenario": "candidate",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 268550
+      "size": 271114
     },
     {
       "step": 20,
@@ -190,7 +190,7 @@
       "description": "Selected 51-100 employees",
       "scenario": "candidate",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 268743
+      "size": 271262
     },
     {
       "step": 21,
@@ -199,7 +199,7 @@
       "description": "Compliance scan: AI tool selection",
       "scenario": "candidate",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 270785
+      "size": 273352
     },
     {
       "step": 22,
@@ -208,7 +208,7 @@
       "description": "Selected tools: LinkedIn Recruiter, HireVue, Greenhouse",
       "scenario": "candidate",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 270713
+      "size": 273306
     },
     {
       "step": 23,
@@ -217,7 +217,7 @@
       "description": "Compliance scan results",
       "scenario": "candidate",
       "url": "https://employarmor.vercel.app/scan",
-      "size": 270713
+      "size": 273306
     },
     {
       "step": 24,

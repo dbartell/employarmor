@@ -9,6 +9,7 @@ import {
 } from "lucide-react"
 import type { QuizQuestion } from "@/lib/training-data"
 import { PASSING_SCORE } from "@/lib/training-data"
+import { TrainingAvatar } from "./training-avatar"
 
 interface QuizProps {
   questions: QuizQuestion[]
@@ -70,37 +71,35 @@ export function Quiz({ questions, sectionNumber, onSubmit, onContinue }: QuizPro
       <Card>
         <CardContent className="pt-6">
           {result.passed ? (
-            <div className="text-center py-8">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                {result.trackComplete ? (
-                  <Trophy className="w-10 h-10 text-yellow-500" />
-                ) : (
-                  <CheckCircle className="w-10 h-10 text-green-600" />
-                )}
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                {result.trackComplete ? 'Training Complete!' : 'Quiz Passed!'}
-              </h2>
-              <p className="text-lg text-gray-600 mb-2">
-                You scored <span className="font-bold text-green-600">{result.score}%</span>
-              </p>
-              <p className="text-sm text-gray-500 mb-6">
-                {result.trackComplete 
-                  ? 'Congratulations! You\'ve completed all sections. Your certificate is ready!'
-                  : 'Great job! You can now proceed to the next section.'
+            <div className="py-6">
+              <TrainingAvatar
+                character="sarah"
+                pose={result.trackComplete ? 'certificate' : 'thumbsup'}
+                name="Sarah"
+                dialogue={result.trackComplete 
+                  ? `Congratulations! You scored ${result.score}% and completed all sections! Your certificate is ready — you've earned it! 🎉`
+                  : `Great job! You scored ${result.score}%. You really know your stuff! Let's keep going to the next section.`
                 }
-              </p>
-              <Button onClick={onContinue} size="lg">
-                {result.trackComplete ? 'View Certificate' : 'Continue'}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+                side="left"
+                className="mb-6"
+              />
+              <div className="text-center">
+                <Button onClick={onContinue} size="lg">
+                  {result.trackComplete ? 'View Certificate' : 'Continue'}
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
             </div>
           ) : (
-            <div className="text-center py-8">
-              <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <XCircle className="w-10 h-10 text-red-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Not Quite</h2>
+            <div className="py-6">
+              <TrainingAvatar
+                character="sarah"
+                pose="concerned"
+                name="Sarah"
+                dialogue={`You scored ${result.score}%, but you need ${PASSING_SCORE}% to pass. Don't worry — review the answers below and try again. You've got this!`}
+                side="left"
+                className="mb-6"
+              />
               <p className="text-lg text-gray-600 mb-2">
                 You scored <span className="font-bold text-red-600">{result.score}%</span>
               </p>
@@ -174,6 +173,15 @@ export function Quiz({ questions, sectionNumber, onSubmit, onContinue }: QuizPro
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <TrainingAvatar
+          character="sarah"
+          pose="thinking"
+          name="Sarah"
+          dialogue="Let's see what you've learned! Take your time with each question — think about the real-world scenarios we covered."
+          side="right"
+          showBackground={false}
+          className="mb-6"
+        />
         <div className="space-y-6">
           {questions.map((question, qIndex) => (
             <div key={question.id} className="border-b border-gray-200 pb-6 last:border-0">

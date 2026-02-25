@@ -10,6 +10,7 @@ import {
   Loader2, BookOpen, Video, FileQuestion
 } from "lucide-react"
 import { Quiz } from "@/components/training/quiz"
+import { TrainingAvatar, type AvatarPose } from "@/components/training/training-avatar"
 import { getTrackData, type TrainingTrack } from "@/lib/training-data"
 import { trackEvent } from "@/components/GoogleAnalytics"
 
@@ -252,27 +253,32 @@ export default function TrainingSectionPage({ params }: PageProps) {
                 </div>
               </CardHeader>
               <CardContent>
-                {/* Video placeholder - will be Synthesia embed */}
-                <div className="aspect-video bg-gray-900 rounded-lg flex items-center justify-center mb-4">
-                  <div className="text-center text-white">
-                    <PlayCircle className="w-16 h-16 mx-auto mb-4 opacity-75" />
-                    <p className="text-lg font-medium">Video Coming Soon</p>
-                    <p className="text-sm text-gray-400">Synthesia video will be embedded here</p>
+                {/* Avatar introduction */}
+                <TrainingAvatar
+                  character="sarah"
+                  pose={sectionNumber === 1 ? 'welcome' : 'presenting'}
+                  name="Sarah"
+                  dialogue={`Welcome to Section ${sectionNumber}: ${section.title}. Let me walk you through what you need to know.`}
+                  side="left"
+                  className="mb-6"
+                />
+                
+                {/* Content with avatar context */}
+                <div className="p-5 bg-gray-50 rounded-xl prose prose-sm max-w-none mb-4">
+                  <div className="whitespace-pre-wrap text-gray-700">
+                    {section.content}
                   </div>
                 </div>
-                
-                {/* Text content fallback */}
-                <details className="mb-4">
-                  <summary className="cursor-pointer text-sm text-blue-600 hover:text-blue-700">
-                    <BookOpen className="w-4 h-4 inline mr-1" />
-                    Read text version
-                  </summary>
-                  <div className="mt-4 p-4 bg-gray-50 rounded-lg prose prose-sm max-w-none">
-                    <div className="whitespace-pre-wrap text-gray-700">
-                      {section.content}
-                    </div>
-                  </div>
-                </details>
+
+                {/* Key point callout with avatar */}
+                <TrainingAvatar
+                  character="sarah"
+                  pose="important"
+                  name="Sarah"
+                  dialogue="Before we move on to the quiz, make sure you understand the key points above. Take your time — compliance matters!"
+                  side="right"
+                  className="mb-4"
+                />
 
                 <Button onClick={handleMarkVideoComplete} className="w-full">
                   <CheckCircle className="w-4 h-4 mr-2" />
