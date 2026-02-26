@@ -137,15 +137,17 @@ export async function POST(req: NextRequest) {
     const employeeCount = quizData?.employeeCount || leadData?.employee_count || null
 
     console.log('=== BOOTSTRAP: Creating org ===')
-    console.log('States (final):', states)
-    console.log('Tools (final):', tools)
-    console.log('Risk Score (final):', riskScore)
-    console.log('Company Name (final):', companyName)
+
+    // Ensure users row exists first (owner_id FK requires it)
+    await supabaseAdmin
+      .from('users')
+      .upsert({ id: userId, email: email || '', company_name: companyName }, { onConflict: 'id' })
 
     // Create organization
     const orgData = {
       id: userId,
       name: companyName,
+      owner_id: userId,
       states,
       quiz_tools: tools,
       quiz_risk_score: riskScore,
@@ -179,12 +181,7 @@ export async function POST(req: NextRequest) {
     if (!existingUser && email) {
       await supabaseAdmin
         .from('users')
-        .insert({
-          id: userId,
-          org_id: userId,
-          email,
-          role: 'admin',
-        })
+        .upsert({ id: userId, email, company_name: companyName }, { onConflict: 'id' })
     }
 
     // Create organization_members record for owner

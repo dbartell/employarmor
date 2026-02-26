@@ -52,6 +52,11 @@ export async function POST(req: NextRequest) {
 
     userId = authData.user.id
 
+    // Ensure users row exists first (owner_id FK requires it)
+    await supabaseAdmin
+      .from('users')
+      .upsert({ id: userId, email, company_name: company }, { onConflict: 'id' })
+
     // Create organization with trial_started_at and quiz data
     const { error: orgError } = await supabaseAdmin
       .from('organizations')
@@ -60,28 +65,17 @@ export async function POST(req: NextRequest) {
         owner_id: userId,
         name: company,
         states: states || [],
-        quiz_tools: tools || [], // Store selected tools from quiz
+        quiz_tools: tools || [],
         quiz_risk_score: riskScore,
         plan: 'trial',
-        subscription_status: 'trialing', // Allows access during trial
+        subscription_status: 'trialing',
         trial_started_at: new Date().toISOString(),
-        documents_generated: 0, // Track for paywall
+        documents_generated: 0,
       })
 
     if (orgError) {
-      console.error('Org error:', orgError)
-      // Continue anyway - org will be created on first login if needed
+      console.error('Scorecard org error:', JSON.stringify(orgError))
     }
-
-    // Create user record
-    await supabaseAdmin
-      .from('users')
-      .insert({
-        id: userId,
-        org_id: userId,
-        email: email,
-        role: 'admin',
-      })
 
     // Create employee_profiles row as owner (layout checks this for role/nav)
     await supabaseAdmin

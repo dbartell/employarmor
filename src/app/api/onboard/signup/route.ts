@@ -34,8 +34,13 @@ export async function POST(req: NextRequest) {
         .single()
 
       if (!existingOrg) {
-        // Create org for existing user (they signed up without going through onboard)
+        // Ensure users row exists first (owner_id FK requires it)
         await supabaseAdmin
+          .from('users')
+          .upsert({ id: userId, email: email, company_name: company }, { onConflict: 'id' })
+
+        // Create org for existing user
+        const { error: newOrgError } = await supabaseAdmin
           .from('organizations')
           .insert({
             id: userId,
@@ -51,17 +56,11 @@ export async function POST(req: NextRequest) {
             documents_generated: 0,
           })
 
-        // Create user record if missing
-        await supabaseAdmin
-          .from('users')
-          .upsert({
-            id: userId,
-            org_id: userId,
-            email: email,
-            role: 'admin',
-          }, { onConflict: 'id' })
+        if (newOrgError) {
+          console.error('Org creation error (existing user):', JSON.stringify(newOrgError))
+        }
 
-        // Create employee_profiles row as owner (bypass RLS with admin client)
+        // Create employee_profiles row as owner
         await supabaseAdmin
           .from('employee_profiles')
           .upsert({
@@ -118,6 +117,20 @@ export async function POST(req: NextRequest) {
 
     const userId = authData.user.id
 
+    // Ensure users row exists (trigger may auto-create it, but upsert to be safe)
+    // owner_id FK on organizations requires this row to exist first
+    const { error: userError } = await supabaseAdmin
+      .from('users')
+      .upsert({
+        id: userId,
+        email: email,
+        company_name: company,
+      }, { onConflict: 'id' })
+
+    if (userError) {
+      console.error('User upsert error:', userError)
+    }
+
     // Create organization with onboarding data
     const { error: orgError } = await supabaseAdmin
       .from('organizations')
@@ -136,31 +149,24 @@ export async function POST(req: NextRequest) {
       })
 
     if (orgError) {
-      console.error('Org error:', orgError)
-      // Continue anyway
+      console.error('Org creation error:', JSON.stringify(orgError))
     }
-
-    // Create user record
-    await supabaseAdmin
-      .from('users')
-      .insert({
-        id: userId,
-        org_id: userId,
-        email: email,
-        role: 'admin',
-      })
 
     // Create employee_profiles row as owner (bypass RLS with admin client)
     // This is what the layout checks for role — without it, user gets employee nav
-    await supabaseAdmin
+    const { error: profileError } = await supabaseAdmin
       .from('employee_profiles')
-      .insert({
+      .upsert({
         user_id: userId,
         organization_id: userId,
         email: email,
         role: 'owner',
         joined_at: new Date().toISOString(),
-      })
+      }, { onConflict: 'user_id,organization_id' })
+
+    if (profileError) {
+      console.error('Employee profile error:', JSON.stringify(profileError))
+    }
 
     // Convert lead if exists
     await supabaseAdmin
