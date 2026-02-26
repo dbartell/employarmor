@@ -5,7 +5,7 @@ import { Shield, FileText, GraduationCap, ClipboardCheck, AlertTriangle, ArrowRi
 
 export default function HomePage() {
   return (
-    <div className="relative">
+    <div>
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,18 +37,6 @@ export default function HomePage() {
             <p className="text-sm text-gray-600 mt-4">
               No credit card required • 5-minute assessment
             </p>
-            <div className="flex items-center justify-center gap-3 mt-6">
-              <div className="flex -space-x-2">
-                {[1,2,3,4,5].map(i => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm text-gray-600">
-                <span className="font-semibold text-gray-900">1,000+</span> companies trust EmployArmor
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -292,16 +280,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-
-      {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t border-gray-200 shadow-lg z-40 p-4">
-        <Link href="/scan" className="block">
-          <Button size="lg" variant="cta" className="w-full">
-            Get Free Compliance Score
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-        </Link>
-      </div>
     </div>
   )
 }

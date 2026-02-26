@@ -36,7 +36,6 @@ export function usePaywall(): UsePaywallReturn {
           .single()
 
         const status = org?.subscription_status
-        // Show paywall for 'none', null, undefined, or any non-active status
         setCanAct(status === "active" || status === "lifetime")
       } catch {
         setCanAct(false)
