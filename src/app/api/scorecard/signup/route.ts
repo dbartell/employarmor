@@ -83,6 +83,17 @@ export async function POST(req: NextRequest) {
         role: 'admin',
       })
 
+    // Create employee_profiles row as owner (layout checks this for role/nav)
+    await supabaseAdmin
+      .from('employee_profiles')
+      .upsert({
+        user_id: userId,
+        organization_id: userId,
+        email: email,
+        role: 'owner',
+        joined_at: new Date().toISOString(),
+      }, { onConflict: 'user_id,organization_id' })
+
     // Update lead with user_id if exists
     await supabaseAdmin
       .from('leads')

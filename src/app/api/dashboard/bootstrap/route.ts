@@ -89,6 +89,27 @@ export async function POST(req: NextRequest) {
             joined_at: new Date().toISOString(),
           })
       }
+
+      // Ensure employee_profiles record exists (layout checks this for role/nav)
+      const { data: existingProfile } = await supabaseAdmin
+        .from('employee_profiles')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('organization_id', userId)
+        .single()
+
+      if (!existingProfile && email) {
+        console.log('Creating missing employee_profiles record for existing org owner')
+        await supabaseAdmin
+          .from('employee_profiles')
+          .upsert({
+            user_id: userId,
+            organization_id: userId,
+            email: email,
+            role: 'owner',
+            joined_at: new Date().toISOString(),
+          }, { onConflict: 'user_id,organization_id' })
+      }
       
       return NextResponse.json({ success: true, action: 'updated' })
     }
@@ -186,7 +207,31 @@ export async function POST(req: NextRequest) {
       
       if (memberError) {
         console.error('Failed to create membership:', memberError)
-        // Don't fail the whole request, but log it
+      }
+    }
+
+    // Create employee_profiles record for owner (layout checks this for role/nav)
+    const { data: existingProfile } = await supabaseAdmin
+      .from('employee_profiles')
+      .select('id')
+      .eq('user_id', userId)
+      .eq('organization_id', userId)
+      .single()
+
+    if (!existingProfile) {
+      console.log('Creating employee_profiles record for owner')
+      const { error: profileError } = await supabaseAdmin
+        .from('employee_profiles')
+        .upsert({
+          user_id: userId,
+          organization_id: userId,
+          email: email || '',
+          role: 'owner',
+          joined_at: new Date().toISOString(),
+        }, { onConflict: 'user_id,organization_id' })
+
+      if (profileError) {
+        console.error('Failed to create employee_profiles:', profileError)
       }
     }
 

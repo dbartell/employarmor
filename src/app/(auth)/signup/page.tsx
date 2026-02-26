@@ -76,6 +76,21 @@ export default function SignupPage() {
       if (userError) {
         console.error('Error creating user:', userError)
       }
+
+      // Create employee_profiles row as owner (layout checks this for role/nav)
+      const { error: profileError } = await supabase
+        .from('employee_profiles')
+        .upsert({
+          user_id: data.user.id,
+          organization_id: data.user.id,
+          email: email,
+          role: 'owner',
+          joined_at: new Date().toISOString(),
+        }, { onConflict: 'user_id,organization_id' })
+
+      if (profileError) {
+        console.error('Error creating employee_profiles:', profileError)
+      }
     }
 
     // Track successful signup
