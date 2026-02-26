@@ -18,6 +18,7 @@ import {
 } from "@/data/compliance-requirements"
 import { PaywallModal } from "@/components/paywall-modal"
 import { checkPaywallStatus, PaywallStatus } from "@/lib/paywall"
+import { OnboardingTour } from "@/components/onboarding-tour"
 
 // ============================================================
 // CIRCULAR PROGRESS RING COMPONENT
@@ -370,6 +371,8 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30">
       {showConfetti && <Confetti />}
+      
+      <OnboardingTour />
       
       {showPaywall && paywallStatus && (
         <PaywallModal

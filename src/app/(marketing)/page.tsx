@@ -5,7 +5,7 @@ import { Shield, FileText, GraduationCap, ClipboardCheck, AlertTriangle, ArrowRi
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="relative">
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -280,6 +280,16 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* Mobile Sticky CTA */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t border-gray-200 shadow-lg z-40 p-4">
+        <Link href="/scorecard" className="block">
+          <Button size="lg" variant="cta" className="w-full">
+            Get Free Compliance Score
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }

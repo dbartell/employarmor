@@ -15,6 +15,50 @@ interface PaywallModalProps {
   isGuest?: boolean
 }
 
+const PRICING_TIERS = [
+  {
+    name: 'Starter',
+    price: '$99',
+    period: '/month',
+    description: 'Perfect for small teams',
+    features: [
+      'Up to 50 employees',
+      'Basic compliance documents',
+      'Single state coverage',
+      'Email support',
+    ]
+  },
+  {
+    name: 'Professional',
+    price: '$249',
+    period: '/month',
+    description: 'For growing companies',
+    features: [
+      'Up to 250 employees',
+      'Full compliance suite',
+      'Multi-state coverage',
+      'Priority support',
+      'Team training modules',
+      'Automated renewals',
+    ],
+    popular: true
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    description: 'Tailored for large organizations',
+    features: [
+      'Unlimited employees',
+      'Dedicated compliance manager',
+      'Custom integrations',
+      '24/7 phone support',
+      'Legal review included',
+      'White-glove onboarding',
+    ]
+  }
+]
+
 const FEATURES = [
   "Unlimited compliance documents",
   "All required disclosure notices",
@@ -163,26 +207,46 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
           <p className="text-white/90">{message.description}</p>
         </div>
 
-        {/* Pricing */}
-        <div className="px-6 pt-6 pb-2 text-center border-b">
-          <div className="text-4xl font-bold text-gray-900">
-            {pricing.price}
-            <span className="text-lg font-normal text-gray-500 ml-1">{pricing.label}</span>
-          </div>
-          <p className="text-sm text-gray-500 mt-1">{pricing.description}</p>
-        </div>
-
-        {/* Features */}
-        <div className="px-6 py-4">
-          <p className="text-sm font-medium text-gray-700 mb-3">What's included:</p>
-          <ul className="space-y-2">
-            {features.map((feature, i) => (
-              <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                {feature}
-              </li>
+        {/* Pricing Tiers */}
+        <div className="px-6 pt-6 pb-4">
+          <h3 className="text-center font-bold text-gray-900 mb-4">Choose Your Plan</h3>
+          <div className="space-y-3">
+            {PRICING_TIERS.map((tier, idx) => (
+              <div 
+                key={tier.name}
+                className={`border-2 rounded-lg p-4 ${
+                  tier.popular 
+                    ? 'border-blue-500 bg-blue-50' 
+                    : 'border-gray-200 bg-white'
+                }`}
+              >
+                {tier.popular && (
+                  <div className="inline-block bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded mb-2">
+                    MOST POPULAR
+                  </div>
+                )}
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <div className="font-bold text-lg text-gray-900">{tier.name}</div>
+                    <div className="text-xs text-gray-500">{tier.description}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-bold text-2xl text-gray-900">
+                      {tier.price}<span className="text-sm font-normal text-gray-500">{tier.period}</span>
+                    </div>
+                  </div>
+                </div>
+                <ul className="space-y-1 mt-3">
+                  {tier.features.slice(0, 4).map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-gray-600">
+                      <Check className="w-3 h-3 text-green-500 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
 
         {/* CTA */}
@@ -214,7 +278,7 @@ export function PaywallModal({ status, onClose, onUpgrade, isGuest }: PaywallMod
                 Loading...
               </>
             ) : (
-              `Start Now — ${pricing.price}${pricing.label}`
+              'Subscribe Now — Professional $249/mo'
             )}
           </Button>
 

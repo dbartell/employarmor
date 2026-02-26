@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-25T16:01:36.554Z",
+  "timestamp": "2026-02-26T00:01:23.813Z",
   "baseUrl": "https://employarmor.vercel.app",
   "scenariosRun": [
     "onboarding",
@@ -37,7 +37,7 @@
       "description": "AI tool catalog",
       "scenario": "onboarding",
       "url": "https://employarmor.vercel.app/tools",
-      "size": 113091
+      "size": 59247
     },
     {
       "step": 4,
