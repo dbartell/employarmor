@@ -10,7 +10,7 @@ import { aiHiringTools, toolCategories } from '@/data/tools'
 import { analyzeToolStack } from '@/lib/tool-analysis'
 import { createClient } from '@/lib/supabase/client'
 
-type Step = 'states' | 'employees' | 'tools' | 'results'
+type Step = 'states' | 'employees' | 'tools' | 'signup'
 
 interface ScanData {
   states: string[]
@@ -71,7 +71,7 @@ export default function ScanPage() {
   }
 
   const nextStep = () => {
-    const steps: Step[] = ['states', 'employees', 'tools', 'results']
+    const steps: Step[] = ['states', 'employees', 'tools', 'signup']
     const currentIndex = steps.indexOf(step)
     if (currentIndex < steps.length - 1) {
       setStep(steps[currentIndex + 1])
@@ -80,7 +80,7 @@ export default function ScanPage() {
   }
 
   const prevStep = () => {
-    const steps: Step[] = ['states', 'employees', 'tools', 'results']
+    const steps: Step[] = ['states', 'employees', 'tools', 'signup']
     const currentIndex = steps.indexOf(step)
     if (currentIndex > 0) {
       setStep(steps[currentIndex - 1])
@@ -122,7 +122,7 @@ export default function ScanPage() {
       toolAnalysis,
     })
 
-    setStep('results')
+    setStep('signup')
     scrollToTop()
   }
 
@@ -130,14 +130,14 @@ export default function ScanPage() {
     states: 33,
     employees: 66,
     tools: 100,
-    results: 100,
+    signup: 100,
   }[step]
 
   const canContinue = {
     states: data.states.length > 0,
     employees: !!data.employeeCount,
     tools: data.tools.length > 0,
-    results: true,
+    signup: true,
   }[step]
 
   return (
@@ -158,11 +158,11 @@ export default function ScanPage() {
             Free Compliance Scan
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            {step === 'results' ? 'Your Compliance Report' : 'Find Your Compliance Gaps'}
+            {step === 'signup' ? 'Create Your Account' : 'Find Your Compliance Gaps'}
           </h1>
           <p className="text-xl text-gray-600">
-            {step === 'results'
-              ? 'See where you stand with AI hiring laws'
+            {step === 'signup'
+              ? 'Get your full compliance dashboard in seconds'
               : 'Answer 3 quick questions to see your compliance score'
             }
           </p>
@@ -364,7 +364,7 @@ export default function ScanPage() {
               <Button variant="outline" size="lg" onClick={prevStep} className="gap-2">
                 <ArrowLeft className="w-5 h-5" /> Back
               </Button>
-              <Button size="lg" onClick={runAnalysis} disabled={!canContinue} className="gap-2">
+              <Button size="lg" onClick={nextStep} disabled={!canContinue} className="gap-2">
                 Continue <ArrowRight className="w-5 h-5" />
               </Button>
             </div>
@@ -372,86 +372,8 @@ export default function ScanPage() {
         )}
 
         {/* Results */}
-        {step === 'results' && analysis && (
+        {step === 'signup' && (
           <div className="space-y-6">
-            {/* Compliance Score */}
-            <Card className="p-8">
-              <div className="text-center">
-                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4 ${
-                  analysis.complianceLevel === 'Good' ? 'bg-green-100 text-green-700' :
-                  analysis.complianceLevel === 'Fair' ? 'bg-amber-100 text-amber-700' :
-                  'bg-red-100 text-red-700'
-                }`}>
-                  {analysis.complianceLevel === 'Poor' && <AlertTriangle className="w-4 h-4" />}
-                  {analysis.complianceLevel}
-                </div>
-
-                <div className="text-6xl font-bold text-gray-900 mb-2">
-                  {analysis.complianceScore}
-                  <span className="text-2xl text-gray-400">%</span>
-                </div>
-
-                <p className="text-lg text-gray-500 mb-1">Compliance Score</p>
-
-                <p className="text-gray-600">
-                  {analysis.complianceLevel === 'Poor'
-                    ? 'You have significant compliance gaps that need immediate attention'
-                    : analysis.complianceLevel === 'Fair'
-                    ? 'You have some compliance gaps to address'
-                    : 'You\'re in good shape, but stay vigilant'
-                  }
-                </p>
-              </div>
-            </Card>
-
-            {/* Applicable Laws */}
-            {analysis.applicableLaws.length > 0 && (
-              <Card className="p-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Laws That Apply to You</h3>
-                <div className="space-y-3">
-                  {analysis.applicableLaws.slice(0, 8).map((law: string, idx: number) => (
-                    <div key={idx} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-                      <Shield className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <div className="font-semibold text-gray-900">{law}</div>
-                      </div>
-                    </div>
-                  ))}
-                  {analysis.applicableLaws.length > 8 && (
-                    <p className="text-sm text-gray-500">
-                      ...and {analysis.applicableLaws.length - 8} more
-                    </p>
-                  )}
-                </div>
-              </Card>
-            )}
-
-            {/* Compliance Gaps */}
-            {analysis.gaps.length > 0 && (
-              <Card className="p-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Your Compliance Gaps</h3>
-                <div className="space-y-4">
-                  {analysis.gaps.slice(0, 5).map((gap: any, idx: number) => (
-                    <div key={idx} className="p-4 border-l-4 border-red-500 bg-red-50 rounded">
-                      <div className="font-semibold text-gray-900">{gap.tool}</div>
-                      <div className="text-sm text-gray-700 mt-1">{gap.reason}</div>
-                      <div className="text-xs text-gray-600 mt-2">
-                        Applicable laws: {gap.laws.slice(0, 3).join(', ')}
-                        {gap.laws.length > 3 && ` +${gap.laws.length - 3} more`}
-                      </div>
-                    </div>
-                  ))}
-
-                  {analysis.gaps.length > 5 && (
-                    <p className="text-sm text-gray-500">
-                      ...and {analysis.gaps.length - 5} more gap{analysis.gaps.length - 5 !== 1 ? 's' : ''}
-                    </p>
-                  )}
-                </div>
-              </Card>
-            )}
-
-            {/* Inline Signup Form */}
             <Card className="p-8 border-2 border-blue-200 shadow-lg">
               <div className="text-center mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -468,6 +390,15 @@ export default function ScanPage() {
                   setSignupError(null)
 
                   try {
+                    // Run analysis to get risk score
+                    const toolAnalysis = analyzeToolStack(data.tools, data.states, [])
+                    const riskScore = Math.min(
+                      (toolAnalysis.high.length * 30) +
+                      (toolAnalysis.medium.length * 15) +
+                      (data.states.filter(s => ['IL', 'CO', 'CA', 'NYC', 'MD', 'TX'].includes(s)).length * 15),
+                      100
+                    )
+
                     const res = await fetch('/api/onboard/signup', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
@@ -478,7 +409,7 @@ export default function ScanPage() {
                         states: data.states,
                         tools: data.tools,
                         employeeCount: data.employeeCount,
-                        riskScore: analysis.riskScore,
+                        riskScore: riskScore,
                       }),
                     })
 
