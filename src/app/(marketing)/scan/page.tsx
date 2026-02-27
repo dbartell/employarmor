@@ -33,7 +33,7 @@ export default function ScanPage() {
   const [signupError, setSignupError] = useState<string | null>(null)
   const [signupForm, setSignupForm] = useState({ email: '', password: '', company: '' })
   const [toolSearch, setToolSearch] = useState('')
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([])
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([toolCategories[0]])
 
   // Scroll to top on mount (fixes issue when navigating from state pages)
   useEffect(() => {
