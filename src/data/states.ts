@@ -192,7 +192,6 @@ export const stateRiskTiers: Record<string, StateRiskTier> = {
   MA: 'moderate', // lie-detector + wiretapping + pay-transparency
   MD: 'moderate', // AI-specific (facial rec) + lie-detector + wiretapping
   TX: 'moderate', // AI-specific + biometric + data-privacy
-  UT: 'moderate', // AI-specific (UAIP) + data-privacy
   FL: 'moderate', // wiretapping (felony!)
   PA: 'moderate', // wiretapping (7yr felony!)
   WA: 'moderate', // biometric + wiretapping + pay-transparency
