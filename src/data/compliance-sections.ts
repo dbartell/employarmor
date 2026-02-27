@@ -11,9 +11,9 @@ export interface ComplianceSectionMeta {
 export const complianceSections: ComplianceSectionMeta[] = [
   {
     href: '/candidate-notices',
-    requiredStates: ['IL', 'NYC', 'CO', 'MD', 'CA'],
+    requiredStates: ['IL', 'NYC', 'CO', 'MD', 'CA', 'UT'],
     alwaysApplies: false,
-    triggerLabel: 'Illinois, NYC, Colorado, Maryland, California',
+    triggerLabel: 'Illinois, NYC, Colorado, Maryland, California, Utah',
   },
   {
     href: '/employee-disclosures',

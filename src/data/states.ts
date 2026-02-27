@@ -85,6 +85,19 @@ export const stateRequirements: StateRequirement[] = [
       "Applies to AI systems making consequential decisions in employment, education, housing, healthcare, insurance, and legal services"
     ],
     penalties: "Enforced by Texas Attorney General. Civil penalties up to $100,000 per violation. 90-day cure period before enforcement action."
+  },
+  {
+    code: "UT",
+    name: "Utah",
+    law: "Utah Artificial Intelligence Policy Act (UAIP)",
+    effective: "May 1, 2024",
+    requirements: [
+      "Clearly disclose when a job candidate or employee is interacting with AI, especially when asked",
+      "Employers accept full responsibility for any discriminatory statements made by AI systems",
+      "Must disclose use of generative AI (e.g., chatbots) in candidate-facing interactions upon request",
+      "Applies to all employers using generative AI in employment contexts"
+    ],
+    penalties: "Up to $2,500 per violation. Enforced under Utah Consumer Protection Act."
   }
 ]
 
@@ -143,7 +156,7 @@ export const allStates = [
   { code: "WY", name: "Wyoming" },
 ]
 
-export const regulatedStates = ["IL", "CO", "CA", "NYC", "MD", "TX"]
+export const regulatedStates = ["IL", "CO", "CA", "NYC", "MD", "TX", "UT"]
 
 // Law categories by state - maps which compliance categories apply to each jurisdiction
 export const lawCategoriesByState: Record<string, string[]> = {
@@ -179,6 +192,7 @@ export const stateRiskTiers: Record<string, StateRiskTier> = {
   MA: 'moderate', // lie-detector + wiretapping + pay-transparency
   MD: 'moderate', // AI-specific (facial rec) + lie-detector + wiretapping
   TX: 'moderate', // AI-specific + biometric + data-privacy
+  UT: 'moderate', // AI-specific (UAIP) + data-privacy
   FL: 'moderate', // wiretapping (felony!)
   PA: 'moderate', // wiretapping (7yr felony!)
   WA: 'moderate', // biometric + wiretapping + pay-transparency
