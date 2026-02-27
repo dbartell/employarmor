@@ -3,15 +3,19 @@
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { 
-  Upload, Search, Download, Plus, CheckCircle, Clock, AlertTriangle, 
+import {
+  Upload, Search, Download, Plus, CheckCircle, Clock, AlertTriangle,
   Trash2, Loader2, X, Edit2, TrendingUp, Calendar, Link2, Copy, Eye,
-  ExternalLink, Code, ToggleLeft, ToggleRight, UserCheck
+  ExternalLink, Code, ToggleLeft, ToggleRight, UserCheck, Video, Share2, Users
 } from "lucide-react"
-import { 
-  getConsentRecords, createConsentRecord, updateConsentRecord, 
-  deleteConsentRecord, bulkImportConsent, getConsentStats, ConsentRecord 
+import {
+  getConsentRecords, createConsentRecord, updateConsentRecord,
+  deleteConsentRecord, bulkImportConsent, getConsentStats, ConsentRecord
 } from "@/lib/actions/consent"
+import {
+  getVideoInterviewRecords, createVideoInterviewRecord, requestDeletion,
+  markDeleted, addSharingEntry, getVideoInterviewStats, VideoInterviewRecord
+} from "@/lib/actions/video-interviews"
 import { ApplicabilityBanner } from '@/components/compliance/applicability-banner'
 
 interface ConsentStats {
@@ -45,7 +49,7 @@ interface ExtendedConsentRecord extends ConsentRecord {
 }
 
 export default function ConsentPage() {
-  const [activeTab, setActiveTab] = useState<'records' | 'links'>('records')
+  const [activeTab, setActiveTab] = useState<'records' | 'links' | 'video-interviews'>('records')
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
   const [records, setRecords] = useState<ExtendedConsentRecord[]>([])
@@ -71,6 +75,27 @@ export default function ConsentPage() {
   const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null)
   const [showEmbedCode, setShowEmbedCode] = useState<string | null>(null)
 
+  // Video Interviews state
+  const [viRecords, setViRecords] = useState<VideoInterviewRecord[]>([])
+  const [viStats, setViStats] = useState({ total: 0, active: 0, deletionRequested: 0, deleted: 0 })
+  const [viLoading, setViLoading] = useState(false)
+  const [viSearchQuery, setViSearchQuery] = useState("")
+  const [viStatusFilter, setViStatusFilter] = useState("all")
+  const [viShowForm, setViShowForm] = useState(false)
+  const [viSaving, setViSaving] = useState(false)
+  const [viFormData, setViFormData] = useState({
+    applicant_name: '',
+    applicant_email: '',
+    date_received: new Date().toISOString().split('T')[0],
+    ai_tool: '',
+    notes: ''
+  })
+  const [viExpandedRecord, setViExpandedRecord] = useState<string | null>(null)
+  const [viSharingForm, setViSharingForm] = useState<string | null>(null)
+  const [viSharingData, setViSharingData] = useState({ name: '', date: new Date().toISOString().split('T')[0], reason: '' })
+  const [viSharingLoading, setViSharingLoading] = useState(false)
+  const [viActionLoading, setViActionLoading] = useState<string | null>(null)
+
   // Quick add form state (simplified)
   const [quickName, setQuickName] = useState('')
   const [quickEmail, setQuickEmail] = useState('')
@@ -90,6 +115,93 @@ export default function ConsentPage() {
     loadData()
     loadLinks()
   }, [statusFilter, searchQuery])
+
+  useEffect(() => {
+    loadVideoInterviews()
+  }, [viStatusFilter, viSearchQuery])
+
+  const loadVideoInterviews = async () => {
+    setViLoading(true)
+    const [recordsData, statsData] = await Promise.all([
+      getVideoInterviewRecords({ status: viStatusFilter, search: viSearchQuery }),
+      getVideoInterviewStats()
+    ])
+    setViRecords(recordsData as VideoInterviewRecord[])
+    setViStats(statsData)
+    setViLoading(false)
+  }
+
+  const handleViCreate = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!viFormData.applicant_name.trim()) return
+    setViSaving(true)
+    await createVideoInterviewRecord({
+      applicant_name: viFormData.applicant_name.trim(),
+      applicant_email: viFormData.applicant_email.trim() || undefined,
+      date_received: viFormData.date_received,
+      ai_tool: viFormData.ai_tool.trim() || undefined,
+      notes: viFormData.notes.trim() || undefined,
+    })
+    setViFormData({ applicant_name: '', applicant_email: '', date_received: new Date().toISOString().split('T')[0], ai_tool: '', notes: '' })
+    setViShowForm(false)
+    setViSaving(false)
+    await loadVideoInterviews()
+  }
+
+  const handleViRequestDeletion = async (id: string) => {
+    setViActionLoading(id)
+    await requestDeletion(id)
+    await loadVideoInterviews()
+    setViActionLoading(null)
+  }
+
+  const handleViMarkDeleted = async (id: string) => {
+    setViActionLoading(id)
+    await markDeleted(id)
+    await loadVideoInterviews()
+    setViActionLoading(null)
+  }
+
+  const handleViAddSharing = async (id: string) => {
+    if (!viSharingData.name.trim() || !viSharingData.reason.trim()) return
+    setViSharingLoading(true)
+    await addSharingEntry(id, {
+      name: viSharingData.name.trim(),
+      date: viSharingData.date,
+      reason: viSharingData.reason.trim()
+    })
+    setViSharingData({ name: '', date: new Date().toISOString().split('T')[0], reason: '' })
+    setViSharingForm(null)
+    setViSharingLoading(false)
+    await loadVideoInterviews()
+  }
+
+  const getDaysRemaining = (deadline: string | null) => {
+    if (!deadline) return null
+    const days = Math.ceil((new Date(deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    return Math.max(0, days)
+  }
+
+  const exportViCsv = () => {
+    const headers = ['Applicant Name', 'Email', 'Date Received', 'AI Tool', 'Status', 'Deletion Deadline', 'Shared With Count', 'Notes']
+    const rows = viRecords.map(r => [
+      r.applicant_name,
+      r.applicant_email || '',
+      r.date_received,
+      r.ai_tool || '',
+      r.status,
+      r.deletion_deadline || '',
+      String(r.shared_with?.length || 0),
+      (r.notes || '').replace(/,/g, ';')
+    ])
+    const csv = [headers, ...rows].map(row => row.join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `video-interview-records-${new Date().toISOString().split('T')[0]}.csv`
+    a.click()
+  }
 
   const loadData = async () => {
     setLoading(true)
@@ -370,6 +482,17 @@ export default function ConsentPage() {
         >
           <Link2 className="w-4 h-4" />
           Consent Links ({links.length})
+        </button>
+        <button
+          onClick={() => setActiveTab('video-interviews')}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
+            activeTab === 'video-interviews'
+              ? 'bg-white text-gray-900 shadow-sm'
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          <Video className="w-4 h-4" />
+          Video Interviews ({viStats.total})
         </button>
       </div>
 
@@ -755,7 +878,7 @@ export default function ConsentPage() {
             </CardContent>
           </Card>
         </>
-      ) : (
+      ) : activeTab === 'links' ? (
         /* Consent Links Tab */
         <>
           {/* Create Link Button */}
@@ -1015,6 +1138,358 @@ export default function ConsentPage() {
                 <li>• When they acknowledge, a consent record is automatically created</li>
                 <li>• Records show &quot;via link&quot; badge to distinguish from manual entries</li>
                 <li>• View and link stats show how many people viewed/submitted</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </>
+      ) : (
+        /* Video Interviews Tab */
+        <>
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <Card>
+              <CardContent className="pt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">Active</p>
+                    <p className="text-2xl font-bold text-green-600">{viStats.active}</p>
+                  </div>
+                  <Video className="w-8 h-8 text-green-100" />
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">Deletion Requested</p>
+                    <p className="text-2xl font-bold text-yellow-600">{viStats.deletionRequested}</p>
+                  </div>
+                  <Clock className="w-8 h-8 text-yellow-100" />
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">Deleted</p>
+                    <p className="text-2xl font-bold text-gray-400">{viStats.deleted}</p>
+                  </div>
+                  <Trash2 className="w-8 h-8 text-gray-100" />
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">Total Records</p>
+                    <p className="text-2xl font-bold">{viStats.total}</p>
+                  </div>
+                  <TrendingUp className="w-8 h-8 text-gray-100" />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Toolbar: Search, Filter, Add, Export */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search by name or email..."
+                value={viSearchQuery}
+                onChange={(e) => setViSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <select
+              value={viStatusFilter}
+              onChange={(e) => setViStatusFilter(e.target.value)}
+              className="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="deletion_requested">Deletion Requested</option>
+              <option value="deleted">Deleted</option>
+            </select>
+            <Button variant="outline" onClick={exportViCsv} disabled={viRecords.length === 0}>
+              <Download className="w-4 h-4 mr-1" />
+              Export CSV
+            </Button>
+            <Button onClick={() => setViShowForm(!viShowForm)}>
+              {viShowForm ? <X className="w-4 h-4 mr-1" /> : <Plus className="w-4 h-4 mr-1" />}
+              {viShowForm ? 'Cancel' : 'Add Record'}
+            </Button>
+          </div>
+
+          {/* Add Form */}
+          {viShowForm && (
+            <Card className="mb-6 border-blue-200 bg-blue-50">
+              <CardContent className="pt-6">
+                <form onSubmit={handleViCreate} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Applicant Name *</label>
+                      <input
+                        type="text"
+                        value={viFormData.applicant_name}
+                        onChange={(e) => setViFormData(p => ({ ...p, applicant_name: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                      <input
+                        type="email"
+                        value={viFormData.applicant_email}
+                        onChange={(e) => setViFormData(p => ({ ...p, applicant_email: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Date Received *</label>
+                      <input
+                        type="date"
+                        value={viFormData.date_received}
+                        onChange={(e) => setViFormData(p => ({ ...p, date_received: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">AI Tool Used</label>
+                      <input
+                        type="text"
+                        value={viFormData.ai_tool}
+                        onChange={(e) => setViFormData(p => ({ ...p, ai_tool: e.target.value }))}
+                        placeholder="e.g., HireVue, myInterview"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+                    <textarea
+                      value={viFormData.notes}
+                      onChange={(e) => setViFormData(p => ({ ...p, notes: e.target.value }))}
+                      rows={2}
+                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <Button type="submit" disabled={viSaving || !viFormData.applicant_name.trim()}>
+                    {viSaving ? <Loader2 className="w-4 h-4 animate-spin mr-1" /> : <Plus className="w-4 h-4 mr-1" />}
+                    Add Video Interview Record
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Records List */}
+          {viLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
+            </div>
+          ) : viRecords.length === 0 ? (
+            <Card>
+              <CardContent className="py-12 text-center">
+                <Video className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">No video interview records</h3>
+                <p className="text-gray-500 mb-4">Track AI video interview recordings for IL AIPA compliance</p>
+                <Button onClick={() => setViShowForm(true)}>
+                  <Plus className="w-4 h-4 mr-1" />
+                  Add First Record
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-3">
+              {viRecords.map((record) => (
+                <Card key={record.id} className={`${
+                  record.status === 'deleted' ? 'opacity-60' :
+                  record.status === 'deletion_requested' ? 'border-yellow-300' : ''
+                }`}>
+                  <CardContent className="pt-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-semibold text-gray-900">{record.applicant_name}</span>
+                          {record.applicant_email && (
+                            <span className="text-sm text-gray-500">{record.applicant_email}</span>
+                          )}
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+                            record.status === 'active' ? 'bg-green-100 text-green-700' :
+                            record.status === 'deletion_requested' ? 'bg-yellow-100 text-yellow-700' :
+                            'bg-gray-100 text-gray-500'
+                          }`}>
+                            {record.status === 'active' ? 'Active' :
+                             record.status === 'deletion_requested' ? 'Deletion Requested' : 'Deleted'}
+                          </span>
+                          {record.status === 'deletion_requested' && record.deletion_deadline && (
+                            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+                              getDaysRemaining(record.deletion_deadline)! <= 5
+                                ? 'bg-red-100 text-red-700'
+                                : 'bg-orange-100 text-orange-700'
+                            }`}>
+                              {getDaysRemaining(record.deletion_deadline)} days left
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-3 mt-1 text-sm text-gray-500">
+                          <span>Received: {new Date(record.date_received).toLocaleDateString()}</span>
+                          {record.ai_tool && <span>Tool: {record.ai_tool}</span>}
+                          {record.shared_with && record.shared_with.length > 0 && (
+                            <span className="flex items-center gap-1">
+                              <Users className="w-3 h-3" />
+                              Shared with {record.shared_with.length}
+                            </span>
+                          )}
+                        </div>
+                        {record.notes && <p className="text-sm text-gray-500 mt-1">{record.notes}</p>}
+                      </div>
+
+                      <div className="flex items-center gap-1 ml-4 flex-shrink-0">
+                        {record.status === 'active' && (
+                          <>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => setViSharingForm(viSharingForm === record.id ? null : record.id)}
+                              title="Add sharing entry"
+                            >
+                              <Share2 className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleViRequestDeletion(record.id)}
+                              disabled={viActionLoading === record.id}
+                              title="Request deletion (30-day countdown)"
+                            >
+                              {viActionLoading === record.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Clock className="w-4 h-4 text-yellow-600" />}
+                            </Button>
+                          </>
+                        )}
+                        {record.status === 'deletion_requested' && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleViMarkDeleted(record.id)}
+                            disabled={viActionLoading === record.id}
+                            title="Confirm deletion"
+                          >
+                            {viActionLoading === record.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4 text-red-600" />}
+                          </Button>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setViExpandedRecord(viExpandedRecord === record.id ? null : record.id)}
+                          title="View sharing log"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Deletion countdown bar */}
+                    {record.status === 'deletion_requested' && record.deletion_deadline && (
+                      <div className="mt-3">
+                        <div className="flex justify-between text-xs text-gray-500 mb-1">
+                          <span>Deletion deadline</span>
+                          <span>{new Date(record.deletion_deadline).toLocaleDateString()}</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div
+                            className={`h-2 rounded-full transition-all ${
+                              getDaysRemaining(record.deletion_deadline)! <= 5 ? 'bg-red-500' :
+                              getDaysRemaining(record.deletion_deadline)! <= 15 ? 'bg-yellow-500' : 'bg-green-500'
+                            }`}
+                            style={{ width: `${Math.max(5, ((30 - (getDaysRemaining(record.deletion_deadline) || 0)) / 30) * 100)}%` }}
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Add Sharing Entry Form */}
+                    {viSharingForm === record.id && (
+                      <div className="mt-3 p-3 bg-gray-50 rounded-lg border">
+                        <h4 className="text-sm font-medium text-gray-700 mb-2">Log Sharing Entry</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          <input
+                            type="text"
+                            placeholder="Shared with (name/dept)"
+                            value={viSharingData.name}
+                            onChange={(e) => setViSharingData(p => ({ ...p, name: e.target.value }))}
+                            className="px-3 py-1.5 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                          />
+                          <input
+                            type="date"
+                            value={viSharingData.date}
+                            onChange={(e) => setViSharingData(p => ({ ...p, date: e.target.value }))}
+                            className="px-3 py-1.5 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Reason"
+                            value={viSharingData.reason}
+                            onChange={(e) => setViSharingData(p => ({ ...p, reason: e.target.value }))}
+                            className="px-3 py-1.5 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div className="flex gap-2 mt-2">
+                          <Button
+                            size="sm"
+                            onClick={() => handleViAddSharing(record.id)}
+                            disabled={viSharingLoading || !viSharingData.name.trim() || !viSharingData.reason.trim()}
+                          >
+                            {viSharingLoading ? <Loader2 className="w-3 h-3 animate-spin mr-1" /> : <Plus className="w-3 h-3 mr-1" />}
+                            Add
+                          </Button>
+                          <Button size="sm" variant="ghost" onClick={() => setViSharingForm(null)}>Cancel</Button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Expanded Sharing Log */}
+                    {viExpandedRecord === record.id && (
+                      <div className="mt-3 p-3 bg-gray-50 rounded-lg border">
+                        <h4 className="text-sm font-medium text-gray-700 mb-2">Sharing Log</h4>
+                        {(!record.shared_with || record.shared_with.length === 0) ? (
+                          <p className="text-sm text-gray-400">No sharing entries recorded</p>
+                        ) : (
+                          <div className="space-y-2">
+                            {record.shared_with.map((entry, i) => (
+                              <div key={i} className="flex items-center gap-3 text-sm">
+                                <Users className="w-3 h-3 text-gray-400 flex-shrink-0" />
+                                <span className="font-medium text-gray-700">{entry.name}</span>
+                                <span className="text-gray-400">on {new Date(entry.date).toLocaleDateString()}</span>
+                                <span className="text-gray-500">&mdash; {entry.reason}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          {/* Info Card */}
+          <Card className="mt-6 bg-blue-50 border-blue-200">
+            <CardContent className="pt-6">
+              <h4 className="font-medium text-blue-900 mb-2">IL AIPA Video Interview Compliance</h4>
+              <ul className="text-sm text-blue-700 space-y-1">
+                <li>• Candidates must consent before AI-analyzed video interviews</li>
+                <li>• Recordings must be deleted within 30 days if requested</li>
+                <li>• Log all sharing of recordings with names, dates, and reasons</li>
+                <li>• Export records for audit documentation</li>
               </ul>
             </CardContent>
           </Card>
